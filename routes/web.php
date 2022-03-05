@@ -2,6 +2,10 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\RolesController;
+use App\Http\Controllers\UsuariosController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,9 +18,32 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [HomeController::class, 'index'])->name('home');
+
+
+Route::group(['middleware' => ['auth', 'validarRol']], function () {
+    Route::get('/roles', [RolesController::class, "index"]);
+    Route::get('/roles/listar/{condicion}', [RolesController::class, "listar"]);
+    Route::get('/roles/crear', [RolesController::class, "crear"]);
+    Route::post('/roles/guardar', [RolesController::class, "guardar"]);
+    Route::get('/roles/editar/{id}', [RolesController::class, "editar"]);
+    Route::post('/roles/actualizar/{id}', [RolesController::class, "actualizar"]);
+    Route::get('/roles/cambiarEstado/{id}/{estado}', [RolesController::class, "cambiarEstado"]);
+    Route::get('/roles/verDetalles/{id}', [RolesController::class, "verDetalles"]);
+    Route::get('/roles/verDeshabilitados', [RolesController::class, "verDeshabilitados"]);
+
+    Route::get('/usuarios', [UsuariosController::class, "index"]);
+    Route::get('/usuarios/listar/{condicion}', [UsuariosController::class, "listar"]);
+    Route::get('/usuarios/crear', [UsuariosController::class, 'crear']);
+    Route::post('/usuarios/insertar', [UsuariosController::class, 'insertar']);
+    Route::get('/usuarios/editar/{id}', [UsuariosController::class, 'editar']);
+    Route::post('/usuarios/actualizar/{id}', [UsuariosController::class, 'actualizar']);
+    Route::get('/usuarios/cambiarEstado/{id}/{estado}', [UsuariosController::class, "cambiarEstado"]);
+    Route::get('/usuarios/verDetalles/{id}', [UsuariosController::class, "verDetalles"]);
+    Route::get('/usuarios/verDeshabilitados', [UsuariosController::class, "verDeshabilitados"]);
+});
