@@ -26,10 +26,10 @@
                         </div>
 
                         <div class="row mb-3">
-                            <label for="apellido" class="col-md-4 col-form-label text-md-end">{{ __('Apellidos') }}</label>
+                            <label for="apellidos" class="col-md-4 col-form-label text-md-end">{{ __('Apellidos') }}</label>
 
                             <div class="col-md-6">
-                                <input id="apellido" type="text" class="form-control" name="apellido" value="{{ old('apellido') }}" required autocomplete="apellido">
+                                <input id="apellidos" type="text" class="form-control" name="apellidos" value="{{ old('apellidos') }}" required autocomplete="apellidos">
                             </div>
                         </div>
 

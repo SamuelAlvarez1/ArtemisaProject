@@ -36,7 +36,7 @@
    ajax: '/usuarios/listar/habilitados',
    columns: [
        {data: 'id', name: 'id'},
-       {data: 'apellido', name: 'apellido'},
+       {data: 'apellidos', name: 'apellidos'},
        {data: 'name', name: 'name'},
        {data: 'email', name: 'email'},
        {data: 'estado', name: 'estado'},

@@ -78,7 +78,7 @@ class UsuariosController extends Controller
     public function insertar(Request $request)
     {
         $campos = [
-            'apellido' => 'required',
+            'apellidos' => 'required',
             'name' => 'required',
             'email' => 'required',
             'telefono' => 'required',
@@ -94,7 +94,7 @@ class UsuariosController extends Controller
         $this->validate($request, $campos, $mensaje);
 
         User::create([
-            'apellido' => $request['apellido'],
+            'apellidos' => $request['apellido'],
             'name' =>  $request['name'],
             'email' => $request['email'],
             'telefono' => $request['telefono'],
@@ -123,7 +123,7 @@ class UsuariosController extends Controller
     {
         if ($id != null) {
             $campos = [
-                'apellido' => 'required',
+                'apellidos' => 'required',
                 'name' => 'required',
                 'email' => 'required',
                 'telefono' => 'required',
@@ -140,7 +140,7 @@ class UsuariosController extends Controller
             $this->validate($request, $campos, $mensaje);
             try {
                 User::where("id", "=", $id)->update([
-                    'apellido' => $request['apellido'],
+                    'apellidos' => $request['apellido'],
                     'name' =>  $request['name'],
                     'email' => $request['email'],
                     'telefono' => $request['telefono'],

@@ -21,8 +21,8 @@
                 <input type="hidden" name="id" value="{{$usuario->id}}">
                 <input type="text" class="form-control" placeholder="nombre" name="name" value="{{$usuario->name}}" />
 
-                <input type="text" class="form-control mt-2" placeholder="apellido" name="apellido"
-                    value="{{$usuario->apellido}}" />
+                <input type="text" class="form-control mt-2" placeholder="apellidos" name="apellidos"
+                    value="{{$usuario->apellidos}}" />
                 <input type="text" class="form-control mt-2" placeholder="email" name="email"
                     value="{{$usuario->email}}" />
                 <input type="text" class="form-control mt-2" placeholder="telefono" name="telefono"
