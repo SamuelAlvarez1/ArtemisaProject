@@ -94,7 +94,7 @@ class UsuariosController extends Controller
         $this->validate($request, $campos, $mensaje);
 
         User::create([
-            'apellidos' => $request['apellido'],
+            'apellidos' => $request['apellidos'],
             'name' =>  $request['name'],
             'email' => $request['email'],
             'telefono' => $request['telefono'],
@@ -140,7 +140,7 @@ class UsuariosController extends Controller
             $this->validate($request, $campos, $mensaje);
             try {
                 User::where("id", "=", $id)->update([
-                    'apellidos' => $request['apellido'],
+                    'apellidos' => $request['apellidos'],
                     'name' =>  $request['name'],
                     'email' => $request['email'],
                     'telefono' => $request['telefono'],
@@ -174,8 +174,13 @@ class UsuariosController extends Controller
 
     public function verDetalles($id)
     {
-        $usuario = User::find($id);
+        $usuario = User::select("users.*", "roles.nombre as rol")
+            ->join("roles", "users.idRol", "=", "roles.id")
+            ->get();
 
+        foreach ($usuario as $user) {
+            $usuario = $user;
+        }
         return view("usuarios.verDetalles", compact("usuario"));
     }
 

@@ -1,11 +1,14 @@
-@extends('layouts.app')
+@extends('layouts.panel')
 
-@section('content')
+@section('styles')
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/datatables.min.css">
+<link rel="stylesheet" href="/css/alertify.min.css" />
+<link rel="stylesheet" href="/css/themes/bootstrap.css" />
+@endsection
 
 
-
-<div class="container">
-    
+@section('main-content')
     <div class="d-flex justify-content-center">
         <a href="roles/crear"class="btn btn-primary mx-4">Crear rol</a>
         <a href="roles/verDeshabilitados"class="btn btn-danger ">Ver deshabilitados</a>
@@ -26,11 +29,12 @@
         </tbody>
     </table>
 
-</div>
-
 @endsection
 
 @section('scripts')
+<script src="/js/jquery-3.6.0.min.js"></script>
+<script src="/js/datatables.min.js"></script>
+<script src="/js/alertify.min.js"></script>
 <script>
     $('#roles').DataTable({
    processing: true,
@@ -73,5 +77,7 @@
  
     </script>
 @endif
+
+
 
 @endsection

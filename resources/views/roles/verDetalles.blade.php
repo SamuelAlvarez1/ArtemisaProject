@@ -1,4 +1,5 @@
-@extends('layouts.app') @section('content')
+@extends('layouts.panel') 
+@section('main-content')
 
 <div class="col-md-4 offset-4 mt-4">
     <div class="card">

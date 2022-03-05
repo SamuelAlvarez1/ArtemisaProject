@@ -12,7 +12,7 @@
 
     <div class="d-flex justify-content-center">
         <a href="usuarios/crear"class="btn btn-primary mx-4">Crear usuario</a>
-        <a href="usuarios/verDeshabilitados"class="btn btn-danger ">Ver deshabilitados</a>
+        <a href="/usuarios"class="btn btn-success">Ver habilitados</a>
     </div>
     <table class="table table-bordered table-striped" id="usuarios">
         <thead>
@@ -45,7 +45,7 @@
    processing: true,
    language: spanish,
    serverSide: true,
-   ajax: '/usuarios/listar/habilitados',
+   ajax: '/usuarios/listar/deshabilitados',
    columns: [
        {data: 'id', name: 'id'},
        {data: 'apellidos', name: 'apellidos'},

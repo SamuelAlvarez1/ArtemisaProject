@@ -19,6 +19,6 @@ class validarRol
         if (auth()->check() && auth()->user()->idRol == 1)
             return $next($request);
 
-        return redirect("/");
+        return redirect("/home");
     }
 }

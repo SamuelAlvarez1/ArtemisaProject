@@ -1,4 +1,9 @@
-@extends('layouts.app') @section('content')
+@extends('layouts.panel') 
+@section('main-content')
+
+@section('styles')
+    
+@endsection
 
 @if(count($errors)>0)
 <div class="alert alert-danger" role="alert">
