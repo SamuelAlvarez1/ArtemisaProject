@@ -13,9 +13,6 @@ class UsuariosController extends Controller
 {
     public function index()
     {
-        // $usuarios = User::select("users.*", "roles.nombre as rol")
-        //     ->join("roles", "users.idRol", "=", "roles.id")
-        //     ->get();
         return view("usuarios.index");
     }
 
@@ -176,6 +173,7 @@ class UsuariosController extends Controller
     {
         $usuario = User::select("users.*", "roles.nombre as rol")
             ->join("roles", "users.idRol", "=", "roles.id")
+            ->where("users.id", "=", $id)
             ->get();
 
         foreach ($usuario as $user) {

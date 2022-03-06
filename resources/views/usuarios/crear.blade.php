@@ -59,7 +59,7 @@
                             <label for="idRol" class="col-md-4 col-form-label text-md-end">{{ __('rol') }}</label>
 
                             <div class="col-md-6">
-                                <select name="idRol" id="idRol" class="form-select">
+                                <select name="idRol" id="idRol" class="form-control">
                                     <option value="">seleccione</option>
                                     @foreach ($roles as $rol)
                                         <option value="{{$rol->id}}">{{$rol->nombre}}</option>

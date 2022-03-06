@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RolesController;
 use App\Http\Controllers\UsuariosController;
+use App\Http\Controllers\ReservasController;
 
 /*
 |--------------------------------------------------------------------------
@@ -46,4 +47,20 @@ Route::group(['middleware' => ['auth', 'validarRol']], function () {
     Route::get('/usuarios/cambiarEstado/{id}/{estado}', [UsuariosController::class, "cambiarEstado"]);
     Route::get('/usuarios/verDetalles/{id}', [UsuariosController::class, "verDetalles"]);
     Route::get('/usuarios/verDeshabilitados', [UsuariosController::class, "verDeshabilitados"]);
+});
+
+
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('/reservas', [ReservasController::class, "index"]);
+    Route::get('/reservas/listar/{condicion}', [ReservasController::class, "listar"]);
+    Route::get('/reservas/crear', [ReservasController::class, 'crear']);
+    Route::post('/reservas/insertar', [ReservasController::class, 'insertar']);
+    Route::get('/reservas/editar/{id}', [ReservasController::class, 'editar']);
+    Route::post('/reservas/actualizar/{id}', [ReservasController::class, 'actualizar']);
+    Route::get('/reservas/cambiarEstado/cancelar/{id}/{estado}', [ReservasController::class, "cambiarEstado"]);
+    Route::get('/reservas/cambiarEstado/enProceso/{id}/{estado}', [ReservasController::class, "cambiarEstado"]);
+    Route::get('/reservas/cambiarEstado/aprobar/{id}/{estado}', [ReservasController::class, "cambiarEstado"]);
+    Route::get('/reservas/verDetalles/{id}', [ReservasController::class, "verDetalles"]);
+    Route::get('/reservas/verCanceladas', [ReservasController::class, "verCanceladas"]);
+    Route::get('/reservas/verAprobadas', [ReservasController::class, "verAprobadas"]);
 });
