@@ -7,18 +7,18 @@
     <meta name="author" content=""/>
     <title>Agency - Start Bootstrap Theme</title>
     <!-- Font Awesome icons (free version)-->
-    <script src="https://use.fontawesome.com/releases/v5.15.4/js/all.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- Google fonts-->
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css"/>
     <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css"/>
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="{{asset('css/styles.css')}}" rel="stylesheet"/>
 </head>
-<body id="page-top">
+<body id="page-top"  style=" background-image: url('{{asset('img/landing/header-bg.jpg')}}');">
 <!-- Navigation-->
 <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
     <div class="container">
-        <a class="navbar-brand" href="#page-top"><img src="{{asset('img/landing/navbar-logo.svg')}}" alt="..."/></a>
+        <a class="navbar-brand" href="#page-top"><img class="logo" src="{{asset('img/landing/navbar-logo.png')}}" alt="..."/></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive"
                 aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
             Menu
@@ -26,11 +26,11 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
-                <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
-                <li class="nav-item"><a class="nav-link" href="#portfolio">Portfolio</a></li>
-                <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
-                <li class="nav-item"><a class="nav-link" href="#team">Team</a></li>
-                <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                <li class="nav-item"><a class="nav-link" href="#page-top">Inicio</a></li>
+                <li class="nav-item"><a class="nav-link" href="#Quienessomos">¿Quiénes somos?</a></li>
+                <li class="nav-item"><a class="nav-link" href="#Ubicacion">Ubicación</a></li>
+                <li class="nav-item"><a class="nav-link" href="#Destacados">Destacados</a></li>
+                <li class="nav-item"><a class="nav-link" href="#Contactanos">Contáctanos</a></li>
             </ul>
         </div>
     </div>
@@ -38,13 +38,17 @@
 <!-- Masthead-->
 <header class="masthead"  style=" background-image: url('{{asset('img/landing/header-bg.jpg')}}');">
     <div class="container">
-        <div class="masthead-subheading">hola</div>
-        <div class="masthead-heading text-uppercase">It's Nice To Meet You</div>
+        <div class="masthead-heading text-uppercase"><img src="{{asset('img/landing/navbar-logo.png')}}" alt="..."/></div>
         <a class="btn btn-primary btn-xl text-uppercase" href="{{url('/login')}}">Iniciar sesión</a>
     </div>
+    <div class="container" style="height: 6rem; background: black; max-width: 1000rem !important; margin-top: 30px; display: flex;">
+        <a class="arrow" href="#Quienessomos"><i class="fa-solid fa-angle-down" ></i></a>
+    </div>
 </header>
+
 <!-- Services-->
-<section class="page-section" id="services">
+<section class="page-section" id="Quienessomos" >
+
     <div class="container">
         <div class="text-center">
             <h2 class="section-heading text-uppercase">Services</h2>
@@ -73,7 +77,7 @@
     </div>
 </section>
 <!-- Portfolio Grid-->
-<section class="page-section bg-light" id="portfolio">
+<section class="page-section" id="Ubicacion">
     <div class="container">
         <div class="text-center">
             <h2 class="section-heading text-uppercase">Portfolio</h2>
@@ -85,7 +89,7 @@
 
 </div>
 <!-- Contact-->
-<section class="page-section" id="contact">
+<section class="page-section" id="Contactanos">
     <div class="container">
         <div class="text-center">
             <h2 class="section-heading text-uppercase">Contact Us</h2>
