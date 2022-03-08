@@ -18,6 +18,8 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="/css/alertify.min.css" />
+    <link rel="stylesheet" href="/css/themes/bootstrap.css" />
 </head>
 <body>
     <div id="app">
@@ -79,5 +81,34 @@
             @yield('content')
         </main>
     </div>
+    <script src="/js/alertify.min.js"></script>
+    <script src="/js/jquery-3.6.0.min.js"></script>
+    <script src="/js/bootstrap.bundle.min.js"></script>
+
+    @if (Session::has('success'))
+    <script>
+    alertify.set('notifier','position', 'top-right');
+    alertify.success('{{Session::get('success')}}');        
+ 
+    </script>
+@endif
+
+
+@if (Session::has('edit'))
+    <script>
+    alertify.set('notifier','position', 'top-right');
+    alertify.warning('{{Session::get('edit')}}');        
+ 
+    </script>
+@endif
+
+
+@if (Session::has('error'))
+    <script>
+    alertify.set('notifier','position', 'top-right');
+    alertify.error('{{Session::get('error')}}');        
+ 
+    </script>
+@endif
 </body>
 </html>
