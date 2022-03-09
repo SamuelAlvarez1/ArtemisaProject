@@ -21,6 +21,9 @@
     <!-- Argon CSS -->
     <link type="text/css" href="{{asset('css/argon.css?v=1.0.0')}}" rel="stylesheet">
 
+    {{--  Select2  --}}
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
 
     @yield('styles')
 </head>
@@ -145,6 +148,7 @@
 <script src="{{asset('vendor\bootstrap-datepicker\dist\js\bootstrap-datepicker.min.js')}}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
 <script src="{{asset('vendor/bootstrap/dist/js/bootstrap.min.js')}}"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 <script>
         var spanish =  {
         "decimal": "",

@@ -5,27 +5,20 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Menu extends Model
+class Categories extends Model
 {
     use HasFactory;
 
-    protected $table = "plates";
+    protected $table = "categories";
 
     protected $fillable = [
         'id',
         'name',
-        'basePrice',
-        'idCategory',
-        'state'
     ];
 
     public static $rules = [
-        'name' => "required|min:3",
+        'name' => 'required|min:3|max:50',
     ];
 
-    public $timestamps = true;
-
-
-
-
+    public $timestamps = false;
 }
