@@ -37,9 +37,9 @@ class CustomersController extends Controller
                 'state' => $input['state'],
             ]);
 
-            return redirect('/clientes')->with('success', 'Se registró el cliente correctamente');
+            return redirect('/customers')->with('success', 'Se registró el cliente correctamente');
         } catch (\Exception $e) {
-            return redirect('/clientes/create')->with('error', $e->getMessage());
+            return redirect('/customers/create')->with('error', $e->getMessage());
         }
 
     }

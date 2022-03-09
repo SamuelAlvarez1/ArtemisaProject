@@ -2,16 +2,23 @@
 @section('main-content')
     <div class="card">
         <div class="card-header">
-            <strong>Clientes</strong>
-            <a href="{{url('/customers/create')}}" class="btn btn-link">Registrar cliente</a>
-            <a href="{{url('/customers/notActive')}}" class="btn btn-link">Ver clientes desactivados</a>
+            <div class="row">
+                <div class="col-6">
+                    <strong>Clientes</strong>
+                </div>
+                <div class="col-6">
+                    <a href="{{url('/customers/create')}}" class="btn btn-outline-dark">Registrar cliente</a>
+                    <a href="{{url('/customers/notActive')}}" class="btn btn-outline-dark">Ver clientes desactivados</a>
+                </div>
+            </div>
             @include('includes.errors')
         </div>
         <div class="card-body">
             <div class="table-responsive">
-                <table id="customers" class="table table-flush">
-                    <thead class="thead-dark">
+                <table id="customers" class="table table-bordered">
+                    <thead class="thead-light">
                     <tr>
+                        <th>#</th>
                         <th>Nombre</th>
                         <th>Documento</th>
                         <th>Dirección</th>

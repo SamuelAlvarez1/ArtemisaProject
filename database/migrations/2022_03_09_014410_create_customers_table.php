@@ -18,8 +18,8 @@ class CreateCustomersTable extends Migration
             $table->string("document")->unique();
             $table->string("name");
             $table->string("address");
-            $table->boolean("phoneNumber");
-            $table->string("state");
+            $table->string("phoneNumber");
+            $table->boolean("state");
             $table->timestamps();
         });
     }
