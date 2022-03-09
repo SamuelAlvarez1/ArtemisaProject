@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\reservas;
-use App\Models\customer;
-use App\Models\eventos;
+use App\Models\Customer;
+use App\Models\Events;
 use DataTables;
 
 class ReservasController extends Controller

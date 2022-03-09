@@ -9,7 +9,7 @@ class Events extends Model
 {
     use HasFactory;
 
-    protected $table = "eventos";
+    protected $table = "events";
 
     protected $fillable = [
         'id',
@@ -26,7 +26,7 @@ class Events extends Model
         'name' => 'required|min:3',
         'description' => 'required|min:3',
         'startDate' => 'required|date',
-        'endDate' => 'required|date|gt:startDate',
+        'endDate' => 'required|date',
         'state' => 'required|boolean',
     ];
 
