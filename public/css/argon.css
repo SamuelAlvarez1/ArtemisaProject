@@ -60,6 +60,7 @@
     box-sizing: border-box;
 }
 
+
 html
 {
     font-family: sans-serif;
@@ -5156,7 +5157,7 @@ input[type='button'].btn-block
 .nav-link:hover,
 .nav-link:focus
 {
-    color: #262626;
+    color: #262626 !important;
     background: #FFFFFF;
     text-decoration: none;
 }

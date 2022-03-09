@@ -27,10 +27,10 @@
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="{{url('/home')}}">
+            <a class="nav-link" href="{{url('/menu')}}">
                 <i class="ni ni-shop text-danger"></i> Menú
             </a>
-        </li>    
+        </li>
         @endif
         <li class="nav-item">
             <a class="nav-link" href="{{url('/home')}}">
@@ -52,7 +52,7 @@
                 <i class="fa-solid fa-clipboard-list text-blue"></i> Reservas
             </a>
         </li>
-        
+
     @endif
 
 
