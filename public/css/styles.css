@@ -11879,7 +11879,7 @@ section#contact form#contactForm :-ms-input-placeholder {
 
 .menu .contenedor-menu {
     border: 1px solid #fff;
-    background:transparent;
+    background: rgba(0,0,0,.2);
     padding: 10px;
     overflow: hidden;
 }
@@ -11930,7 +11930,7 @@ section#contact form#contactForm :-ms-input-placeholder {
 
 .menu .contenedor-menu2 {
     border: 1px solid #fff;
-    background:transparent;
+    background: rgba(0,0,0,.5);
     padding: 10px;
     overflow: hidden;
 }
@@ -11960,3 +11960,13 @@ section#contact form#contactForm :-ms-input-placeholder {
 .form .sugerencia:active{
     color: #000;
 }
+
+
+.contact{
+    background: rgba(0,0,0,.5);
+    padding: 30px;
+    width: 48rem;
+    margin: auto;
+}
+
+

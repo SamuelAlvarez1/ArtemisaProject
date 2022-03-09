@@ -20,6 +20,7 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="/css/alertify.min.css" />
     <link rel="stylesheet" href="/css/themes/bootstrap.css" />
+    <link rel="stylesheet" href="{{ asset('css/styles.css') }}" />
 </head>
 <body>
     <div id="app">
@@ -88,8 +89,8 @@
     @if (Session::has('success'))
     <script>
     alertify.set('notifier','position', 'top-right');
-    alertify.success('{{Session::get('success')}}');        
- 
+    alertify.success('{{Session::get('success')}}');
+
     </script>
 @endif
 
@@ -97,8 +98,8 @@
 @if (Session::has('edit'))
     <script>
     alertify.set('notifier','position', 'top-right');
-    alertify.warning('{{Session::get('edit')}}');        
- 
+    alertify.warning('{{Session::get('edit')}}');
+
     </script>
 @endif
 
@@ -106,8 +107,8 @@
 @if (Session::has('error'))
     <script>
     alertify.set('notifier','position', 'top-right');
-    alertify.error('{{Session::get('error')}}');        
- 
+    alertify.error('{{Session::get('error')}}');
+
     </script>
 @endif
 </body>
