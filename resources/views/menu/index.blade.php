@@ -11,20 +11,17 @@
 @section('main-content')
 
     <div class="d-flex justify-content-center">
-        <a href="plates/create"class="btn btn-primary">Crear platillo</a>
-        <a href="plates/verCanceladas"class="btn btn-danger ">Ver canceladas</a>
-        <a href="plates/verAprobadas"class="btn btn-success ">Ver aprobadas</a>
+        <a href="menu/create"class="btn btn-outline-dark">Crear platillo</a>
+        <a href="menu/notActive"class="btn btn-outline-dark ">Ver deshabilitados</a>
     </div>
     <table class="table table-bordered table-striped" id="plates">
-        <thead>
+        <thead class="thead-dark">
         <tr>
             <th>Id</th>
-            <th>Cliente</th>
-            <th>Evento</th>
-            <th>cantidad de personas</th>
+            <th>Nombre</th>
+            <th>Precio base</th>
+{{--            <th>cantidad de variaciones</th>--}}
             <th>Estado</th>
-            <th>fecha inicio</th>
-            <th>fecha fin</th>
             <th>Acciones</th>
         </tr>
         </thead>
@@ -46,16 +43,14 @@
             processing: true,
             language: spanish,
             serverSide: true,
-            ajax: '/plates/listar/enProceso',
+            ajax: 'menu/show',
             columns: [
                 {data: 'id', name: 'id'},
-                {data: 'nombreCliente', name: 'nombreCliente'},
-                {data: 'nombreEvento', name: 'nombreEvento'},
-                {data: 'cantidad_personas', name: 'cantidad_personas'},
-                {data: 'estado', name: 'estado'},
-                {data: 'fecha_inicio', name: 'fecha_inicio'},
-                {data: 'fecha_fin', name: 'fecha_fin'},
-                {data: 'acciones', name: 'acciones', orderable: false, searchable: false},
+                {data: 'name', name: 'name'},
+                {data: 'basePrice', name: 'basePrice'},
+                // {data: 'variations', name: 'variations'},
+                {data: 'state', name: 'state'},
+                {data: 'actions', name: 'actions', orderable: false, searchable: false},
             ]
         });
     </script>

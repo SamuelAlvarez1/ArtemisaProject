@@ -2,9 +2,11 @@
 
 namespace Database\Seeders;
 
+use App\Models\Menu;
 use Illuminate\Database\Seeder;
 use App\Models\User;
 use App\Models\roles;
+use App\Models\Categories;
 
 
 class DatabaseSeeder extends Seeder
@@ -34,6 +36,23 @@ class DatabaseSeeder extends Seeder
         'telefono' => '123123123',
         'password' => bcrypt('12345678'),
         ]);
+
+
+        $categories = ['Papas', 'Pizzas', 'Arroz'];
+        foreach ($categories as $value){
+            Categories::create([
+                'name' => $value,
+            ]);
+        }
+
+        Menu::create([
+            'name' => 'pizza hawaiana',
+            'basePrice' => '1500',
+            'state' => '1',
+            'idCategory' => '1',
+        ]);
+
+
 
     }
 }

@@ -8,7 +8,7 @@
         </div>
     </div>
 
-    <form action="/menu/store" method="post">
+    <form action="store" method="post">
         @csrf
         <div class="row">
             <div class="col-6">
@@ -20,8 +20,11 @@
                     <div class="row card-body d-flex justify-content-center">
                         <div class="form-group col-6">
                             <label for="">Categoría</label>
-                            <select name="categoria" class="form-control" onchange="colocar_categoria()" id="categoria">
+                            <select name="categoria" class="form-control js-example-basic-single" onchange="colocar_categoria()" id="categories">
                                 <option value="">Seleccione</option>
+                                @foreach($categories as $value)
+                                    <option value="{{$value->id}}">{{$value->name}}</option>
+                                @endforeach
                             </select>
                         </div>
                         <div class="form-group col-6">
@@ -44,7 +47,7 @@
                         </div>
                     </div>
                     <div class="col-4 d-block" style="margin: 5% auto; ">
-                        <button type="submit" class="btn btn-success">Guardar platillo</button>
+                        <button type="submit" class="btn btn-outline-dark">Guardar platillo</button>
                     </div>
                 </div>
             </div>
@@ -76,13 +79,14 @@
                         </div>
 
                         <div class="col-12">
-                            <button type="button" class="btn btn-success float-right" onclick="agregar_variacion()">Agregar</button>
+                            <button type="button" class="btn btn btn-outline-dark float-right" onclick="agregar_variacion()">Agregar</button>
                         </div>
                     </div>
 
                     <table id="tbl_variaciones" class="table text-center">
                         <thead>
                         <tr>
+                            <th>id</th>
                             <th>Nombre variación</th>
                             <th>precio adicional</th>
                             <th>Acciones</th>
@@ -103,30 +107,31 @@
 
 @section("scripts")
     <script>
-        function colocar_categoria() {
-            let nombre = $("#categoria option:selected").attr("nombre");
+        function colocar_categories() {
+            let categories = $("#cliente option:selected").attr("categories");
 
-            $("#nombre_categoria").val(nombre);
+            $("#categories_cliente").val(categories);
         }
 
 
+        let id = 0;
         function agregar_variacion() {
-            let variacion_id = $("#nombre_variacion option:input").val();
-            let variacion_text = $("#nombre_variacion option:input").text();
+            let variacion_text = $("#nombre_variacion").val();
             let precio = $("#precio_adicional").val();
 
             if (precio > 0) {
-
+                id++;
                 $("#tbl_variaciones").append(`
-            <tr id="tr-${variacion_id}">
+            <tr id="tr-${id}">
+            <td>${id}</td>
             <td>
-                <input type="hidden" name="variacion_id[]" value="${variacion_id}">
+                <input type="hidden" name="id[]" value="${id}">
                 <input type="hidden" name="precios[]" value="${precio}">
                 ${variacion_text}
             </td>
             <td>${precio}</td>
             <td>
-            <button type="button" class="btn btn-danger bg-danger" style="width: 35px; height: 35px; display: flex;margin: auto;" onclick="eliminar_variacion(${variacion_id}, ${parseInt(precio)})"><i class="fas fa-ban"></i></button>
+            <button type="button" class="btn btn-danger bg-danger" style="width: 35px; height: 35px; display: flex;margin: auto; justify-content: center" onclick="eliminar_variacion(${id}, ${parseInt(precio)})"><i class="fas fa-ban"></i></button>
             </td>
             </tr>
             `);
@@ -143,6 +148,11 @@
             $("#tr-" + id).remove();
 
         }
+
+        $(document).ready(function() {
+            $('.js-example-basic-single').select2();
+        });
     </script>
+
 
 @endsection
