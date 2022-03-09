@@ -6,6 +6,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RolesController;
 use App\Http\Controllers\Admin\UsuariosController;
 use App\Http\Controllers\ReservasController;
+use App\Http\Controllers\MenuController;
 
 /*
 |--------------------------------------------------------------------------
@@ -65,4 +66,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/reservas/verDetalles/{id}', [ReservasController::class, "verDetalles"]);
     Route::get('/reservas/verCanceladas', [ReservasController::class, "verCanceladas"]);
     Route::get('/reservas/verAprobadas', [ReservasController::class, "verAprobadas"]);
+    Route::resources([
+        'menu' => MenuController::class
+    ]);
 });

@@ -4,7 +4,7 @@
 
     <div class="card">
         <div class="card-header m-auto">
-            <strong >Crear productos</strong>
+            <strong >Crear variación</strong>
         </div>
         <div class="card-body">
 
@@ -13,9 +13,9 @@
                 <div class="row d-flex justify-content-center">
                     <div class="col-4">
                         <div class="form-group">
-                            <label for="">Nombre producto</label>
-                            <input type="text" class="form-control @error('nombre_producto') is-invalid @enderror" name="nombre_producto">
-                            @error('nombre_producto')
+                            <label for="">Nombre de la variación</label>
+                            <input type="text" class="form-control @error('nombre_variacion') is-invalid @enderror" name="nombre_variacion">
+                            @error('nombre_variacion')
                             <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
@@ -24,9 +24,9 @@
                     </div>
                     <div class="col-4">
                         <div class="form-group">
-                            <label for="">Precio base</label>
-                            <input type="number" class="form-control @error('precio_base') is-invalid @enderror" name="precio_base">
-                            @error('precio_base')
+                            <label for="">Precio adicional</label>
+                            <input type="number" class="form-control @error('precio_adicional') is-invalid @enderror" name="precio_adicional">
+                            @error('precio_adicional')
                             <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>

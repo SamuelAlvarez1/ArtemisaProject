@@ -3033,6 +3033,10 @@ textarea.form-control-lg {
   color: #fff;
   background-color: #ffc800;
   border-color: #ffc800;
+  border-radius: 101.5px;
+    padding-bottom: 8px !important;
+    padding-top: 8px !important;
+
 }
 .btn-primary:hover {
   color: #fff;
@@ -11339,9 +11343,10 @@ p {
 }
 
 #mainNav {
+    height: 5rem;
   padding-top: 1rem;
   padding-bottom: 1rem;
-  background-color: #212529;
+  background-color: transparent;
 }
 #mainNav .navbar-toggler {
   padding: 0.75rem;
@@ -11387,9 +11392,10 @@ p {
     transition: height 0.3s ease-in-out;
   }
   #mainNav.navbar-shrink {
+      height: 5rem;
     padding-top: 1rem;
     padding-bottom: 1rem;
-    background-color: #212529;
+    background-color: #4A0000;
   }
   #mainNav.navbar-shrink .navbar-brand {
     font-size: 1.25em;
@@ -11406,14 +11412,20 @@ p {
   }
 }
 header.masthead {
-  padding-top: 10.5rem;
-  padding-bottom: 6rem;
   text-align: center;
   color: #fff;
   background-repeat: no-repeat;
   background-attachment: scroll;
   background-position: center center;
   background-size: cover;
+    background-attachment: fixed;
+}
+body{
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+    background-position: center center;
+    background-size: cover;
+    background-attachment: fixed;
 }
 header.masthead .masthead-subheading {
   font-size: 1.5rem;
@@ -11430,22 +11442,22 @@ header.masthead .masthead-heading {
   font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
 
+
+
 @media (min-width: 768px) {
   header.masthead {
-    padding-top: 17rem;
-    padding-bottom: 12.5rem;
+    padding-top: 3rem;
   }
   header.masthead .masthead-subheading {
     font-size: 2.25rem;
     font-style: italic;
     line-height: 2.25rem;
-    margin-bottom: 2rem;
   }
   header.masthead .masthead-heading {
     font-size: 4.5rem;
     font-weight: 700;
     line-height: 4.5rem;
-    margin-bottom: 4rem;
+    margin-bottom: 0;
   }
 }
 #portfolio .portfolio-item {
@@ -11717,12 +11729,7 @@ header.masthead .masthead-heading {
   height: 2.75rem;
 }
 
-section#contact {
-  background-color: #212529;
-  background-image: url("../assets/img/map-image.png");
-  background-repeat: no-repeat;
-  background-position: center;
-}
+
 section#contact .section-heading {
   color: #fff;
 }
@@ -11776,3 +11783,190 @@ section#contact form#contactForm :-ms-input-placeholder {
   font-size: 0.9rem;
   font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
+
+
+
+/*Estilos propios*/
+
+@font-face {
+    font-family: 'Oregano';
+    src: url('../fonts/tipografias/Oregano-Regular.ttf');
+    font-style: normal;
+    font-weight: bold;
+}
+
+.logo{
+    width: 100px;
+    height: 100px !important;
+}
+
+.arrow{
+    margin: auto;
+    color: #FFB42B;
+    font-size: 1.5rem;
+}
+
+.arrow:hover{
+    transform: translateY(-4px);
+}
+
+.quienessomos{
+    width: 25rem;
+    height: 35rem;
+    border-radius: 20px;
+}
+
+.map{
+    width: 25rem;
+    height: 25rem;
+    border-radius: 20px;
+    border-radius: 100%;
+}
+
+.titulo{
+    display: inline-block;
+    position: relative;
+    color: #ffc800;
+    font-family: Oregano;
+    text-decoration: none;
+}
+
+.titulo::after, .titulo::before{
+    content: '';
+    position: absolute;
+    width: 120px;
+    height: 2px;
+    background-color: #ffc800;
+    top: 1.3rem;
+
+}
+
+.titulo::after{
+     right: -8.438rem;
+}
+
+.titulo::before{
+    left: -8.438rem;
+}
+
+.text{
+    color: #fff;
+    font-size: 28px;
+    font-family: Open Sans, sans-serif;
+    margin: 70px auto;
+    width: 440px;
+}
+
+#Quienessomos, #Ubicacion{
+    padding-top: 96px;
+    padding-bottom: 24px;
+}
+
+.menu {
+    width: 800px;
+    margin: auto;
+    padding-top: 24px;
+    padding-bottom: 20px;
+    margin-bottom: 50px;
+}
+
+ .menu .titulo {
+    font-size: 40px;
+    font-weight: 300;
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.menu .contenedor-menu {
+    border: 1px solid #fff;
+    background: rgba(0,0,0,.2);
+    padding: 10px;
+    overflow: hidden;
+}
+
+.menu article {
+    width: 50%;
+    float: left;
+    padding: 20px;
+    color: #fff;
+
+}
+
+.menu article .categoria {
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 40px;
+    text-align: center;
+    font-family: Oregano;
+}
+
+.menu article .platillo {
+    overflow: hidden;
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 4px dotted #fff;
+
+}
+
+.menu article .nombre {
+    font-size:20px;
+    margin-bottom: 15px;
+    float: left;
+    font-family: Oregano;
+}
+
+.menu article .precio {
+    float: right;
+    font-size: 20px;
+    margin-bottom: 15px;
+    font-family: Oregano;
+}
+
+.menu article .descripcion {
+    font-size: 16px;
+    color: #999999;
+    clear: both;
+}
+
+.menu .contenedor-menu2 {
+    border: 1px solid #fff;
+    background: rgba(0,0,0,.5);
+    padding: 10px;
+    overflow: hidden;
+}
+
+.form{
+    width: 500px;
+    margin: auto;
+    color: white;
+}
+
+.form input{
+    background: transparent;
+    color: #fff;
+}
+
+.form input:active{
+    color: #000;
+}
+
+.form .sugerencia {
+    border-radius: 0.25rem;
+    background: transparent;
+    border: 1px solid #ced4da;
+    color: #fff;
+}
+
+.form .sugerencia:active{
+    color: #000;
+}
+
+
+.contact{
+    background: rgba(0,0,0,.5);
+    padding: 30px;
+    width: 48rem;
+    margin: auto;
+}
+
+
