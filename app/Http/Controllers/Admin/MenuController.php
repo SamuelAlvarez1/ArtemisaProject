@@ -7,6 +7,8 @@ use App\Models\Menu;
 use App\Models\PlatesVariations;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
+use DataTables;
 
 class MenuController extends Controller
 {
@@ -17,7 +19,9 @@ class MenuController extends Controller
      */
     public function index()
     {
-        return view("menu.index");
+        $plates = Menu::all();
+
+        return view("menu.index", compact('plates'));
     }
 
     /**
@@ -42,8 +46,8 @@ class MenuController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate(Menu::$rules);
         $input = $request->all();
+
 
         try {
             DB::beginTransaction();
@@ -56,7 +60,8 @@ class MenuController extends Controller
 
             foreach ($input["id"] as $key => $value) {
                 PlatesVariations::create([
-                    "id" => $value,
+                    
+                    "variation" => $input["variation"][$key],
                     "idPlate" => $plate->id,
                     "price" => $input["precios"][$key],
                     "description" => ""
@@ -66,7 +71,7 @@ class MenuController extends Controller
             DB::commit();
 
 
-            return redirect('/menu')->with('success', 'Factura creada exitosamente');
+            return redirect('/menu')->with('success', 'Platillo creado exitosamente');
         } catch (\Exception $e) {
             DB::rollBack();
             return redirect('/menu')->with('error', $e->getMessage());
@@ -82,20 +87,35 @@ class MenuController extends Controller
      */
     public function show()
     {
-        $plates = Menu::select("plates.*")->get();
+        // $plates = Menu::all();
+        // // $plates = Menu::select('plates.*', 'plates_variations.id_plates')
+        // // ->join('plates_variations', 'plates_variations.id_plates', '=', 'plates.id')
+        // // ->where("plates.state", "=", 1)
+        // // ->select(DB::raw('count(*) as variations_count'));
 
-        return DataTables::of($plates)
-            ->addColumn("state", function ($plate) {
-                if ($plate->state == 1) {
-                    return '<span class="badge bg-success">Activo</span>';
-                }
-            })
-            ->addColumn("actions", function ($plate) {
+        // $variations = PlatesVariations::where('idPlate', 'plates.id')
+        // ->get();
+
+        // $variationsCount = $variations->count();
+
+        // return DataTables::of($plates)
+        //     ->addColumn("state", function ($plate) {
+        //         if ($plate->state == 1) {
+        //             return '<span class="badge bg-success">Activo</span>';
+        //         }
+        //     })
+        //     ->addColumn("variations", function ($plate) {
+        //         if ($plate->state == 1) {
+        //             return 
+        //         }
+
+        //     })
+        //     ->addColumn("actions", function ($plate) {
 
 
-            })
-            ->rawColumns(['state', 'actions'])
-            ->make(true);
+        //     })
+        //     ->rawColumns(['state', 'variations', 'actions'])
+        //     ->make(true);
     }
 
     /**

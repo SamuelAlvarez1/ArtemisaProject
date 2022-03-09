@@ -8,7 +8,7 @@
         </div>
     </div>
 
-    <form action="store" method="post">
+    <form action="{{url('menu')}}" method="post">
         @csrf
         <div class="row">
             <div class="col-6">
@@ -20,7 +20,7 @@
                     <div class="row card-body d-flex justify-content-center">
                         <div class="form-group col-6">
                             <label for="">Categoría</label>
-                            <select name="categoria" class="form-control js-example-basic-single" onchange="colocar_categoria()" id="categories">
+                            <select name="categories" class="form-control js-example-basic-single" onchange="colocar_categoria()" id="categories">
                                 <option value="">Seleccione</option>
                                 @foreach($categories as $value)
                                     <option value="{{$value->id}}">{{$value->name}}</option>
@@ -108,9 +108,9 @@
 @section("scripts")
     <script>
         function colocar_categories() {
-            let categories = $("#cliente option:selected").attr("categories");
+            let categories = $("#categoria option:selected").attr("categories");
 
-            $("#categories_cliente").val(categories);
+            $("#categoria").val(categories);
         }
 
 
@@ -125,6 +125,7 @@
             <tr id="tr-${id}">
             <td>${id}</td>
             <td>
+            <input type="hidden" name="variation[]" value="${variacion_text}">
                 <input type="hidden" name="id[]" value="${id}">
                 <input type="hidden" name="precios[]" value="${precio}">
                 ${variacion_text}

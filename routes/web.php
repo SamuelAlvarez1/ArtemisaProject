@@ -74,4 +74,5 @@ Route::group(['middleware' => 'auth'], function () {
         'events' => EventsController::class
     ]);
     Route::get('/customers/list', [CustomersController::class, "list"]);
+    // Route::get('/menu/list', [menuController::class, "list"]);
 });
