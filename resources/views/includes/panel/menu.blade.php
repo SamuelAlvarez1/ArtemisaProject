@@ -38,12 +38,12 @@
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="{{url('/home')}}">
+            <a class="nav-link" href="{{url('/events')}}">
                 <i class="fa-solid fa-star"></i> Eventos
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="{{url('/home')}}">
+            <a class="nav-link" href="{{url('/customers')}}">
                 <i class="fa-solid fa-circle-user text-warning"></i> Clientes
             </a>
         </li>

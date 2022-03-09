@@ -8,25 +8,26 @@
             @include('includes.errors')
         </div>
         <div class="card-body">
-            <table id="customers" class="table table-bordered">
-                <thead>
-                <tr>
-                    <th>Nombre</th>
-                    <th>Documento</th>
-                    <th>Dirección</th>
-                    <th>Telefono</th>
-                    <th>Estado</th>
-                    <th>Acciones</th>
-                </tr>
-                </thead>
-                <tbody>
-                {{--table content--}}
-                </tbody>
-            </table>
-
+            <div class="table-responsive">
+                <table id="customers" class="table table-flush">
+                    <thead class="thead-dark">
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Documento</th>
+                        <th>Dirección</th>
+                        <th>Telefono</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {{--table content--}}
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
-
+@endsection
 @section('scripts')
     <script>
 

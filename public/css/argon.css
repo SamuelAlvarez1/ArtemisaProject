@@ -2205,8 +2205,8 @@ pre code
 .table .thead-dark th
 {
     color: #f8f9fe;
-    border-color: #1f3a68;
-    background-color: #172b4d;
+    border-color: #000000;
+    background-color: #262626;
 }
 
 .table .thead-light th
@@ -20917,8 +20917,8 @@ textarea[resize='horizontal']
 
 .table .thead-dark th
 {
-    color: #4d7bca;
-    background-color: #1c345d;
+    color: #FFFFFF;
+    background-color: #262626;
 }
 
 .table .thead-light th
