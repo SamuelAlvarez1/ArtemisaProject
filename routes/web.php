@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RolesController;
-use App\Http\Controllers\UsuariosController;
+use App\Http\Controllers\Admin\UsuariosController;
 use App\Http\Controllers\ReservasController;
 
 /*
@@ -19,7 +19,7 @@ use App\Http\Controllers\ReservasController;
 */
 
 Route::get('/', function () {
-    return view('auth.login');
+    return view('welcome');
 });
 
 Auth::routes();
@@ -47,6 +47,8 @@ Route::group(['middleware' => ['auth', 'validarRol']], function () {
     Route::get('/usuarios/cambiarEstado/{id}/{estado}', [UsuariosController::class, "cambiarEstado"]);
     Route::get('/usuarios/verDetalles/{id}', [UsuariosController::class, "verDetalles"]);
     Route::get('/usuarios/verDeshabilitados', [UsuariosController::class, "verDeshabilitados"]);
+
+
 });
 
 

@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\reservas;
-use App\Models\clientes;
+use App\Models\customer;
 use App\Models\eventos;
 use DataTables;
 
@@ -20,8 +20,8 @@ class ReservasController extends Controller
 
 
         if ($condicion == "canceladas") {
-            $reservas = reservas::select("reservas.*", "clientes.nombres as nombreCliente", "eventos.nombre as nombreEvento")
-                ->join("clientes", "reservas.idCliente", "=", "clientes.id")
+            $reservas = reservas::select("reservas.*", "customer.nombres as nombreCliente", "eventos.nombre as nombreEvento")
+                ->join("customer", "reservas.idCliente", "=", "customer.id")
                 ->join("eventos", "reservas.idEvento", "=", "eventos.id")
                 ->where("reservas.estado", "=", 0)
                 ->get();
@@ -43,8 +43,8 @@ class ReservasController extends Controller
                 ->rawColumns(['estado', 'acciones'])
                 ->make(true);
         } else if ($condicion == "enProceso") {
-            $reservas = reservas::select("reservas.*", "clientes.nombres as nombreCliente", "eventos.nombre as nombreEvento")
-                ->join("clientes", "reservas.idCliente", "=", "clientes.id")
+            $reservas = reservas::select("reservas.*", "customer.nombres as nombreCliente", "eventos.nombre as nombreEvento")
+                ->join("customer", "reservas.idCliente", "=", "customer.id")
                 ->join("eventos", "reservas.idEvento", "=", "eventos.id")
                 ->where("reservas.estado", "=", 1)
                 ->get();
@@ -66,8 +66,8 @@ class ReservasController extends Controller
                 ->rawColumns(['estado', 'acciones'])
                 ->make(true);
         } else {
-            $reservas = reservas::select("reservas.*", "clientes.nombres as nombreCliente", "eventos.nombre as nombreEvento")
-                ->join("clientes", "reservas.idCliente", "=", "clientes.id")
+            $reservas = reservas::select("reservas.*", "customer.nombres as nombreCliente", "eventos.nombre as nombreEvento")
+                ->join("customer", "reservas.idCliente", "=", "customer.id")
                 ->join("eventos", "reservas.idEvento", "=", "eventos.id")
                 ->where("reservas.estado", "=", 2)
                 ->get();
@@ -90,7 +90,7 @@ class ReservasController extends Controller
 
     public function crear()
     {
-        $clientes = clientes::all();
+        $clientes = customer::all();
         $eventos = eventos::all();
 
         return view("reservas.crear", compact('clientes', 'eventos'));
@@ -127,7 +127,7 @@ class ReservasController extends Controller
     {
         if ($id != null) {
             $reserva = reservas::find($id);
-            $clientes = clientes::all();
+            $clientes = customer::all();
             $eventos = eventos::all();
 
             return view("reservas.editar", compact("reserva", "clientes", "eventos"));
@@ -188,8 +188,8 @@ class ReservasController extends Controller
     public function verDetalles($id)
     {
 
-        $reserva = reservas::select("reservas.*", "clientes.nombres as nombreCliente", "eventos.nombre as nombreEvento")
-            ->join("clientes", "reservas.idCliente", "=", "clientes.id")
+        $reserva = reservas::select("reservas.*", "customer.nombres as nombreCliente", "eventos.nombre as nombreEvento")
+            ->join("customer", "reservas.idCliente", "=", "customer.id")
             ->join("eventos", "reservas.idEvento", "=", "eventos.id")
             ->where("reservas.id", "=", $id)
             ->get();
