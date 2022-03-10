@@ -11,7 +11,7 @@
 @section('main-content')
 
     <div class="d-flex justify-content-center">
-        <a href="reservas/crear"class="btn btn-primary">Crear reserva</a>
+        <a href="bookings/create"class="btn btn-primary">Crear reserva</a>
         <a href="reservas/verCanceladas"class="btn btn-danger ">Ver canceladas</a>
         <a href="reservas/verAprobadas"class="btn btn-success ">Ver aprobadas</a>
     </div>
@@ -49,13 +49,13 @@
    ajax: '/reservas/listar/enProceso',
    columns: [
        {data: 'id', name: 'id'},
-       {data: 'nombreCliente', name: 'nombreCliente'},
-       {data: 'nombreEvento', name: 'nombreEvento'},
-       {data: 'cantidad_personas', name: 'cantidad_personas'},
-       {data: 'estado', name: 'estado'},
-       {data: 'fecha_inicio', name: 'fecha_inicio'},
-       {data: 'fecha_fin', name: 'fecha_fin'},
-       {data: 'acciones', name: 'acciones', orderable: false, searchable: false},
+       {data: 'customerName', name: 'customerName'},
+       {data: 'eventName', name: 'eventName'},
+       {data: 'amount_people', name: 'amount_people'},
+       {data: 'state', name: 'state'},
+       {data: 'start_date', name: 'start_date'},
+       {data: 'final_date', name: 'final_date'},
+       {data: 'actions', name: 'actions', orderable: false, searchable: false},
    ]
 });
 </script>

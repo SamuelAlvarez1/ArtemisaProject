@@ -17,7 +17,7 @@ class BookingsController extends Controller
      */
     public function index()
     {
-        return view("reservas.index");
+        return view("bookings.index");
     }
 
     public function listar($condicion)
@@ -25,70 +25,70 @@ class BookingsController extends Controller
 
 
         if ($condicion == "canceladas") {
-            $reservas = Booking::select("reservas.*", "customers.name as nombreCliente", "eventos.nombre as nombreEvento")
-                ->join("customers", "reservas.idCliente", "=", "customers.id")
-                ->join("eventos", "reservas.idEvento", "=", "eventos.id")
-                ->where("reservas.estado", "=", 0)
+            $bookings = Booking::select("bookings.*", "customers.name as customerName", "events.name as eventName")
+                ->join("customers", "bookings.idCustomer", "=", "customers.id")
+                ->join("events", "bookings.idEvent", "=", "events.id")
+                ->where("bookings.state", "=", 0)
                 ->get();
-            return DataTables::of($reservas)
-                ->editColumn("estado", function ($reserva) {
+            return DataTables::of($bookings)
+                ->editColumn("state", function ($booking) {
                     return '<div class="d-flex justify-content-center">'
                         . '<span class="badge bg-danger">cancelada</span>'
                         . '</div>';
                 })
-                ->addColumn("acciones", function ($reserva) {
+                ->addColumn("actions", function ($booking) {
 
                     return '<div class="d-flex justify-content-center">'
-                        . '<a href="/reservas/verDetalles/' . $reserva->id . '" class="btn btn-primary"><i class="fa-solid fa-eye"></i></a>'
-                        . '<a href="/reservas/editar/' . $reserva->id . '" class="btn btn-warning text-white"><i class="fas fa-edit"></i></a>'
-                        . '<a href="/reservas/cambiarEstado/enProceso/' . $reserva->id . '/1" class="btn btn-info text-white"><i class="fa-solid fa-clock"></i></a>'
-                        . '<a href="/reservas/cambiarEstado/aprobar/' . $reserva->id . '/2" class="btn btn-success text-white"><i class="fas fa-check"></i></a>'
+                        . '<a href="/reservas/verDetalles/' . $booking->id . '" class="btn btn-primary"><i class="fa-solid fa-eye"></i></a>'
+                        . '<a href="/reservas/editar/' . $booking->id . '" class="btn btn-warning text-white"><i class="fas fa-edit"></i></a>'
+                        . '<a href="/reservas/cambiarEstado/enProceso/' . $booking->id . '/1" class="btn btn-info text-white"><i class="fa-solid fa-clock"></i></a>'
+                        . '<a href="/reservas/cambiarEstado/aprobar/' . $booking->id . '/2" class="btn btn-success text-white"><i class="fas fa-check"></i></a>'
                         . '</div>';
                 })
-                ->rawColumns(['estado', 'acciones'])
+                ->rawColumns(['state', 'actions'])
                 ->make(true);
         } else if ($condicion == "enProceso") {
-            $reservas = Booking::select("reservas.*", "customers.name as nombreCliente", "eventos.nombre as nombreEvento")
-                ->join("customers", "reservas.idCliente", "=", "customers.id")
-                ->join("eventos", "reservas.idEvento", "=", "eventos.id")
-                ->where("reservas.estado", "=", 1)
+            $bookings = Booking::select("bookings.*", "customers.name as customerName", "events.name as eventName")
+                ->join("customers", "bookings.idCustomer", "=", "customers.id")
+                ->join("events", "bookings.idEvent", "=", "events.id")
+                ->where("bookings.state", "=", 1)
                 ->get();
-            return DataTables::of($reservas)
-                ->editColumn("estado", function ($reserva) {
+            return DataTables::of($bookings)
+                ->editColumn("state", function ($booking) {
                     return '<div class="d-flex justify-content-center">'
                         . '<span class="badge bg-warning">En proceso</span>'
                         . '</div>';
                 })
-                ->addColumn("acciones", function ($reserva) {
+                ->addColumn("actions", function ($booking) {
 
                     return '<div class="d-flex justify-content-center">'
-                        . '<a href="/reservas/verDetalles/' . $reserva->id . '" class="btn btn-primary"><i class="fa-solid fa-eye"></i></a>'
-                        . '<a href="/reservas/editar/' . $reserva->id . '" class="btn btn-warning text-white"><i class="fas fa-edit"></i></a>'
-                        . '<a href="/reservas/cambiarEstado/cancelar/' . $reserva->id . '/0" class="btn btn-danger text-white"><i class="fas fa-ban"></i></a>'
-                        . '<a href="/reservas/cambiarEstado/aprobar/' . $reserva->id . '/2" class="btn btn-success text-white"><i class="fas fa-check"></i></a>'
+                        . '<a href="/reservas/verDetalles/' . $booking->id . '" class="btn btn-primary"><i class="fa-solid fa-eye"></i></a>'
+                        . '<a href="/reservas/editar/' . $booking->id . '" class="btn btn-warning text-white"><i class="fas fa-edit"></i></a>'
+                        . '<a href="/reservas/cambiarEstado/cancelar/' . $booking->id . '/0" class="btn btn-danger text-white"><i class="fas fa-ban"></i></a>'
+                        . '<a href="/reservas/cambiarEstado/aprobar/' . $booking->id . '/2" class="btn btn-success text-white"><i class="fas fa-check"></i></a>'
                         . '</div>';
                 })
-                ->rawColumns(['estado', 'acciones'])
+                ->rawColumns(['state', 'actions'])
                 ->make(true);
         } else {
-            $reservas = Booking::select("reservas.*", "customers.name as nombreCliente", "eventos.nombre as nombreEvento")
-                ->join("customers", "reservas.idCliente", "=", "customers.id")
-                ->join("eventos", "reservas.idEvento", "=", "eventos.id")
-                ->where("reservas.estado", "=", 2)
+            $bookings = Booking::select("bookings.*", "customers.name as customerName", "events.name as eventName")
+                ->join("customers", "bookings.idCustomer", "=", "customers.id")
+                ->join("events", "bookings.idEvent", "=", "events.id")
+                ->where("bookings.state", "=", 2)
                 ->get();
-            return DataTables::of($reservas)
-                ->editColumn("estado", function ($reserva) {
+            return DataTables::of($bookings)
+                ->editColumn("state", function ($booking) {
                     return '<div class="d-flex justify-content-center">'
                         . '<span class="badge bg-success">Aprobada</span>'
                         . '</div>';
                 })
-                ->addColumn("acciones", function ($reserva) {
+                ->addColumn("actions", function ($booking) {
 
                     return '<div class="d-flex justify-content-center">'
-                        . '<a href="/reservas/verDetalles/' . $reserva->id . '" class="btn btn-primary"><i class="fa-solid fa-eye"></i></a>'
+                        . '<a href="/reservas/verDetalles/' . $booking->id . '" class="btn btn-primary"><i class="fa-solid fa-eye"></i></a>'
                         . '</div>';
                 })
-                ->rawColumns(['estado', 'acciones'])
+                ->rawColumns(['state', 'actions'])
                 ->make(true);
         }
     }
@@ -102,9 +102,9 @@ class BookingsController extends Controller
     public function create()
     {
         $customers = customer::all();
-        $events = Booking::all();
+        $events = Events::all();
 
-        return view("reservas.crear", compact('clientes', 'eventos'));
+        return view("bookings.create", compact('customers', 'events'));
     }
 
     /**
@@ -116,10 +116,10 @@ class BookingsController extends Controller
     public function store(Request $request)
     {
         $campos = [
-            'idCliente' => 'required',
-            'idEvento' => 'required',
-            'cantidad_personas' => 'required',
-            'fecha_fin' => 'required',
+            'idCustomer' => 'required',
+            'idEvent' => 'required',
+            'amount_people' => 'required',
+            'final_date' => 'required',
         ];
 
         $mensaje = [
@@ -129,15 +129,15 @@ class BookingsController extends Controller
         $this->validate($request, $campos, $mensaje);
 
         Booking::create([
-            'idCliente' => $request['idCliente'],
-            'idEvento' =>  $request['idEvento'],
-            'cantidad_personas' => $request['cantidad_personas'],
-            'fecha_inicio' => date('Y-m-d'),
-            'fecha_fin' => $request['fecha_fin'],
-            'estado' => 1,
+            'idCustomer' => $request['idCustomer'],
+            'idEvent' =>  $request['idEvent'],
+            'amount_people' => $request['amount_people'],
+            'start_date' => date('Y-m-d'),
+            'final_date' => $request['final_date'],
+            'state' => 1,
         ]);
 
-        return redirect("/reservas")->with("success", "reserva creada satisfactoriamente");
+        return redirect("/bookings")->with("success", "reserva creada satisfactoriamente");
     }
 
     /**
@@ -148,18 +148,18 @@ class BookingsController extends Controller
      */
     public function show($id)
     {
-        $reserva = Booking::select("reservas.*", "customer.name as nombreCliente", "eventos.nombre as nombreEvento")
-            ->join("customer", "reservas.idCliente", "=", "customer.id")
-            ->join("eventos", "reservas.idEvento", "=", "eventos.id")
-            ->where("reservas.id", "=", $id)
+        $booking = Booking::select("bookings.*", "customer.name as customerName", "events.name as eventName")
+            ->join("customer", "bookings.idCustomer", "=", "customer.id")
+            ->join("events", "bookings.idEvent", "=", "events.id")
+            ->where("bookings.id", "=", $id)
             ->get();
 
-        foreach ($reserva as $value) {
-            $reserva = $value;
+        foreach ($booking as $value) {
+            $booking = $value;
         }
 
 
-        return view("reservas.verDetalles", compact("reserva"));
+        return view("booking.showDetails", compact("booking"));
     }
 
     /**
@@ -171,13 +171,13 @@ class BookingsController extends Controller
     public function edit($id)
     {
         if ($id != null) {
-            $reserva = Booking::find($id);
-            $clientes = Customer::all();
-            $eventos = Events::all();
+            $booking = Booking::find($id);
+            $customers = Customer::all();
+            $events = Events::all();
 
-            return view("reservas.editar", compact("reserva", "clientes", "eventos"));
+            return view("booking.edit", compact("booking", "customers", "events"));
         } else {
-            return redirect('/reservas')->with("error", "el id de la reserva no fue encontrado");
+            return redirect('/bookings')->with("error", "el id de la reserva no fue encontrado");
         }
     }
 
@@ -192,10 +192,10 @@ class BookingsController extends Controller
     {
         if ($id != null) {
             $campos = [
-                'idCliente' => 'required',
-                'idEvento' => 'required',
-                'cantidad_personas' => 'required',
-                'fecha_fin' => 'required',
+                'idCustomer' => 'required',
+                'idEvent' => 'required',
+                'amount_people' => 'required',
+                'final_date' => 'required',
             ];
 
 
@@ -206,14 +206,14 @@ class BookingsController extends Controller
             $this->validate($request, $campos, $mensaje);
             try {
                 Booking::where("id", "=", $id)->update([
-                    'idCliente' => $request['idCliente'],
-                    'idEvento' =>  $request['idEvento'],
-                    'cantidad_personas' => $request['cantidad_personas'],
-                    'fecha_fin' => $request['fecha_fin'],
+                    'idCustomer' => $request['idCustomer'],
+                    'idEvent' =>  $request['idEvent'],
+                    'amount_people' => $request['amount_people'],
+                    'final_date' => $request['final_date'],
                 ]);
-                return redirect('/reservas')->with("edit", "La reserva fue editada satisfactoriamente");
+                return redirect('/bookings')->with("edit", "La reserva fue editada satisfactoriamente");
             } catch (\Exception $e) {
-                return redirect('/reservas')->with("error", $e->getMessage());
+                return redirect('/bookings')->with("error", $e->getMessage());
             }
         }
     }
@@ -228,28 +228,28 @@ class BookingsController extends Controller
     {
         if ($id != null) {
             try {
-                $reserva = Booking::where("id", "=", $id);
+                $booking = Booking::where("id", "=", $id);
                 Booking::where("id", "=", $id)->update([
-                    "estado" => $estado
+                    "state" => $estado
                 ]);
                 if ($estado == 1) {
-                    return redirect('/reservas/verCanceladas')->with("success", "cambio de estado exitoso");
+                    return redirect('/bookings/seeCanceled')->with("success", "cambio de estado exitoso");
                 } else {
-                    return redirect('/reservas')->with("success", "cambio de estado exitoso");
+                    return redirect('/bookings')->with("success", "cambio de estado exitoso");
                 }
             } catch (\Exception $e) {
-                return redirect('/reservas')->with("error", "el estado de la reserva no se pudo cambiar");
+                return redirect('/bookings')->with("error", "el estado de la reserva no se pudo cambiar");
             }
         }
     }
 
     public function verCanceladas()
     {
-        return view("reservas.verCanceladas");
+        return view("bookings.seeCanceled");
     }
 
     public function verAprobadas()
     {
-        return view("reservas.verAprobadas");
+        return view("bookings.seeApproved");
     }
 }

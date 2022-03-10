@@ -48,7 +48,7 @@
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="{{url('/reservas')}}">
+            <a class="nav-link" href="{{url('/bookings')}}">
                 <i class="fa-solid fa-clipboard-list text-blue"></i> Reservas
             </a>
         </li>

@@ -17,20 +17,20 @@
             <div class="card-title text-center">
                 <h2>Crear reserva</h2>
             </div>
-            <form action="insertar" method="post">
+            <form action="{{ url('bookings') }}" method="post">
                 @csrf
 
-                <select name="idCliente" id="idCliente" class="form-control">
+                <select name="idCustomer" id="idCustomer" class="form-control">
                     <option value="0">Seleccione el cliente</option>
-                    @foreach ($clientes as $cliente)
-                        <option value="{{$cliente->id}}">{{$cliente->nombres}}</option>
+                    @foreach ($customers as $customer)
+                        <option value="{{$customer->id}}">{{$customer->name}}</option>
                     @endforeach
                 </select>
 
-                <select name="idEvento" id="idEvento" class="form-control mt-2">
+                <select name="idEvent" id="idEvent" class="form-control mt-2">
                     <option value="">Seleccione el evento</option>
-                    @foreach ($eventos as $evento)
-                        <option value="{{$evento->id}}">{{$evento->nombre}}</option>
+                    @foreach ($events as $event)
+                        <option value="{{$event->id}}">{{$event->name}}</option>
                     @endforeach
                 </select>
 
@@ -38,11 +38,11 @@
                     type="text"
                     class="form-control mt-2"
                     placeholder="Cantidad de personas"
-                    name="cantidad_personas"
-                    value="{{ old('cantidad_personas') }}"
+                    name="amount_people"
+                    value="{{ old('amount_people') }}"
                 />
 
-                <input type="date" class="form-control mt-2" name="fecha_fin">
+                <input type="date" class="form-control mt-2" name="final_date">
 
                 <button type="submit" class="btn btn-primary mt-2">
                     Crear reserva
