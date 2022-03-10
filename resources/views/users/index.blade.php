@@ -11,7 +11,7 @@
 @section('main-content')
 
     <div class="d-flex justify-content-center">
-        <a href="usuarios/crear"class="btn btn-primary mx-4">Crear usuario</a>
+        <a href="users/create"class="btn btn-primary mx-4">Crear usuario</a>
         <a href="usuarios/verDeshabilitados"class="btn btn-danger ">Ver deshabilitados</a>
     </div>
     <table class="table table-bordered table-striped" id="usuarios">
@@ -48,13 +48,13 @@
    ajax: '/usuarios/listar/habilitados',
    columns: [
        {data: 'id', name: 'id'},
-       {data: 'apellidos', name: 'apellidos'},
+       {data: 'last_name', name: 'last_name'},
        {data: 'name', name: 'name'},
        {data: 'email', name: 'email'},
-       {data: 'estado', name: 'estado'},
-       {data: 'telefono', name: 'telefono'},
+       {data: 'state', name: 'state'},
+       {data: 'phone', name: 'phone'},
        {data: 'rol', name: 'rol'},
-       {data: 'acciones', name: 'acciones', orderable: false, searchable: false},
+       {data: 'actions', name: 'actions', orderable: false, searchable: false},
    ]
 });
 </script>

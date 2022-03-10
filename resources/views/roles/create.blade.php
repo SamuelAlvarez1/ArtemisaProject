@@ -17,23 +17,23 @@
             <div class="card-title text-center">
                 <h2>Crear rol</h2>
             </div>
-            <form action="guardar" method="post">
+            <form action="{{ url('roles') }}" method="post">
                 @csrf
 
                 <input
                     type="text"
                     class="form-control"
-                    placeholder="nombre"
-                    name="nombre"
-                    value="{{ old('nombre') }}"
+                    placeholder="Nombre"
+                    name="name"
+                    value="{{ old('name') }}"
                 />
 
                 <input
                     type="text"
                     class="form-control mt-2"
                     placeholder="descripcion"
-                    name="descripcion"
-                    value="{{ old('descripcion') }}"
+                    name="description"
+                    value="{{ old('description') }}"
                 />
 
                 <button type="submit" class="btn btn-primary mt-2">

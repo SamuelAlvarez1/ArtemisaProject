@@ -10,7 +10,7 @@
 
 @section('main-content')
     <div class="d-flex justify-content-center">
-        <a href="roles/crear"class="btn btn-primary mx-4">Crear rol</a>
+        <a href="roles/create"class="btn btn-primary mx-4">Crear rol</a>
         <a href="roles/verDeshabilitados"class="btn btn-danger ">Ver deshabilitados</a>
     </div>
     
@@ -43,10 +43,10 @@
    ajax: '/roles/listar/habilitados',
    columns: [
        {data: 'id', name: 'id'},
-       {data: 'nombre', name: 'nombre'},
-       {data: 'descripcion', name: 'descripcion'},
-       {data: 'estado', name: 'estado'},
-       {data: 'acciones', name: 'acciones', orderable: false, searchable: false},
+       {data: 'name', name: 'name'},
+       {data: 'description', name: 'description'},
+       {data: 'state', name: 'state'},
+       {data: 'actions', name: 'actions', orderable: false, searchable: false},
        
    ]
 });

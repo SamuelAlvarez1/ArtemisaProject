@@ -3,13 +3,18 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Reserva;
+use App\Models\Booking;
 use App\Models\Customer;
 use App\Models\Events;
 use DataTables;
 
-class ReservasController extends Controller
+class BookingsController extends Controller
 {
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function index()
     {
         return view("reservas.index");
@@ -20,7 +25,7 @@ class ReservasController extends Controller
 
 
         if ($condicion == "canceladas") {
-            $reservas = Reserva::select("reservas.*", "customers.name as nombreCliente", "eventos.nombre as nombreEvento")
+            $reservas = Booking::select("reservas.*", "customers.name as nombreCliente", "eventos.nombre as nombreEvento")
                 ->join("customers", "reservas.idCliente", "=", "customers.id")
                 ->join("eventos", "reservas.idEvento", "=", "eventos.id")
                 ->where("reservas.estado", "=", 0)
@@ -43,7 +48,7 @@ class ReservasController extends Controller
                 ->rawColumns(['estado', 'acciones'])
                 ->make(true);
         } else if ($condicion == "enProceso") {
-            $reservas = Reserva::select("reservas.*", "customers.name as nombreCliente", "eventos.nombre as nombreEvento")
+            $reservas = Booking::select("reservas.*", "customers.name as nombreCliente", "eventos.nombre as nombreEvento")
                 ->join("customers", "reservas.idCliente", "=", "customers.id")
                 ->join("eventos", "reservas.idEvento", "=", "eventos.id")
                 ->where("reservas.estado", "=", 1)
@@ -66,7 +71,7 @@ class ReservasController extends Controller
                 ->rawColumns(['estado', 'acciones'])
                 ->make(true);
         } else {
-            $reservas = Reserva::select("reservas.*", "customers.name as nombreCliente", "eventos.nombre as nombreEvento")
+            $reservas = Booking::select("reservas.*", "customers.name as nombreCliente", "eventos.nombre as nombreEvento")
                 ->join("customers", "reservas.idCliente", "=", "customers.id")
                 ->join("eventos", "reservas.idEvento", "=", "eventos.id")
                 ->where("reservas.estado", "=", 2)
@@ -88,15 +93,27 @@ class ReservasController extends Controller
         }
     }
 
-    public function crear()
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
     {
-        $clientes = customer::all();
-        $eventos = eventos::all();
+        $customers = customer::all();
+        $events = Booking::all();
 
         return view("reservas.crear", compact('clientes', 'eventos'));
     }
 
-    public function insertar(Request $request)
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
     {
         $campos = [
             'idCliente' => 'required',
@@ -111,7 +128,7 @@ class ReservasController extends Controller
 
         $this->validate($request, $campos, $mensaje);
 
-        reservas::create([
+        Booking::create([
             'idCliente' => $request['idCliente'],
             'idEvento' =>  $request['idEvento'],
             'cantidad_personas' => $request['cantidad_personas'],
@@ -123,12 +140,40 @@ class ReservasController extends Controller
         return redirect("/reservas")->with("success", "reserva creada satisfactoriamente");
     }
 
-    public function editar($id)
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        $reserva = Booking::select("reservas.*", "customer.name as nombreCliente", "eventos.nombre as nombreEvento")
+            ->join("customer", "reservas.idCliente", "=", "customer.id")
+            ->join("eventos", "reservas.idEvento", "=", "eventos.id")
+            ->where("reservas.id", "=", $id)
+            ->get();
+
+        foreach ($reserva as $value) {
+            $reserva = $value;
+        }
+
+
+        return view("reservas.verDetalles", compact("reserva"));
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
     {
         if ($id != null) {
-            $reserva = reservas::find($id);
-            $clientes = customer::all();
-            $eventos = eventos::all();
+            $reserva = Booking::find($id);
+            $clientes = Customer::all();
+            $eventos = Events::all();
 
             return view("reservas.editar", compact("reserva", "clientes", "eventos"));
         } else {
@@ -136,7 +181,14 @@ class ReservasController extends Controller
         }
     }
 
-    public function actualizar($id, Request $request)
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
     {
         if ($id != null) {
             $campos = [
@@ -153,7 +205,7 @@ class ReservasController extends Controller
 
             $this->validate($request, $campos, $mensaje);
             try {
-                reservas::where("id", "=", $id)->update([
+                Booking::where("id", "=", $id)->update([
                     'idCliente' => $request['idCliente'],
                     'idEvento' =>  $request['idEvento'],
                     'cantidad_personas' => $request['cantidad_personas'],
@@ -166,12 +218,18 @@ class ReservasController extends Controller
         }
     }
 
-    public function cambiarEstado($id, $estado)
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id, $estado)
     {
         if ($id != null) {
             try {
-                $reserva = reservas::where("id", "=", $id);
-                reservas::where("id", "=", $id)->update([
+                $reserva = Booking::where("id", "=", $id);
+                Booking::where("id", "=", $id)->update([
                     "estado" => $estado
                 ]);
                 if ($estado == 1) {
@@ -183,23 +241,6 @@ class ReservasController extends Controller
                 return redirect('/reservas')->with("error", "el estado de la reserva no se pudo cambiar");
             }
         }
-    }
-
-    public function verDetalles($id)
-    {
-
-        $reserva = reservas::select("reservas.*", "customer.name as nombreCliente", "eventos.nombre as nombreEvento")
-            ->join("customer", "reservas.idCliente", "=", "customer.id")
-            ->join("eventos", "reservas.idEvento", "=", "eventos.id")
-            ->where("reservas.id", "=", $id)
-            ->get();
-
-        foreach ($reserva as $value) {
-            $reserva = $value;
-        }
-
-
-        return view("reservas.verDetalles", compact("reserva"));
     }
 
     public function verCanceladas()

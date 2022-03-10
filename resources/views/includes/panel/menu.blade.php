@@ -22,7 +22,7 @@
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="{{url('/usuarios')}}">
+            <a class="nav-link" href="{{url('/users')}}">
                 <i class="ni ni-circle-08 text-primary"></i>Usuarios
             </a>
         </li>

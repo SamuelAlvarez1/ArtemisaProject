@@ -5,16 +5,20 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class roles extends Model
+class Booking extends Model
 {
     use HasFactory;
-    protected $table = "roles";
+
+    protected $table = "bookings";
 
     protected $fillable = [
         'id',
-        'nombre',
-        'descripcion',
-        'estado',
+        'idCustomer',
+        'idEvent',
+        'amount_people',
+        'state',
+        'start_date',
+        'final_date',
     ];
 
     public $timestamps = false;

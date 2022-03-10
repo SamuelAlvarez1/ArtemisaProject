@@ -4,30 +4,38 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use DataTables;
-use App\Models\roles;
+use App\Models\Rol;
+
 
 class RolesController extends Controller
 {
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function index()
     {
         return view("roles.index");
     }
+
+
     public function listar($condicion)
     {
 
         // $roles = roles::all();
 
         if ($condicion == "deshabilitados") {
-            $roles = roles::select("roles.*")
-                ->where('roles.estado', "=", "0")
+            $roles = Rol::select("roles.*")
+                ->where('roles.state', "=", "0")
                 ->get();
             return DataTables::of($roles)
-                ->editColumn("estado", function ($rol) {
+                ->editColumn("state", function ($rol) {
                     return '<div class="d-flex justify-content-center">'
                         . '<span class="badge bg-danger">Inactivo</span>'
                         . '</div>';
                 })
-                ->addColumn("acciones", function ($rol) {
+                ->addColumn("actions", function ($rol) {
 
                     return '<div class="d-flex justify-content-center">'
                         . '<a href="/roles/verDetalles/' . $rol->id . '" class="btn btn-success"><i class="fa-solid fa-eye"></i></a>'
@@ -35,19 +43,19 @@ class RolesController extends Controller
                         . '<a href="/roles/cambiarEstado/' . $rol->id . '/1" class="btn btn-success text-white"><i class="fas fa-check"></i></a>'
                         . '</div>';
                 })
-                ->rawColumns(['estado', 'acciones'])
+                ->rawColumns(['state', 'actions'])
                 ->make(true);
         } else {
-            $roles = roles::select("roles.*")
-                ->where('roles.estado', "=", "1")
+            $roles = Rol::select("roles.*")
+                ->where('roles.state', "=", "1")
                 ->get();
             return DataTables::of($roles)
-                ->editColumn("estado", function ($rol) {
+                ->editColumn("state", function ($rol) {
                     return '<div class="d-flex justify-content-center">'
                         . '<span class="badge bg-primary">activo</span>'
                         . '</div>';
                 })
-                ->addColumn("acciones", function ($rol) {
+                ->addColumn("actions", function ($rol) {
 
                     return '<div class="d-flex justify-content-center">'
                         . '<a href="roles/verDetalles/' . $rol->id . '" class="btn btn-success"><i class="fa-solid fa-eye"></i></a>'
@@ -55,36 +63,48 @@ class RolesController extends Controller
                         . '<a href="roles/cambiarEstado/' . $rol->id . '/0" class="btn btn-danger text-white"><i class="fas fa-ban"></i></a>'
                         . '</div>';
                 })
-                ->rawColumns(['estado', 'acciones'])
+                ->rawColumns(['state', 'actions'])
                 ->make(true);
         }
     }
 
-    public function crear()
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
     {
-        return view("roles.crear");
+        return view("roles.create");
     }
 
-    public function guardar(Request $request)
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
     {
         $campos = [
-            'nombre' => 'required',
-            'descripcion' => 'required'
+            'name' => 'required',
+            'description' => 'required'
 
         ];
 
         $mensaje = [
             'required' => 'El :attribute es requerido',
-            'descripcion.required' => 'La :attribute es requerida',
+            'description.required' => 'La :attribute es requerida',
         ];
 
         $this->validate($request, $campos, $mensaje);
 
         try {
-            roles::create([
-                'nombre' => $request["nombre"],
-                'descripcion' => $request["descripcion"],
-                'estado' => 1
+            Rol::create([
+                'name' => $request["name"],
+                'description' => $request["description"],
+                'state' => 1
             ]);
             return redirect('/roles')->with("success", "el rol fue agregado satisfactoriamente");
         } catch (\Exception $e) {
@@ -92,10 +112,29 @@ class RolesController extends Controller
         }
     }
 
-    public function editar($id)
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        $rol = Rol::find($id);
+
+        return view("roles.verDetalles", compact("rol"));
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
     {
         if ($id != null) {
-            $rol = roles::find($id);
+            $rol = Rol::find($id);
 
             return view("roles.editar", compact("rol"));
         } else {
@@ -103,7 +142,14 @@ class RolesController extends Controller
         }
     }
 
-    public function actualizar($id, Request $request)
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
     {
         if ($id != null) {
             $campos = [
@@ -119,7 +165,7 @@ class RolesController extends Controller
 
             $this->validate($request, $campos, $mensaje);
             try {
-                roles::where("id", "=", $id)->update([
+                Rol::where("id", "=", $id)->update([
                     "nombre" => $request["nombre"],
                     "descripcion" => $request["descripcion"]
                 ]);
@@ -130,11 +176,17 @@ class RolesController extends Controller
         }
     }
 
-    public function cambiarEstado($id, $estado)
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id, $estado)
     {
         if ($id != null) {
             try {
-                roles::where("id", "=", $id)->update([
+                Rol::where("id", "=", $id)->update([
                     "estado" => $estado
                 ]);
                 if ($estado == 1) {
@@ -147,14 +199,6 @@ class RolesController extends Controller
             }
         }
     }
-
-    public function verDetalles($id)
-    {
-        $rol = roles::find($id);
-
-        return view("roles.verDetalles", compact("rol"));
-    }
-
     public function verDeshabilitados()
     {
         return view("roles.verDeshabilitados");

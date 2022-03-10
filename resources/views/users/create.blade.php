@@ -8,7 +8,7 @@
                 <div class="card-header">{{ __('Crear usuario') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="insertar">
+                    <form method="POST" action="{{ url('users') }}">
                         @csrf
 
                         <div class="row mb-3">
@@ -26,10 +26,10 @@
                         </div>
 
                         <div class="row mb-3">
-                            <label for="apellidos" class="col-md-4 col-form-label text-md-end">{{ __('Apellidos') }}</label>
+                            <label for="last_name" class="col-md-4 col-form-label text-md-end">{{ __('Apellidos') }}</label>
 
                             <div class="col-md-6">
-                                <input id="apellidos" type="text" class="form-control" name="apellidos" value="{{ old('apellidos') }}" required autocomplete="apellidos">
+                                <input id="last_name" type="text" class="form-control" name="last_name" value="{{ old('last_name') }}" required autocomplete="last_name">
                             </div>
                         </div>
 
@@ -48,10 +48,10 @@
                         </div>
 
                         <div class="row mb-3">
-                            <label for="telefono" class="col-md-4 col-form-label text-md-end">{{ __('telefono') }}</label>
+                            <label for="phone" class="col-md-4 col-form-label text-md-end">{{ __('telefono') }}</label>
 
                             <div class="col-md-6">
-                                <input id="telefono" type="text" class="form-control" name="telefono" value="{{ old('telefono') }}" required autocomplete="telefono">
+                                <input id="phone" type="text" class="form-control" name="phone" value="{{ old('phone') }}" required autocomplete="phone">
                             </div>
                         </div>
 
@@ -62,7 +62,7 @@
                                 <select name="idRol" id="idRol" class="form-control">
                                     <option value="">seleccione</option>
                                     @foreach ($roles as $rol)
-                                        <option value="{{$rol->id}}">{{$rol->nombre}}</option>
+                                        <option value="{{$rol->id}}">{{$rol->name}}</option>
                                     @endforeach
                                 </select>
                             
