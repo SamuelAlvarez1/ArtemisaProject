@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="Artemisa">
     <meta name="description" content="resto-bar">
-    <meta name="author" content="Samuel Alvarez Ospina">
+    <meta name="author" content="Artemisa restobar">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Artemisa</title>
     <!-- Favicon -->
@@ -23,6 +23,7 @@
 
     {{--  Select2  --}}
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="//cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js">
 
 
     @yield('styles')
@@ -88,10 +89,9 @@
                     </a>
                     <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-right"
                          aria-labelledby="navbar-default_dropdown_1">
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
+                        <a class="dropdown-item" href="#">Reportes de reservas</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Something else here</a>
+                        <a class="dropdown-item" href="#">Reportes de ventas</a>
                     </div>
                 </li>
                 <li class="nav-item dropdown">
@@ -108,21 +108,21 @@
                     </a>
                     <div class="dropdown-menu active dropdown-menu-arrow dropdown-menu-right">
                         <div class=" dropdown-header noti-title">
-                            <h6 class="text-overflow m-0">Welcome!</h6>
+                            <h6 class="text-overflow m-0">Bienvenido!</h6>
                         </div>
                         <a href="#" class="dropdown-item">
                             <i class="ni ni-single-02"></i>
-                            <span>My profile</span>
+                            <span>Mi perfil</span>
                         </a>
                         <a href="#" class="dropdown-item">
                             <i class="ni ni-settings-gear-65"></i>
-                            <span>Settings</span>
+                            <span>Configuración</span>
                         </a>
                         <div class="dropdown-divider"></div>
                         <a href="" class="dropdown-item"
                            onclick="event.preventDefault(); document.getElementById('form-logout').submit();">
                             <i class="ni ni-user-run"></i>
-                            <span>Logout</span>
+                            <span>Cerrar sesion</span>
                         </a>
                         <form action="{{route('logout')}}" method="post" style="display: none;" id="form-logout">
                             @csrf
@@ -172,7 +172,12 @@
     }
     </script>
 <!-- Argon JS -->
+
+
+
 @yield('scripts')
+
+<script src="//cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
 <script src="{{asset('js/argon.js?v=1.0.0')}}"></script>
 
 

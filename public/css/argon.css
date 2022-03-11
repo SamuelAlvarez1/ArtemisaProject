@@ -4547,7 +4547,6 @@ input[type='button'].btn-block
 .input-group-append .btn
 {
     position: relative;
-    z-index: 2;
 }
 .input-group-prepend .btn + .btn,
 .input-group-prepend .btn + .input-group-text,
@@ -6127,7 +6126,7 @@ input[type='button'].btn-block
 
     color: #fff;
     border-color: #5e72e4;
-    background-color: #5e72e4;
+    background-color: #262626;
 }
 
 .page-item.disabled .page-link
