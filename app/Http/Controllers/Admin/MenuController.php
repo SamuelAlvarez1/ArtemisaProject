@@ -12,23 +12,54 @@ use DataTables;
 
 class MenuController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        $plates = Menu::all();
+        $plates = Menu::join('categories', 'plates.idCategory', '=', 'categories.id')
+        ->select('categories.name as categories', 'plates.*')
+        ->where('state', '1')->paginate(10);
+        $states = "active";
+        $variations = [];
+        $categories = 0;
 
-        return view("menu.index", compact('plates'));
+        foreach ($plates as $plate){
+            $variations[] += PlatesVariations::where('idPlate', $plate->id)->count();
+        }
+
+
+
+        return view("menu.index", compact('plates', 'variations', 'states', 'categories'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public function notActive()
+    {
+        $plates = Menu::join('categories', 'plates.idCategory', '=', 'categories.id')
+            ->select('categories.name as categories', 'plates.*')
+            ->where('state', '0')->paginate(10);
+        $states = "false";
+        $variations = [];
+        $categories = 0;
+
+
+        foreach ($plates as $plate){
+            $variations[] += PlatesVariations::where('idPlate', $plate->id)->count();
+        }
+
+
+        return view("menu.index", compact('plates', 'variations', 'states', 'categories'));
+    }
+
+    public function updateState($id)
+    {
+        try {
+            $plate = Menu::find($id);
+            $plate->update(['state' => !$plate->state]);
+            return redirect('/menu')->with('success', 'Se cambió el estado correctamente');
+        } catch (\Exception $e) {
+            return redirect('/menu')->with('error', $e->getMessage());
+        }
+    }
+
+
     public function create()
     {
         $categories = Categories::all();
@@ -38,12 +69,7 @@ class MenuController extends Controller
 
 
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+
     public function store(Request $request)
     {
         $input = $request->all();
@@ -60,7 +86,7 @@ class MenuController extends Controller
 
             foreach ($input["id"] as $key => $value) {
                 PlatesVariations::create([
-                    
+
                     "variation" => $input["variation"][$key],
                     "idPlate" => $plate->id,
                     "price" => $input["precios"][$key],
@@ -79,13 +105,9 @@ class MenuController extends Controller
 
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show()
+
+
+    public function show($id)
     {
         // $plates = Menu::all();
         // // $plates = Menu::select('plates.*', 'plates_variations.id_plates')
@@ -106,7 +128,7 @@ class MenuController extends Controller
         //     })
         //     ->addColumn("variations", function ($plate) {
         //         if ($plate->state == 1) {
-        //             return 
+        //             return
         //         }
 
         //     })

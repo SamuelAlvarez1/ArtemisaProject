@@ -35,11 +35,15 @@ Route::group(['middleware' => ['auth', 'validarRol']], function () {
         'roles' => RolesController::class,
         'users' => UsersController::class,
     ]);
+
+    //<------------Roles------------>
+
     Route::get('/roles/listar/{condicion}', [RolesController::class, "listar"]);
     Route::get('/roles/cambiarEstado/{id}/{estado}', [RolesController::class, "cambiarEstado"]);
     Route::get('/roles/verDetalles/{id}', [RolesController::class, "verDetalles"]);
     Route::get('/roles/verDeshabilitados', [RolesController::class, "verDeshabilitados"]);
 
+    //<-----------Users------------>
 
     Route::get('/usuarios/listar/{condicion}', [UsersController::class, "listar"]);
     Route::get('/usuarios/cambiarEstado/{id}/{estado}', [UsersController::class, "cambiarEstado"]);
@@ -66,6 +70,13 @@ Route::group(['middleware' => 'auth'], function () {
     //<-----------Events------------>
 
 
+    //<-----------Plates------------>
+
+    Route::get('/menu/notActive', [MenuController::class, 'notActive']);
+    Route::get('/menu/updateState/{id}', [MenuController::class, 'updateState']);
+
+
+    //<----------Resources---------->
 
     Route::resources([
         'menu' => MenuController::class,
@@ -73,8 +84,6 @@ Route::group(['middleware' => 'auth'], function () {
         'events' => EventsController::class,
         'bookings' => BookingsController::class,
     ]);
-
-    //customer
 
 
 
