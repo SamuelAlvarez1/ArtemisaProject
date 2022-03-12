@@ -18,58 +18,45 @@ class UsersController extends Controller
      */
     public function index()
     {
-        return view("users.index");
+        $users = User::select("users.*", "roles.name as rol")
+            ->join("roles", "users.idRol", "=", "roles.id")
+            ->where("users.state", "=", "1")
+            ->get();
+
+        $states = "1";
+        return view("users.index", compact("users", "states"));
     }
 
-
-    public function listar($condicion)
+    public function notActive()
     {
+        $users = User::select("users.*", "roles.name as rol")
+            ->join("roles", "users.idRol", "=", "roles.id")
+            ->where("users.state", "=", "0")
+            ->get();
 
+        $states = "0";
+        return view("users.index", compact("users", "states"));
+    }
 
-        if ($condicion == "deshabilitados") {
-            $users = User::select("users.*", "roles.name as rol")
-                ->join("roles", "users.idRol", "=", "roles.id")
-                ->where("users.state", "=", "0")
-                ->get();
-            return DataTables::of($users)
-                ->editColumn("state", function ($user) {
-                    return '<div class="d-flex justify-content-center">'
-                        . '<span class="badge bg-danger">Inactivo</span>'
-                        . '</div>';
-                })
-                ->addColumn("actions", function ($user) {
-
-                    return '<div class="d-flex justify-content-center">'
-                        . '<a href="/usuarios/verDetalles/' . $user->id . '" class="btn btn-success"><i class="fa-solid fa-eye"></i></a>'
-                        . '<a href="/usuarios/editar/' . $user->id . '" class="btn btn-warning mx-4 text-white"><i class="fas fa-edit"></i></a>'
-                        . '<a href="/usuarios/cambiarEstado/' . $user->id . '/1" class="btn btn-success text-white"><i class="fas fa-check"></i></a>'
-                        . '</div>';
-                })
-                ->rawColumns(['state', 'actions'])
-                ->make(true);
-        } else {
-            $users = User::select("users.*", "roles.name as rol")
-                ->join("roles", "users.idRol", "=", "roles.id")
-                ->where("users.state", "=", "1")
-                ->get();
-            return DataTables::of($users)
-                ->editColumn("state", function ($user) {
-                    return '<div class="d-flex justify-content-center">'
-                        . '<span class="badge bg-primary">activo</span>'
-                        . '</div>';
-                })
-                ->addColumn("actions", function ($user) {
-
-                    return '<div class="d-flex justify-content-center">'
-                        . '<a href="usuarios/verDetalles/' . $user->id . '" class="btn btn-success"><i class="fa-solid fa-eye"></i></a>'
-                        . '<a href="usuarios/editar/' . $user->id . '" class="btn btn-warning mx-4 text-white"><i class="fas fa-edit"></i></a>'
-                        . '<a href="usuarios/cambiarEstado/' . $user->id . '/0" class="btn btn-danger text-white"><i class="fas fa-ban"></i></a>'
-                        . '</div>';
-                })
-                ->rawColumns(['state', 'actions'])
-                ->make(true);
+    public function updateState($id, $state)
+    {
+        if ($id != null) {
+            try {
+                User::where("id", "=", $id)->update([
+                    "state" => $state
+                ]);
+                if ($state == 1) {
+                    return redirect('/users/notActive')->with("success", "cambio de estado exitoso");;
+                } else {
+                    return redirect('/users')->with("success", "cambio de estado exitoso");;
+                }
+            } catch (\Exception $e) {
+                return redirect('/users')->with("error", "El estado del usuarios no se pudo realizar");
+            }
         }
     }
+
+
     /**
      * Show the form for creating a new resource.
      *

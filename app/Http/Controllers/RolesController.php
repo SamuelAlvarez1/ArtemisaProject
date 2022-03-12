@@ -16,55 +16,40 @@ class RolesController extends Controller
      */
     public function index()
     {
-        return view("roles.index");
+        $roles = Rol::select("roles.*")
+            ->where('roles.state', "=", "1")
+            ->get();
+
+        $states = "1";
+        return view("roles.index", compact("roles", "states"));
+    }
+
+    public function notActive()
+    {
+        $roles = Rol::select("roles.*")
+            ->where('roles.state', "=", "0")
+            ->get();
+
+        $states = "0";
+        return view("roles.index", compact("roles", "states"));
     }
 
 
-    public function listar($condicion)
+    public function updateState($id, $state)
     {
-
-        // $roles = roles::all();
-
-        if ($condicion == "deshabilitados") {
-            $roles = Rol::select("roles.*")
-                ->where('roles.state', "=", "0")
-                ->get();
-            return DataTables::of($roles)
-                ->editColumn("state", function ($rol) {
-                    return '<div class="d-flex justify-content-center">'
-                        . '<span class="badge bg-danger">Inactivo</span>'
-                        . '</div>';
-                })
-                ->addColumn("actions", function ($rol) {
-
-                    return '<div class="d-flex justify-content-center">'
-                        . '<a href="/roles/verDetalles/' . $rol->id . '" class="btn btn-success"><i class="fa-solid fa-eye"></i></a>'
-                        . '<a href="/roles/editar/' . $rol->id . '" class="btn btn-warning mx-4 text-white"><i class="fas fa-edit"></i></a>'
-                        . '<a href="/roles/cambiarEstado/' . $rol->id . '/1" class="btn btn-success text-white"><i class="fas fa-check"></i></a>'
-                        . '</div>';
-                })
-                ->rawColumns(['state', 'actions'])
-                ->make(true);
-        } else {
-            $roles = Rol::select("roles.*")
-                ->where('roles.state', "=", "1")
-                ->get();
-            return DataTables::of($roles)
-                ->editColumn("state", function ($rol) {
-                    return '<div class="d-flex justify-content-center">'
-                        . '<span class="badge bg-primary">activo</span>'
-                        . '</div>';
-                })
-                ->addColumn("actions", function ($rol) {
-
-                    return '<div class="d-flex justify-content-center">'
-                        . '<a href="roles/verDetalles/' . $rol->id . '" class="btn btn-success"><i class="fa-solid fa-eye"></i></a>'
-                        . '<a href="roles/editar/' . $rol->id . '" class="btn btn-warning mx-4 text-white"><i class="fas fa-edit"></i></a>'
-                        . '<a href="roles/cambiarEstado/' . $rol->id . '/0" class="btn btn-danger text-white"><i class="fas fa-ban"></i></a>'
-                        . '</div>';
-                })
-                ->rawColumns(['state', 'actions'])
-                ->make(true);
+        if ($id != null) {
+            try {
+                Rol::where("id", "=", $id)->update([
+                    "state" => $state
+                ]);
+                if ($state == 1) {
+                    return redirect('/roles/notActive')->with("success", "cambio de estado exitoso");;
+                } else {
+                    return redirect('/roles')->with("success", "cambio de estado exitoso");;
+                }
+            } catch (\Exception $e) {
+                return redirect('/roles')->with("error", "El estado del rol no se pudo realizar");
+            }
         }
     }
 
@@ -122,7 +107,7 @@ class RolesController extends Controller
     {
         $rol = Rol::find($id);
 
-        return view("roles.verDetalles", compact("rol"));
+        return view("roles.showDetails", compact("rol"));
     }
 
     /**
@@ -182,25 +167,7 @@ class RolesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id, $estado)
+    public function destroy($id)
     {
-        if ($id != null) {
-            try {
-                Rol::where("id", "=", $id)->update([
-                    "estado" => $estado
-                ]);
-                if ($estado == 1) {
-                    return redirect('/roles/verDeshabilitados')->with("success", "cambio de estado exitoso");;
-                } else {
-                    return redirect('/roles')->with("success", "cambio de estado exitoso");;
-                }
-            } catch (\Exception $e) {
-                return redirect('/roles')->with("error", "El estado del rol no se pudo realizar");
-            }
-        }
-    }
-    public function verDeshabilitados()
-    {
-        return view("roles.verDeshabilitados");
     }
 }

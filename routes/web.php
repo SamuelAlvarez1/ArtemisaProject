@@ -31,36 +31,33 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 
 Route::group(['middleware' => ['auth', 'validarRol']], function () {
+
+    //<------------Roles------------>
+
+    Route::get('/roles/updateState/{id}/{state}', [RolesController::class, "updateState"]);
+    Route::get('/roles/notActive', [RolesController::class, "notActive"]);
+
+    //<-----------Users------------>
+
+    Route::get('/users/updateState/{id}/{state}', [UsersController::class, "updateState"]);
+    Route::get('/users/notActive', [UsersController::class, "notActive"]);
+
+
     Route::resources([
         'roles' => RolesController::class,
         'users' => UsersController::class,
     ]);
-
-    //<------------Roles------------>
-
-    Route::get('/roles/listar/{condicion}', [RolesController::class, "listar"]);
-    Route::get('/roles/cambiarEstado/{id}/{estado}', [RolesController::class, "cambiarEstado"]);
-    Route::get('/roles/verDetalles/{id}', [RolesController::class, "verDetalles"]);
-    Route::get('/roles/verDeshabilitados', [RolesController::class, "verDeshabilitados"]);
-
-    //<-----------Users------------>
-
-    Route::get('/usuarios/listar/{condicion}', [UsersController::class, "listar"]);
-    Route::get('/usuarios/cambiarEstado/{id}/{estado}', [UsersController::class, "cambiarEstado"]);
-    Route::get('/usuarios/verDetalles/{id}', [UsersController::class, "verDetalles"]);
-    Route::get('/usuarios/verDeshabilitados', [UsersController::class, "verDeshabilitados"]);
 });
 
 
 Route::group(['middleware' => 'auth'], function () {
 
-    Route::get('/reservas/listar/{condicion}', [BookingsController::class, "listar"]);
-    Route::get('/reservas/cambiarEstado/cancelar/{id}/{estado}', [BookingsController::class, "cambiarEstado"]);
-    Route::get('/reservas/cambiarEstado/enProceso/{id}/{estado}', [BookingsController::class, "cambiarEstado"]);
-    Route::get('/reservas/cambiarEstado/aprobar/{id}/{estado}', [BookingsController::class, "cambiarEstado"]);
-    Route::get('/reservas/verDetalles/{id}', [BookingsController::class, "verDetalles"]);
-    Route::get('/reservas/verCanceladas', [BookingsController::class, "verCanceladas"]);
-    Route::get('/reservas/verAprobadas', [BookingsController::class, "verAprobadas"]);
+
+    //<---------Bookings----------->
+
+    Route::get('/bookings/updateState/{id}/{state}', [BookingsController::class, "updateState"]);
+    Route::get('/bookings/seeCanceled', [BookingsController::class, "seeCanceled"]);
+    Route::get('/bookings/seeApproved', [BookingsController::class, "seeApproved"]);
 
     //<---------Customers----------->
 
@@ -84,8 +81,4 @@ Route::group(['middleware' => 'auth'], function () {
         'events' => EventsController::class,
         'bookings' => BookingsController::class,
     ]);
-
-
-
 });
-
