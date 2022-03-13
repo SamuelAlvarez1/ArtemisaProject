@@ -67,7 +67,7 @@
                         </td>
                         
                         <td>
-                            <a class="mx-2" href="{{url('/roles/updateState/'.$value->id)}}"><i
+                            <a class="mx-2" href="{{url('/roles/'.$value->id)}}"><i
                                     class="fa-solid text-dark fa-magnifying-glass"></i></a>
                             <a class="mx-2" href="{{url('/roles/updateState/'.$value->id)}}"><i
                                     class="fa text-dark fa-edit"></i></a>

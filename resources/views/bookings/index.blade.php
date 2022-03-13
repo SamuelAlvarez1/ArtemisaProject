@@ -84,9 +84,9 @@
                         <td>{{$value->final_date}}</td>
                         
                         <td>
-                            <a class="mx-2" href="{{url('/bookings/updateState/'.$value->id)}}"><i
+                            <a class="mx-2" href="{{url('/bookings/'.$value->id)}}"><i
                                     class="fa-solid text-dark fa-magnifying-glass"></i></a>
-                            <a class="mx-2" href="{{url('/bookings/updateState/'.$value->id)}}"><i
+                            <a class="mx-2" href="{{url('/bookings/'.$value->id.'/edit')}}"><i
                                     class="fa text-dark fa-edit"></i></a>
                             @if($value->state == 0)
                                 <a class="mx-2" href="{{url('/bookings/updateState/'.$value->id)}}/1"><i

@@ -125,8 +125,8 @@ class BookingsController extends Controller
      */
     public function show($id)
     {
-        $booking = Booking::select("bookings.*", "customer.name as customerName", "events.name as eventName")
-            ->join("customer", "bookings.idCustomer", "=", "customer.id")
+        $booking = Booking::select("bookings.*", "customers.name as customerName", "events.name as eventName")
+            ->join("customers", "bookings.idCustomer", "=", "customers.id")
             ->join("events", "bookings.idEvent", "=", "events.id")
             ->where("bookings.id", "=", $id)
             ->get();
@@ -136,7 +136,7 @@ class BookingsController extends Controller
         }
 
 
-        return view("booking.showDetails", compact("booking"));
+        return view("bookings.showDetails", compact("booking"));
     }
 
     /**

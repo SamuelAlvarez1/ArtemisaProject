@@ -6,28 +6,28 @@
         <div class="card-body">
           <h2 class="card-title">Detalles de la reserva</h2>
           <h5 class="card-subtitle mt-2">Nombre del cliente</h5>
-          <p class="card-text">{{$reserva->nombreCliente}}</p>
+          <p class="card-text">{{$booking->customerName}}</p>
           
           <h5 class="card-subtitle mt-2">Evento</h5>
-          <p class="card-text">{{$reserva->nombreEvento}}</p>
+          <p class="card-text">{{$booking->eventName}}</p>
 
           <h5 class="card-subtitle mt-2">cantidad de personas</h5>
-          <p class="card-text">{{$reserva->cantidad_personas}}</p>
+          <p class="card-text">{{$booking->amount_people}}</p>
 
           <h5 class="card-subtitle mt-2">Fecha de inicio</h5>
-          <p class="card-text">{{$reserva->fecha_inicio}}</p>
+          <p class="card-text">{{$booking->start_date}}</p>
 
           <h5 class="card-subtitle mt-2">fecha de la reserva</h5>
-          <p class="card-text">{{$reserva->fecha_fin}}</p>
+          <p class="card-text">{{$booking->final_date}}</p>
 
           <h5 class="card-subtitle mt-2">Estado</h5>
-          @if ($reserva->estado == 0)
+          @if ($booking->state == 0)
           <p class="card-text">Cancelada <span class="text-danger"><i class="fa-solid fa-x"></i></span></p>
           @endif
-          @if ($reserva->estado == 1)
+          @if ($booking->state == 1)
           <p class="card-text">En proceso <span class="text-warning"><i class="fa-solid fa-clock"></i></span></p>
           @endif
-          @if ($reserva->estado == 2)
+          @if ($booking->state == 2)
           <p class="card-text">Aprobada <span class="text-success"><i class="fa-solid fa-check"></i></span></p>
           @endif
         </div>
