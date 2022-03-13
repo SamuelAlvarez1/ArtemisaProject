@@ -178,6 +178,7 @@
 @yield('scripts')
 
 <script src="//cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap4.min.js"></script>
 <script src="{{asset('js/argon.js?v=1.0.0')}}"></script>
 
 

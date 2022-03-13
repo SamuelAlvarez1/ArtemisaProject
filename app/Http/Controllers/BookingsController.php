@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Booking;
 use App\Models\Customer;
-use App\Models\Events;
+use App\Models\Event;
 use DataTables;
 
 class BookingsController extends Controller
@@ -79,7 +79,7 @@ class BookingsController extends Controller
     public function create()
     {
         $customers = customer::all();
-        $events = Events::all();
+        $events = Event::all();
 
         return view("bookings.create", compact('customers', 'events'));
     }
@@ -111,7 +111,7 @@ class BookingsController extends Controller
             'amount_people' => $request['amount_people'],
             'start_date' => date('Y-m-d'),
             'final_date' => $request['final_date'],
-            'state' => 1,
+            'state' => 1
         ]);
 
         return redirect("/bookings")->with("success", "reserva creada satisfactoriamente");
@@ -150,7 +150,7 @@ class BookingsController extends Controller
         if ($id != null) {
             $booking = Booking::find($id);
             $customers = Customer::all();
-            $events = Events::all();
+            $events = Event::all();
 
             return view("booking.edit", compact("booking", "customers", "events"));
         } else {

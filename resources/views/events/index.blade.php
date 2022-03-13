@@ -3,27 +3,44 @@
     <div class="card">
         <div class="card-header">
             <div class="row">
-                <div class="col-6">
+                <div class="col-3">
                     <strong>Eventos</strong>
                 </div>
-                <div class="col-6">
-                    <a href="{{url('/events/create')}}" class="btn btn-outline-dark">Crear evento</a>
-                    <a href="{{url('/events/old')}}" class="btn btn-outline-dark">Ver eventos antiguos</a>
+                <div class="col-5">
+
+                    <a href="{{url('/events/create')}}" class=" btn mx-2 btn-outline-dark">Crear evento</a>
+
+                    @if($states == 'active')
+
+                        <a href="{{url('/events/old')}}" class="btn mx-2 mr-4 btn-outline-dark">Ver eventos antiguos</a>
+                    @else
+                        <a href="{{url('/events')}}" class="btn mx-2 btn-outline-dark">Ver eventos
+                            activos</a>
+                    @endif
+                </div>
+                <div class="col-4">
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" id="searchInput" placeholder="Busqueda"
+                               aria-label="Recipient's username" aria-describedby="basic-addon2">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-dark" id="searchButton" type="button">Buscar</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
         <div class="card-body">
-            <div class="table-responsive">
-                <table id="customers" class="table table-bordered">
+            <div class="table-responsive text-center">
+                <table id="events" class="table table-bordered">
                     <thead class="thead-light">
                     <tr>
                         <th>#</th>
                         <th>Nombre</th>
                         <th>Descripción</th>
-                        <th>Precio de decoracion</th>
-                        <th>Precio de entrada</th>
-                        <th>Fecha inicio</th>
-                        <th>Fecha fin</th>
+                        <th>Valor <br> decoración</th>
+                        <th>Valor <br> entrada</th>
+                        <th>Fecha <br> inicio</th>
+                        <th>Fecha <br> fin</th>
                         <th>Estado</th>
                         <th>Acciones</th>
                     </tr>
@@ -33,14 +50,45 @@
                     @foreach($events as $event)
                         <tr>
                             <td>{{$event->id}}</td>
-                            <td>{{$event->name}}</td>
-                            <td>{{$event->description}}</td>
-                            <td>{{$event->decorationPrice}}</td>
-                            <td>{{$event->entryPrice}}</td>
+                            <td>{{Str::limit($event->name, 15)}}</td>
+                            <td>{{Str::limit($event->description, 13)}}</td>
+                            <td>
+                                @if($event->decorationPrice == '')
+                                    Sin valor
+                                @else
+                                    {{$event->decorationPrice}}
+                                @endif
+                            </td>
+                            <td>
+                                @if($event->entryPrice == '')
+                                    Sin valor
+                                @else
+                                    {{$event->entryPrice}}
+                                @endif
+                            </td>
                             <td>{{$event->startDate}}</td>
                             <td>{{$event->endDate}}</td>
-                            <td>{{$event->state}}</td>
-                            <td></td>
+                            <td>
+                                @if($event->state == 1)
+                                    <span class="badge badge-success">Activo</span>
+                                @else
+                                    <span class="badge badge-danger">No activo</span>
+                                @endif
+                            </td>
+                            <td>
+                                <a class="mx-2" href="{{url('/events/updateState/'.$event->id)}}"><i
+                                        class="fa-solid text-dark fa-magnifying-glass"></i></a>
+                                <a class="mx-2" href="{{url('/events/updateState/'.$event->id)}}"><i
+                                        class="fa text-dark fa-edit"></i></a>
+                                @if($event->state == 1)
+                                    <a class="mx-2" href="{{url('/events/updateState/'.$event->id)}}"><i
+                                            class="fa text-dark fa-ban"></i></a>
+                                @else
+                                    <a class="mx-2" href="{{url('/events/updateState/'.$event->id)}}"><i
+                                            class="fa text-dark fa-check"></i></a>
+                                @endif
+
+                            </td>
                         </tr>
                     @endforeach
                     </tbody>
@@ -50,5 +98,15 @@
     </div>
 @endsection
 @section('scripts')
+    <script>
+        $(document).ready(function () {
+            var table = $('#events').DataTable({
+                "dom": 'tp'
+            });
 
+            $('#searchButton').on('keyup click', function () {
+                table.search($('#searchInput').val()).draw();
+            });
+        });
+    </script>
 @endsection

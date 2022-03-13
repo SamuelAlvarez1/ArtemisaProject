@@ -2,7 +2,10 @@
 
 namespace Database\Seeders;
 
+use App\Models\customer;
+use App\Models\Event;
 use App\Models\Menu;
+use Database\Factories\CustomerFactory;
 use Illuminate\Database\Seeder;
 use App\Models\User;
 use App\Models\Rol;
@@ -16,9 +19,12 @@ class DatabaseSeeder extends Seeder
      *
      * @return void
      */
+
     public function run()
     {
         // \App\Models\User::factory(10)->create();
+        Customer::factory(50)->create();
+        Event::factory(20)->create();
 
         Rol::create([
             'id' => '1',

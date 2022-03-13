@@ -42,6 +42,7 @@ Route::group(['middleware' => ['auth', 'validarRol']], function () {
     Route::get('/users/updateState/{id}/{state}', [UsersController::class, "updateState"]);
     Route::get('/users/notActive', [UsersController::class, "notActive"]);
 
+    //<---------Resources---------->
 
     Route::resources([
         'roles' => RolesController::class,
@@ -64,7 +65,10 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/customers/notActive', [CustomersController::class, 'notActive']);
     Route::get('/customers/updateState/{id}', [CustomersController::class, 'updateState']);
 
-    //<-----------Events------------>
+    //<-----------Event------------>
+
+    Route::get('/events/old', [EventsController::class, 'oldEvents']);
+    Route::get('/events/updateState/{id}', [EventsController::class, 'updateState']);
 
 
     //<-----------Plates------------>

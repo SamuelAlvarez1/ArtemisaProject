@@ -46,12 +46,12 @@
                 </div>
                 <div class="form-group">
                     <label for="idCardInput">Precio de entrada</label>
-                    <input value="{{old('entryPrice')}}" type="text" class="form-control" name="entryPrice"
+                    <input value="{{old('entryPrice')}}" type="number" class="form-control" name="entryPrice"
                            id="addressInput" placeholder="Evento">
                 </div>
                 <div class="form-group">
                     <label for="idCardInput">Precio de decoration </label>
-                    <input value="{{old('decorationPrice')}}" type="text" class="form-control" name="decorationPrice"
+                    <input value="{{old('decorationPrice')}}" type="number" class="form-control" name="decorationPrice"
                            id="decorationPriceInput" placeholder="Evento">
                 </div>
                 <div class="row">

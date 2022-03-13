@@ -11,7 +11,7 @@
                 </div>
                 <div class="col text-right">
                     <a href="{{url('customers')}}" class="btn btn-sm btn-danger">
-                        Go back
+                        Regresar
                     </a>
                 </div>
             </div>

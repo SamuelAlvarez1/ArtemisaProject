@@ -51,7 +51,7 @@
                             <td>{{$customer->id}}</td>
                             <td>{{$customer->name}}</td>
                             <td>{{$customer->document}}</td>
-                            <td>{{$customer->address}}</td>
+                            <td>{{Str::limit($customer->address, 20)}}</td>
                             <td>{{$customer->phoneNumber}}</td>
                             <td>
                                 @if($customer->state == 1)
@@ -62,8 +62,8 @@
 
                             </td>
                             <td>
-                                <a class="mx-2" href="{{url('/customers/updateState/'.$customer->id)}}"><i class="fa-solid text-dark fa-magnifying-glass"></i></a>
-                                <a class="mx-2" href="{{url('/customers/updateState/'.$customer->id)}}"><i class="fa text-dark fa-edit"></i></a>
+                                <a class="mx-2" href="{{url('/customers/details/'.$customer->id)}}"><i class="fa-solid text-dark fa-magnifying-glass"></i></a>
+                                <a class="mx-2" href="{{url('/customers/'.$customer->id.'/edit')}}"><i class="fa text-dark fa-edit"></i></a>
                                 @if($customer->state == 1)
                                     <a class="mx-2" href="{{url('/customers/updateState/'.$customer->id)}}"><i class="fa text-dark fa-ban"></i></a>
                                 @else
@@ -77,8 +77,8 @@
                     </tbody>
                 </table>
             </div>
-            <div class="d-flex justify-content-end">
-                {{ $customers->links() }}
+            <div  class="d-flex justify-content-end">
+
             </div>
 
         </div>
@@ -89,12 +89,13 @@
     <script>
         $(document).ready(function () {
             var table = $('#customers').DataTable({
-                "dom": 't'
+                "dom": 'tp'
             });
 
             $('#searchButton').on('keyup click', function () {
                 table.search($('#searchInput').val()).draw();
             });
+
         });
     </script>
 @endsection

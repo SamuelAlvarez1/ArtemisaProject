@@ -12,7 +12,7 @@ class CustomersController extends Controller
 
     public function index()
     {
-        $customers = Customer::where('state', '1')->paginate(20);
+        $customers = Customer::where('state', '1')->get();
         $states = 'active';
         return view('customers.index', compact('customers', 'states'));
     }
@@ -52,7 +52,7 @@ class CustomersController extends Controller
     public function show($id)
     {
         $customer = Customer::find($id);
-        //        return view('customers.details', compact('customer'));
+        return view('customers.details', compact('customer'));
     }
 
     public function edit($id)

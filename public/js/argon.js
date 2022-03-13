@@ -41,7 +41,7 @@ var Datepicker = (function() {
 	}
 
 
-	// Events
+	// Event
 
 	if ($datepicker.length) {
 		$datepicker.each(function() {
@@ -90,7 +90,7 @@ var CopyIcon = (function() {
 	}
 
 
-	// Events
+	// Event
 	if ($btn.length) {
 		init($btn);
 	}
@@ -119,7 +119,7 @@ var FormControl = (function() {
 	}
 
 
-	// Events
+	// Event
 
 	if ($input.length) {
 		init($input);
@@ -204,7 +204,7 @@ if($map.length) {
 //
 //
 //
-// 	// Events
+// 	// Event
 //
 // 	if ($headroom.length) {
 // 		headroom.init();
@@ -243,7 +243,7 @@ var Navbar = (function() {
 	}
 
 
-	// Events
+	// Event
 
 	$collapse.on({
 		'show.bs.collapse': function() {
@@ -284,7 +284,7 @@ var NavbarCollapse = (function() {
 	}
 
 
-	// Events
+	// Event
 
 	if ($collapse.length) {
 		$collapse.on({
@@ -328,7 +328,7 @@ var noUiSlider = (function() {
 	// }
 	//
 	//
-	// // Events
+	// // Event
 	//
 	// if ($input.length) {
 	// 	init($input);
@@ -417,7 +417,7 @@ var Popover = (function() {
 	}
 
 
-	// Events
+	// Event
 
 	if ($popover.length) {
 		$popover.each(function() {
@@ -461,7 +461,7 @@ var ScrollTo = (function() {
 
 
 	//
-	// Events
+	// Event
 	//
 
 	if ($scrollTo.length) {
@@ -492,7 +492,7 @@ var Tooltip = (function() {
 	}
 
 
-	// Events
+	// Event
 
 	if ($tooltip.length) {
 		init();
@@ -870,7 +870,7 @@ var Charts = (function() {
 	}
 
 
-	// Events
+	// Event
 
 	// Parse global options
 	if (window.Chart) {
@@ -955,7 +955,7 @@ var OrdersChart = (function() {
 							}
 
 							content += '<span class="popover-body-value">' + yLabel + '</span>';
-							
+
 							return content;
 						}
 					}
@@ -1054,7 +1054,7 @@ var SalesChart = (function() {
 	};
 
 
-	// Events
+	// Event
 
 	if ($chart.length) {
 		init($chart);
