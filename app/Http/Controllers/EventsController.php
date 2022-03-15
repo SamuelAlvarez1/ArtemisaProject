@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Event;
+use App\Models\Events;
 use Illuminate\Http\Request;
 
 class EventsController extends Controller
@@ -10,16 +10,8 @@ class EventsController extends Controller
 
     public function index()
     {
-        $events = Event::all();
-        $states = 'active';
-        return view('events.index', compact('events', 'states'));
-    }
-
-    public function oldEvents()
-    {
-        $events = Event::whereDate('endDate', '<', date('Y-m-d'))->get();
-        $states = 'false';
-        return view('events.index', compact('events', 'states'));
+        $events = Events::all();
+        return view('events.index', compact('events'));
     }
 
     public function create()
@@ -30,7 +22,7 @@ class EventsController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate(Event::$rules);
+        $request->validate(Events::$rules);
 
         $input = $request->only('name', 'description','decorationPrice','entryPrice','state', 'endDate','startDate');
 
@@ -38,7 +30,7 @@ class EventsController extends Controller
 
         try {
 
-            Event::create([
+            Events::create([
                 'name' => $input['name'],
                 'description' => $input['description'],
                 'decorationPrice' => $input['decorationPrice'],
@@ -77,16 +69,4 @@ class EventsController extends Controller
     {
         //
     }
-
-    public function updateState($id)
-    {
-        try {
-            $event = Event::find($id);
-            $event->update(['state' => !$event->state]);
-            return redirect('/events')->with('success', 'Se cambió el estado correctamente');
-        } catch (\Exception $e) {
-            return redirect('/events')->with('error', $e->getMessage());
-        }
-    }
-
 }
