@@ -6,7 +6,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RolesController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\BookingsController;
-use App\Http\Controllers\Admin\MenuController;
+use App\Http\Controllers\Admin\PlatesController;
 use App\Http\Controllers\CustomersController;
 use App\Http\Controllers\EventsController;
 
@@ -73,14 +73,14 @@ Route::group(['middleware' => 'auth'], function () {
 
     //<-----------Plates------------>
 
-    Route::get('/menu/notActive', [MenuController::class, 'notActive']);
-    Route::get('/menu/updateState/{id}', [MenuController::class, 'updateState']);
+    Route::get('/plates/notActive', [PlatesController::class, 'notActive']);
+    Route::get('/plates/updateState/{id}', [PlatesController::class, 'updateState']);
 
 
     //<----------Resources---------->
 
     Route::resources([
-        'menu' => MenuController::class,
+        'plates' => PlatesController::class,
         'customers' => CustomersController::class,
         'events' => EventsController::class,
         'bookings' => BookingsController::class,

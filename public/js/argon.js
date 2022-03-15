@@ -233,7 +233,7 @@ var Navbar = (function() {
 	}
 
     function closeDropdown($this) {
-        var $dropdownMenu = $this.find('.dropdown-menu');
+        var $dropdownMenu = $this.find('.dropdown-plates');
 
         $dropdownMenu.addClass('close');
 

@@ -14,14 +14,14 @@
                 </div>
                 <div class="col-5">
 
-                    <a href="{{url('/menu/create')}}" class=" btn mx-2 btn-outline-dark">Registrar platillo</a>
+                    <a href="{{url('/plates/create')}}" class=" btn mx-2 btn-outline-dark">Registrar platillo</a>
 
                     @if($states == 'active')
 
-                        <a href="{{url('/menu/notActive')}}" class="btn mx-2 mr-4 btn-outline-dark">Ver platillos
+                        <a href="{{url('/plates/notActive')}}" class="btn mx-2 mr-4 btn-outline-dark">Ver platillos
                             desactivados</a>
                     @else
-                        <a href="{{url('/menu')}}" class="btn mx-2 btn-outline-dark">Ver platillos
+                        <a href="{{url('/plates')}}" class="btn mx-2 btn-outline-dark">Ver platillos
                             activos</a>
                     @endif
                 </div>
@@ -70,15 +70,15 @@
 
                             </td>
                             <td>
-                                <a class="mx-2" href="{{url('/menu/updateState/'.$value->id)}}"><i
+                                <a class="mx-2" href="{{url('/plates/'.$value->id)}}"><i
                                         class="fa-solid text-dark fa-magnifying-glass"></i></a>
-                                <a class="mx-2" href="{{url('/menu/updateState/'.$value->id)}}"><i
+                                <a class="mx-2" href="{{url('/plates/'.$value->id.'/edit')}}"><i
                                         class="fa text-dark fa-edit"></i></a>
                                 @if($value->state == 1)
-                                    <a class="mx-2" href="{{url('/menu/updateState/'.$value->id)}}"><i
+                                    <a class="mx-2" href="{{url('/plates/updateState/'.$value->id)}}"><i
                                             class="fa text-dark fa-ban"></i></a>
                                 @else
-                                    <a class="mx-2" href="{{url('/menu/updateState/'.$value->id)}}"><i
+                                    <a class="mx-2" href="{{url('/plates/updateState/'.$value->id)}}"><i
                                             class="fa text-dark fa-check"></i></a>
                                 @endif
 

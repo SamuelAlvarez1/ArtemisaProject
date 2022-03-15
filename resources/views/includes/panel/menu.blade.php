@@ -27,7 +27,7 @@
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="{{url('/menu')}}">
+            <a class="nav-link" href="{{url('/plates')}}">
                 <i class="ni ni-shop text-danger"></i> Menú
             </a>
         </li>

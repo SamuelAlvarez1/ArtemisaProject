@@ -8,7 +8,7 @@
         </div>
     </div>
 
-    <form action="{{url('menu')}}" method="post">
+    <form action="{{url('plates')}}" method="post">
         @csrf
         <div class="row">
             <div class="col-6">
@@ -20,7 +20,8 @@
                     <div class="row card-body d-flex justify-content-center">
                         <div class="form-group col-6">
                             <label for="">Categoría</label>
-                            <select name="categories" class="form-control js-example-basic-single" onchange="colocar_categoria()" id="categories">
+                            <select name="categories" class="form-control js-example-basic-single"
+                                    onchange="colocar_categoria()" id="categories">
                                 <option value="">Seleccione</option>
                                 @foreach($categories as $value)
                                     <option value="{{$value->id}}">{{$value->name}}</option>
@@ -29,7 +30,8 @@
                         </div>
                         <div class="form-group col-6">
                             <label for="">Nombre del platillo</label>
-                            <input type="text" class="form-control @error('nombre_platillo') is-invalid @enderror" name="nombre_platillo"  id="nombre_platillo">
+                            <input type="text" class="form-control @error('nombre_platillo') is-invalid @enderror"
+                                   name="nombre_platillo" id="nombre_platillo">
                             @error('nombre_platillo')
                             <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -38,7 +40,8 @@
                         </div>
                         <div class="form-group col-6">
                             <label for="">Precio base</label>
-                            <input type="number" class="form-control @error('precio_base') is-invalid @enderror" name="precio_base"  id="precio_base">
+                            <input type="number" class="form-control @error('precio_base') is-invalid @enderror"
+                                   name="precio_base" id="precio_base">
                             @error('precio_base')
                             <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -46,9 +49,13 @@
                             @enderror
                         </div>
                     </div>
-                    <div class="col-4 d-block" style="margin: 5% auto; ">
+                    <div class="col-4 d-flex justify-content-center" style="margin: 5% auto; ">
                         <button type="submit" class="btn btn-outline-dark">Guardar platillo</button>
+                        <a href="{{url('plates')}}" class="btn btn-outline-danger">
+                            Volver
+                        </a>
                     </div>
+
                 </div>
             </div>
             <div class="col-6">
@@ -61,7 +68,8 @@
 
                         <div class="form-group col-6">
                             <label for="">Nombre de variación</label>
-                            <input type="text" class="form-control @error('nombre_variacion') is-invalid @enderror" name="nombre_variacion"  id="nombre_variacion">
+                            <input type="text" class="form-control @error('nombre_variacion') is-invalid @enderror"
+                                   name="nombre_variacion" id="nombre_variacion">
                             @error('nombre_variacion')
                             <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -70,7 +78,8 @@
                         </div>
                         <div class="form-group col-4">
                             <label>precio adicional</label>
-                            <input type="number" class="form-control  @error('precio_adicional') is-invalid @enderror" name="precio_adicional" id="precio_adicional">
+                            <input type="number" class="form-control  @error('precio_adicional') is-invalid @enderror"
+                                   name="precio_adicional" id="precio_adicional">
                             @error('precio_adicional')
                             <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -78,17 +87,31 @@
                             @enderror
                         </div>
 
+                        <div class="form-group col-6">
+                            <label for="">Descripción</label>
+                            <textarea class="form-control @error('description') is-invalid @enderror" name="description"
+                                      id="description"></textarea>
+                            @error('description')
+                            <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                            @enderror
+                        </div>
+
                         <div class="col-12">
-                            <button type="button" class="btn btn btn-outline-dark float-right" onclick="agregar_variacion()">Agregar</button>
+                            <button type="button" class="btn btn btn-outline-dark float-right"
+                                    onclick="agregar_variacion()">Agregar
+                            </button>
                         </div>
                     </div>
 
-                    <table id="tbl_variaciones" class="table text-center">
+                    <table id="tbl_variaciones" class="table text-center table-responsive">
                         <thead>
                         <tr>
                             <th>id</th>
                             <th>Nombre variación</th>
-                            <th>precio adicional</th>
+                            <th>Precio adicional</th>
+                            <th>Descripción</th>
                             <th>Acciones</th>
                         </tr>
                         </thead>
@@ -115,8 +138,10 @@
 
 
         let id = 0;
+
         function agregar_variacion() {
             let variacion_text = $("#nombre_variacion").val();
+            let description = $("#description").val();
             let precio = $("#precio_adicional").val();
 
             if (precio > 0) {
@@ -128,9 +153,11 @@
             <input type="hidden" name="variation[]" value="${variacion_text}">
                 <input type="hidden" name="id[]" value="${id}">
                 <input type="hidden" name="precios[]" value="${precio}">
+                <input type="hidden" name="description[]" value="${description}">
                 ${variacion_text}
             </td>
             <td>${precio}</td>
+            <td>${description}</td>
             <td>
             <button type="button" class="btn btn-danger bg-danger" style="width: 35px; height: 35px; display: flex;margin: auto; justify-content: center" onclick="eliminar_variacion(${id}, ${parseInt(precio)})"><i class="fas fa-ban"></i></button>
             </td>
@@ -150,7 +177,7 @@
 
         }
 
-        $(document).ready(function() {
+        $(document).ready(function () {
             $('.js-example-basic-single').select2();
         });
     </script>

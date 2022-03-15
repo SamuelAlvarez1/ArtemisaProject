@@ -9,7 +9,7 @@ use Database\Factories\CustomerFactory;
 use Illuminate\Database\Seeder;
 use App\Models\User;
 use App\Models\Rol;
-use App\Models\Categories;
+use App\Models\Category;
 
 
 class DatabaseSeeder extends Seeder
@@ -46,7 +46,7 @@ class DatabaseSeeder extends Seeder
 
         $categories = ['Papas', 'Pizzas', 'Arroz'];
         foreach ($categories as $value) {
-            Categories::create([
+            Category::create([
                 'name' => $value,
             ]);
         }
