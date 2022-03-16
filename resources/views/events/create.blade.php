@@ -13,8 +13,8 @@
                     <h3 class="mb-0">Crear evento</h3>
                 </div>
                 <div class="col text-right">
-                    <a href="{{url('customers')}}" class="btn btn-sm btn-danger">
-                        Go back
+                    <a href="{{url('events')}}" class="btn btn-sm btn-danger">
+                        Regresar
                     </a>
                 </div>
             </div>
@@ -41,8 +41,8 @@
                 </div>
                 <div class="form-group">
                     <label for="emailInput">Descripción</label>
-                    <input value="{{old('description')}}" type="text" class="form-control" name="description"
-                           id="descriptionInput" placeholder="Evento">
+                    <textarea rows="2" class="form-control" name="description" id="descriptionInput" placeholder="Evento">{{old('description')}}
+                    </textarea>
                 </div>
                 <div class="form-group">
                     <label for="idCardInput">Precio de entrada</label>
@@ -85,6 +85,7 @@
                     </div>
                 </div>
                 <div class="form-check mb-3">
+                    <input type="hidden" name="state" value="0">
                     <input class="form-check-input" name="state" checked type="checkbox" value="1" id="state">
                     <label class="form-check-label" for="state">
                         Estado
