@@ -121,7 +121,7 @@ class RolesController extends Controller
         if ($id != null) {
             $rol = Rol::find($id);
 
-            return view("roles.editar", compact("rol"));
+            return view("roles.edit", compact("rol"));
         } else {
             return redirect('/roles')->with("error", 'el id del rol no fue encontrado');
         }
@@ -138,8 +138,8 @@ class RolesController extends Controller
     {
         if ($id != null) {
             $campos = [
-                'nombre' => 'required',
-                'descripcion' => 'required'
+                'name' => 'required',
+                'description' => 'required'
 
             ];
 
@@ -151,10 +151,10 @@ class RolesController extends Controller
             $this->validate($request, $campos, $mensaje);
             try {
                 Rol::where("id", "=", $id)->update([
-                    "nombre" => $request["nombre"],
-                    "descripcion" => $request["descripcion"]
+                    "name" => $request["name"],
+                    "description" => $request["description"]
                 ]);
-                return redirect('/roles')->with("edit", "el rol fue editado satisfactoriamente");
+                return redirect('/roles')->with("success", "el rol fue editado satisfactoriamente");
             } catch (\Exception $e) {
                 return redirect('/roles')->with("error", $e->getMessage());
             }

@@ -152,7 +152,7 @@ class BookingsController extends Controller
             $customers = Customer::all();
             $events = Event::all();
 
-            return view("booking.edit", compact("booking", "customers", "events"));
+            return view("bookings.edit", compact("booking", "customers", "events"));
         } else {
             return redirect('/bookings')->with("error", "el id de la reserva no fue encontrado");
         }
@@ -188,7 +188,7 @@ class BookingsController extends Controller
                     'amount_people' => $request['amount_people'],
                     'final_date' => $request['final_date'],
                 ]);
-                return redirect('/bookings')->with("edit", "La reserva fue editada satisfactoriamente");
+                return redirect('/bookings')->with("success", "La reserva fue editada satisfactoriamente");
             } catch (\Exception $e) {
                 return redirect('/bookings')->with("error", $e->getMessage());
             }

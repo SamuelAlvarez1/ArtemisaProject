@@ -21,21 +21,22 @@
             <div class="card-title text-center">
                 <h2>editar usuario</h2>
             </div>
-            <form action="/usuarios/actualizar/{{$usuario->id}}" method="post">
+            <form action="{{url('/users/' . $user->id)}}" method="post">
                 @csrf
-                <input type="hidden" name="id" value="{{$usuario->id}}">
-                <input type="text" class="form-control" placeholder="nombre" name="name" value="{{$usuario->name}}" />
+                @method('PUT')
+                <input type="hidden" name="id" value="{{$user->id}}">
+                <input type="text" class="form-control" placeholder="nombre" name="name" value="{{$user->name}}" />
 
-                <input type="text" class="form-control mt-2" placeholder="apellidos" name="apellidos"
-                    value="{{$usuario->apellidos}}" />
+                <input type="text" class="form-control mt-2" placeholder="apellidos" name="last_name"
+                    value="{{$user->last_name}}" />
                 <input type="text" class="form-control mt-2" placeholder="email" name="email"
-                    value="{{$usuario->email}}" />
-                <input type="text" class="form-control mt-2" placeholder="telefono" name="telefono"
-                    value="{{$usuario->telefono}}" />
-                <select name="idRol" id="idRol" class="form-select mt-2">
+                    value="{{$user->email}}" />
+                <input type="text" class="form-control mt-2" placeholder="telefono" name="phone"
+                    value="{{$user->phone}}" />
+                <select name="idRol" id="idRol" class="form-control mt-2">
                     <option value="">seleccione el rol</option>
                     @foreach ($roles as $rol)
-                    <option value="{{$rol->id}}">{{$rol->nombre}}</option>
+                    <option value="{{$rol->id}}" {{($rol->id == $user->idRol) ? 'selected' : ''}}>{{$rol->name}}</option>
                     @endforeach
                 </select>
                 <input type="password" class="form-control mt-2" placeholder="contraseña" name="password"

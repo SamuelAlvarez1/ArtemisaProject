@@ -17,20 +17,20 @@
             <div class="card-title text-center">
                 <h2>Crear reserva</h2>
             </div>
-            <form action="/reservas/actualizar/{{$reserva->id}}" method="post">
+            <form action="{{url('/bookings/' . $booking->id)}}" method="post">
                 @csrf
-
-                <select name="idCliente" id="idCliente" class="form-control">
+                @method('PUT')
+                <select name="idCustomer" id="idCustomer" class="form-control">
                     <option value="">Seleccione el cliente</option>
-                    @foreach ($clientes as $cliente)
-                        <option value="{{$cliente->id}}" {{$cliente->id == $reserva->idCliente ? 'selected': ''}}>{{$cliente->nombres}}</option>
+                    @foreach ($customers as $customer)
+                        <option value="{{$customer->id}}" {{$customer->id == $booking->idCustomer ? 'selected': ''}}>{{$customer->name}}</option>
                     @endforeach
                 </select>
 
-                <select name="idEvento" id="idEvento" class="form-control mt-2">
+                <select name="idEvent" id="idEvent" class="form-control mt-2">
                     <option value="">Seleccione el evento</option>
-                    @foreach ($eventos as $evento)
-                        <option value="{{$evento->id}}" {{$evento->id == $reserva->idEvento ? 'selected' : ''}}>{{$evento->nombre}}</option>
+                    @foreach ($events as $event)
+                        <option value="{{$event->id}}" {{$event->id == $booking->idEvent ? 'selected' : ''}}>{{$event->name}}</option>
                     @endforeach
                 </select>
 
@@ -38,14 +38,14 @@
                     type="text"
                     class="form-control mt-2"
                     placeholder="Cantidad de personas"
-                    name="cantidad_personas"
-                    value="{{$reserva->cantidad_personas}}"
+                    name="amount_people"
+                    value="{{$booking->amount_people}}"
                 />
 
-                <input type="date" class="form-control mt-2" name="fecha_fin" value="{{$reserva->fecha_fin}}">
+                <input type="date" class="form-control mt-2" name="final_date" value="{{$booking->final_date}}">
 
                 <button type="submit" class="btn btn-primary mt-2">
-                    Crear reserva
+                    Editar reserva
                 </button>
             </form>
         </div>

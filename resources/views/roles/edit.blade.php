@@ -17,23 +17,24 @@
             <div class="card-title text-center">
                 <h2>editar rol</h2>
             </div>
-            <form action="/roles/actualizar/{{$rol->id}}" method="post">
+            <form action="{{ url('/roles/' . $rol->id) }}" method="post">
                 @csrf
+                @method('PUT')
                 <input type="hidden" name="id" value="{{$rol->id}}">
                 <input
                     type="text"
                     class="form-control"
                     placeholder="nombre"
-                    name="nombre"
-                    value="{{$rol->nombre}}"
+                    name="name"
+                    value="{{$rol->name}}"
                 />
 
                 <input
                 type="text"
                 class="form-control mt-2"
                 placeholder="descripcion"
-                name="descripcion"
-                value="{{$rol->descripcion}}"
+                name="description"
+                value="{{$rol->description}}"
             />
                 <button type="submit" class="btn btn-primary mt-2">
                     editar rol

@@ -179,7 +179,7 @@ class UsersController extends Controller
                     'idRol' => $request['idRol'],
                     'password' => Hash::make($request['password']),
                 ]);
-                return redirect('/users')->with("edit", "el usuario fue editado satisfactoriamente");
+                return redirect('/users')->with("success", "el usuario fue editado satisfactoriamente");
             } catch (\Exception $e) {
                 return redirect('/users')->with("error", $e->getMessage());
             }
