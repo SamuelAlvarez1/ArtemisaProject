@@ -16,6 +16,7 @@ class PlateVariation extends Model
       'variation',
       'price',
       'description',
+      'state',
       'idPlate'
     ];
 

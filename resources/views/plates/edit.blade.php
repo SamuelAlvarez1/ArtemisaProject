@@ -2,18 +2,21 @@
 @section('main-content')
 
     <div class="card">
+        <form action="{{url('plates/'.$plate->id)}}" method="post">
         <div class="card-body">
             <div class="card-title text-center">
                 <h2>Editar platillo</h2>
             </div>
-            <form action="/plates/update/{{$plate->id}}" method="post">
+
                 @csrf
+                @method('PUT')
                 <div class="d-flex">
                     <input type="hidden" name="id" value="{{$plate->id}}">
+                    <input type="hidden" name="state" value="{{$plate->state}}">
                     <input type="text" class="form-control m-3" placeholder="Nombre platillo" name="name"
                            value="{{$plate->name}}"/>
 
-                    <input type="text" class="form-control m-3" placeholder="Precio base" name="basePrice"
+                    <input type="number" class="form-control m-3" placeholder="Precio base" name="basePrice"
                            value="{{$plate->basePrice}}"/>
                     <select name="idCategory" id="idCategory" class="form-control m-3">
                         <option value="">Seleccione la categoría</option>
@@ -23,7 +26,7 @@
                     </select>
                 </div>
 
-            </form>
+            <a href="{{url('plates/addVariation/')}}"></a>
         </div>
         <div class="table-responsive text-center w-80 m-auto">
             <table id="variations" class="table table-bordered">
@@ -46,7 +49,7 @@
                         <td>{{$variation->variation}}</td>
                         <td>{{$variation-> price}}</td>
                         <td>{{$variation-> description}}</td>
-                        <td><a class="mx-2" href=""><i class="fa-solid fa-trash text-dark"></i></a>
+                        <td><a class="mx-2" href="{{url('plates/updateStateVariation/'.$variation->id)}}"><i class="fa-solid fa-trash text-dark"></i></a>
                         </td>
                     </tr>
                 @endforeach
@@ -56,12 +59,13 @@
         </div>
         <div class="row mt-4">
             <button type="submit" class="btn btn-outline-dark mb-4">
-                editar usuario
+                Guardar
             </button>
             <a href="{{url('plates')}}" class="btn btn-outline-danger mb-4">
                 Volver
             </a>
         </div>
+        </form>
     </div>
 
 @endsection

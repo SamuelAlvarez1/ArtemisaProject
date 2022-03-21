@@ -90,9 +90,7 @@
                     </tbody>
                 </table>
 
-                <div class="d-flex justify-content-end">
-                    {{ $plates->links() }}
-                </div>
+
             </div>
         </div>
     </div>
@@ -105,7 +103,7 @@
                 <script>
                     $(document).ready(function () {
                         var table = $('#plates').DataTable({
-                            "dom": 't'
+                            "dom": 'tp'
                         });
 
                         $('#searchButton').on('keyup click', function () {

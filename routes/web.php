@@ -75,6 +75,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/plates/notActive', [PlatesController::class, 'notActive']);
     Route::get('/plates/updateState/{id}', [PlatesController::class, 'updateState']);
+    Route::get('/plates/updateStateVariation/{id}', [PlatesController::class, 'updateStateVariation']);
 
 
     //<----------Resources---------->

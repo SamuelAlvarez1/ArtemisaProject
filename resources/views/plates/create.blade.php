@@ -20,7 +20,7 @@
                     <div class="row card-body d-flex justify-content-center">
                         <div class="form-group col-6">
                             <label for="">Categoría</label>
-                            <select name="categories" class="form-control js-example-basic-single"
+                            <select name="categories" class="form-control"
                                     onchange="colocar_categoria()" id="categories">
                                 <option value="">Seleccione</option>
                                 @foreach($categories as $value)
@@ -142,6 +142,7 @@
         function agregar_variacion() {
             let variacion_text = $("#nombre_variacion").val();
             let description = $("#description").val();
+            let description_text = description.substring(0,20);
             let precio = $("#precio_adicional").val();
 
             if (precio > 0) {
@@ -157,7 +158,7 @@
                 ${variacion_text}
             </td>
             <td>${precio}</td>
-            <td>${description}</td>
+            <td>${description_text}</td>
             <td>
             <button type="button" class="btn btn-danger bg-danger" style="width: 35px; height: 35px; display: flex;margin: auto; justify-content: center" onclick="eliminar_variacion(${id}, ${parseInt(precio)})"><i class="fas fa-ban"></i></button>
             </td>
@@ -177,9 +178,6 @@
 
         }
 
-        $(document).ready(function () {
-            $('.js-example-basic-single').select2();
-        });
     </script>
 
 

@@ -18,6 +18,7 @@ class CreatePlatesVariationsTable extends Migration
             $table->string("variation");
             $table->decimal("price");
             $table->string("description");
+            $table->boolean("state");
             $table->unsignedBigInteger("idPlate");
             $table->foreign("idPlate")->references("id")->on("plates");
             $table->timestamps();

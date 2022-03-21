@@ -16,14 +16,14 @@ class PlatesController extends Controller
     {
         $plates = Plate::join('categories', 'plates.idCategory', '=', 'categories.id')
         ->select('categories.name as categories', 'plates.*')
-        ->where('state', '1')->paginate(10);
+        ->where('state', '1')->get();
         $infoVariations = PlateVariation::all();
         $states = "active";
         $variations = [];
         $categories = 0;
 
         foreach ($plates as $plate){
-            $variations[] += PlateVariation::where('idPlate', $plate->id)->count();
+            $variations[] += PlateVariation::where('state', '1')->where('idPlate', $plate->id)->count();
         }
 
 
@@ -35,7 +35,7 @@ class PlatesController extends Controller
     {
         $plates = Plate::join('categories', 'plates.idCategory', '=', 'categories.id')
             ->select('categories.name as categories', 'plates.*')
-            ->where('state', '0')->paginate(10);
+            ->where('state', '0')->get();
         $infoVariations = PlateVariation::all();
         $states = "false";
         $variations = [];
@@ -44,7 +44,7 @@ class PlatesController extends Controller
 
 
         foreach ($plates as $plate){
-            $variations[] += PlateVariation::where('idPlate', $plate->id)->count();
+            $variations[] += PlateVariation::where('state', '1')->where('idPlate', $plate->id)->count();
         }
 
 
@@ -59,6 +59,17 @@ class PlatesController extends Controller
             return redirect('/plates')->with('success', 'Se cambió el estado correctamente');
         } catch (\Exception $e) {
             return redirect('/plates')->with('error', $e->getMessage());
+        }
+    }
+
+    public function updateStateVariation($id)
+    {
+        try {
+            $variation = PlateVariation::find($id);
+            $variation->update(['state' => !$variation->state]);
+            return redirect('/plates/'.$variation->idPlate.'/edit')->with('success', 'Se deshabilitó el estado de la variación correctamente');
+        } catch (\Exception $e) {
+            return redirect('/plates/'.$variation->idPlate.'/edit')->with('error', $e->getMessage());
         }
     }
 
@@ -93,7 +104,8 @@ class PlatesController extends Controller
                     "variation" => $input["variation"][$key],
                     "idPlate" => $plate->id,
                     "price" => $input["precios"][$key],
-                    "description" => $input["description"][$key]
+                    "description" => $input["description"][$key],
+                    "state" => 1
                 ]);
             }
 
@@ -114,7 +126,7 @@ class PlatesController extends Controller
     {
         $plates = Plate::find($id);
 
-        $variations = PlateVariation::where('idPlate', $id)->get();
+        $variations = PlateVariation::where('state', '1')->where('idPlate', $id)->get();
 
         return view('plates.show', compact('plates', 'variations'));
 
@@ -125,7 +137,7 @@ class PlatesController extends Controller
     public function edit($id)
     {
     $plate = Plate::find($id);
-    $variations = PlateVariation::where('idPlate',$id)->get();
+    $variations = PlateVariation::where('state', '1')->where('idPlate',$id)->get();
     $categories = Category::all();
 
         if ($plate == null) {
@@ -134,6 +146,11 @@ class PlatesController extends Controller
 
         return view("plates.edit", compact('plate','variations','categories'));
 
+    }
+
+    public function addVariation()
+    {
+        return view('plates.addVariations');
     }
 
 
@@ -145,10 +162,11 @@ class PlatesController extends Controller
                 Plate::where("id", "=", $id)->update([
                     'name' =>  $request['name'],
                     'basePrice' => $request['basePrice'],
+                    'state' => $request['state'],
                 ]);
-                return redirect('/users')->with("edit", "el usuario fue editado satisfactoriamente");
+                return redirect('/plates')->with("edit", "El platillo fue editado satisfactoriamente");
             } catch (\Exception $e) {
-                return redirect('/users')->with("error", $e->getMessage());
+                return redirect('/plates')->with("error", $e->getMessage());
             }
         }
     }

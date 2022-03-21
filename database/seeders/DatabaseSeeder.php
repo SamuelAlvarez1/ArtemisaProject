@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\customer;
 use App\Models\Event;
-use App\Models\Menu;
+use App\Models\Plate;
 use Database\Factories\CustomerFactory;
 use Illuminate\Database\Seeder;
 use App\Models\User;
@@ -51,7 +51,7 @@ class DatabaseSeeder extends Seeder
             ]);
         }
 
-        Menu::create([
+        Plate::create([
             'name' => 'pizza hawaiana',
             'basePrice' => '1500',
             'state' => '1',
