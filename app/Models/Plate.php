@@ -27,8 +27,4 @@ class Plate extends Model
     ];
 
     public $timestamps = true;
-
-
-
-
 }
