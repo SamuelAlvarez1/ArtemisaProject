@@ -13,8 +13,8 @@
                     <h3 class="mb-0">Crear evento</h3>
                 </div>
                 <div class="col text-right">
-                    <a href="{{url('customers')}}" class="btn btn-sm btn-danger">
-                        Go back
+                    <a href="{{url('events')}}" class="btn btn-sm btn-danger">
+                        Regresar
                     </a>
                 </div>
             </div>
@@ -41,17 +41,17 @@
                 </div>
                 <div class="form-group">
                     <label for="emailInput">Descripción</label>
-                    <input value="{{old('description')}}" type="text" class="form-control" name="description"
-                           id="descriptionInput" placeholder="Evento">
+                    <textarea rows="2" class="form-control" name="description" id="descriptionInput" placeholder="Evento">{{old('description')}}
+                    </textarea>
                 </div>
                 <div class="form-group">
                     <label for="idCardInput">Precio de entrada</label>
-                    <input value="{{old('entryPrice')}}" type="text" class="form-control" name="entryPrice"
+                    <input value="{{old('entryPrice')}}" type="number" class="form-control" name="entryPrice"
                            id="addressInput" placeholder="Evento">
                 </div>
                 <div class="form-group">
                     <label for="idCardInput">Precio de decoration </label>
-                    <input value="{{old('decorationPrice')}}" type="text" class="form-control" name="decorationPrice"
+                    <input value="{{old('decorationPrice')}}" type="number" class="form-control" name="decorationPrice"
                            id="decorationPriceInput" placeholder="Evento">
                 </div>
                 <div class="row">
@@ -85,6 +85,7 @@
                     </div>
                 </div>
                 <div class="form-check mb-3">
+                    <input type="hidden" name="state" value="0">
                     <input class="form-check-input" name="state" checked type="checkbox" value="1" id="state">
                     <label class="form-check-label" for="state">
                         Estado
@@ -96,10 +97,10 @@
     </div>
 @endsection
 
-{{--@section('scripts')--}}
-{{--    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js" integrity="sha512-T/tUfKSV1bihCnd+MxKD0Hm1uBBroVYBOYSk1knyvQ9VyZJpc/ALb4P0r6ubwVPSGB2GvjeoMAJJImBG12TiaQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>--}}
+@section('scripts')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js" integrity="sha512-T/tUfKSV1bihCnd+MxKD0Hm1uBBroVYBOYSk1knyvQ9VyZJpc/ALb4P0r6ubwVPSGB2GvjeoMAJJImBG12TiaQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-{{--    <script>--}}
-{{--       $('.datepicker').datepicker();--}}
-{{--    </script>--}}
-{{--@endsection--}}
+    <script>
+       $('.datepicker').datepicker();
+    </script>
+@endsection

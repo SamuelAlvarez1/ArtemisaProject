@@ -4,87 +4,92 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use DataTables;
-use App\Models\roles;
+use App\Models\Rol;
+
 
 class RolesController extends Controller
 {
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function index()
     {
-        return view("roles.index");
+        $roles = Rol::select("roles.*")
+            ->where('roles.state', "=", "1")
+            ->get();
+
+        $states = "1";
+        return view("roles.index", compact("roles", "states"));
     }
-    public function listar($condicion)
+
+    public function notActive()
     {
+        $roles = Rol::select("roles.*")
+            ->where('roles.state', "=", "0")
+            ->get();
 
-        // $roles = roles::all();
+        $states = "0";
+        return view("roles.index", compact("roles", "states"));
+    }
 
-        if ($condicion == "deshabilitados") {
-            $roles = roles::select("roles.*")
-                ->where('roles.estado', "=", "0")
-                ->get();
-            return DataTables::of($roles)
-                ->editColumn("estado", function ($rol) {
-                    return '<div class="d-flex justify-content-center">'
-                        . '<span class="badge bg-danger">Inactivo</span>'
-                        . '</div>';
-                })
-                ->addColumn("acciones", function ($rol) {
 
-                    return '<div class="d-flex justify-content-center">'
-                        . '<a href="/roles/verDetalles/' . $rol->id . '" class="btn btn-success"><i class="fa-solid fa-eye"></i></a>'
-                        . '<a href="/roles/editar/' . $rol->id . '" class="btn btn-warning mx-4 text-white"><i class="fas fa-edit"></i></a>'
-                        . '<a href="/roles/cambiarEstado/' . $rol->id . '/1" class="btn btn-success text-white"><i class="fas fa-check"></i></a>'
-                        . '</div>';
-                })
-                ->rawColumns(['estado', 'acciones'])
-                ->make(true);
-        } else {
-            $roles = roles::select("roles.*")
-                ->where('roles.estado', "=", "1")
-                ->get();
-            return DataTables::of($roles)
-                ->editColumn("estado", function ($rol) {
-                    return '<div class="d-flex justify-content-center">'
-                        . '<span class="badge bg-primary">activo</span>'
-                        . '</div>';
-                })
-                ->addColumn("acciones", function ($rol) {
-
-                    return '<div class="d-flex justify-content-center">'
-                        . '<a href="roles/verDetalles/' . $rol->id . '" class="btn btn-success"><i class="fa-solid fa-eye"></i></a>'
-                        . '<a href="roles/editar/' . $rol->id . '" class="btn btn-warning mx-4 text-white"><i class="fas fa-edit"></i></a>'
-                        . '<a href="roles/cambiarEstado/' . $rol->id . '/0" class="btn btn-danger text-white"><i class="fas fa-ban"></i></a>'
-                        . '</div>';
-                })
-                ->rawColumns(['estado', 'acciones'])
-                ->make(true);
+    public function updateState($id, $state)
+    {
+        if ($id != null) {
+            try {
+                Rol::where("id", "=", $id)->update([
+                    "state" => $state
+                ]);
+                if ($state == 1) {
+                    return redirect('/roles/notActive')->with("success", "cambio de estado exitoso");;
+                } else {
+                    return redirect('/roles')->with("success", "cambio de estado exitoso");;
+                }
+            } catch (\Exception $e) {
+                return redirect('/roles')->with("error", "El estado del rol no se pudo realizar");
+            }
         }
     }
 
-    public function crear()
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
     {
-        return view("roles.crear");
+        return view("roles.create");
     }
 
-    public function guardar(Request $request)
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
     {
         $campos = [
-            'nombre' => 'required',
-            'descripcion' => 'required'
+            'name' => 'required',
+            'description' => 'required'
 
         ];
 
         $mensaje = [
             'required' => 'El :attribute es requerido',
-            'descripcion.required' => 'La :attribute es requerida',
+            'description.required' => 'La :attribute es requerida',
         ];
 
         $this->validate($request, $campos, $mensaje);
 
         try {
-            roles::create([
-                'nombre' => $request["nombre"],
-                'descripcion' => $request["descripcion"],
-                'estado' => 1
+            Rol::create([
+                'name' => $request["name"],
+                'description' => $request["description"],
+                'state' => 1
             ]);
             return redirect('/roles')->with("success", "el rol fue agregado satisfactoriamente");
         } catch (\Exception $e) {
@@ -92,23 +97,49 @@ class RolesController extends Controller
         }
     }
 
-    public function editar($id)
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        $rol = Rol::find($id);
+
+        return view("roles.showDetails", compact("rol"));
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
     {
         if ($id != null) {
-            $rol = roles::find($id);
+            $rol = Rol::find($id);
 
-            return view("roles.editar", compact("rol"));
+            return view("roles.edit", compact("rol"));
         } else {
             return redirect('/roles')->with("error", 'el id del rol no fue encontrado');
         }
     }
 
-    public function actualizar($id, Request $request)
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
     {
         if ($id != null) {
             $campos = [
-                'nombre' => 'required',
-                'descripcion' => 'required'
+                'name' => 'required',
+                'description' => 'required'
 
             ];
 
@@ -119,44 +150,24 @@ class RolesController extends Controller
 
             $this->validate($request, $campos, $mensaje);
             try {
-                roles::where("id", "=", $id)->update([
-                    "nombre" => $request["nombre"],
-                    "descripcion" => $request["descripcion"]
+                Rol::where("id", "=", $id)->update([
+                    "name" => $request["name"],
+                    "description" => $request["description"]
                 ]);
-                return redirect('/roles')->with("edit", "el rol fue editado satisfactoriamente");
+                return redirect('/roles')->with("success", "el rol fue editado satisfactoriamente");
             } catch (\Exception $e) {
                 return redirect('/roles')->with("error", $e->getMessage());
             }
         }
     }
 
-    public function cambiarEstado($id, $estado)
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
     {
-        if ($id != null) {
-            try {
-                roles::where("id", "=", $id)->update([
-                    "estado" => $estado
-                ]);
-                if ($estado == 1) {
-                    return redirect('/roles/verDeshabilitados')->with("success", "cambio de estado exitoso");;
-                } else {
-                    return redirect('/roles')->with("success", "cambio de estado exitoso");;
-                }
-            } catch (\Exception $e) {
-                return redirect('/roles')->with("error", "El estado del rol no se pudo realizar");
-            }
-        }
-    }
-
-    public function verDetalles($id)
-    {
-        $rol = roles::find($id);
-
-        return view("roles.verDetalles", compact("rol"));
-    }
-
-    public function verDeshabilitados()
-    {
-        return view("roles.verDeshabilitados");
     }
 }

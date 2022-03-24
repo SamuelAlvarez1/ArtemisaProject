@@ -791,7 +791,7 @@ pre code
 .row
 {
     display: flex;
-
+    justify-content: center;
     margin-right: -15px;
     margin-left: -15px;
 
@@ -4547,7 +4547,6 @@ input[type='button'].btn-block
 .input-group-append .btn
 {
     position: relative;
-    z-index: 2;
 }
 .input-group-prepend .btn + .btn,
 .input-group-prepend .btn + .input-group-text,
@@ -6063,6 +6062,10 @@ input[type='button'].btn-block
 {
     display: flex;
 
+    justify-content: center;
+
+    margin: 50px 20px;
+
     padding-left: 0;
 
     list-style: none;
@@ -6127,7 +6130,7 @@ input[type='button'].btn-block
 
     color: #fff;
     border-color: #5e72e4;
-    background-color: #5e72e4;
+    background-color: #262626;
 }
 
 .page-item.disabled .page-link

@@ -11,7 +11,7 @@
                 </div>
                 <div class="col text-right">
                     <a href="{{url('customers')}}" class="btn btn-sm btn-danger">
-                        Go back
+                        Regresar
                     </a>
                 </div>
             </div>
@@ -48,6 +48,7 @@
                     <input value="{{old('phoneNumber')}}" type="text" class="form-control" name="phoneNumber" id="phoneNumberInput" placeholder="Cliente">
                 </div>
                 <div class="form-check mb-3">
+                    <input type="hidden" name="state" value="0">
                     <input class="form-check-input" name="state" checked type="checkbox" value="1" id="state">
                     <label class="form-check-label" for="state">
                         Estado

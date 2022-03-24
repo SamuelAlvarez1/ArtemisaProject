@@ -13,16 +13,16 @@ class CreateReservasTable extends Migration
      */
     public function up()
     {
-        Schema::create('reservas', function (Blueprint $table) {
+        Schema::create('bookings', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger("idCliente");
-            $table->foreign("idCliente")->references("id")->on("customers");
-            $table->unsignedBigInteger("idEvento");
-            $table->foreign("idEvento")->references("id")->on("events");
-            $table->bigInteger("cantidad_personas");
-            $table->boolean("estado");
-            $table->date("fecha_inicio");
-            $table->date("fecha_fin");
+            $table->unsignedBigInteger("idCustomer");
+            $table->foreign("idCustomer")->references("id")->on("customers");
+            $table->unsignedBigInteger("idEvent");
+            $table->foreign("idEvent")->references("id")->on("events");
+            $table->bigInteger("amount_people");
+            $table->boolean("state");
+            $table->date("start_date");
+            $table->date("final_date");
         });
     }
 

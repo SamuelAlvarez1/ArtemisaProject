@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class customer extends Model
+class Customer extends Model
 {
     use HasFactory;
 
@@ -22,7 +22,14 @@ class customer extends Model
 
     public static $rules = [
         'name' => 'required|min:5|max:50',
-        'document' => 'required|unique:customers|min:8|max:11',
+        'document' => 'required|min:8|max:11|unique:customers',
+        'address' => 'required',
+        'phoneNumber' => 'required',
+        'state' => 'required|boolean',
+    ];
+    public static $rulesUpdate = [
+        'name' => 'required|min:5|max:50',
+        'document' => 'required|min:8|max:11',
         'address' => 'required',
         'phoneNumber' => 'required',
         'state' => 'required|boolean',

@@ -4,9 +4,9 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RolesController;
-use App\Http\Controllers\Admin\UsuariosController;
-use App\Http\Controllers\ReservasController;
-use App\Http\Controllers\Admin\MenuController;
+use App\Http\Controllers\UsersController;
+use App\Http\Controllers\BookingsController;
+use App\Http\Controllers\Admin\PlatesController;
 use App\Http\Controllers\CustomersController;
 use App\Http\Controllers\EventsController;
 
@@ -31,47 +31,59 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 
 Route::group(['middleware' => ['auth', 'validarRol']], function () {
-    Route::get('/roles', [RolesController::class, "index"]);
-    Route::get('/roles/listar/{condicion}', [RolesController::class, "listar"]);
-    Route::get('/roles/crear', [RolesController::class, "crear"]);
-    Route::post('/roles/guardar', [RolesController::class, "guardar"]);
-    Route::get('/roles/editar/{id}', [RolesController::class, "editar"]);
-    Route::post('/roles/actualizar/{id}', [RolesController::class, "actualizar"]);
-    Route::get('/roles/cambiarEstado/{id}/{estado}', [RolesController::class, "cambiarEstado"]);
-    Route::get('/roles/verDetalles/{id}', [RolesController::class, "verDetalles"]);
-    Route::get('/roles/verDeshabilitados', [RolesController::class, "verDeshabilitados"]);
 
-    Route::get('/usuarios', [UsuariosController::class, "index"]);
-    Route::get('/usuarios/listar/{condicion}', [UsuariosController::class, "listar"]);
-    Route::get('/usuarios/crear', [UsuariosController::class, 'crear']);
-    Route::post('/usuarios/insertar', [UsuariosController::class, 'insertar']);
-    Route::get('/usuarios/editar/{id}', [UsuariosController::class, 'editar']);
-    Route::post('/usuarios/actualizar/{id}', [UsuariosController::class, 'actualizar']);
-    Route::get('/usuarios/cambiarEstado/{id}/{estado}', [UsuariosController::class, "cambiarEstado"]);
-    Route::get('/usuarios/verDetalles/{id}', [UsuariosController::class, "verDetalles"]);
-    Route::get('/usuarios/verDeshabilitados', [UsuariosController::class, "verDeshabilitados"]);
+    //<------------Roles------------>
 
+    Route::get('/roles/updateState/{id}/{state}', [RolesController::class, "updateState"]);
+    Route::get('/roles/notActive', [RolesController::class, "notActive"]);
 
+    //<-----------Users------------>
+
+    Route::get('/users/updateState/{id}/{state}', [UsersController::class, "updateState"]);
+    Route::get('/users/notActive', [UsersController::class, "notActive"]);
+
+    //<---------Resources---------->
+
+    Route::resources([
+        'roles' => RolesController::class,
+        'users' => UsersController::class,
+    ]);
 });
 
 
 Route::group(['middleware' => 'auth'], function () {
-    Route::get('/reservas', [ReservasController::class, "index"]);
-    Route::get('/reservas/listar/{condicion}', [ReservasController::class, "listar"]);
-    Route::get('/reservas/crear', [ReservasController::class, 'crear']);
-    Route::post('/reservas/insertar', [ReservasController::class, 'insertar']);
-    Route::get('/reservas/editar/{id}', [ReservasController::class, 'editar']);
-    Route::post('/reservas/actualizar/{id}', [ReservasController::class, 'actualizar']);
-    Route::get('/reservas/cambiarEstado/cancelar/{id}/{estado}', [ReservasController::class, "cambiarEstado"]);
-    Route::get('/reservas/cambiarEstado/enProceso/{id}/{estado}', [ReservasController::class, "cambiarEstado"]);
-    Route::get('/reservas/cambiarEstado/aprobar/{id}/{estado}', [ReservasController::class, "cambiarEstado"]);
-    Route::get('/reservas/verDetalles/{id}', [ReservasController::class, "verDetalles"]);
-    Route::get('/reservas/verCanceladas', [ReservasController::class, "verCanceladas"]);
-    Route::get('/reservas/verAprobadas', [ReservasController::class, "verAprobadas"]);
+
+
+    //<---------Bookings----------->
+
+    Route::get('/bookings/updateState/{id}/{state}', [BookingsController::class, "updateState"]);
+    Route::get('/bookings/seeCanceled', [BookingsController::class, "seeCanceled"]);
+    Route::get('/bookings/seeApproved', [BookingsController::class, "seeApproved"]);
+
+    //<---------Customers----------->
+
+    Route::get('/customers/notActive', [CustomersController::class, 'notActive']);
+    Route::get('/customers/updateState/{id}', [CustomersController::class, 'updateState']);
+
+    //<-----------Event------------>
+
+    Route::get('/events/old', [EventsController::class, 'oldEvents']);
+    Route::get('/events/updateState/{id}', [EventsController::class, 'updateState']);
+
+
+    //<-----------Plates------------>
+
+    Route::get('/plates/notActive', [PlatesController::class, 'notActive']);
+    Route::get('/plates/updateState/{id}', [PlatesController::class, 'updateState']);
+    Route::get('/plates/updateStateVariation/{id}', [PlatesController::class, 'updateStateVariation']);
+
+
+    //<----------Resources---------->
+
     Route::resources([
-        'menu' => MenuController::class,
+        'plates' => PlatesController::class,
         'customers' => CustomersController::class,
-        'events' => EventsController::class
+        'events' => EventsController::class,
+        'bookings' => BookingsController::class,
     ]);
-    Route::get('/customers/list', [CustomersController::class, "list"]);
 });

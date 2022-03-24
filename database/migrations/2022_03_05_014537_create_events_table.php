@@ -17,8 +17,8 @@ class CreateEventsTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('description');
-            $table->integer('decorationPrice');
-            $table->integer('entryPrice');
+            $table->integer('decorationPrice')->nullable(true);
+            $table->integer('entryPrice')->nullable(true);
             $table->date('endDate');
             $table->date('startDate');
             $table->boolean('state');

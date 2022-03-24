@@ -16,8 +16,9 @@ class CreatePlatesVariationsTable extends Migration
         Schema::create('plates_variations', function (Blueprint $table) {
             $table->id();
             $table->string("variation");
-            $table->decimal("price");
+            $table->double("price");
             $table->string("description");
+            $table->boolean("state");
             $table->unsignedBigInteger("idPlate");
             $table->foreign("idPlate")->references("id")->on("plates");
             $table->timestamps();

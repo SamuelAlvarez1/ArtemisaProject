@@ -3,27 +3,45 @@
     <div class="card">
         <div class="card-header">
             <div class="row">
-                <div class="col-6">
+                <div class="col-2 d-flex justify-content-center d-flex align-items-center">
                     <strong>Clientes</strong>
                 </div>
-                <div class="col-6">
-                    <a href="{{url('/customers/create')}}" class="btn btn-outline-dark">Registrar cliente</a>
-                    <a href="{{url('/customers/notActive')}}" class="btn btn-outline-dark">Ver clientes desactivados</a>
+                <div class="col-6 d-flex justify-content-center d-flex align-items-center">
+
+                    <a href="{{url('/customers/create')}}" class="btn-sm btn mx-2 btn-outline-dark">Registrar cliente</a>
+
+                    @if($states == 'active')
+
+                        <a href="{{url('/customers/notActive')}}" class="btn-sm btn mx-2 mr-4 btn-outline-dark">Ver clientes
+                            desactivados</a>
+                    @else
+                        <a href="{{url('/customers')}}" class="btn-sm btn mx-2 btn-outline-dark">Ver clientes
+                            activos</a>
+                    @endif
+                </div>
+                <div class="col-4 d-flex justify-content-center d-flex align-items-center">
+                    <div class="input-group">
+                        <input type="text" class="form-control-sm form-control" id="searchInput" placeholder="Busqueda"
+                               aria-label="Recipient's username" aria-describedby="basic-addon2">
+                        <div class="input-group-append">
+                            <button class="btn btn-sm btn-outline-dark" id="searchButton" type="button">Buscar</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
         <div class="card-body">
-            <div class="table-responsive">
+            <div class="table-responsive mb-3 text-center">
                 <table id="customers" class="table table-bordered">
                     <thead class="thead-light">
                     <tr>
                         <th>#</th>
-                        <th>Nombre</th>
-                        <th>Documento</th>
-                        <th>Dirección</th>
-                        <th>Telefono</th>
-                        <th>Estado</th>
-                        <th>Acciones</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Documento</th>
+                        <th scope="col">Dirección</th>
+                        <th scope="col">Telefono</th>
+                        <th scope="col">Estado</th>
+                        <th scope="col">Acciones</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -33,43 +51,63 @@
                             <td>{{$customer->id}}</td>
                             <td>{{$customer->name}}</td>
                             <td>{{$customer->document}}</td>
-                            <td>{{$customer->address}}</td>
+                            <td>{{Str::limit($customer->address, 20)}}</td>
                             <td>{{$customer->phoneNumber}}</td>
-                            <td>{{$customer->state}}</td>
-                            <td></td>
+                            <td>
+                                @if($customer->state == 1)
+                                    <span class="badge badge-success">Activo</span>
+                                @else
+                                    <span class="badge badge-danger">No activo</span>
+                                @endif
+
+                            </td>
+                            <td>
+                                <a class="mx-2" href="{{url('/customers/'.$customer->id)}}"><i class="fa-solid text-dark fa-magnifying-glass"></i></a>
+                                <a class="mx-2" href="{{url('/customers/'.$customer->id.'/edit')}}"><i class="fa text-dark fa-edit"></i></a>
+                                @if($customer->state == 1)
+                                    <a class="mx-2" href="{{url('/customers/updateState/'.$customer->id)}}"><i class="fa text-dark fa-ban"></i></a>
+                                @else
+                                    <a class="mx-2" href="{{url('/customers/updateState/'.$customer->id)}}"><i class="fa text-dark fa-check"></i></a>
+                                @endif
+
+
+                            </td>
                         </tr>
                     @endforeach
                     </tbody>
                 </table>
             </div>
+            <div  class="d-flex justify-content-end">
+
+            </div>
+
         </div>
     </div>
 @endsection
 @section('scripts')
-{{--    <script src="/js/jquery-3.6.0.min.js"></script>--}}
-{{--    <script src="/js/datatables.min.js"></script>--}}
-{{--    <script>--}}
-{{--        $('#customers').DataTable({--}}
-{{--            processing: true,--}}
-{{--            serverSide: true,--}}
-{{--            ajax: '/customer/list',--}}
-{{--            columns: [--}}
-{{--                {data: 'id', name: 'id'},--}}
-{{--                {data: 'name', name: 'name'},--}}
-{{--                {data: 'document', name: 'document'},--}}
-{{--                {data: 'address', name: 'address'},--}}
-{{--                {data: 'phoneNumber', name: 'phoneNumber'},--}}
-{{--                {data: 'state', name: 'state'},--}}
 
-{{--                {data: 'edit', name: 'edit', orderable: false, searchable: false},--}}
-{{--                {data: 'change', name: 'change', orderable: false, searchable: false}--}}
-{{--            ],--}}
-{{--            'columnDefs': [--}}
-{{--                {--}}
-{{--                    "targets": [0, 1, 2, 3, 4, 5, 6, 7],--}}
-{{--                    "className": "text-center"--}}
-{{--                }--}}
-{{--            ]--}}
-{{--        });--}}
-{{--    </script>--}}
+    <script>
+        $(document).ready(function () {
+            var table = $('#customers').DataTable({
+                "dom": 'tp',
+                'language': {
+                    "paginate": {
+                        "first": "Primero",
+                        "last": "Último",
+                        "next": "→",
+                        "previous": "←"
+                    }
+                }
+            });
+
+            $('#searchButton').on('keyup click', function () {
+                table.search($('#searchInput').val()).draw();
+            });
+
+
+        });
+
+    </script>
 @endsection
+
+
