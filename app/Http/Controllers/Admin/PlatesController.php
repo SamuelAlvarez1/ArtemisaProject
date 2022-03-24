@@ -25,9 +25,6 @@ class PlatesController extends Controller
         foreach ($plates as $plate){
             $variations[] += PlateVariation::where('state', '1')->where('idPlate', $plate->id)->count();
         }
-
-
-
         return view("plates.index", compact('plates', 'variations', 'states', 'categories', 'infoVariations'));
     }
 
