@@ -20,7 +20,7 @@
                     <div class="card-head">
                         <h4 class="text-center mb-3 pt-3">Platillo</h4>
                     </div>
-                    <input type="hidden" name="state" value"{{$plate->state}}">
+                    <input type="hidden" name="state" value = "{{$plate->state}}">
                     <div class="row card-body d-flex justify-content-center">
                         <div class="form-group col-6">
                             <label for="">Categoría</label>
@@ -111,7 +111,6 @@
                     <table id="tbl_variaciones" class="table text-center table-responsive">
                         <thead>
                         <tr>
-                            <th>id</th>
                             <th>Nombre variación</th>
                             <th>Precio adicional</th>
                             <th>Descripción</th>
@@ -120,8 +119,7 @@
                         </thead>
                         <tbody id="tbl_variaciones">
                         @foreach($variations as $value)
-                            <tr id="tr-{{$value->id}}">
-                            <td>{{$value->id}}</td>
+                            <tr id="tr-{{$value->id}}" class="trAction">
                             <td>{{$value->variation}}</td>
                             <td>{{$value->price}}</td>
                             <td>{{$value->description}}</td>
@@ -149,8 +147,8 @@
             $("#categoria").val(categories);
         }
 
-
-        let id = 0;
+        
+        let id = document.querySelectorAll(".trAction").length;
 
         function agregar_variacion() {
             let variacion_text = $("#nombre_variacion").val();
@@ -162,7 +160,6 @@
                 id++;
                 $("#tbl_variaciones").append(`
             <tr id="tr-${id}">
-            <td>${id}</td>
             <td>
             <input type="hidden" name="variation[]" value="${variacion_text}">
                 <input type="hidden" name="id[]" value="${id}">
@@ -179,9 +176,7 @@
             `);
 
 
-            } else {
-
-            }
+            } 
 
         }
 

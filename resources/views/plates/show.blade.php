@@ -40,10 +40,10 @@
                 <table id="variations" class="table table-bordered">
                     <thead class="text-dark">
                     <tr>
-                        <th>Id</th>
                         <th>Variación</th>
                         <th>Precio adicional</th>
                         <th>Descripción</th>
+                        <th>Acciones</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -51,11 +51,20 @@
                     @foreach($variations as $variation)
 
                         <tr>
-
-                            <td class="text-dark">{{$variation-> id}}</td>
                             <td>{{$variation->variation}}</td>
                             <td>{{$variation-> price}}</td>
                             <td>{{$variation-> description}}</td>
+                            <td>
+                            @if($variation->state = 1)
+            <a class="btn btn-dark"  href="{{url('plates/updateStateVariation/'.$variation->id)}}" style="width: 35px; height: 35px; display: flex;margin: auto; justify-content: center"><i class="fas fa-trash"></i></a>
+            </td>
+            @else
+            <td>
+            <a class="btn btn-dark"  href="{{url('plates/updateStateVariation/'.$variation->id)}}" style="width: 35px; height: 35px; display: flex;margin: auto; justify-content: center"><i class="fas fa-check"></i></a>
+            @endif    
+        </td>
+            
+
                         </tr>
                     @endforeach
 

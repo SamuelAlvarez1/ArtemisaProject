@@ -98,7 +98,7 @@ class PlatesController extends Controller
                 "state" => 1
             ]);
 
-            if ($input["id"] == []) {
+            if (isset($input["id"])) {
                 foreach ($input["id"] as $key => $value) {
                     PlateVariation::create([
                         "variation" => $input["variation"][$key],
@@ -160,17 +160,13 @@ class PlatesController extends Controller
                     "idCategory" => $request["categories"],
                     'state' => $request["state"]
                 ]);
-
-                $input = $request->all();
-
-
-                if ($input["id"] == []) {
-                foreach ($input["id"] as $key => $value) {
+                if (isset($request["id"])) {
+                foreach ($request["id"] as $key => $value) {
                     PlateVariation::create([
-                        "variation" => $input["variation"][$key],
-                        "idPlate" => $plate->id,
-                        "price" => $input["precios"][$key],
-                        "description" => $input["description"][$key],
+                        "variation" => $request["variation"][$key],
+                        "idPlate" => $id,
+                        "price" => $request["precios"][$key],
+                        "description" => $request["description"][$key],
                         "state" => 1
                     ]);
                 }

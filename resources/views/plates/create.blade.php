@@ -4,7 +4,7 @@
 
     <div class="row">
         <div class="col">
-            <h2 class="text-center">Menú</h2>
+            <h2 class="text-center">Crear platillo</h2>
         </div>
     </div>
 
@@ -108,7 +108,6 @@
                     <table id="tbl_variaciones" class="table text-center table-responsive">
                         <thead>
                         <tr>
-                            <th>id</th>
                             <th>Nombre variación</th>
                             <th>Precio adicional</th>
                             <th>Descripción</th>
@@ -149,7 +148,6 @@
                 id++;
                 $("#tbl_variaciones").append(`
             <tr id="tr-${id}">
-            <td>${id}</td>
             <td>
             <input type="hidden" name="variation[]" value="${variacion_text}">
                 <input type="hidden" name="id[]" value="${id}">
