@@ -3,28 +3,28 @@
     <div class="card">
         <div class="card-header">
             <div class="row">
-                <div class="col-3">
+                <div class="col-2 d-flex justify-content-center d-flex align-items-center">
                     <strong>Clientes</strong>
                 </div>
-                <div class="col-5">
+                <div class="col-6 d-flex justify-content-center d-flex align-items-center">
 
-                    <a href="{{url('/customers/create')}}" class=" btn mx-2 btn-outline-dark">Registrar cliente</a>
+                    <a href="{{url('/customers/create')}}" class="btn-sm btn mx-2 btn-outline-dark">Registrar cliente</a>
 
                     @if($states == 'active')
 
-                        <a href="{{url('/customers/notActive')}}" class="btn mx-2 mr-4 btn-outline-dark">Ver clientes
+                        <a href="{{url('/customers/notActive')}}" class="btn-sm btn mx-2 mr-4 btn-outline-dark">Ver clientes
                             desactivados</a>
                     @else
-                        <a href="{{url('/customers')}}" class="btn mx-2 btn-outline-dark">Ver clientes
+                        <a href="{{url('/customers')}}" class="btn-sm btn mx-2 btn-outline-dark">Ver clientes
                             activos</a>
                     @endif
                 </div>
-                <div class="col-4">
-                    <div class="input-group mb-3">
-                        <input type="text" class="form-control" id="searchInput" placeholder="Busqueda"
+                <div class="col-4 d-flex justify-content-center d-flex align-items-center">
+                    <div class="input-group">
+                        <input type="text" class="form-control-sm form-control" id="searchInput" placeholder="Busqueda"
                                aria-label="Recipient's username" aria-describedby="basic-addon2">
                         <div class="input-group-append">
-                            <button class="btn btn-outline-dark" id="searchButton" type="button">Buscar</button>
+                            <button class="btn btn-sm btn-outline-dark" id="searchButton" type="button">Buscar</button>
                         </div>
                     </div>
                 </div>
@@ -62,7 +62,7 @@
 
                             </td>
                             <td>
-                                <a class="mx-2" href="{{url('/customers/details/'.$customer->id)}}"><i class="fa-solid text-dark fa-magnifying-glass"></i></a>
+                                <a class="mx-2" href="{{url('/customers/'.$customer->id)}}"><i class="fa-solid text-dark fa-magnifying-glass"></i></a>
                                 <a class="mx-2" href="{{url('/customers/'.$customer->id.'/edit')}}"><i class="fa text-dark fa-edit"></i></a>
                                 @if($customer->state == 1)
                                     <a class="mx-2" href="{{url('/customers/updateState/'.$customer->id)}}"><i class="fa text-dark fa-ban"></i></a>
@@ -89,13 +89,25 @@
     <script>
         $(document).ready(function () {
             var table = $('#customers').DataTable({
-                "dom": 'tp'
+                "dom": 'tp',
+                'language': {
+                    "paginate": {
+                        "first": "Primero",
+                        "last": "Último",
+                        "next": "→",
+                        "previous": "←"
+                    }
+                }
             });
 
             $('#searchButton').on('keyup click', function () {
                 table.search($('#searchInput').val()).draw();
             });
 
+
         });
+
     </script>
 @endsection
+
+

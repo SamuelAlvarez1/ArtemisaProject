@@ -166,8 +166,8 @@
         "paginate": {
             "first": "Primero",
             "last": "Ultimo",
-            "next": "Siguiente",
-            "previous": "Anterior"
+            "next": "->",
+            "previous": "<-"
         }
     }
     </script>
