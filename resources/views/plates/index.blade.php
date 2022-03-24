@@ -12,21 +12,21 @@
                 <div class="col-3">
                     <strong>Platillos</strong>
                 </div>
-                <div class="col-5">
+                <div class="col-6">
 
-                    <a href="{{url('/plates/create')}}" class=" btn mx-2 btn-outline-dark">Registrar platillo</a>
+                    <a href="{{url('/plates/create')}}" class=" btn btn-sm mx-2 btn-outline-dark">Registrar platillo</a>
 
                     @if($states == 'active')
 
-                        <a href="{{url('/plates/notActive')}}" class="btn mx-2 mr-4 btn-outline-dark">Ver platillos
+                        <a href="{{url('/plates/notActive')}}" class="btn mx-2 btn-sm mr-4 btn-outline-dark">Ver platillos
                             desactivados</a>
                     @else
-                        <a href="{{url('/plates')}}" class="btn mx-2 btn-outline-dark">Ver platillos
+                        <a href="{{url('/plates')}}" class="btn btn-sm mx-2 btn-outline-dark">Ver platillos
                             activos</a>
                     @endif
                 </div>
-                <div class="col-4">
-                    <div class="input-group mb-3">
+                <div class="col-3">
+                    <div class="input-group mb-3 input-group-sm">
                         <input type="text" class="form-control" id="searchInput" placeholder="Busqueda"
                                aria-label="Recipient's username" aria-describedby="basic-addon2">
                         <div class="input-group-append">

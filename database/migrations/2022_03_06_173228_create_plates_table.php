@@ -17,7 +17,7 @@ class CreatePlatesTable extends Migration
 
             $table->id();
             $table->string("name");
-            $table->decimal("basePrice");
+            $table->double("basePrice");
             $table->boolean("state");
             $table->unsignedBigInteger("idCategory");
             $table->foreign("idCategory")->references("id")->on("categories");

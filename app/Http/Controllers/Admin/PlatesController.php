@@ -98,15 +98,16 @@ class PlatesController extends Controller
                 "state" => 1
             ]);
 
-            foreach ($input["id"] as $key => $value) {
-                PlateVariation::create([
-
-                    "variation" => $input["variation"][$key],
-                    "idPlate" => $plate->id,
-                    "price" => $input["precios"][$key],
-                    "description" => $input["description"][$key],
-                    "state" => 1
-                ]);
+            if ($input["id"] == []) {
+                foreach ($input["id"] as $key => $value) {
+                    PlateVariation::create([
+                        "variation" => $input["variation"][$key],
+                        "idPlate" => $plate->id,
+                        "price" => $input["precios"][$key],
+                        "description" => $input["description"][$key],
+                        "state" => 1
+                    ]);
+                }
             }
 
             DB::commit();
@@ -148,23 +149,34 @@ class PlatesController extends Controller
 
     }
 
-    public function addVariation()
-    {
-        return view('plates.addVariations');
-    }
-
 
     public function update(Request $request, $id)
     {
         if ($id != null) {
-           $request->validate(Plate::$rules);
             try {
                 Plate::where("id", "=", $id)->update([
-                    'name' =>  $request['name'],
-                    'basePrice' => $request['basePrice'],
-                    'state' => $request['state'],
+                    'name' =>  $request['nombre_platillo'],
+                    'basePrice' => $request['precio_base'],
+                    "idCategory" => $request["categories"],
+                    'state' => $request["state"]
                 ]);
-                return redirect('/plates')->with("edit", "El platillo fue editado satisfactoriamente");
+
+                $input = $request->all();
+
+
+                if ($input["id"] == []) {
+                foreach ($input["id"] as $key => $value) {
+                    PlateVariation::create([
+                        "variation" => $input["variation"][$key],
+                        "idPlate" => $plate->id,
+                        "price" => $input["precios"][$key],
+                        "description" => $input["description"][$key],
+                        "state" => 1
+                    ]);
+                }
+            }
+
+                return redirect('/plates')->with("success", "El platillo fue editado satisfactoriamente");
             } catch (\Exception $e) {
                 return redirect('/plates')->with("error", $e->getMessage());
             }
