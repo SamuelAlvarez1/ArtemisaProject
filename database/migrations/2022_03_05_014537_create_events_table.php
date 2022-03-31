@@ -19,6 +19,8 @@ class CreateEventsTable extends Migration
             $table->string('description');
             $table->integer('decorationPrice')->nullable(true);
             $table->integer('entryPrice')->nullable(true);
+            $table->unsignedBigInteger('idUser');
+            $table->foreign('idUser')->references('id')->on('users');
             $table->date('endDate');
             $table->date('startDate');
             $table->boolean('state');

@@ -17,12 +17,14 @@ class BookingsController extends Controller
      */
     public function index()
     {
-        $bookings = Booking::select("bookings.*", "customers.name as customerName", "events.name as eventName")
+        $bookings = Booking::select("bookings.*", "customers.name as customerName", "events.name as eventName", "users.name as user")
             ->join("customers", "bookings.idCustomer", "=", "customers.id")
-            ->join("events", "bookings.idEvent", "=", "events.id")
+            ->leftJoin('events', 'bookings.idEvent', '=', 'events.id')
+            ->join("users", "bookings.idUser", "=", "users.id")
             ->where("bookings.state", "=", 1)
             ->get();
 
+        // dd($bookings);
         $states = "1";
         return view("bookings.index", compact("bookings", "states"));
     }
@@ -30,9 +32,10 @@ class BookingsController extends Controller
 
     public function seeCanceled()
     {
-        $bookings = Booking::select("bookings.*", "customers.name as customerName", "events.name as eventName")
+        $bookings = Booking::select("bookings.*", "customers.name as customerName", "events.name as eventName", "users.name as user")
             ->join("customers", "bookings.idCustomer", "=", "customers.id")
-            ->join("events", "bookings.idEvent", "=", "events.id")
+            ->leftJoin('events', 'bookings.idEvent', '=', 'events.id')
+            ->join("users", "bookings.idUser", "=", "users.id")
             ->where("bookings.state", "=", 0)
             ->get();
 
@@ -42,9 +45,10 @@ class BookingsController extends Controller
 
     public function seeApproved()
     {
-        $bookings = Booking::select("bookings.*", "customers.name as customerName", "events.name as eventName")
+        $bookings = Booking::select("bookings.*", "customers.name as customerName", "events.name as eventName", "users.name as user")
             ->join("customers", "bookings.idCustomer", "=", "customers.id")
-            ->join("events", "bookings.idEvent", "=", "events.id")
+            ->leftJoin('events', 'bookings.idEvent', '=', 'events.id')
+            ->join("users", "bookings.idUser", "=", "users.id")
             ->where("bookings.state", "=", 2)
             ->get();
 
@@ -94,7 +98,6 @@ class BookingsController extends Controller
     {
         $campos = [
             'idCustomer' => 'required',
-            'idEvent' => 'required',
             'amount_people' => 'required',
             'final_date' => 'required',
         ];
@@ -108,6 +111,7 @@ class BookingsController extends Controller
         Booking::create([
             'idCustomer' => $request['idCustomer'],
             'idEvent' =>  $request['idEvent'],
+            'idUser' => auth()->user()->id,
             'amount_people' => $request['amount_people'],
             'start_date' => date('Y-m-d'),
             'final_date' => $request['final_date'],
@@ -127,7 +131,7 @@ class BookingsController extends Controller
     {
         $booking = Booking::select("bookings.*", "customers.name as customerName", "events.name as eventName")
             ->join("customers", "bookings.idCustomer", "=", "customers.id")
-            ->join("events", "bookings.idEvent", "=", "events.id")
+            ->leftJoin('events', 'bookings.idEvent', '=', 'events.id')
             ->where("bookings.id", "=", $id)
             ->get();
 

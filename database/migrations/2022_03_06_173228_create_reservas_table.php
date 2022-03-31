@@ -17,8 +17,10 @@ class CreateReservasTable extends Migration
             $table->id();
             $table->unsignedBigInteger("idCustomer");
             $table->foreign("idCustomer")->references("id")->on("customers");
-            $table->unsignedBigInteger("idEvent");
+            $table->unsignedBigInteger("idEvent")->nullable(true);
             $table->foreign("idEvent")->references("id")->on("events");
+            $table->unsignedBigInteger('idUser');
+            $table->foreign('idUser')->references('id')->on('users');
             $table->bigInteger("amount_people");
             $table->boolean("state");
             $table->date("start_date");

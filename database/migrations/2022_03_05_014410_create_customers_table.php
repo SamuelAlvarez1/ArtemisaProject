@@ -18,6 +18,8 @@ class CreateCustomersTable extends Migration
             $table->string("document")->unique();
             $table->string("name");
             $table->string("address");
+            $table->unsignedBigInteger('idUser');
+            $table->foreign('idUser')->references('id')->on('users');
             $table->string("phoneNumber");
             $table->boolean("state");
             $table->timestamps();

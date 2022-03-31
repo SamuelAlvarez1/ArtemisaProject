@@ -15,6 +15,7 @@ class Customer extends Model
         'id',
         'document',
         'name',
+        'idUser',
         'address',
         'phoneNumber',
         'state',

@@ -14,6 +14,7 @@ class Sale extends Model
     protected $fillable = [
         'id',
         'idCustomers',
+        'idUser',
         'state',
         'iva'
     ];

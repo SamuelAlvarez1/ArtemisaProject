@@ -40,6 +40,9 @@
                         <th scope="col">Documento</th>
                         <th scope="col">Dirección</th>
                         <th scope="col">Telefono</th>
+                        @if (auth()->user()->idRol == 1)
+                        <th>Usuario que creo el cliente</th>
+                        @endif
                         <th scope="col">Estado</th>
                         <th scope="col">Acciones</th>
                     </tr>
@@ -53,6 +56,9 @@
                             <td>{{$customer->document}}</td>
                             <td>{{Str::limit($customer->address, 20)}}</td>
                             <td>{{$customer->phoneNumber}}</td>
+                            @if (auth()->user()->idRol == 1)
+                        <td>{{$customer->user}}</td>
+                        @endif
                             <td>
                                 @if($customer->state == 1)
                                     <span class="badge badge-success">Activo</span>

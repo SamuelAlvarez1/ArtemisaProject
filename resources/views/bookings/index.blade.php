@@ -51,6 +51,9 @@
                     <th>Cliente</th>
                     <th>Evento</th>
                     <th>cantidad de personas</th>
+                    @if (auth()->user()->idRol == 1)
+                        <th>Usuario que creo la reserva</th>
+                        @endif
                     <th>Estado</th>
                     <th>fecha inicial</th>
                     <th>fecha final</th>
@@ -65,8 +68,17 @@
 
                         <td>{{$value->id}}</td>
                         <td>{{$value->customerName}}</td>
-                        <td>{{$value->eventName}}</td>
+                        <td>
+                            @if ($value->idEvent == null)
+                                sin evento
+                            @else
+                                {{$value->eventName}}
+                            @endif
+                        </td>
                         <td>{{$value->amount_people}}</td>
+                        @if (auth()->user()->idRol == 1)
+                        <td>{{$value->user}}</td>
+                        @endif
                         <td>
                             @if($value->state == 0)
                             <span class="badge badge-danger">Cancelada</span>

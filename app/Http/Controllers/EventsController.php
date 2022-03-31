@@ -10,7 +10,9 @@ class EventsController extends Controller
 
     public function index()
     {
-        $events = Event::all();
+        $events = Event::select("events.*", "users.name as user")
+            ->join("users", "users.id", "=", "events.idUser")
+            ->get();
         $states = 'active';
         return view('events.index', compact('events', 'states'));
     }
@@ -24,19 +26,20 @@ class EventsController extends Controller
 
     public function create()
     {
-       return view('events.create');
+        return view('events.create');
     }
 
     public function store(Request $request)
     {
         $request->validate(Event::$rules);
-        $input = $request->only('name', 'description','decorationPrice','entryPrice','state', 'endDate','startDate');
+        $input = $request->only('name', 'description', 'decorationPrice', 'entryPrice', 'state', 'endDate', 'startDate');
         try {
             Event::create([
                 'name' => $input['name'],
                 'description' => $input['description'],
                 'decorationPrice' => $input['decorationPrice'],
                 'entryPrice' => $input['entryPrice'],
+                'idUser' => auth()->user()->id,
                 'endDate' => $input['endDate'],
                 'startDate' => $input['startDate'],
                 'state' => $input['state'],
@@ -67,8 +70,8 @@ class EventsController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate(Event::$rules);
-        $input = $request->only('name', 'description','decorationPrice','entryPrice','state', 'endDate','startDate');
-        $data=[
+        $input = $request->only('name', 'description', 'decorationPrice', 'entryPrice', 'state', 'endDate', 'startDate');
+        $data = [
             'name' => $input['name'],
             'description' => $input['description'],
             'decorationPrice' => $input['decorationPrice'],
@@ -82,7 +85,7 @@ class EventsController extends Controller
             $event->update($data);
             return redirect('/events')->with('success', 'Se ha editado correctamente la información');
         } catch (\Exception $e) {
-            return redirect('/events/'.$id.'/edit')->with('error', 'No se pudo editar la información');
+            return redirect('/events/' . $id . '/edit')->with('error', 'No se pudo editar la información');
         }
     }
 

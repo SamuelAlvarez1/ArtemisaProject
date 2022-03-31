@@ -22,8 +22,6 @@ class CreatePlatesTable extends Migration
             $table->unsignedBigInteger("idCategory");
             $table->foreign("idCategory")->references("id")->on("categories");
             $table->timestamps();
-
-
         });
     }
 

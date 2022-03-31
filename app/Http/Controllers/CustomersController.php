@@ -12,7 +12,10 @@ class CustomersController extends Controller
 
     public function index()
     {
-        $customers = Customer::where('state', '1')->get();
+        $customers = Customer::select('customers.*', 'users.name as user')
+            ->join("users", "customers.idUser", "=", "users.id")
+            ->where("customers.state", "1")
+            ->get();
         $states = 'active';
         return view('customers.index', compact('customers', 'states'));
     }
@@ -32,6 +35,7 @@ class CustomersController extends Controller
                 'name' => $input['name'],
                 'document' => $input['document'],
                 'address' => $input['address'],
+                'idUser' => auth()->user()->id,
                 'phoneNumber' => $input['phoneNumber'],
                 'state' => $input['state'],
             ]);
@@ -39,7 +43,6 @@ class CustomersController extends Controller
         } catch (\Exception $e) {
             return redirect('/customers/create')->with('error', $e->getMessage());
         }
-
     }
 
 
@@ -61,7 +64,7 @@ class CustomersController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate(Customer::$rulesUpdate);
-        $input = $request->only('name', 'document', 'address', 'phoneNumber','state');
+        $input = $request->only('name', 'document', 'address', 'phoneNumber', 'state');
         $data = [
             'name' => $input['name'],
             'address' => $input['address'],
@@ -74,7 +77,7 @@ class CustomersController extends Controller
             $customer->update($data);
             return redirect('/customers')->with('success', 'Se ha editado correctamente la información');
         } catch (\Exception $e) {
-            return redirect('/customers/'.$id.'/edit')->with('error', 'No se pudo editar la información');
+            return redirect('/customers/' . $id . '/edit')->with('error', 'No se pudo editar la información');
         }
     }
 
@@ -86,7 +89,10 @@ class CustomersController extends Controller
 
     public function notActive()
     {
-        $customers = Customer::where('state', '0')->paginate(20);
+        $customers = Customer::select('customers.*', 'users.name as user')
+            ->join("users", "customers.idUser", "=", "users.id")
+            ->where('customers.state', '0')
+            ->paginate(20);
         $states = 'false';
         return view('customers.index', compact('customers', 'states'));
     }
@@ -101,5 +107,4 @@ class CustomersController extends Controller
             return redirect('/customers')->with('error', $e->getMessage());
         }
     }
-
 }
