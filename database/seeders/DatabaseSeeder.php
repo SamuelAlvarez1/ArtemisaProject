@@ -23,8 +23,8 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // \App\Models\User::factory(10)->create();
-        Customer::factory(50)->create();
-        Event::factory(20)->create();
+        // Customer::factory(50)->create();
+        // Event::factory(20)->create();
 
         Rol::create([
             'id' => '1',

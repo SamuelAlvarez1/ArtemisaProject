@@ -15,6 +15,7 @@ class Event extends Model
         'id',
         'name',
         'description',
+        'idUser',
         'decorationPrice',
         'entryPrice',
         'state',

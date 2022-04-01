@@ -17,6 +17,8 @@ class CreateSalesTable extends Migration
             $table->id();
             $table->unsignedBigInteger("idCustomers");
             $table->foreign("idCustomers")->references("id")->on("customers");
+            $table->unsignedBigInteger('idUser');
+            $table->foreign('idUser')->references('id')->on('users');
             $table->boolean("state");
             $table->double("iva");
             $table->timestamps();

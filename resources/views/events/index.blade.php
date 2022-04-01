@@ -34,6 +34,9 @@
                         <th>#</th>
                         <th>Nombre</th>
                         <th>Descripción</th>
+                        @if (auth()->user()->idRol == 1)
+                        <th>Usuario que creo el evento</th>
+                        @endif
                         <th>Valor <br> decoración</th>
                         <th>Valor <br> entrada</th>
                         <th>Fecha <br> inicio</th>
@@ -49,6 +52,9 @@
                             <td>{{$event->id}}</td>
                             <td>{{Str::limit($event->name, 15)}}</td>
                             <td>{{Str::limit($event->description, 13)}}</td>
+                            @if (auth()->user()->idRol == 1)
+                                <td>{{$event->user}}</td>
+                            @endif
                             <td>
                                 @if($event->decorationPrice == '')
                                     Sin valor

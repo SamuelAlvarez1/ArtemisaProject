@@ -9,7 +9,7 @@
           <p class="card-text">{{$booking->customerName}}</p>
           
           <h5 class="card-subtitle mt-2">Evento</h5>
-          <p class="card-text">{{$booking->eventName}}</p>
+          <p class="card-text">{{($booking->idEvent == null) ? 'sin evento' : $booking->eventName}}</p>
 
           <h5 class="card-subtitle mt-2">cantidad de personas</h5>
           <p class="card-text">{{$booking->amount_people}}</p>
