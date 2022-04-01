@@ -39,7 +39,9 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <!-- Brand -->
-        <a class="navbar-brand text-white" href="#">Artemisa
+        <a class="navbar-brand text-white" href="#">
+            <img src="{{asset('img/landing/navbar-logo.png')}}" alt="Logo">
+            Artemisa
         </a>
 
         <!-- Collapse -->
@@ -48,8 +50,8 @@
             <div class="navbar-collapse-header d-md-none">
                 <div class="row">
                     <div class="col-6 collapse-brand">
-                        <a href="{{url('/home')}}">
-                            <img src="{{asset('img/brand/blueCitas.png')}}" alt="Logo">
+                        <a href="{{url('/home')}}" class="text-dark">
+                            Artemisa
                         </a>
                     </div>
                     <div class="col-6 collapse-close">
@@ -80,11 +82,9 @@
             <a class="h4 mb-0 text-dark text-uppercase d-none d-lg-inline-block" href="">Dashboard</a>
 
             <!-- User -->
-
             <ul class="navbar-nav align-items-center d-none d-md-flex">
                 <li class="nav-item dropdown">
-                    <a class="nav-link nav-link-icon" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
-                       aria-expanded="false">
+                    <a class="nav-link nav-link-icon" href="#" role="button" data-toggle="dropdown">
                         <i class="ni ni-bell-55"></i>
                     </a>
                     <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-right"
@@ -149,39 +149,11 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
 <script src="{{asset('vendor/bootstrap/dist/js/bootstrap.min.js')}}"></script>
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-<script>
-        var spanish =  {
-        "decimal": "",
-        "emptyTable": "No hay información",
-        "info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
-        "infoEmpty": "Mostrando 0 to 0 of 0 Entradas",
-        "infoFiltered": "(Filtrado de _MAX_ total entradas)",
-        "infoPostFix": "",
-        "thousands": ",",
-        "lengthMenu": "Mostrar _MENU_ Entradas",
-        "loadingRecords": "Cargando...",
-        "processing": "Procesando...",
-        "search": "Buscar:",
-        "zeroRecords": "Sin resultados encontrados",
-        "paginate": {
-            "first": "Primero",
-            "last": "Ultimo",
-            "next": "->",
-            "previous": "<-"
-        }
-    }
-    </script>
 <!-- Argon JS -->
-
-
-
 @yield('scripts')
-
+<script src="{{asset('js/argon.js?v=1.0.0')}}"></script>
 <script src="//cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap4.min.js"></script>
-<script src="{{asset('js/argon.js?v=1.0.0')}}"></script>
-
-
 
 </body>
 </html>

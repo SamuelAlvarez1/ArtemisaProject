@@ -74,7 +74,7 @@
                             </td>
                             <td>
                                 <a class="mx-2" href="{{url('/events/'.$event->id)}}"><i
-                                        class="fa-solid text-dark fa-magnifying-glass"></i></a>
+                                        class="fa-solid text-dark fa-info-circle"></i></a>
                                 <a class="mx-2" href="{{url('/events/'.$event->id.'/edit')}}"><i
                                         class="fa text-dark fa-edit"></i></a>
                                 @if($event->state == 1)

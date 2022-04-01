@@ -35,7 +35,7 @@
                     </button>
                 </div>
             @endif
-            <form action="{{url('events/'.$event->id)}}" method="post">
+            <form action="{{url('events/'.$event->id)}}" method="post" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
                 <div class="form-group">
@@ -92,6 +92,10 @@
                             </div>
                         </div>
                     </div>
+                </div>
+                <div class="mb-3">
+                    <label for="formFile" class="form-label">Default file input example</label>
+                    <input class="form-control" name="image" type="file" id="formFile">
                 </div>
                 <div class="form-check mb-3">
                     <input type="hidden" name="state" value="0">

@@ -19,7 +19,8 @@ class Event extends Model
         'entryPrice',
         'state',
         'startDate',
-        'endDate'
+        'endDate',
+        'image'
     ];
 
     public static $rules = [

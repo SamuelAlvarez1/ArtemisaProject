@@ -22,6 +22,7 @@ class CreateEventsTable extends Migration
             $table->date('endDate');
             $table->date('startDate');
             $table->boolean('state');
+            $table->string('image')->nullable(true);
             $table->timestamps();
         });
     }

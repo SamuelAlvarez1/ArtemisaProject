@@ -12,6 +12,9 @@
                         <a href="{{url('/events/'.$event->id.'/edit')}}" class="btn btn-sm btn-warning">
                             Editar este evento
                         </a>
+                        <a href="{{url('events')}}" class="btn btn-sm btn-danger">
+                            Regresar
+                        </a>
                     </div>
                 </div>
             </div>
@@ -46,9 +49,30 @@
                 <p class="card-text">{{$event->updated_at}}</p>
                 <h5 class="card-subtitle mt-2">Estado</h5>
                 @if ($event->state == 0)
-                    <p class="card-text">No activo <span class="text-danger"><i class="fa-solid fa-x"></i></span></p>
+                    <span class="badge badge-danger">No activo</span>
                 @else
-                    <p class="card-text">Activo <span class="text-success"><i class="fa-solid fa-check"></i></span></p>
+                    <span class="badge badge-success">Activo</span>
+                @endif
+                <h5 class="card-subtitle mt-2">Imagen</h5>
+                @if($event->image == null)
+                    <span class="badge badge-danger">Sin imagen</span>
+                @else
+                    <button type="button" class="bg-transparent d-block m-auto border-0" data-toggle="modal" data-target=".bd-image-modal-lg">
+                        <img src="/uploads/{{$event->image}}" width="250px" alt="Imagen no disponible">
+                    </button>
+                    <div class="modal fade bd-image-modal-lg" tabindex="-1" role="dialog" aria-labelledby="imageModal" aria-hidden="true">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Imagen</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <img class="align-self-center mb-4" src="/uploads/{{$event->image}}" alt="Imagen no disponible">
+                            </div>
+                        </div>
+                    </div>
                 @endif
             </div>
 
