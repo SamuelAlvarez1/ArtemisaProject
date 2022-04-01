@@ -19,11 +19,11 @@
                 </div>
             </div>
             <div class="card-body">
-                <h5 class="card-subtitle mt-2">Nombre del evento</h5>
+                <h4 class="card-subtitle mt-2">Nombre del evento</h4>
                 <p class="card-text">{{$event->name}}</p>
-                <h5 class="card-subtitle mt-2">Descripción</h5>
+                <h4 class="card-subtitle mt-2">Descripción</h4>
                 <p class="card-text">{{$event->description}}</p>
-                <h5 class="card-subtitle mt-2">Precio de decoración</h5>
+                <h4 class="card-subtitle mt-2">Precio de decoración</h4>
                 <p class="card-text">
                     @if($event->decorationPrice == '')
                         Precio sin especificar
@@ -31,7 +31,7 @@
                         {{$event->decorationPrice}}
                     @endif
                 </p>
-                <h5 class="card-subtitle mt-2">Precio de entrada</h5>
+                <h4 class="card-subtitle mt-2">Precio de entrada</h4>
                 <p class="card-text">
                     @if($event->entryPrice == '')
                         Precio sin especificar
@@ -39,21 +39,28 @@
                         {{$event->entryPrice}}
                     @endif
                 </p>
-                <h5 class="card-subtitle mt-2">Fecha de inicio</h5>
+                <h4 class="card-subtitle mt-2">Fecha de inicio</h4>
                 <p class="card-text">{{$event->startDate}}</p>
-                <h5 class="card-subtitle mt-2">Fecha fin</h5>
+                <h4 class="card-subtitle mt-2">Fecha fin</h4>
                 <p class="card-text">{{$event->endDate}}</p>
-                <h5 class="card-subtitle mt-2">Fecha de creación del evento</h5>
+                <h4 class="card-subtitle mt-2">Fecha de creación del evento</h4>
                 <p class="card-text">{{$event->created_at}}</p>
-                <h5 class="card-subtitle mt-2">Ultima actualización del evento</h5>
+                <h4 class="card-subtitle mt-2">Ultima actualización del evento</h4>
                 <p class="card-text">{{$event->updated_at}}</p>
-                <h5 class="card-subtitle mt-2">Estado</h5>
+                <h4 class="card-subtitle mt-2">Usuario que creo el evento</h4>
+                <ul>
+                    <li><p class="card-text">Nombre: {{$user->name.' '.$user->last_name}}</p></li>
+                    <li><p class="card-text">Número de telefono: {{$user->phone}}</p></li>
+                    <li><p class="card-text">Rol: {{$role->name}}</p></li>
+                </ul>
+                <p class="card-text">{{$user->name}}</p>
+                <h4 class="card-subtitle mt-2">Estado</h4>
                 @if ($event->state == 0)
                     <span class="badge badge-danger">No activo</span>
                 @else
                     <span class="badge badge-success">Activo</span>
                 @endif
-                <h5 class="card-subtitle mt-2">Imagen</h5>
+                <h4 class="card-subtitle mt-2">Imagen</h4>
                 @if($event->image == null)
                     <span class="badge badge-danger">Sin imagen</span>
                 @else
@@ -64,7 +71,7 @@
                         <div class="modal-dialog modal-lg">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Imagen</h5>
+                                    <h4 class="modal-title" id="exampleModalLabel">Imagen</h4>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>

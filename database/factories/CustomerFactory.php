@@ -18,6 +18,7 @@ class CustomerFactory extends Factory
         return [
             'document' => $this->faker->randomNumber(8),
             'name' => $this->faker->name(),
+            'idUser' => 1,
             'address' => $this->faker->address(),
             'phoneNumber' => $this->faker-> phoneNumber(),
             'state' => $this->faker-> boolean,

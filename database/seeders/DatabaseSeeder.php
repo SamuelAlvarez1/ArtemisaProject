@@ -23,25 +23,25 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // \App\Models\User::factory(10)->create();
-        // Customer::factory(50)->create();
-        // Event::factory(20)->create();
 
         Rol::create([
             'id' => '1',
-            'name' => 'admin',
-            'description' => 'hola',
+            'name' => 'Administrador',
+            'description' => 'Rol por defecto',
             'state' => '1'
         ]);
 
         User::create([
-            'last_name' => 'admin',
-            'name' => 'admin',
-            'email' => 'admin@admin.admin',
+            'last_name' => 'Valencia',
+            'name' => 'Santiago',
+            'email' => 'a@a.a',
             'state' => '1',
             'idRol' => '1',
-            'phone' => '123123123',
+            'phone' => '3002004040',
             'password' => bcrypt('12345678'),
         ]);
+        Customer::factory(50)->create();
+        Event::factory(20)->create();
 
 
         $categories = ['Papas', 'Pizzas', 'Arroz'];

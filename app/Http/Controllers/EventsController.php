@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Event;
+use App\Models\Rol;
+use \App\Models\User;
 use Illuminate\Http\Request;
 
 class EventsController extends Controller
@@ -10,9 +12,7 @@ class EventsController extends Controller
 
     public function index()
     {
-        $events = Event::select("events.*", "users.name as user")
-            ->join("users", "users.id", "=", "events.idUser")
-            ->get();
+        $events = Event::all();
         $states = 'active';
         return view('events.index', compact('events', 'states'));
     }
@@ -60,7 +60,11 @@ class EventsController extends Controller
     public function show($id)
     {
         $event = Event::find($id);
-        return view('events.details', compact('event'));
+        if ($event == null)  return redirect("/events")->with('error', 'Evento no encontrado');
+        $user = User::find($event->idUser);
+        $role = Rol::find($user->idRol);
+
+        return view('events.details', compact('event', 'user','role'));
     }
 
 

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Customer;
+use App\Models\Rol;
+use App\Models\User;
 use http\Client;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
@@ -12,10 +14,7 @@ class CustomersController extends Controller
 
     public function index()
     {
-        $customers = Customer::select('customers.*', 'users.name as user')
-            ->join("users", "customers.idUser", "=", "users.id")
-            ->where("customers.state", "1")
-            ->get();
+        $customers = Customer::where('state',1)->get();
         $states = 'active';
         return view('customers.index', compact('customers', 'states'));
     }
@@ -49,7 +48,10 @@ class CustomersController extends Controller
     public function show($id)
     {
         $customer = Customer::find($id);
-        return view('customers.details', compact('customer'));
+        if ($customer == null)  return redirect("/customers")->with('error', 'Cliente no encontrado');
+        $user = User::find($customer->idUser);
+        $role = Rol::find($user->idRol);
+        return view('customers.details', compact('customer', 'user','role'));
     }
 
     public function edit($id)

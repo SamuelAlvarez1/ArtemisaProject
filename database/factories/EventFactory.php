@@ -20,6 +20,7 @@ class EventFactory extends Factory
         return [
             'name' => $this->faker->name(),
             'description' => $this->faker->text(),
+            'idUser' => 1,
             'decorationPrice' => $this->faker->randomNumber(7),
             'entryPrice' => $this->faker->randomNumber(4),
             'state' => $this->faker->boolean,
