@@ -22,5 +22,5 @@ class Booking extends Model
         'final_date',
     ];
 
-    public $timestamps = false;
+    public $timestamps = true;
 }
