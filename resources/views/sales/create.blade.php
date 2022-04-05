@@ -94,7 +94,7 @@
                     </div>
                 </div>
 
-                <table id="tbl_productos" class="table text-center">
+                <table id="tbl_plates" class="table text-center">
                     <thead>
                         <tr>
                             <th>Nombre platillo</th>
@@ -104,7 +104,7 @@
                             <th>Acciones</th>
                         </tr>
                     </thead>
-                    <tbody id="tbl_productos">
+                    <tbody id="tbl_plates">
 
                     </tbody>
                 </table>
@@ -124,7 +124,7 @@
 
         $("#precio").val(precio);
     }
-z`
+
     function agregar_producto() {
         let producto_id = $("#producto option:selected").val();
         let producto_text = $("#producto option:selected").text();
@@ -134,7 +134,7 @@ z`
         if (precio > 0 && cantidad > 0) {
 
 
-            $("#tbl_productos").append(`
+            $("#tbl_plates").append(`
             <tr id="tr-${producto_id}">
             <td>
                 <input type="hidden" name="producto_id[]" value="${producto_id}">

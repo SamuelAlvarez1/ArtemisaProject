@@ -33,33 +33,27 @@ class HomeController extends Controller
     {
         //Plates
 
-<<<<<<< HEAD
         $Plates = SaleDetail::select('sales_details.idPlate', 'plates.id as Plate')
         ->join('plates', 'sales_details.idPlate', '=', 'plates.id')
         ->get();
-=======
-        // $Plates = SaleDetail::select('sales_details.idVariations', 'plates_variations.idPlate as Plate')
-        // ->join('plates_variations', 'sales_details.idVariations', '=', 'plates_variations.id')
-        // ->join('plates', 'plates_variations.idPlate', '=', 'plates.id')
-        // ->get();
->>>>>>> 067eb22cf2a216c8a724ecd96f588f0de9d3d604
 
-        // $idPlate = [];
 
-        // foreach ($Plates as $i => $value) {
-        //     $idPlate[$i] = $value->Plate;
-        // }
-        // $plates = array_count_values($idPlate);
+        $idPlate = [];
 
-        // $outstandingPlate = 0;
+        foreach ($Plates as $i => $value) {
+            $idPlate[$i] = $value->Plate;
+        }
+        $plates = array_count_values($idPlate);
 
-        // foreach ($plates as $key => $value) {
-        //     if ($value > $outstandingPlate) {
-        //         $outstandingPlate = $key;
-        //     }
-        // }
+        $outstandingPlate = 0;
 
-        // $plate = Plate::find($outstandingPlate);
+        foreach ($plates as $key => $value) {
+            if ($value > $outstandingPlate) {
+                $outstandingPlate = $key;
+            }
+        }
+
+        $plate = Plate::find($outstandingPlate);
 
         //Bookings
         $date = Carbon::now()->toDateString();
