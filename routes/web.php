@@ -9,6 +9,7 @@ use App\Http\Controllers\BookingsController;
 use App\Http\Controllers\Admin\PlatesController;
 use App\Http\Controllers\CustomersController;
 use App\Http\Controllers\EventsController;
+use App\Http\Controllers\SalesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -77,6 +78,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/plates/updateState/{id}', [PlatesController::class, 'updateState']);
     Route::get('/plates/updateStateVariation/{id}', [PlatesController::class, 'updateStateVariation']);
 
+    //<-----------Sales------------>
+    Route::get('/sales/canceledSales', [EventsController::class, 'canceledSales']);
+    Route::get('/sales/updateState/{id}', [SalesController::class, 'updateState']);
 
     //<----------Resources---------->
 
@@ -85,5 +89,6 @@ Route::group(['middleware' => 'auth'], function () {
         'customers' => CustomersController::class,
         'events' => EventsController::class,
         'bookings' => BookingsController::class,
+        'sales' => SalesController::class
     ]);
 });

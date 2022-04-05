@@ -21,6 +21,8 @@ class CreateSalesDetailsTable extends Migration
             $table->foreign("idSales")->references("id")->on("sales");
             $table->unsignedBigInteger("idVariations");
             $table->foreign("idVariations")->references("id")->on("plates_variations");
+            // $table->unsignedBigInteger("idPlate");
+            // $table->foreign("idPlate")->references("id")->on("plates");
             $table->timestamps();
         });
     }
