@@ -33,9 +33,8 @@ class HomeController extends Controller
     {
         //Plates
 
-        $Plates = SaleDetail::select('sales_details.idVariations', 'plates_variations.idPlate as Plate')
-        ->join('plates_variations', 'sales_details.idVariations', '=', 'plates_variations.id')
-        ->join('plates', 'plates_variations.idPlate', '=', 'plates.id')
+        $Plates = SaleDetail::select('sales_details.idPlate', 'plates.id as Plate')
+        ->join('plates', 'sales_details.idPlate', '=', 'plates.id')
         ->get();
 
         $idPlate = [];

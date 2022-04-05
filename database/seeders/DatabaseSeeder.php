@@ -53,7 +53,7 @@ class DatabaseSeeder extends Seeder
 
         Plate::create([
             'name' => 'pizza hawaiana',
-            'basePrice' => '1500',
+            'price' => '1500',
             'state' => '1',
             'idCategory' => '1',
         ]);
