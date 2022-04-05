@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\Category;
 use App\Models\Plate;
-use App\Models\PlateVariation;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
@@ -17,15 +16,10 @@ class PlatesController extends Controller
         $plates = Plate::join('categories', 'plates.idCategory', '=', 'categories.id')
         ->select('categories.name as categories', 'plates.*')
         ->where('state', '1')->get();
-        $infoVariations = PlateVariation::all();
         $states = "active";
-        $variations = [];
         $categories = 0;
 
-        foreach ($plates as $plate){
-            $variations[] += PlateVariation::where('state', '1')->where('idPlate', $plate->id)->count();
-        }
-        return view("plates.index", compact('plates', 'variations', 'states', 'categories', 'infoVariations'));
+        return view("plates.index", compact('plates', 'states', 'categories'));
     }
 
     public function notActive()
@@ -33,19 +27,12 @@ class PlatesController extends Controller
         $plates = Plate::join('categories', 'plates.idCategory', '=', 'categories.id')
             ->select('categories.name as categories', 'plates.*')
             ->where('state', '0')->get();
-        $infoVariations = PlateVariation::all();
         $states = "false";
-        $variations = [];
+
 
         $categories = 0;
 
-
-        foreach ($plates as $plate){
-            $variations[] += PlateVariation::where('state', '1')->where('idPlate', $plate->id)->count();
-        }
-
-
-        return view("plates.index", compact('plates', 'variations', 'states', 'categories', 'infoVariations'));
+        return view("plates.index", compact('plates',  'states', 'categories'));
     }
 
     public function updateState($id)
@@ -59,16 +46,6 @@ class PlatesController extends Controller
         }
     }
 
-    public function updateStateVariation($id)
-    {
-        try {
-            $variation = PlateVariation::find($id);
-            $variation->update(['state' => !$variation->state]);
-            return redirect('/plates/'.$variation->idPlate.'/edit')->with('success', 'Se deshabilitó el estado de la variación correctamente');
-        } catch (\Exception $e) {
-            return redirect('/plates/'.$variation->idPlate.'/edit')->with('error', $e->getMessage());
-        }
-    }
 
 
     public function create()
@@ -88,20 +65,14 @@ class PlatesController extends Controller
 
         try {
             DB::beginTransaction();
-            $plate = Plate::create([
-                "name" => $input["nombre_platillo"],
-                "basePrice" => $input["precio_base"],
-                "idCategory" => $input["categories"],
-                "state" => 1
-            ]);
+
 
             if (isset($input["id"])) {
                 foreach ($input["id"] as $key => $value) {
-                    PlateVariation::create([
+                    Plate::create([
                         "variation" => $input["variation"][$key],
-                        "idPlate" => $plate->id,
+                        "idPlate" => $input['id'],
                         "price" => $input["precios"][$key],
-                        "description" => $input["description"][$key],
                         "state" => 1
                     ]);
                 }
@@ -124,9 +95,9 @@ class PlatesController extends Controller
     {
         $plates = Plate::find($id);
 
-        $variations = PlateVariation::where('state', '1')->where('idPlate', $id)->get();
 
-        return view('plates.show', compact('plates', 'variations'));
+
+        return view('plates.show', compact('plates'));
 
 
     }
@@ -135,14 +106,13 @@ class PlatesController extends Controller
     public function edit($id)
     {
     $plate = Plate::find($id);
-    $variations = PlateVariation::where('state', '1')->where('idPlate',$id)->get();
     $categories = Category::all();
 
         if ($plate == null) {
             return redirect('/plate')->with('error', 'Platillo no encontrado');
         }
 
-        return view("plates.edit", compact('plate','variations','categories'));
+        return view("plates.edit", compact('plate','categories'));
 
     }
 
@@ -159,8 +129,8 @@ class PlatesController extends Controller
                 ]);
                 if (isset($request["id"])) {
                 foreach ($request["id"] as $key => $value) {
-                    PlateVariation::create([
-                        "variation" => $request["variation"][$key],
+                    Plate::create([
+                        "name" => $request["variation"][$key],
                         "idPlate" => $id,
                         "price" => $request["precios"][$key],
                         "description" => $request["description"][$key],

@@ -2,7 +2,7 @@
 @section('main-content')
     <div class="container">
         <div class="row mb-5">
-            {{-- <div class="col-md-4">
+             <div class="col-md-4">
                 <div class="card-counter bg-warning text-light ">
                     <i class="fa-solid fa-pizza-slice"></i>
 
@@ -13,8 +13,14 @@
                     @endif
                     <span class="count-name">Platillo destacado</span>
                 </div>
-            </div> --}}
-
+            </div>
+            <div class="col-md-4">
+                <div class="card-counter danger">
+                    <i class="fa fa-users"></i>
+                    <span class="count-numbers">{{$countSales}}</span>
+                    <span class="count-name">Ventas de hoy</span>
+                </div>
+            </div>
             <div class="col-md-4">
                 <div class="card-counter info">
                     <i class="fa-solid fa-calendar"></i>
@@ -23,19 +29,11 @@
                 </div>
             </div>
 
-            <div class="col-md-4">
-                <div class="card-counter danger">
-                    <i class="fa fa-users"></i>
-                    <span class="count-numbers">{{$countCustomers}}</span>
-                    <span class="count-name">Clientes registrados</span>
-                </div>
-            </div>
+
         </div>
 
         <div class="row mb-5 d-grid">
-            <div class="col-6" id="">
-                <h4>Ventas</h4>
-                <canvas id="sales" width="800" height="400"></canvas>
+            <div class="col-6" id="sales">
             </div>
         </div>
         <div class="row d-grid">
@@ -59,58 +57,56 @@
     <script src="https://code.highcharts.com/modules/exporting.js"></script>
     <script src="https://code.highcharts.com/modules/export-data.js"></script>
     <script src="https://code.highcharts.com/modules/accessibility.js"></script>
-    <script src="/js/chats.js"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
 
 
     <script>
+
         const salesData = <?php echo json_encode($salesData); ?>;
-        const chartSales = document.getElementById('sales').getContext('2d');
-        const sales = new Chart(chartSales, {
-            type: 'line',
-            data: {
-                labels: ['Ene','Feb', 'Mar','Abr','May','Jun','Jul','Agt','Sep','Oct','Nov','Dic'],
-                datasets: [{
-                    label: 'Número de ventas',
-                    data: salesData,
-                    backgroundColor: [
-                        'rgba(255, 99, 132, 0.2)',
-                        'rgba(54, 162, 235, 0.2)',
-                        'rgba(255, 206, 86, 0.2)',
-                        'rgba(75, 192, 192, 0.2)',
-                        'rgba(153, 102, 255, 0.2)',
-                        'rgba(255, 159, 64, 0.2)',
-                        'rgba(255, 99, 132, 0.2)',
-                        'rgba(54, 162, 235, 0.2)',
-                        'rgba(255, 206, 86, 0.2)',
-                        'rgba(75, 192, 192, 0.2)',
-                        'rgba(153, 102, 255, 0.2)',
-                        'rgba(255, 159, 64, 0.2)'
-                    ],
-                    borderColor: [
-                        'rgba(255, 99, 132, 1)',
-                        'rgba(54, 162, 235, 1)',
-                        'rgba(255, 206, 86, 1)',
-                        'rgba(75, 192, 192, 1)',
-                        'rgba(153, 102, 255, 1)',
-                        'rgba(255, 159, 64, 1)',
-                        'rgba(255, 99, 132, 1)',
-                        'rgba(54, 162, 235, 1)',
-                        'rgba(255, 206, 86, 1)',
-                        'rgba(75, 192, 192, 1)',
-                        'rgba(153, 102, 255, 1)',
-                        'rgba(255, 159, 64, 1)'
-                    ],
-                }]
+        Highcharts.chart('sales', {
+            chart: {
+                type: 'areaspline'
             },
-            options: {
-                scales: {
-                    yAxes: [{
-                        ticks:{
-                            beginAtZero: true
-                        }
-                    }]
+            title: {
+                text: 'Ventas del año'
+            },
+            legend: {
+                layout: 'vertical',
+                align: 'left',
+                verticalAlign: 'top',
+                x: 150,
+                y: 100,
+                floating: true,
+                borderWidth: 1,
+                backgroundColor:
+                    Highcharts.defaultOptions.legend.backgroundColor || '#FFFFFF'
+            },
+            xAxis: {
+                categories: ['Ene','Feb', 'Mar','Abr','May','Jun','Jul','Agt','Sep','Oct','Nov','Dic'],
+
+
+            },
+            yAxis: {
+                title: {
+                    text: 'Número de ventas'
                 }
-            }
+            },
+            tooltip: {
+                shared: true,
+                valueSuffix: ' units'
+            },
+            credits: {
+                enabled: false
+            },
+            plotOptions: {
+                areaspline: {
+                    fillOpacity: 0.5
+                }
+            },
+            series: [{
+                name: 'Ventas',
+                data: salesData,
+            }]
         });
 
         {{--const platesData = <?php echo json_encode($platesData); ?>;--}}

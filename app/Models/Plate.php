@@ -14,14 +14,14 @@ class Plate extends Model
     protected $fillable = [
         'id',
         'name',
-        'basePrice',
+        'price',
         'idCategory',
         'state'
     ];
 
     public static $rules = [
         'name' => "required|min:3",
-        'basePrice' => "required",
+        'price' => "required",
         'idCategory' => "required",
         'state' => "required"
     ];

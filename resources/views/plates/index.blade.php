@@ -44,8 +44,7 @@
                         <th>Id</th>
                         <th>Categoría</th>
                         <th>Nombre</th>
-                        <th>Precio base</th>
-                        <th>cantidad de variaciones</th>
+                        <th>Precio</th>
                         <th>Estado</th>
                         <th>Acciones</th>
                     </tr>
@@ -59,8 +58,7 @@
                             <td>{{$value-> id}}</td>
                             <td>{{$value->categories}}</td>
                             <td>{{$value-> name}}</td>
-                            <td>{{$value-> basePrice}}</td>
-                            <td>{{$variations[$key]}}</td>
+                            <td>{{$value-> price}}</td>
                             <td>
                                 @if($value->state == 1)
                                     <span class="badge badge-success">Activo</span>
@@ -103,7 +101,15 @@
                 <script>
                     $(document).ready(function () {
                         var table = $('#plates').DataTable({
-                            "dom": 'tp'
+                            "dom": 'tp',
+                            'language': {
+                                "paginate": {
+                                    "first": "Inicio",
+                                    "last": "Fin",
+                                    "next": "→",
+                                    "previous": "←"
+                                }
+                            }
                         });
 
                         $('#searchButton').on('keyup click', function () {

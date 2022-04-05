@@ -11,113 +11,78 @@
     <form action="{{url('plates')}}" method="post">
         @csrf
         <div class="row">
-            <div class="col-6">
 
-                <div class="card">
+            <div class="col-10">
+
+                <div class="card pb-3">
                     <div class="card-head">
-                        <h4 class="text-center mb-3 pt-3">Platillo</h4>
+                        <br>
                     </div>
                     <div class="row card-body d-flex justify-content-center">
-                        <div class="form-group col-6">
+                        <div class="form-group col-4">
                             <label for="">Categoría</label>
-                            <select name="categories" class="form-control"
-                                    onchange="colocar_categoria()" id="categories">
+                            <select name="categories" class="form-control" id="categories">
                                 <option value="">Seleccione</option>
                                 @foreach($categories as $value)
                                     <option value="{{$value->id}}">{{$value->name}}</option>
                                 @endforeach
                             </select>
                         </div>
-                        <div class="form-group col-6">
+                        <div class="form-group col-4">
                             <label for="">Nombre del platillo</label>
-                            <input type="text" class="form-control @error('nombre_platillo') is-invalid @enderror"
-                                   name="nombre_platillo" id="nombre_platillo">
-                            @error('nombre_platillo')
+                            <input type="text" class="form-control @error('plate') is-invalid @enderror"
+                                   name="plate" id="plate">
+                            @error('plate')
                             <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
                             @enderror
                         </div>
-                        <div class="form-group col-6">
+                        <div class="form-group col-3">
                             <label for="">Precio base</label>
-                            <input type="number" class="form-control @error('precio_base') is-invalid @enderror"
-                                   name="precio_base" id="precio_base">
-                            @error('precio_base')
+                            <input type="number" class="form-control @error('price') is-invalid @enderror"
+                                   name="price" id="price">
+                            @error('price')
                             <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
                             @enderror
                         </div>
                     </div>
-                    <div class="col-4 d-flex justify-content-center" style="margin: 5% auto; ">
-                        <button type="submit" class="btn btn-outline-dark">Guardar platillo</button>
+                    <div class="col-4 d-flex justify-content-center" style="margin: auto; ">
+
+                        <button type="button" class="btn btn btn-outline-dark "
+                                onclick="agregar_plate()">Agregar
+                        </button>
                         <a href="{{url('plates')}}" class="btn btn-outline-danger">
                             Volver
                         </a>
                     </div>
 
-                </div>
-            </div>
-            <div class="col-6">
 
-                <div class="card">
-                    <div class="card-head">
-                        <h4 class="text-center mb-3 pt-3">Variación</h4>
+
+                        <div class="col-12 mb-4">
+                            <button type="submit" class="btn btn-outline-dark float-right">Guardar platillo/s</button>
+                        </div>
+
+                    <div class="row m-auto">
+                        <table id="tbl_plates" class="table text-center table-responsive">
+                            <thead>
+                            <tr>
+                                <th>Categoría</th>
+                                <th>Nombre platillo</th>
+                                <th>Precio</th>
+                                <th>Acciones</th>
+                            </tr>
+                            </thead>
+                            <tbody id="tbl_plates">
+
+                            </tbody>
+                        </table>
                     </div>
-                    <div class="row card-body d-flex justify-content-center">
-
-                        <div class="form-group col-6">
-                            <label for="">Nombre de variación</label>
-                            <input type="text" class="form-control @error('nombre_variacion') is-invalid @enderror"
-                                   name="nombre_variacion" id="nombre_variacion">
-                            @error('nombre_variacion')
-                            <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                            @enderror
-                        </div>
-                        <div class="form-group col-4">
-                            <label>precio adicional</label>
-                            <input type="number" class="form-control  @error('precio_adicional') is-invalid @enderror"
-                                   name="precio_adicional" id="precio_adicional">
-                            @error('precio_adicional')
-                            <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                            @enderror
-                        </div>
-
-                        <div class="form-group col-6">
-                            <label for="">Descripción</label>
-                            <textarea class="form-control @error('description') is-invalid @enderror" name="description"
-                                      id="description"></textarea>
-                            @error('description')
-                            <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                            @enderror
-                        </div>
-
-                        <div class="col-12">
-                            <button type="button" class="btn btn btn-outline-dark float-right"
-                                    onclick="agregar_variacion()">Agregar
-                            </button>
-                        </div>
                     </div>
 
-                    <table id="tbl_variaciones" class="table text-center table-responsive">
-                        <thead>
-                        <tr>
-                            <th>Nombre variación</th>
-                            <th>Precio adicional</th>
-                            <th>Descripción</th>
-                            <th>Acciones</th>
-                        </tr>
-                        </thead>
-                        <tbody id="tbl_variaciones">
 
-                        </tbody>
-                    </table>
 
                 </div>
             </div>
@@ -129,36 +94,29 @@
 
 @section("scripts")
     <script>
-        function colocar_categories() {
-            let categories = $("#categoria option:selected").attr("categories");
-
-            $("#categoria").val(categories);
-        }
-
 
         let id = 0;
 
-        function agregar_variacion() {
-            let variacion_text = $("#nombre_variacion").val();
-            let description = $("#description").val();
-            let description_text = description.substring(0,20);
-            let precio = $("#precio_adicional").val();
+        function agregar_plate() {
+            let plate_text = $("#plate").val();
+            let price = $("#price").val();
+            let category = $("#categories option:selected").val()
 
-            if (precio > 0) {
+            if (price > 0) {
                 id++;
-                $("#tbl_variaciones").append(`
+                $("#tbl_plates").append(`
             <tr id="tr-${id}">
             <td>
-            <input type="hidden" name="variation[]" value="${variacion_text}">
+            <input type="hidden" name="plate[]" value="${plate_text}">
                 <input type="hidden" name="id[]" value="${id}">
-                <input type="hidden" name="precios[]" value="${precio}">
-                <input type="hidden" name="description[]" value="${description}">
-                ${variacion_text}
+                <input type="hidden" name="prices[]" value="${price}">
+                <input type="hidden" name="categories[]" value="${category}">
+                ${plate_text}
             </td>
-            <td>${precio}</td>
-            <td>${description_text}</td>
+            <td>${price}</td>
+            <td>${category}</td>
             <td>
-            <button type="button" class="btn btn-danger bg-danger" style="width: 35px; height: 35px; display: flex;margin: auto; justify-content: center" onclick="eliminar_variacion(${id}, ${parseInt(precio)})"><i class="fas fa-ban"></i></button>
+            <button type="button" class="btn btn-danger bg-danger" style="width: 35px; height: 35px; display: flex;margin: auto; justify-content: center" onclick="remove_plate(${id}, ${parseInt(price)})"><i class="fas fa-ban"></i></button>
             </td>
             </tr>
             `);
@@ -171,7 +129,7 @@
         }
 
 
-        function eliminar_variacion(id) {
+        function remove_plate(id) {
             $("#tr-" + id).remove();
 
         }
