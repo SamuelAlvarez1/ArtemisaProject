@@ -25,6 +25,7 @@ class CreateReservasTable extends Migration
             $table->boolean("state");
             $table->date("start_date");
             $table->date("final_date");
+            $table->timestamps();
         });
     }
 
