@@ -31,11 +31,12 @@ class SalesController extends Controller
 
     public function create()
     {
-        $customers = Customer::select('id', 'name');
-        $users = User::select('id', 'name');
-        $plates = Plate::select('name', 'basePrice');
+        $customers = Customer::all();
+        $users = User::all();
+        $plates = Plate::all();
 
-        return view('sales.create', compact('customers', 'users', 'plates'));
+
+        return view('sales.create', compact('customers', 'users', 'plates'));   
     }
 
     public function store(Request $request)
@@ -43,11 +44,27 @@ class SalesController extends Controller
         $request->validate(Sale::$rules);
         $input = $request->all();
         try {
-            Sale::create([
-                "idCustomers" => $input['idCostumers'],
-                "idUser" => auth()->user()->id,
-                "state" => $input['state'],
+            DB::beginTransaction();
+            $plate = Sale::create([
+                "name" => $input["nombre_platillo"],
+                "basePrice" => $input["precio_base"],
+                "idCategory" => $input["categories"],
+                "state" => 1
             ]);
+
+            if (isset($input["id"])) {
+                foreach ($input["id"] as $key => $value) {
+                    PlateVariation::create([
+                        "variation" => $input["variation"][$key],
+                        "idPlate" => $plate->id,
+                        "price" => $input["precios"][$key],
+                        "description" => $input["description"][$key],
+                        "state" => 1
+                    ]);
+                }
+            }
+
+            DB::commit();
             return redirect('/sales')->with('success', 'Se registró la venta correctamente');
         } catch (\Exception $e) {
             return redirect('/sales/create')->with('error', $e->getMessage());

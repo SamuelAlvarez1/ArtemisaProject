@@ -14,7 +14,7 @@ class Plate extends Model
     protected $fillable = [
         'id',
         'name',
-        'basePrice',
+        'price',
         'idCategory',
         'state'
     ];
