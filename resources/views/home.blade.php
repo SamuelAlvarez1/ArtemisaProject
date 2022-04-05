@@ -2,7 +2,7 @@
 @section('main-content')
     <div class="container">
         <div class="row mb-5">
-            <div class="col-md-4">
+            {{-- <div class="col-md-4">
                 <div class="card-counter bg-warning text-light ">
                     <i class="fa-solid fa-pizza-slice"></i>
 
@@ -13,7 +13,7 @@
                     @endif
                     <span class="count-name">Platillo destacado</span>
                 </div>
-            </div>
+            </div> --}}
 
             <div class="col-md-4">
                 <div class="card-counter info">

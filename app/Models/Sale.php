@@ -16,11 +16,9 @@ class Sale extends Model
         'idCustomers',
         'idUser',
         'state',
-        'iva'
     ];
 
     public static $rules = [
-        'iva' => "required",
         'state' => "required"
     ];
 

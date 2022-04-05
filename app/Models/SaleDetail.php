@@ -14,15 +14,13 @@ class SaleDetail extends Model
 
     protected $fillable = [
         'id',
-        'subTotal',
-        'quantity',
         'idSales',
-        'idVatiariation',
-        'state'
+        'idPlate',
+        'quantity',
+        'platePrice'
     ];
 
-    public static $rules = [
-    ];
+    public static $rules = [];
 
     public $timestamps = true;
 }

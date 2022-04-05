@@ -33,7 +33,7 @@
         </li>
         @endif
         <li class="nav-item">
-            <a class="nav-link" href="{{url('/home')}}">
+            <a class="nav-link" href="{{url('/sales')}}">
                 <i class="ni ni-cart text-info"></i> Ventas
             </a>
         </li>

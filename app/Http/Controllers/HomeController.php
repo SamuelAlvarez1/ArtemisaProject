@@ -33,26 +33,33 @@ class HomeController extends Controller
     {
         //Plates
 
+<<<<<<< HEAD
         $Plates = SaleDetail::select('sales_details.idPlate', 'plates.id as Plate')
         ->join('plates', 'sales_details.idPlate', '=', 'plates.id')
         ->get();
+=======
+        // $Plates = SaleDetail::select('sales_details.idVariations', 'plates_variations.idPlate as Plate')
+        // ->join('plates_variations', 'sales_details.idVariations', '=', 'plates_variations.id')
+        // ->join('plates', 'plates_variations.idPlate', '=', 'plates.id')
+        // ->get();
+>>>>>>> 067eb22cf2a216c8a724ecd96f588f0de9d3d604
 
-        $idPlate = [];
+        // $idPlate = [];
 
-        foreach ($Plates as $i => $value) {
-            $idPlate[$i] = $value->Plate;
-        }
-        $plates = array_count_values($idPlate);
+        // foreach ($Plates as $i => $value) {
+        //     $idPlate[$i] = $value->Plate;
+        // }
+        // $plates = array_count_values($idPlate);
 
-        $outstandingPlate = 0;
+        // $outstandingPlate = 0;
 
-        foreach ($plates as $key => $value) {
-            if ($value > $outstandingPlate) {
-                $outstandingPlate = $key;
-            }
-        }
+        // foreach ($plates as $key => $value) {
+        //     if ($value > $outstandingPlate) {
+        //         $outstandingPlate = $key;
+        //     }
+        // }
 
-        $plate = Plate::find($outstandingPlate);
+        // $plate = Plate::find($outstandingPlate);
 
         //Bookings
         $date = Carbon::now()->toDateString();
@@ -67,7 +74,7 @@ class HomeController extends Controller
 
 
 
-//        Charts
+        //        Charts
 
         $salesChart = Sale::select(DB::raw('COUNT(*) as count'))
             ->whereYear('created_at', date('Y'))
@@ -78,9 +85,9 @@ class HomeController extends Controller
             ->whereYear('created_at', date('Y'))
             ->groupBy(DB::raw('Month(created_at)'))
             ->pluck('month');
-        $salesData = array(0,0,0,0,0,0,0,0,0,0,0,0);
-        foreach ($salesMonths as $index => $month){
-            $salesData[$month-1] = $salesChart[$index];
+        $salesData = array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+        foreach ($salesMonths as $index => $month) {
+            $salesData[$month - 1] = $salesChart[$index];
         }
 
         $bookingsChart = Booking::select(DB::raw('COUNT(*) as count'))
@@ -92,11 +99,12 @@ class HomeController extends Controller
             ->whereYear('created_at', date('Y'))
             ->groupBy(DB::raw('Month(created_at)'))
             ->pluck('month');
-        $bookingsData = array(0,0,0,0,0,0,0,0,0,0,0,0);
-        foreach ($bookingsMonths as $index => $month){
-            $bookingsData[$month-1] = $bookingsChart[$index];
+        $bookingsData = array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+        foreach ($bookingsMonths as $index => $month) {
+            $bookingsData[$month - 1] = $bookingsChart[$index];
         }
 
-        return view('home', compact('plate','countBookings','countCustomers', 'salesData', 'bookingsData'));
+        // return view('home', compact('plate', 'countBookings', 'countCustomers', 'salesData', 'bookingsData'));
+        return view('home', compact('countBookings', 'countCustomers', 'salesData', 'bookingsData'));
     }
 }

@@ -1,0 +1,107 @@
+@extends('layouts.panel')
+
+@section('styles')
+
+
+@endsection
+
+@section('main-content')
+    <div class="card">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-3">
+                    <strong>Ventas</strong>
+                </div>
+                <div class="col-6">
+
+                    <a href="{{url('/sales/create')}}" class=" btn btn-sm mx-2 btn-outline-dark">Registrar Venta</a>
+
+                    @if($states == 'active')
+
+                        <a href="{{url('/sales/canceledSales')}}" class="btn mx-2 btn-sm mr-4 btn-outline-dark">Ver Ventas Anuladas</a>
+                    @else
+                        <a href="{{url('/sales')}}" class="btn btn-sm mx-2 btn-outline-dark">Ver Ventas
+                            Realizadas</a>
+                    @endif
+                </div>
+                <div class="col-3">
+                    <div class="input-group mb-3 input-group-sm">
+                        <input type="text" class="form-control" id="searchInput" placeholder="Busqueda"
+                               aria-label="Recipient's username" aria-describedby="basic-addon2">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-dark" id="searchButton" type="button">Buscar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive mb-3 text-center">
+                <table id="sales" class="table table-bordered">
+                    <thead class="thead-light">
+                    <tr>
+                        <th>Id</th>
+                        <th>Clientes</th>
+                        <th>Usuario</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    @foreach($sales as $key=>$value)
+
+                        <tr>
+
+                            <td>{{$value-> id}}</td>
+                            <td>{{$value-> idCustomers}}</td>
+                            <td>{{$value-> idUser}}</td>
+                            <td>
+                                @if($value->state == 1)
+                                    <span class="badge badge-success">Activa</span>
+                                @else
+                                    <span class="badge badge-danger">Anulada</span>
+                                @endif
+
+                            </td>
+                            <td>
+                                <a class="mx-2" href="{{url('/sales/'.$value->id)}}"><i
+                                        class="fa-solid text-dark fa-magnifying-glass"></i></a>
+                                <a class="mx-2" href="{{url('/sales/'.$value->id.'/edit')}}"><i
+                                        class="fa text-dark fa-edit"></i></a>
+                                @if($value->state == 1)
+                                    <a class="mx-2" href="{{url('/sales/updateState/'.$value->id)}}"><i
+                                            class="fa text-dark fa-ban"></i></a>
+                                @else
+                                    <a class="mx-2" href="{{url('/sales/updateState/'.$value->id)}}"><i
+                                            class="fa text-dark fa-check"></i></a>
+                                @endif
+
+
+                            </td>
+                        </tr>
+                    @endforeach
+
+                    </tbody>
+                </table>
+
+
+            </div>
+        </div>
+    </div>
+
+            @endsection
+
+            @section('scripts')
+                <script>
+                    $(document).ready(function () {
+                        var table = $('#sales').DataTable({
+                            "dom": 'tp'
+                        });
+
+                        $('#searchButton').on('keyup click', function () {
+                            table.search($('#searchInput').val()).draw();
+                        });
+                    });
+                </script>
+@endsection
