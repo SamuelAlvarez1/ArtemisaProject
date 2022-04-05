@@ -80,7 +80,6 @@ class PlatesController extends Controller
 
             DB::commit();
 
-
             return redirect('/plates')->with('success', 'Platillo creado exitosamente');
         } catch (\Exception $e) {
             DB::rollBack();
