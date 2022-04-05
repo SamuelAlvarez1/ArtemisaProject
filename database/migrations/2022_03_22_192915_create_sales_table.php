@@ -20,7 +20,6 @@ class CreateSalesTable extends Migration
             $table->unsignedBigInteger('idUser');
             $table->foreign('idUser')->references('id')->on('users');
             $table->boolean("state");
-            $table->double("iva");
             $table->timestamps();
         });
     }

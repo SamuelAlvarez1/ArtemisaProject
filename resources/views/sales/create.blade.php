@@ -1,147 +1,170 @@
 @extends('layouts.panel')
 
 @section('styles')
-    
+
+
 @endsection
 
 @section('main-content')
 
-<div class="card">
-    <div class="card-header">
-        <div class="row">
-            <div class="col-3">
-                <strong>Ventas    </strong>
-            </div>
-            <div class="col-5">
-
-                <a href="{{url('/sales/create')}}" class="btn mx-2 btn-outline-dark">crear reserva</a>
-
-                @if($states == '0')
-                <a href="{{url('/sales')}}" class="btn btn-outline-dark">Ver reservas en proceso</a>
-                <a href="{{url('/bookings/seeApproved')}}" class="btn btn-outline-dark">Ver reservas aprobadas</a>
-                @endif
-                @if ($states == "1")
-                <a href="{{url('/bookings/seeCanceled')}}" class="btn btn-outline-dark">Ver reservas canceladas</a>
-                    <a href="{{url('/bookings/seeApproved')}}" class="btn btn-outline-dark">Ver reservas aprobadas</a>
-                @endif        
-
-                @if ($states == "2")
-                <a href="{{url('/bookings/seeCanceled')}}" class="btn btn-outline-dark">Ver reservas canceladas</a>
-                    <a href="{{url('/bookings')}}" class="btn btn-outline-dark">Ver reservas en proceso</a>
-                @endif        
-                
-            </div>
-            <div class="col-4">
-                <div class="input-group mb-3">
-                    <input type="text" class="form-control" id="searchInput" placeholder="Busqueda"
-                           aria-label="Recipient's username" aria-describedby="basic-addon2">
-                    <div class="input-group-append">
-                        <button class="btn btn-outline-dark" id="searchButton" type="button">Buscar</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="card-body">
-        <div class="table-responsive mb-3 text-center">
-            <table id="bookings" class="table table-bordered">
-                <thead class="thead-light">
-                <tr>
-                    <th>Id</th>
-                    <th>Cliente</th>
-                    <th>Evento</th>
-                    <th>cantidad de personas</th>
-                    @if (auth()->user()->idRol == 1)
-                        <th>Usuario que creo la reserva</th>
-                        @endif
-                    <th>Estado</th>
-                    <th>fecha inicial</th>
-                    <th>fecha final</th>
-                    <th>Acciones</th>
-                </tr>
-                </thead>
-                <tbody>
-
-                @foreach($bookings as $value)
-
-                    <tr>
-
-                        <td>{{$value->id}}</td>
-                        <td>{{$value->customerName}}</td>
-                        <td>
-                            @if ($value->idEvent == null)
-                                sin evento
-                            @else
-                                {{$value->eventName}}
-                            @endif
-                        </td>
-                        <td>{{$value->amount_people}}</td>
-                        @if (auth()->user()->idRol == 1)
-                        <td>{{$value->user}}</td>
-                        @endif
-                        <td>
-                            @if($value->state == 0)
-                            <span class="badge badge-danger">Cancelada</span>
-                            @endif
-                            @if($value->state == 1)
-                                <span class="badge badge-primary">En proceso</span>
-                            @endif
-                            @if($value->state == 2)
-                                <span class="badge badge-success">Aprobada</span>
-                                
-                            @endif
-
-                        </td>
-                        <td>{{$value->start_date}}</td>
-                        <td>{{$value->final_date}}</td>
-                        
-                        <td>
-                            <a class="mx-2" href="{{url('/bookings/'.$value->id)}}"><i
-                                    class="fa-solid text-dark fa-magnifying-glass"></i></a>
-                            <a class="mx-2" href="{{url('/bookings/'.$value->id.'/edit')}}"><i
-                                    class="fa text-dark fa-edit"></i></a>
-                            @if($value->state == 0)
-                                <a class="mx-2" href="{{url('/bookings/updateState/'.$value->id)}}/1"><i
-                                    class="fa text-dark fa-check"></i></a>
-                                        
-                            @endif
-                            @if($value->state == 1)
-                            <a class="mx-2" href="{{url('/bookings/updateState/'.$value->id)}}/0"><i
-                                class="fa text-dark fa-ban"></i></a>
-                                <a class="mx-2" href="{{url('/bookings/updateState/'.$value->id)}}/2"><i
-                                    class="fa text-dark fa-check"></i></a>
-                            @endif
-                        </td>
-                    </tr>
-                @endforeach
-
-                </tbody>
-            </table>
-
-            <div class="d-flex justify-content-end">
-                {{-- {{ $bookings->links() }} --}}
-            </div>
-        </div>
+<div class="row">
+    <div class="col">
+        <h3 class="text-center">Crear Venta</h3>
     </div>
 </div>
 
+<form action="/sales/store" method="post">
+    @csrf
+    <div class="row">
+        <div class="col-6">
+
+            <div class="card">
+                <div class="card-head">
+                    <h4 class="text-center mb-3">Información Venta</h4>
+                </div>
+                <div class="row card-body d-flex justify-content-center">
+                    <div class="form-group col-6">
+                        <label for="">Cliente</label>
+                        <select name="customer" class="form-control" id="customer">
+                            <option value="">Seleccione</option>
+                            @foreach($customers as $value)
+                            @if($value->state == 1)
+                            <option name="{{$value->name}}" value="{{$value->id}}">{{$value->name}}</option>
+                            @endif
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group col-6">
+                        <label for="">Precio Final</label>
+                        <input type="number" class="form-control @error('totalPrice') is-invalid @enderror" name="totalPrice" readonly value="0" id="totalPrice">
+                        @error('totalPrice')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                    </div>
+                </div>
+                <div class="col-4 d-flex justify-content-center" style="margin: 5% auto;">
+                    <button type="submit" class="btn btn-outline-dark">Guardar platillo</button>
+                    <a href="{{url('sales')}}" class="btn btn-outline-danger">
+                        Volver
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-6">
+
+            <div class="card">
+                <div class="card-head">
+                    <h4 class="text-center mb-3">Información Platillos</h4>
+                </div>
+                <div class="row card-body d-flex justify-content-center">
+
+                    <div class="form-group col-6">
+                        <label>Platillo</label>
+                        <select name="producto" id="producto" class="form-control">
+                            <option value="">Seleccione</option>
+                            @foreach($plates as $value)
+                            @if($value->state == 1)
+                            <option precio="{{$value->basePrice}}" value="{{$value->id}}">{{$value->name}}</option>
+                            @endif
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group col-2">
+                        <label>Cantidad</label>
+                        <input type="number" class="form-control  @error('quantity') is-invalid @enderror" name="quantity" id="quantity">
+                        @error('quantity')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                    </div>
+                    <div class="form-group col-3">
+                        <label>platePrice</label>
+                        <input type="number" class="form-control @error('platePrice') is-invalid @enderror" name="platePrice" readonly value="0" id="platePrice">
+                        @error('platePrice')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                    </div>
+                    <div class="col-4 d-flex justify-content-center" style="margin: 5% auto;">
+                        <button type="button" class="btn btn-outline-dark" onclick="agregar_producto()">Agregar</button>
+                    </div>
+                </div>
+
+                <table id="tbl_productos" class="table text-center">
+                    <thead>
+                        <tr>
+                            <th>Nombre platillo</th>
+                            <th>precio platillo</th>
+                            <th>cantidad</th>
+                            <th>Sub total</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbl_productos">
+
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+
+    </div>
+</form>
 
 @endsection
 
+@section("scripts")
+<script>
+    function colocar_precio() {
+        let precio = $("#producto option:selected").attr("precio");
 
-@section('scripts')
-                <script>
-                    $(document).ready(function () {
-                        var table = $('#bookings').DataTable({
-                            "dom": 't'
-                        });
+        $("#precio").val(precio);
+    }
+z`
+    function agregar_producto() {
+        let producto_id = $("#producto option:selected").val();
+        let producto_text = $("#producto option:selected").text();
+        let cantidad = $("#cantidad").val();
+        let precio = $("#precio").val();
 
-                        $('#searchButton').on('keyup click', function () {
-                            table.search($('#searchInput').val()).draw();
-                        });
-                    });
-                </script>
+        if (precio > 0 && cantidad > 0) {
 
 
+            $("#tbl_productos").append(`
+            <tr id="tr-${producto_id}">
+            <td>
+                <input type="hidden" name="producto_id[]" value="${producto_id}">
+                <input type="hidden" name="cantidades[]" value="${cantidad}">
+                <input type="hidden" name="precios[]" value="${precio}">
+                ${producto_text}
+            </td>
+            <td>${precio}</td>
+            <td>${cantidad}</td>
+            <td>${parseInt(cantidad) * parseInt(precio)}</td>
+            <td>
+            <button type="button" class="btn btn-danger bg-danger" style="width: 35px; height: 35px; display: flex;margin: auto;" onclick="eliminar_producto(${producto_id}, ${parseInt(cantidad) * parseInt(precio)})"><i class="fas fa-ban"></i></button>
+            </td>
+            </tr>
+            `);
+            let precio_total = $("#precio_total").val() || 0;
+            $("#precio_total").val(parseInt(precio_total) + parseInt(cantidad) * parseInt(precio));
+
+        } else {
+
+        }
+
+    }
+
+
+    function eliminar_producto(id, subtotal) {
+        $("#tr-" + id).remove();
+        let precio_total = $("#precio_total").val() || 0;
+        $("#precio_total").val(parseInt(precio_total) - subtotal);
+    }
+</script>
 
 @endsection

@@ -80,7 +80,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/plates/updateStateVariation/{id}', [PlatesController::class, 'updateStateVariation']);
 
     //<-----------Sales------------>
-    Route::get('/sales/canceledSales', [EventsController::class, 'canceledSales']);
+    Route::get('/sales/canceledSales', [SalesController::class, 'canceledSales']);
     Route::get('/sales/updateState/{id}', [SalesController::class, 'updateState']);
 
     //<----------Resources---------->

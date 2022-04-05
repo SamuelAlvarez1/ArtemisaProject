@@ -15,15 +15,14 @@ class CreateSalesDetailsTable extends Migration
     {
         Schema::create('sales_details', function (Blueprint $table) {
             $table->id();
-            $table->double("subTotal");
-            $table->bigInteger("quiantity");
             $table->unsignedBigInteger("idSales");
             $table->foreign("idSales")->references("id")->on("sales");
-            $table->unsignedBigInteger("idVariations");
-            $table->foreign("idVariations")->references("id")->on("plates_variations");
-            // $table->unsignedBigInteger("idPlate");
-            // $table->foreign("idPlate")->references("id")->on("plates");
-            $table->timestamps();
+            $table->unsignedBigInteger("idPlate");
+            $table->foreign("idPlate")->references("id")->on("plates");
+            $table->bigInteger("quantity");
+            $table->double("platePrice");
+            // $table->unsignedBigInteger("idVariations");
+            // $table->foreign("idVariations")->references("id")->on("plates_variations");
         });
     }
 
