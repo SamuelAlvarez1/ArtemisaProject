@@ -13,7 +13,7 @@
     </div>
 </div>
 
-<form action="/sales/store" method="post">
+<form action="{{ url('sales') }}" method="post">
     @csrf
     <div class="row">
         <div class="col-6">

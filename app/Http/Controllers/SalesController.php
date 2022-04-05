@@ -7,6 +7,7 @@ use App\Models\Sale;
 use App\Models\Customer;
 use App\Models\Plate;
 use App\Models\User;
+use App\Models\SaleDetail;
 use http\Client;
 use Yajra\DataTables\DataTables;
 
@@ -41,34 +42,35 @@ class SalesController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate(Sale::$rules);
-        $input = $request->all();
+        // $request->validate(Sale::$rules);
+        
         try {
             DB::beginTransaction();
-            $plate = Sale::create([
-                "name" => $input["nombre_platillo"],
-                "basePrice" => $input["precio_base"],
-                "idCategory" => $input["categories"],
-                "state" => 1
+            $sale = Sale::create([
+                "idCustomers" => $request["customer"],
+                "state" => 1,
+                'idUser' => auth()->user()->id
             ]);
 
-            if (isset($input["id"])) {
-                foreach ($input["id"] as $key => $value) {
-                    PlateVariation::create([
-                        "variation" => $input["variation"][$key],
-                        "idPlate" => $plate->id,
-                        "price" => $input["precios"][$key],
-                        "description" => $input["description"][$key],
-                        "state" => 1
+            
+
+            if (isset($request["idPlatillo"])) {
+                foreach ($request["idPlatillo"] as $key => $value) {
+                    SaleDetail::create([
+                        'idSales' => $sale->id,  
+                        "idPlate" => $value,
+                        "quantity" => $request["cantidades"][$key],
+                        "platePrice" => $request["precios"][$key],
+                        
                     ]);
                 }
             }
 
             DB::commit();
-            return redirect('/sales')->with('success', 'Se registró la venta correctamente');
         } catch (\Exception $e) {
             return redirect('/sales/create')->with('error', $e->getMessage());
         }
+        return redirect('/sales')->with('success', 'Se registró la venta correctamente');
     }
 
     public function updateState($id)
