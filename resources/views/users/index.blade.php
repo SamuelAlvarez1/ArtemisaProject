@@ -14,25 +14,25 @@
             </div>
             <div class="col-5">
 
-                <a href="{{url('/users/create')}}" class="btn mx-2 btn-outline-dark">crear usuario</a>
+                <a href="{{url('/users/create')}}" class="btn-sm btn mx-2 btn-outline-dark">crear usuario</a>
 
                 @if($states == '0')
-                <a href="{{url('/users')}}" class="btn btn-outline-dark">Ver usuarios activos</a>
+                <a href="{{url('/users')}}" class="btn-sm btn btn-outline-dark">Ver usuarios activos</a>
                 @endif
                 @if ($states == "1")
-                    <a href="{{url('/users/notActive')}}" class="btn btn-outline-dark">Ver usuarios deshabilitados</a>
+                    <a href="{{url('/users/notActive')}}" class="btn-sm btn btn-outline-dark">Ver usuarios deshabilitados</a>
                 @endif        
                 
             </div>
-            <div class="col-4">
-                <div class="input-group mb-3">
-                    <input type="text" class="form-control" id="searchInput" placeholder="Busqueda"
-                           aria-label="Recipient's username" aria-describedby="basic-addon2">
-                    <div class="input-group-append">
-                        <button class="btn btn-outline-dark" id="searchButton" type="button">Buscar</button>
+            <div class="col-4 d-flex justify-content-center d-flex align-items-center">
+                    <div class="input-group">
+                        <input type="text" class="form-control border border-dark" id="searchInput" placeholder="Busqueda"
+                            aria-label="Recipient's username" aria-describedby="basic-addon2">
+                        <div class="input-group-append">
+                            <button class="btn btn-sm btn-outline-dark" id="searchButton" type="button">Buscar</button>
+                        </div>
                     </div>
                 </div>
-            </div>
         </div>
     </div>
     <div class="card-body">
@@ -105,7 +105,15 @@
                 <script>
                     $(document).ready(function () {
                         var table = $('#users').DataTable({
-                            "dom": 't'
+                            "dom": 'tp',
+                            'language': {
+                                "paginate": {
+                                    "first": "Inicio",
+                                    "last": "Fin",
+                                    "next": "→",
+                                    "previous": "←"
+                                }
+                            }
                         });
 
                         $('#searchButton').on('keyup click', function () {

@@ -15,6 +15,7 @@ class Sale extends Model
         'id',
         'idCustomers',
         'idUser',
+        'finalPrice',
         'state',
     ];
 

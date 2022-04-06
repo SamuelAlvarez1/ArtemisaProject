@@ -16,23 +16,21 @@
 
                     <a href="{{url('/sales/create')}}" class=" btn btn-sm mx-2 btn-outline-dark">Registrar Venta</a>
 
-                    @if($states == 'active')
-
-                        <a href="{{url('/sales/canceledSales')}}" class="btn mx-2 btn-sm mr-4 btn-outline-dark">Ver Ventas Anuladas</a>
+                    @if($states == 'activeSales')
+                    <a href="{{url('/sales/canceledSales')}}" class="btn btn-sm mx-2 btn-outline-dark">Ver Ventas Anuladas</a>
                     @else
-                        <a href="{{url('/sales')}}" class="btn btn-sm mx-2 btn-outline-dark">Ver Ventas
-                            Realizadas</a>
+                    <a href="{{url('/sales')}}" class="btn mx-2 btn-sm mr-4 btn-outline-dark">Ver Ventas Realizadas</a>
                     @endif
                 </div>
-                <div class="col-3">
-                    <div class="input-group mb-3 input-group-sm">
-                        <input type="text" class="form-control" id="searchInput" placeholder="Busqueda"
-                               aria-label="Recipient's username" aria-describedby="basic-addon2">
-                        <div class="input-group-append">
-                            <button class="btn btn-outline-dark" id="searchButton" type="button">Buscar</button>
+                <div class="col-3 d-flex justify-content-center d-flex align-items-center">
+                        <div class="input-group">
+                            <input type="text" class="form-control border border-dark" id="searchInput" placeholder="Busqueda"
+                                aria-label="Recipient's username" aria-describedby="basic-addon2">
+                            <div class="input-group-append">
+                                <button class="btn btn-sm btn-outline-dark" id="searchButton" type="button">Buscar</button>
+                            </div>
                         </div>
                     </div>
-                </div>
             </div>
         </div>
         <div class="card-body">
@@ -43,6 +41,8 @@
                         <th>Id</th>
                         <th>Clientes</th>
                         <th>Usuario</th>
+                        <th>Precio Total</th>
+                        <th>Fecha de Ventas</th>
                         <th>Estado</th>
                         <th>Acciones</th>
                     </tr>
@@ -54,8 +54,10 @@
                         <tr>
 
                             <td>{{$value-> id}}</td>
-                            <td>{{$value-> idCustomers}}</td>
-                            <td>{{$value-> idUser}}</td>
+                            <td>{{$value-> customerName}}</td>
+                            <td>{{$value-> userName}}</td>
+                            <td>{{$value-> finalPrice}}</td>
+                            <td>{{$value-> created_at}}</td>
                             <td>
                                 @if($value->state == 1)
                                     <span class="badge badge-success">Activa</span>
@@ -67,8 +69,6 @@
                             <td>
                                 <a class="mx-2" href="{{url('/sales/'.$value->id)}}"><i
                                         class="fa-solid text-dark fa-magnifying-glass"></i></a>
-                                <a class="mx-2" href="{{url('/sales/'.$value->id.'/edit')}}"><i
-                                        class="fa text-dark fa-edit"></i></a>
                                 @if($value->state == 1)
                                     <a class="mx-2" href="{{url('/sales/updateState/'.$value->id)}}"><i
                                             class="fa text-dark fa-ban"></i></a>
@@ -84,8 +84,6 @@
 
                     </tbody>
                 </table>
-
-
             </div>
         </div>
     </div>
@@ -96,7 +94,15 @@
                 <script>
                     $(document).ready(function () {
                         var table = $('#sales').DataTable({
-                            "dom": 'tp'
+                            "dom": 'tp',
+                            'language': {
+                                "paginate": {
+                                    "first": "Inicio",
+                                    "last": "Fin",
+                                    "next": "→",
+                                    "previous": "←"
+                                }
+                            }
                         });
 
                         $('#searchButton').on('keyup click', function () {

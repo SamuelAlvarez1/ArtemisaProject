@@ -2,7 +2,6 @@
 
 @section('styles')
 
-
 @endsection
 
 @section('main-content')
@@ -54,7 +53,4 @@
     <script>
 
     </script>
-
-
-
 @endsection
