@@ -13,13 +13,12 @@ class PlatesController extends Controller
 {
     public function index()
     {
-        $plates = Plate::join('categories', 'plates.idCategory', '=', 'categories.id')
-        ->select('categories.name as categories', 'plates.*')
-        ->where('state', '1')->get();
+        $plates = Plate::select('categories.name as categories', 'plates.*')
+            ->join('categories', 'plates.idCategory', '=', 'categories.id')
+            ->where('state', '1')->get();
         $states = "active";
-        $categories = 0;
 
-        return view("plates.index", compact('plates', 'states', 'categories'));
+        return view("plates.index", compact('plates', 'states'));
     }
 
     public function notActive()
@@ -32,7 +31,7 @@ class PlatesController extends Controller
 
         $categories = 0;
 
-        return view("plates.index", compact('plates',  'states', 'categories'));
+        return view("plates.index", compact('plates', 'states', 'categories'));
     }
 
     public function updateState($id)
@@ -47,7 +46,6 @@ class PlatesController extends Controller
     }
 
 
-
     public function create()
     {
         $categories = Category::all();
@@ -56,12 +54,9 @@ class PlatesController extends Controller
     }
 
 
-
-
     public function store(Request $request)
     {
         $input = $request->all();
-
 
         try {
             DB::beginTransaction();
@@ -70,9 +65,9 @@ class PlatesController extends Controller
             if (isset($input["id"])) {
                 foreach ($input["id"] as $key => $value) {
                     Plate::create([
-                        "variation" => $input["variation"][$key],
-                        "idPlate" => $input['id'],
-                        "price" => $input["precios"][$key],
+                        "name" => $input["plate"][$key],
+                        "price" => $input["prices"][$key],
+                        "idCategory" => $input["categories"][$key],
                         "state" => 1
                     ]);
                 }
@@ -89,12 +84,9 @@ class PlatesController extends Controller
     }
 
 
-
     public function show($id)
     {
         $plates = Plate::find($id);
-
-
 
         return view('plates.show', compact('plates'));
 
@@ -104,14 +96,14 @@ class PlatesController extends Controller
 
     public function edit($id)
     {
-    $plate = Plate::find($id);
-    $categories = Category::all();
+        $plate = Plate::find($id);
+        $categories = Category::all();
 
         if ($plate == null) {
             return redirect('/plate')->with('error', 'Platillo no encontrado');
         }
 
-        return view("plates.edit", compact('plate','categories'));
+        return view("plates.edit", compact('plate', 'categories'));
 
     }
 
@@ -120,23 +112,16 @@ class PlatesController extends Controller
     {
         if ($id != null) {
             try {
-                Plate::where("id", "=", $id)->update([
-                    'name' =>  $request['nombre_platillo'],
-                    'basePrice' => $request['precio_base'],
-                    "idCategory" => $request["categories"],
-                    'state' => $request["state"]
-                ]);
-                if (isset($request["id"])) {
-                foreach ($request["id"] as $key => $value) {
-                    Plate::create([
-                        "name" => $request["variation"][$key],
-                        "idPlate" => $id,
-                        "price" => $request["precios"][$key],
-                        "description" => $request["description"][$key],
-                        "state" => 1
-                    ]);
+                if (isset($input["id"])) {
+                    foreach ($input["id"] as $key => $value) {
+                        Plate::create([
+                            "name" => $input["plate"][$key],
+                            "price" => $input["prices"][$key],
+                            "idCategory" => $input["categories"][$key],
+                            "state" => 1
+                        ]);
+                    }
                 }
-            }
 
                 return redirect('/plates')->with("success", "El platillo fue editado satisfactoriamente");
             } catch (\Exception $e) {

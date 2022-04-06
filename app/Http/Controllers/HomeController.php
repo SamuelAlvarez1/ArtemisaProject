@@ -37,7 +37,6 @@ class HomeController extends Controller
         ->join('plates', 'sales_details.idPlate', '=', 'plates.id')
         ->get();
 
-<<<<<<< HEAD
         $idPlate = [];
 
         foreach ($Plates as $i => $value) {
@@ -45,16 +44,6 @@ class HomeController extends Controller
         }
         $plates = array_count_values($idPlate);
 
-=======
-
-        $idPlate = [];
-
-        foreach ($Plates as $i => $value) {
-            $idPlate[$i] = $value->Plate;
-        }
-        $plates = array_count_values($idPlate);
-
->>>>>>> 48110f4b569754a5e31a37e3b694f22bc1fad522
         $outstandingPlate = 0;
 
         foreach ($plates as $key => $value) {

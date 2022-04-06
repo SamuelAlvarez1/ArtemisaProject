@@ -14,126 +14,57 @@
             @csrf
             @method('PUT')
         <div class="row">
-            <div class="col-6">
 
-                <div class="card">
+            <div class="col-10">
+
+                <div class="card pb-3">
                     <div class="card-head">
-                        <h4 class="text-center mb-3 pt-3">Platillo</h4>
+                        <br>
                     </div>
-                    <input type="hidden" name="state" value = "{{$plate->state}}">
                     <div class="row card-body d-flex justify-content-center">
-                        <div class="form-group col-6">
+                        <div class="form-group col-4">
                             <label for="">Categoría</label>
-                            <select name="categories" class="form-control"
-                                    onchange="colocar_categoria()" id="categories">
+                            <select name="categories" class="form-control" id="categories">
+                                <option value="">Seleccione</option>
                                 @foreach($categories as $value)
-                                    <option value="{{$value->id}}" {{($value->id == $plate->idCategory) ? 'selected' : ''}} >{{$value->name}}</option>
+                                    <option value="{{$value->id}}">{{$value->name}}</option>
                                 @endforeach
                             </select>
                         </div>
-                        <div class="form-group col-6">
+                        <div class="form-group col-4">
                             <label for="">Nombre del platillo</label>
-                            <input type="text" class="form-control @error('nombre_platillo') is-invalid @enderror"
-                                   name="nombre_platillo" id="nombre_platillo" value = "{{$plate->name}}">
-                            @error('nombre_platillo')
+                            <input type="text" class="form-control @error('plate') is-invalid @enderror"
+                                   name="plate" id="plate">
+                            @error('plate')
                             <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
                             @enderror
                         </div>
-                        <div class="form-group col-6">
+                        <div class="form-group col-3">
                             <label for="">Precio base</label>
-                            <input type="number" class="form-control @error('precio_base') is-invalid @enderror"
-                                   name="precio_base" id="precio_base"  value = "{{$plate->basePrice}}">
-                            @error('precio_base')
+                            <input type="number" class="form-control @error('price') is-invalid @enderror"
+                                   name="price" id="price">
+                            @error('price')
                             <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
                             @enderror
                         </div>
                     </div>
-                    <div class="col-4 d-flex justify-content-center" style="margin: 5% auto; ">
-                        <button type="submit" class="btn btn-outline-dark">Guardar platillo</button>
+                    <div class="col-4 d-flex justify-content-center" style="margin: auto; ">
+
+                        <button type="submit" class="btn btn-outline-dark float-right">Guardar platillo/s</button>
                         <a href="{{url('plates')}}" class="btn btn-outline-danger">
                             Volver
                         </a>
                     </div>
 
-                </div>
-            </div>
-            <div class="col-6">
-
-                <div class="card">
-                    <div class="card-head">
-                        <h4 class="text-center mb-3 pt-3">Variación</h4>
-                    </div>
-                    <div class="row card-body d-flex justify-content-center">
-
-                        <div class="form-group col-6">
-                            <label for="">Nombre de variación</label>
-                            <input type="text" class="form-control @error('nombre_variacion') is-invalid @enderror"
-                                   name="nombre_variacion" id="nombre_variacion">
-                            @error('nombre_variacion')
-                            <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                            @enderror
-                        </div>
-                        <div class="form-group col-4">
-                            <label>precio adicional</label>
-                            <input type="number" class="form-control  @error('precio_adicional') is-invalid @enderror"
-                                   name="precio_adicional" id="precio_adicional">
-                            @error('precio_adicional')
-                            <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                            @enderror
-                        </div>
-
-                        <div class="form-group col-6">
-                            <label for="">Descripción</label>
-                            <textarea class="form-control @error('description') is-invalid @enderror" name="description"
-                                      id="description"></textarea>
-                            @error('description')
-                            <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                            @enderror
-                        </div>
-
-                        <div class="col-12">
-                            <button type="button" class="btn btn btn-outline-dark float-right"
-                                    onclick="agregar_variacion()">Agregar
-                            </button>
-                        </div>
-                    </div>
-
-                    <table id="tbl_variaciones" class="table text-center table-responsive">
-                        <thead>
-                        <tr>
-                            <th>Nombre variación</th>
-                            <th>Precio adicional</th>
-                            <th>Descripción</th>
-                            <th>Acciones</th>
-                        </tr>
-                        </thead>
-                        <tbody id="tbl_variaciones">
-                        @foreach($variations as $value)
-                            <tr id="tr-{{$value->id}}" class="trAction">
-                            <td>{{$value->variation}}</td>
-                            <td>{{$value->price}}</td>
-                            <td>{{$value->description}}</td>
-                            <td>
-            <a class="btn btn-danger bg-danger"  href="{{url('plates/updateStateVariation/'.$value->id)}}" style="width: 35px; height: 35px; display: flex;margin: auto; justify-content: center" onclick="eliminar_variacion({{$value->id}})"><i class="fas fa-ban"></i></a>
-            </td>
-                            </tr>
-                        @endforeach
-                        </tbody>
-                    </table>
 
                 </div>
-            </div>
 
+
+            </div>
         </div>
     </form>
 
@@ -147,7 +78,7 @@
             $("#categoria").val(categories);
         }
 
-        
+
         let id = document.querySelectorAll(".trAction").length;
 
         function agregar_variacion() {
@@ -176,7 +107,7 @@
             `);
 
 
-            } 
+            }
 
         }
 

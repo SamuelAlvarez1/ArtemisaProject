@@ -60,10 +60,9 @@
                     </div>
 
 
-
-                        <div class="col-12 mb-4">
-                            <button type="submit" class="btn btn-outline-dark float-right">Guardar platillo/s</button>
-                        </div>
+                    <div class="col-12 mb-4">
+                        <button type="submit" class="btn btn-outline-dark float-right">Guardar platillo/s</button>
+                    </div>
 
                     <div class="row m-auto">
                         <table id="tbl_plates" class="table text-center table-responsive">
@@ -80,12 +79,11 @@
                             </tbody>
                         </table>
                     </div>
-                    </div>
-
-
-
                 </div>
+
+
             </div>
+        </div>
 
         </div>
     </form>
@@ -100,12 +98,14 @@
         function agregar_plate() {
             let plate_text = $("#plate").val();
             let price = $("#price").val();
-            let category = $("#categories option:selected").val()
+            let category_text = $("#categories option:selected").text();
+            let category = $("#categories option:selected").val();
 
             if (price > 0) {
                 id++;
-                $("#tbl_plates").append(`
+                $("#tbl_plates").append(`    
             <tr id="tr-${id}">
+            <td>${category_text}</td>
             <td>
             <input type="hidden" name="plate[]" value="${plate_text}">
                 <input type="hidden" name="id[]" value="${id}">
@@ -114,7 +114,7 @@
                 ${plate_text}
             </td>
             <td>${price}</td>
-            <td>${category}</td>
+
             <td>
             <button type="button" class="btn btn-danger bg-danger" style="width: 35px; height: 35px; display: flex;margin: auto; justify-content: center" onclick="remove_plate(${id}, ${parseInt(price)})"><i class="fas fa-ban"></i></button>
             </td>
