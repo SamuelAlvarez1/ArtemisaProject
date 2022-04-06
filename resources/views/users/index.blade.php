@@ -26,7 +26,7 @@
             </div>
             <div class="col-4">
                 <div class="input-group mb-3">
-                    <input type="text" class="form-control" id="searchInput" placeholder="Busqueda"
+                    <input type="text" class="form-control border border-dark" id="searchInput" placeholder="Busqueda"
                            aria-label="Recipient's username" aria-describedby="basic-addon2">
                     <div class="input-group-append">
                         <button class="btn btn-outline-dark" id="searchButton" type="button">Buscar</button>

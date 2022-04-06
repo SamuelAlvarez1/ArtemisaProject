@@ -34,18 +34,8 @@ class HomeController extends Controller
         //Plates
 
         $Plates = SaleDetail::select('sales_details.idPlate', 'plates.id as Plate')
-        ->join('plates', 'sales_details.idPlate', '=', 'plates.id')
-        ->get();
-
-<<<<<<< HEAD
-        $idPlate = [];
-
-        foreach ($Plates as $i => $value) {
-            $idPlate[$i] = $value->Plate;
-        }
-        $plates = array_count_values($idPlate);
-
-=======
+            ->join('plates', 'sales_details.idPlate', '=', 'plates.id')
+            ->get();
 
         $idPlate = [];
 
@@ -54,7 +44,7 @@ class HomeController extends Controller
         }
         $plates = array_count_values($idPlate);
 
->>>>>>> 48110f4b569754a5e31a37e3b694f22bc1fad522
+
         $outstandingPlate = 0;
 
         foreach ($plates as $key => $value) {
@@ -82,7 +72,7 @@ class HomeController extends Controller
 
 
 
-//        Charts
+        //        Charts
 
         $salesChart = Sale::select(DB::raw('COUNT(*) as count'))
             ->whereYear('created_at', date('Y'))
@@ -93,9 +83,9 @@ class HomeController extends Controller
             ->whereYear('created_at', date('Y'))
             ->groupBy(DB::raw('Month(created_at)'))
             ->pluck('month');
-        $salesData = array(0,0,0,0,0,0,0,0,0,0,0,0);
-        foreach ($salesMonths as $index => $month){
-            $salesData[$month-1] = $salesChart[$index];
+        $salesData = array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+        foreach ($salesMonths as $index => $month) {
+            $salesData[$month - 1] = $salesChart[$index];
         }
 
         $bookingsChart = Booking::select(DB::raw('COUNT(*) as count'))
@@ -107,11 +97,11 @@ class HomeController extends Controller
             ->whereYear('created_at', date('Y'))
             ->groupBy(DB::raw('Month(created_at)'))
             ->pluck('month');
-        $bookingsData = array(0,0,0,0,0,0,0,0,0,0,0,0);
-        foreach ($bookingsMonths as $index => $month){
-            $bookingsData[$month-1] = $bookingsChart[$index];
+        $bookingsData = array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+        foreach ($bookingsMonths as $index => $month) {
+            $bookingsData[$month - 1] = $bookingsChart[$index];
         }
 
-        return view('home', compact('plate','countBookings','countSales', 'salesData', 'bookingsData'));
+        return view('home', compact('plate', 'countBookings', 'countSales', 'salesData', 'bookingsData'));
     }
 }
