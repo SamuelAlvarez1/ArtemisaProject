@@ -22,15 +22,15 @@
                     <a href="{{url('/sales')}}" class="btn mx-2 btn-sm mr-4 btn-outline-dark">Ver Ventas Realizadas</a>
                     @endif
                 </div>
-                <div class="col-3">
-                    <div class="input-group mb-3 input-group-sm">
-                        <input type="text" class="form-control border border-dark" id="searchInput" placeholder="Busqueda"
-                               aria-label="Recipient's username" aria-describedby="basic-addon2">
-                        <div class="input-group-append">
-                            <button class="btn btn-outline-dark" id="searchButton" type="button">Buscar</button>
+                <div class="col-3 d-flex justify-content-center d-flex align-items-center">
+                        <div class="input-group">
+                            <input type="text" class="form-control border border-dark" id="searchInput" placeholder="Busqueda"
+                                aria-label="Recipient's username" aria-describedby="basic-addon2">
+                            <div class="input-group-append">
+                                <button class="btn btn-sm btn-outline-dark" id="searchButton" type="button">Buscar</button>
+                            </div>
                         </div>
                     </div>
-                </div>
             </div>
         </div>
         <div class="card-body">
@@ -94,7 +94,15 @@
                 <script>
                     $(document).ready(function () {
                         var table = $('#sales').DataTable({
-                            "dom": 'tp'
+                            "dom": 'tp',
+                            'language': {
+                                "paginate": {
+                                    "first": "Inicio",
+                                    "last": "Fin",
+                                    "next": "→",
+                                    "previous": "←"
+                                }
+                            }
                         });
 
                         $('#searchButton').on('keyup click', function () {

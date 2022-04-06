@@ -4,8 +4,19 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Crear usuario') }}</div>
+                <div class="card shadow">
+                        <div class="card-header border-0">
+                            <div class="row align-items-center">
+                                <div class="col">
+                                    <h3 class="mb-0">Crear usuario</h3>
+                                </div>
+                                <div class="col text-right">
+                                    <a href="{{url('users')}}" class="btn btn-sm btn-danger">
+                                        Regresar
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ url('users') }}">
