@@ -44,10 +44,7 @@ class HomeController extends Controller
         }
         $plates = array_count_values($idPlate);
 
-<<<<<<< HEAD
-=======
 
->>>>>>> 39629c1348b55327e9ef36af629122105e32386d
         $outstandingPlate = 0;
 
         foreach ($plates as $key => $value) {

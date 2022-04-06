@@ -120,6 +120,12 @@
 @section("scripts")
 <script>
     function assign_price() {
+        let plateId = $("#plates option:selected").val();
+        console.log(plateId);
+        // $.ajax({
+        //     url : ''
+        // })
+
         let price = $("#plates option:selected").attr("price");
 
         $("#platePrice").val(price);

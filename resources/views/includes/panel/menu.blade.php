@@ -33,8 +33,8 @@
         </li>
         @endif
         <li class="nav-item">
-            <a class="nav-link" href="{{url('/sales')}}">
-                <i class="ni ni-cart text-info"></i> Ventas
+            <a class="nav-link" href="{{url('/bookings')}}">
+                <i class="fa-solid fa-clipboard-list text-blue"></i> Reservas
             </a>
         </li>
         <li class="nav-item">
@@ -48,10 +48,11 @@
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="{{url('/bookings')}}">
-                <i class="fa-solid fa-clipboard-list text-blue"></i> Reservas
+            <a class="nav-link" href="{{url('/sales')}}">
+                <i class="ni ni-cart text-info"></i> Ventas
             </a>
         </li>
+        
 
     @endif
 

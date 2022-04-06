@@ -111,18 +111,12 @@ class PlatesController extends Controller
     public function update(Request $request, $id)
     {
         if ($id != null) {
-            try {
-                if (isset($input["id"])) {
-                    foreach ($input["id"] as $key => $value) {
-                        Plate::create([
-                            "name" => $input["plate"][$key],
-                            "price" => $input["prices"][$key],
-                            "idCategory" => $input["categories"][$key],
-                            "state" => 1
+            try {       
+                Plate::where("id", $id)->update([
+                    "name" => $request["plate"],
+                    "price" => $request["price"],
+                    "idCategory" => $request["category"]
                         ]);
-                    }
-                }
-
                 return redirect('/plates')->with("success", "El platillo fue editado satisfactoriamente");
             } catch (\Exception $e) {
                 return redirect('/plates')->with("error", $e->getMessage());
