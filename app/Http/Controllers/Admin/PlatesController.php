@@ -128,4 +128,10 @@ class PlatesController extends Controller
     {
         //
     }
+
+    public function getPricePlate($id){
+        $price = Plate::select("plates.price")->where("id", $id)->first();
+
+        return $price;
+    }
 }

@@ -66,7 +66,7 @@
                             <option value="">Seleccione</option>
                             @foreach($plates as $value)
                             @if($value->state == 1)
-                            <option price="{{$value->price}}" value="{{$value->id}}">{{$value->name}}</option>
+                            <option value="{{$value->id}}">{{$value->name}}</option>
                             @endif
                             @endforeach
                         </select>
@@ -121,14 +121,16 @@
 <script>
     function assign_price() {
         let plateId = $("#plates option:selected").val();
-        console.log(plateId);
-        // $.ajax({
-        //     url : ''
-        // })
-
-        let price = $("#plates option:selected").attr("price");
-
-        $("#platePrice").val(price);
+        
+       
+        $.ajax({
+            url : `/plates/getPricePlate/${plateId}`,
+            type : 'GET',
+            success : function(res){
+                $("#platePrice").val(res.price);
+                
+            }
+        })
     }
 
     function add_plate() {
