@@ -31,23 +31,23 @@
                 @csrf
 
                 <select name="idCustomer" id="idCustomer" class="form-control">
-                    <option value="0">Seleccione el cliente</option>
+                    <option value="">Seleccione el cliente</option>
                     @foreach ($customers as $customer)
-                    <option value="{{$customer->id}}">{{$customer->name}}</option>
+                    <option value="{{$customer->id}}" {{($customer->id == old('idCustomer')) ? 'selected' : ''}} >{{$customer->name}}</option>
                     @endforeach
                 </select>
 
                 <select name="idEvent" id="idEvent" class="form-control mt-2">
                     <option value="">Seleccione el evento</option>
                     @foreach ($events as $event)
-                    <option value="{{$event->id}}">{{$event->name}}</option>
+                    <option value="{{$event->id}}" {{($event->id == old('idEvent')) ? 'selected' : ''}}>{{$event->name}}</option>
                     @endforeach
                 </select>
 
                 <input type="text" class="form-control mt-2" placeholder="Cantidad de personas" name="amount_people"
                     value="{{ old('amount_people') }}" />
 
-                <input type="date" class="form-control mt-2" name="final_date">
+                <input type="date" class="form-control mt-2" name="final_date" value="{{ old('final_date') }}">
 
                 <button type="submit" class="btn btn-primary mt-2">
                     Crear reserva

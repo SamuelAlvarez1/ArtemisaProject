@@ -101,14 +101,19 @@
                         <td>
                             <a class="mx-2" href="{{url('/bookings/'.$value->id)}}"><i
                                     class="fa-solid text-dark fa-magnifying-glass"></i></a>
-                            <a class="mx-2" href="{{url('/bookings/'.$value->id.'/edit')}}"><i
-                                    class="fa text-dark fa-edit"></i></a>
+
                             @if($value->state == 0)
+
+                            <a class="mx-2" href="{{url('/bookings/'.$value->id.'/edit')}}"><i
+                                class="fa text-dark fa-edit"></i></a>        
                             <a class="mx-2" href="{{url('/bookings/updateState/'.$value->id)}}/1"><i
                                     class="fa text-dark fa-check"></i></a>
-
                             @endif
+
                             @if($value->state == 1)
+                            
+                            <a class="mx-2" href="{{url('/bookings/'.$value->id.'/edit')}}"><i
+                                class="fa text-dark fa-edit"></i></a>
                             <a class="mx-2" href="{{url('/bookings/updateState/'.$value->id)}}/0"><i
                                     class="fa text-dark fa-ban"></i></a>
                             <a class="mx-2" href="{{url('/bookings/updateState/'.$value->id)}}/2"><i

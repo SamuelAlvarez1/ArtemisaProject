@@ -59,20 +59,31 @@ class BookingsController extends Controller
 
     public function updateState($id, $state)
     {
-        if ($id != null) {
+        if ($id != null && $state < 3) {
+
             try {
-                Booking::where("id", "=", $id)->update([
-                    "state" => $state
-                ]);
+
+                $booking = Booking::find($id);
+
+                if ($booking != null && $booking->state != $state) {
+                    $booking->update([
+                        "state" => $state
+                    ]);
+                } else {
+                    return redirect('/bookings')->with("error", "El cambio de estado de la reserva no se pudo realizar");
+                }
+
                 if ($state == 1) {
                     return redirect('/bookings/seeCanceled')->with("success", "cambio de estado exitoso");;
                 } else {
                     return redirect('/bookings')->with("success", "cambio de estado exitoso");;
                 }
             } catch (\Exception $e) {
-                return redirect('/bookings')->with("error", "El estado de la reserva no se pudo realizar");
+
+                return redirect('/bookings')->with("error", "El cambio de estado de la reserva no se pudo realizar");
             }
         }
+        return redirect('/bookings')->with("error", "El cambio de estado de la reserva no se pudo realizar");
     }
 
     /**
@@ -97,26 +108,28 @@ class BookingsController extends Controller
     public function store(Request $request)
     {
         $campos = [
-            'idCustomer' => 'required',
-            'amount_people' => 'required',
-            'final_date' => 'required',
+            'idCustomer' => 'required|numeric',
+            'amount_people' => 'required|numeric|min:1|max:20',
+            'final_date' => 'required|date|after_or_equal:' . date('d-m-Y'),
         ];
 
-        $mensaje = [
-            'required' => 'El campo :attribute es requerido',
-        ];
+        $this->validate($request, $campos);
 
-        $this->validate($request, $campos, $mensaje);
+        try {
+            Booking::create([
+                'idCustomer' => $request['idCustomer'],
+                'idEvent' =>  $request['idEvent'],
+                'idUser' => auth()->user()->id,
+                'amount_people' => $request['amount_people'],
+                'start_date' => date('Y-m-d'),
+                'final_date' => $request['final_date'],
+                'state' => 1
+            ]);
+        } catch (\Exception $e) {
+            return redirect('/bookings')->with("error", "La reserva no se pudo crear");
+        }
 
-        Booking::create([
-            'idCustomer' => $request['idCustomer'],
-            'idEvent' =>  $request['idEvent'],
-            'idUser' => auth()->user()->id,
-            'amount_people' => $request['amount_people'],
-            'start_date' => date('Y-m-d'),
-            'final_date' => $request['final_date'],
-            'state' => 1
-        ]);
+
 
         return redirect("/bookings")->with("success", "reserva creada satisfactoriamente");
     }
@@ -129,16 +142,17 @@ class BookingsController extends Controller
      */
     public function show($id)
     {
-        $booking = Booking::select("bookings.*", "customers.name as customerName", "events.name as eventName")
-            ->join("customers", "bookings.idCustomer", "=", "customers.id")
-            ->leftJoin('events', 'bookings.idEvent', '=', 'events.id')
-            ->where("bookings.id", "=", $id)
-            ->get();
+        if ($id != null) {
+            $booking = Booking::select("bookings.*", "customers.name as customerName", "events.name as eventName")
+                ->join("customers", "bookings.idCustomer", "=", "customers.id")
+                ->leftJoin('events', 'bookings.idEvent', '=', 'events.id')
+                ->where("bookings.id", "=", $id)
+                ->first();
 
-        foreach ($booking as $value) {
-            $booking = $value;
+            if ($booking == null) {
+                return redirect('/bookings')->with("error", "La reserva no se pudo encontrar");
+            }
         }
-
 
         return view("bookings.showDetails", compact("booking"));
     }
@@ -153,13 +167,17 @@ class BookingsController extends Controller
     {
         if ($id != null) {
             $booking = Booking::find($id);
-            $customers = Customer::all();
-            $events = Event::all();
 
-            return view("bookings.edit", compact("booking", "customers", "events"));
+            if ($booking != null) {
+                $customers = Customer::all();
+                $events = Event::all();
+
+                return view("bookings.edit", compact("booking", "customers", "events"));
+            }
         } else {
-            return redirect('/bookings')->with("error", "el id de la reserva no fue encontrado");
+            return redirect('/bookings')->with("error", "La reserva no fue encontrada");
         }
+        return redirect('/bookings')->with("error", "La reserva no fue encontrada");
     }
 
     /**
@@ -173,28 +191,27 @@ class BookingsController extends Controller
     {
         if ($id != null) {
             $campos = [
-                'idCustomer' => 'required',
-                'idEvent' => 'required',
-                'amount_people' => 'required',
-                'final_date' => 'required',
+                'idCustomer' => 'required|numeric',
+                'amount_people' => 'required|numeric|min:1|max:20',
+                'final_date' => 'required|date|after_or_equal:' . date('d-m-Y'),
             ];
 
-
-            $mensaje = [
-                'required' => 'El campo :attribute es requerido',
-            ];
-
-            $this->validate($request, $campos, $mensaje);
+            $this->validate($request, $campos);
             try {
-                Booking::where("id", "=", $id)->update([
-                    'idCustomer' => $request['idCustomer'],
-                    'idEvent' =>  $request['idEvent'],
-                    'amount_people' => $request['amount_people'],
-                    'final_date' => $request['final_date'],
-                ]);
+                $booking = Booking::find($id);
+
+                if ($booking != null) {
+                    $booking->update([
+                        'idCustomer' => $request['idCustomer'],
+                        'idEvent' =>  $request['idEvent'],
+                        'amount_people' => $request['amount_people'],
+                        'final_date' => $request['final_date'],
+                    ]);
+                }
+
                 return redirect('/bookings')->with("success", "La reserva fue editada satisfactoriamente");
             } catch (\Exception $e) {
-                return redirect('/bookings')->with("error", $e->getMessage());
+                return redirect('/bookings')->with("error", 'La reserva no se pudo editar');
             }
         }
     }
@@ -205,32 +222,7 @@ class BookingsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id, $estado)
+    public function destroy($id)
     {
-        if ($id != null) {
-            try {
-                $booking = Booking::where("id", "=", $id);
-                Booking::where("id", "=", $id)->update([
-                    "state" => $estado
-                ]);
-                if ($estado == 1) {
-                    return redirect('/bookings/seeCanceled')->with("success", "cambio de estado exitoso");
-                } else {
-                    return redirect('/bookings')->with("success", "cambio de estado exitoso");
-                }
-            } catch (\Exception $e) {
-                return redirect('/bookings')->with("error", "el estado de la reserva no se pudo cambiar");
-            }
-        }
-    }
-
-    public function verCanceladas()
-    {
-        return view("bookings.seeCanceled");
-    }
-
-    public function verAprobadas()
-    {
-        return view("bookings.seeApproved");
     }
 }

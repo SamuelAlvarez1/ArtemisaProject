@@ -149,7 +149,9 @@ return [
 
     'attributes' => [
         'name' => 'nombre',
+        'amount_people' => 'cantidad de personas',
         'endDate' => 'fecha fin',
+        'final_date' => 'fecha de la reserva',
         'startDate' => 'fecha inicio',
         'state' => 'estado',
         'description' => 'descripcion',
