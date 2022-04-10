@@ -10,11 +10,7 @@ use DataTables;
 
 class BookingsController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
         $bookings = Booking::select("bookings.*", "customers.name as customerName", "events.name as eventName", "users.name as user")
@@ -24,7 +20,7 @@ class BookingsController extends Controller
             ->where("bookings.state", "=", 1)
             ->get();
 
-        // dd($bookings);
+
         $states = "1";
         return view("bookings.index", compact("bookings", "states"));
     }
@@ -86,11 +82,7 @@ class BookingsController extends Controller
         return redirect('/bookings')->with("error", "El cambio de estado de la reserva no se pudo realizar");
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function create()
     {
         $customers = customer::all();
@@ -99,12 +91,6 @@ class BookingsController extends Controller
         return view("bookings.create", compact('customers', 'events'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $campos = [
@@ -114,6 +100,21 @@ class BookingsController extends Controller
         ];
 
         $this->validate($request, $campos);
+
+        $bookings = Booking::select("amount_people")
+            ->whereDate("final_date", $request['final_date'])
+            ->where('state', 1)
+            ->get();
+
+        $countPeople = 0;
+        foreach ($bookings as $booking) {
+            $countPeople += $booking->amount_people;
+        }
+
+
+        if (($countPeople + $request['amount_people']) >= 100) {
+            return redirect('/bookings')->with("error", "ya no hay mas reservas disponibles para esa fecha");
+        }
 
         try {
             Booking::create([
@@ -134,12 +135,7 @@ class BookingsController extends Controller
         return redirect("/bookings")->with("success", "reserva creada satisfactoriamente");
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function show($id)
     {
         if ($id != null) {
@@ -157,12 +153,7 @@ class BookingsController extends Controller
         return view("bookings.showDetails", compact("booking"));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function edit($id)
     {
         if ($id != null) {
@@ -180,13 +171,7 @@ class BookingsController extends Controller
         return redirect('/bookings')->with("error", "La reserva no fue encontrada");
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function update(Request $request, $id)
     {
         if ($id != null) {
@@ -197,6 +182,24 @@ class BookingsController extends Controller
             ];
 
             $this->validate($request, $campos);
+
+
+            $bookings = Booking::select("amount_people")
+                ->whereDate("final_date", $request['final_date'])
+                ->where('state', 1)
+                ->get();
+
+            $countPeople = 0;
+            foreach ($bookings as $booking) {
+                $countPeople += $booking->amount_people;
+            }
+
+
+            if (($countPeople + $request['amount_people']) >= 100) {
+                return redirect('/bookings')->with("error", "ya no hay mas reservas disponibles para esa fecha");
+            }
+
+
             try {
                 $booking = Booking::find($id);
 
@@ -214,14 +217,10 @@ class BookingsController extends Controller
                 return redirect('/bookings')->with("error", 'La reserva no se pudo editar');
             }
         }
+        return redirect('/bookings')->with("error", 'La reserva no se pudo editar');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function destroy($id)
     {
     }
