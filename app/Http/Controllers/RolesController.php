@@ -73,17 +73,12 @@ class RolesController extends Controller
     public function store(Request $request)
     {
         $campos = [
-            'name' => 'required',
-            'description' => 'required'
+            'name' => 'required|string|min:5|max:20',
+            'description' => 'required|string|min:10|max:50'
 
         ];
 
-        $mensaje = [
-            'required' => 'El :attribute es requerido',
-            'description.required' => 'La :attribute es requerida',
-        ];
-
-        $this->validate($request, $campos, $mensaje);
+        $this->validate($request, $campos);
 
         try {
             Rol::create([
@@ -138,17 +133,11 @@ class RolesController extends Controller
     {
         if ($id != null) {
             $campos = [
-                'name' => 'required',
-                'description' => 'required'
+                'name' => 'required|string|min:5|max:20',
+                'description' => 'required|string|min:10|max:50'
 
             ];
-
-            $mensaje = [
-                'required' => 'El :attribute es requerido',
-                'descripcion.required' => 'La :attribute es requerida',
-            ];
-
-            $this->validate($request, $campos, $mensaje);
+            $this->validate($request, $campos);
             try {
                 Rol::where("id", "=", $id)->update([
                     "name" => $request["name"],

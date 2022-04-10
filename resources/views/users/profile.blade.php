@@ -11,16 +11,16 @@
             </div>
             <div class="card-body">
                 <div class="d-flex justify-content-center">
-                    <span><b>{{$user->name}} {{$user->last_name}}</b></span>
+                    <span style="font-size: 1.5rem"><b>{{$user->name}} {{$user->last_name}}</b></span>
                 </div>
                 <div class="d-flex justify-content-center">
-                <span>Email: <b>{{$user->email}}</b></span>
+                <span style="font-size: 1.2rem">Email: <b>{{$user->email}}</b></span>
             </div>
                 <div class="d-flex justify-content-center">  
-                <span>Número: <b>{{$user->phone}}</b></span>
+                <span style="font-size: 1.2rem">Número: <b>{{$user->phone}}</b></span>
             </div>
                 <div class="d-flex justify-content-center">
-                <span>Rol: <b>{{$user->rol}}</b></span>
+                <span style="font-size: 1.2rem">Rol: <b>{{$user->rol}}</b></span>
             </div>
             </div>
         </div>

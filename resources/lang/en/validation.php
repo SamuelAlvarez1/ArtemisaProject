@@ -149,6 +149,9 @@ return [
 
     'attributes' => [
         'name' => 'nombre',
+        'last_name' => 'apellido',
+        'phone' => 'numero',
+        'id_rol' => 'rol',
         'amount_people' => 'cantidad de personas',
         'endDate' => 'fecha fin',
         'final_date' => 'fecha de la reserva',

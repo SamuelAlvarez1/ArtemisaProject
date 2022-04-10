@@ -78,20 +78,15 @@ class UsersController extends Controller
     public function store(Request $request)
     {
         $campos = [
-            'last_name' => 'required',
-            'name' => 'required',
-            'email' => 'required',
-            'phone' => 'required',
+            'last_name' => 'required|string|min:3|max:40',
+            'name' => 'required|string|min:3|max:40',
+            'email' => 'required|email|min:10|max:80|unique:users',
+            'phone' => 'required|numeric|max:10',
             'idRol' => 'required',
-            'password' => 'required'
+            'password' => 'required|min:10|max:80'
         ];
 
-        $mensaje = [
-            'required' => 'El :attribute es requerido',
-            'password.required' => 'La :attribute es requerida',
-        ];
-
-        $this->validate($request, $campos, $mensaje);
+        $this->validate($request, $campos);
 
         User::create([
             'last_name' => $request['last_name'],
@@ -155,21 +150,15 @@ class UsersController extends Controller
     {
         if ($id != null) {
             $campos = [
-                'last_name' => 'required',
-                'name' => 'required',
-                'email' => 'required',
-                'phone' => 'required',
+                'last_name' => 'required|string|min:3|max:40',
+                'name' => 'required|string|min:3|max:40',
+                'email' => 'required|email|min:10|max:80',
+                'phone' => 'required|numeric|max:10',
                 'idRol' => 'required',
-                'password' => 'required',
+                'password' => 'required|min:10|max:80'
 
             ];
-
-            $mensaje = [
-                'required' => 'El :attribute es requerido',
-                'password.required' => 'La contraseña es requerida',
-            ];
-
-            $this->validate($request, $campos, $mensaje);
+            $this->validate($request, $campos);
             try {
                 User::where("id", "=", $id)->update([
                     'last_name' => $request['last_name'],
