@@ -153,6 +153,8 @@ return [
         'phone' => 'numero',
         'id_rol' => 'rol',
         'amount_people' => 'cantidad de personas',
+        'password' => 'contraseña',
+        'password_confirmation' => 'confirmar contraseña',
         'endDate' => 'fecha fin',
         'final_date' => 'fecha de la reserva',
         'startDate' => 'fecha inicio',

@@ -76,7 +76,7 @@
                                 <select name="idRol" id="idRol" class="form-control">
                                     <option value="">seleccione</option>
                                     @foreach ($roles as $rol)
-                                        <option value="{{$rol->id}}">{{$rol->name}}</option>
+                                        <option value="{{$rol->id}}" {{($rol->id == old('idRol') ? 'selected' : '')}}>{{$rol->name}}</option>
                                     @endforeach
                                 </select>
                                 

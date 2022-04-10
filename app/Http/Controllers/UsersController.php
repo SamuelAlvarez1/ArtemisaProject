@@ -81,9 +81,10 @@ class UsersController extends Controller
             'last_name' => 'required|string|min:3|max:40',
             'name' => 'required|string|min:3|max:40',
             'email' => 'required|email|min:10|max:80|unique:users',
-            'phone' => 'required|numeric|max:10',
+            'phone' => 'required|string|max:11',
             'idRol' => 'required',
-            'password' => 'required|min:10|max:80'
+            'password' => 'required|min:10|max:80',
+            'password_confirmation' => 'required|min:10|max:80|same:password'
         ];
 
         $this->validate($request, $campos);
