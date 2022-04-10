@@ -56,6 +56,9 @@ Route::group(['middleware' => ['auth', 'validarRol']], function () {
 Route::group(['middleware' => 'auth'], function () {
 
 
+    Route::get('/users/profile/{id}', [UsersController::class, 'profile']);
+
+
     //<---------Bookings----------->
 
     Route::get('/bookings/updateState/{id}/{state}', [BookingsController::class, "updateState"]);

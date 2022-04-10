@@ -192,25 +192,35 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id, $estado)
+    public function destroy($id)
+    {
+    }
+    public function profile($id)
     {
         if ($id != null) {
-            try {
-                User::where("id", "=", $id)->update([
-                    "state" => $estado
-                ]);
-                if ($estado == 1) {
-                    return redirect('/users/verDeshabilitados')->with("success", "cambio de estado exitoso");
-                } else {
-                    return redirect('/users')->with("success", "cambio de estado exitoso");;
+            if (auth()->user()->idRol == 1) {
+                $user = User::select("users.*", "roles.name as rol")
+                    ->join("roles", "users.idRol", "=", "roles.id")
+                    ->where("users.id", "=", $id)
+                    ->first();
+
+                if ($user != null) {
+                    return view("users.profile", compact('user'));
                 }
-            } catch (\Exception $e) {
-                return redirect('/users')->with("error", "el estado del usuario no se pudo cambiar");
+                return redirect('/users')->with("error", 'el usuario no se ha encontrado');
+            } else {
+                if ($id != auth()->user()->id) {
+                    return redirect('/home')->with("error", 'Usted solo puede ver su información personal');
+                }
+                $user = User::select("users.*", "roles.name as rol")
+                    ->join("roles", "users.idRol", "=", "roles.id")
+                    ->where("users.id", "=", $id)
+                    ->first();
+
+                if ($user != null) {
+                    return view("users.profile", compact('user'));
+                }
             }
         }
-    }
-    public function verDeshabilitados()
-    {
-        return view("users.verDeshabilitados");
     }
 }
