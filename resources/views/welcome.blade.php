@@ -38,7 +38,7 @@
 <!-- Masthead-->
 <header class="masthead"  style=" background-image: url('{{asset('img/landing/header-bg.jpg')}}');">
     <div class="container">
-        <div class="masthead-heading text-uppercase"><img src="{{asset('img/landing/navbar-logo.png')}}" alt="..."/></div>
+        <div class="masthead-heading text-uppercase"><img src="{{asset('img/landing/navbar-logo.png')}}" alt="..." /></div>
         <a class="btn btn-primary btn-xl text-uppercase" href="#Destacados">Destacados</a>
     </div>
     <div class="container" style="height: 6rem; background: rgba(0,0,0, 0.8); max-width: 1000rem !important; margin-top: 30px; display: flex;">
@@ -52,7 +52,7 @@
     <div class="container">
         <div class="row text-center">
             <div class="col-md-6">
-                <img src="img/landing/Artemisa_comida.jfif" alt="..." class="quienessomos">
+                <img src="img/landing/Artemisa_comida.jfif" alt="..." class="quienessomos img">
             </div>
             <div class="col-md-5">
                       <h2 class="titulo">¿Quiénes somos?</h2>
@@ -73,7 +73,7 @@
 
                 <p class="text">Nos encontramos ubicados Cra51 #50a 06, te esperamos para que disfrutes de un buen momento en nuestro restaurante-bar  </div>
             <div class="col-md-5">
-                <img src="img/landing/Mapa.png" alt="..." class="map">
+                <img src="img/landing/Mapa.png" alt="..." class="img" class="map">
             </div>
         </div>
     </div>
@@ -87,7 +87,7 @@
         <div class="row text-center">
             <section class="menu">
                 <div class="contenedor">
-                    <h3 class="titulo" id="platillos">Destacados</h3>
+                    <h2 class="titulo" id="platillos">Destacados</h2>
                     <div class="contenedor-menu">
                         <div class="contenedor-menu2">
                             <article>
@@ -149,7 +149,7 @@
 <section class="page-section pt-0" id="Contactanos">
     <div class="container">
         <div class="text-center contact">
-            <h2 class="section-heading text-uppercase titulo">Contáctanos</h2>
+            <h2 class="titulo">Contáctanos</h2>
             <h3 class="section-subheading text-white">Cuentanos tus sugerencias e inquietudes</h3>
             <div class="form">
             <form>

@@ -5,8 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Booking;
 use Illuminate\Http\Request;
 use App\Models\Sale;
-use App\Models\SaleDetail;
-use App\Models\PlateVariation;
 use App\Models\Plate;
 use App\Models\Customer;
 use Illuminate\Support\Carbon;
@@ -44,10 +42,6 @@ class HomeController extends Controller
         }
         $plates = array_count_values($idPlate);
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 39629c1348b55327e9ef36af629122105e32386d
         $outstandingPlate = 0;
 
         foreach ($plates as $key => $value) {
