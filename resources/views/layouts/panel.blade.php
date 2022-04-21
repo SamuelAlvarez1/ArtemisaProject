@@ -9,6 +9,8 @@
     <meta name="author" content="Artemisa restobar">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Artemisa</title>
+    <script src="{{ asset('js/app.js') }}" defer></script>
+
     <!-- Favicon -->
     <link href="{{asset('img/brand/favicon.png')}}" rel="icon" type="image/png">
     <!-- Fonts -->
@@ -16,12 +18,12 @@
     <!-- Icons -->
     <link href="{{asset('vendor/nucleo/css/nucleo.css')}}" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
-          integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
-          crossorigin="anonymous" referrerpolicy="no-referrer" />
+        integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- Argon CSS -->
     <link type="text/css" href="{{asset('css/argon.css?v=1.0.0')}}" rel="stylesheet">
 
-    {{--  Select2  --}}
+    {{-- Select2 --}}
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="//cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js">
 
@@ -30,73 +32,73 @@
 </head>
 
 <body>
-<!-- Sidenav -->
-<nav class="navbar navbar-vertical fixed-left navbar-expand-md navbar-dark bg-dark" id="sidenav-main">
-    <div class="container-fluid">
-        <!-- Toggler -->
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#sidenav-collapse-main"
+    <!-- Sidenav -->
+    <nav class="navbar navbar-vertical fixed-left navbar-expand-md navbar-dark bg-dark" id="sidenav-main">
+        <div class="container-fluid">
+            <!-- Toggler -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#sidenav-collapse-main"
                 aria-controls="sidenav-main" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <!-- Brand -->
-        <a class="navbar-brand text-white" href="#">
-            <img src="{{asset('img/landing/navbar-logo.png')}}" alt="Logo">
-            Artemisa
-        </a>
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <!-- Brand -->
+            <a class="navbar-brand text-white" href="#">
+                <img src="{{asset('img/landing/navbar-logo.png')}}" alt="Logo">
+                Artemisa
+            </a>
 
-        <!-- Collapse -->
-        <div class="collapse navbar-collapse" id="sidenav-collapse-main">
-            <!-- Collapse header -->
-            <div class="navbar-collapse-header d-md-none">
-                <div class="row">
-                    <div class="col-6 collapse-brand">
-                        <a href="{{url('/home')}}" class="text-dark">
-                            Artemisa
-                        </a>
-                    </div>
-                    <div class="col-6 collapse-close">
-                        <button type="button" class="navbar-toggler" data-toggle="collapse"
+            <!-- Collapse -->
+            <div class="collapse navbar-collapse" id="sidenav-collapse-main">
+                <!-- Collapse header -->
+                <div class="navbar-collapse-header d-md-none">
+                    <div class="row">
+                        <div class="col-6 collapse-brand">
+                            <a href="{{url('/home')}}" class="text-dark">
+                                Artemisa
+                            </a>
+                        </div>
+                        <div class="col-6 collapse-close">
+                            <button type="button" class="navbar-toggler" data-toggle="collapse"
                                 data-target="#sidenav-collapse-main" aria-controls="sidenav-main" aria-expanded="false"
                                 aria-label="Toggle sidenav">
-                            <span></span>
-                            <span></span>
-                        </button>
+                                <span></span>
+                                <span></span>
+                            </button>
+                        </div>
                     </div>
                 </div>
+                <!-- Navigation -->
+
+                @include('includes.panel.menu')
+
+
+                <!-- Heading -->
+
             </div>
-            <!-- Navigation -->
-
-        @include('includes.panel.menu')
-
-
-        <!-- Heading -->
-
         </div>
-    </div>
-</nav>
-<div class="main-content">
-    <!-- Top navbar -->
-    <nav class="navbar navbar-top navbar-expand-md navbar-white" id="navbar-main">
-        <div class="container-fluid">
-            <!-- Brand -->
-            <a class="h4 mb-0 text-dark text-uppercase d-none d-lg-inline-block" href="">Dashboard</a>
+    </nav>
+    <div class="main-content">
+        <!-- Top navbar -->
+        <nav class="navbar navbar-top navbar-expand-md navbar-white" id="navbar-main">
+            <div class="container-fluid">
+                <!-- Brand -->
+                <a class="h4 mb-0 text-dark text-uppercase d-none d-lg-inline-block" href="">Dashboard</a>
 
-            <!-- User -->
-            <ul class="navbar-nav align-items-center d-none d-md-flex">
-                <li class="nav-item dropdown">
-                    <a class="nav-link nav-link-icon" href="#" role="button" data-toggle="dropdown">
-                        <i class="ni ni-bell-55"></i>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-right"
-                         aria-labelledby="navbar-default_dropdown_1">
-                        <a class="dropdown-item" href="#">Reportes de reservas</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Reportes de ventas</a>
-                    </div>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
-                       aria-expanded="false">
+                <!-- User -->
+                <ul class="navbar-nav align-items-center d-none d-md-flex">
+                    <li class="nav-item dropdown">
+                        <a id="navbarDropdown" class="nav-link" href="#" role="button"
+                            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                            <i class="ni ni-bell-55"></i>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-right"
+                            aria-labelledby="navbar-default_dropdown_1">
+                            <a class="dropdown-item" href="#">Reportes de reservas</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Reportes de ventas</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a id="navbarDropdown" id="navbarDropdown" class="nav-link" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                         <div class="media align-items-center">
                 <span class="avatar avatar-sm rounded-circle">
                   <img alt="Image placeholder" src="{{asset('img/theme/avatar.jpg')}}">
@@ -106,54 +108,57 @@
                             </div>
                         </div>
                     </a>
-                    <div class="dropdown-menu active dropdown-menu-arrow dropdown-menu-right">
-                        <div class=" dropdown-header noti-title">
-                            <h6 class="text-overflow m-0">Bienvenido!</h6>
+                        <div class="dropdown-menu active dropdown-menu-arrow dropdown-menu-right">
+                            <div class=" dropdown-header noti-title">
+                                <h6 class="text-overflow m-0">Bienvenido!</h6>
+                            </div>
+                            <a href="/users/profile/{{auth()->user()->id}}" class="dropdown-item">
+                                <i class="ni ni-single-02"></i>
+                                <span>Mi perfil</span>
+                            </a>
+                            <a href="#" class="dropdown-item">
+                                <i class="ni ni-settings-gear-65"></i>
+                                <span>Configuración</span>
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a href="" class="dropdown-item"
+                                onclick="event.preventDefault(); document.getElementById('form-logout').submit();">
+                                <i class="ni ni-user-run"></i>
+                                <span>Cerrar sesion</span>
+                            </a>
+                            <form action="{{route('logout')}}" method="post" style="display: none;" id="form-logout">
+                                @csrf
+                            </form>
                         </div>
-                        <a href="#" class="dropdown-item">
-                            <i class="ni ni-single-02"></i>
-                            <span>Mi perfil</span>
-                        </a>
-                        <a href="#" class="dropdown-item">
-                            <i class="ni ni-settings-gear-65"></i>
-                            <span>Configuración</span>
-                        </a>
-                        <div class="dropdown-divider"></div>
-                        <a href="" class="dropdown-item"
-                           onclick="event.preventDefault(); document.getElementById('form-logout').submit();">
-                            <i class="ni ni-user-run"></i>
-                            <span>Cerrar sesion</span>
-                        </a>
-                        <form action="{{route('logout')}}" method="post" style="display: none;" id="form-logout">
-                            @csrf
-                        </form>
-                    </div>
-                </li>
-            </ul>
-        </div>
-    </nav>
-    <!-- Header -->
-    <div class="header bg-white pb-2 pt-6 pt-md-6">
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <!-- Header -->
+        <div class="header bg-white pb-2 pt-6 pt-md-6">
 
+        </div>
+        <div class="container-fluid mt-5">
+            @include('includes.errors')
+            @yield('main-content')
+            @include('includes.panel.footer')
+        </div>
     </div>
-    <div class="container-fluid mt-5">
-        @include('includes.errors')
-        @yield('main-content')
-        @include('includes.panel.footer')
-    </div>
-</div>
-<!-- Argon Scripts -->
-<!-- Core -->
-<script src="{{asset('vendor/jquery/dist/jquery.min.js')}}"></script>
-<script src="{{asset('vendor\bootstrap-datepicker\dist\js\bootstrap-datepicker.min.js')}}"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
-<script src="{{asset('vendor/bootstrap/dist/js/bootstrap.min.js')}}"></script>
-<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-<!-- Argon JS -->
-@yield('scripts')
-<script src="{{asset('js/argon.js?v=1.0.0')}}"></script>
-<script src="//cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap4.min.js"></script>
+    <!-- Argon Scripts -->
+    <!-- Core -->
+    <script src="{{asset('vendor/jquery/dist/jquery.min.js')}}"></script>
+    <script src="{{asset('vendor\bootstrap-datepicker\dist\js\bootstrap-datepicker.min.js')}}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"
+        integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4"
+        crossorigin="anonymous"></script>
+    <script src="{{asset('vendor/bootstrap/dist/js/bootstrap.min.js')}}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <!-- Argon JS -->
+    @yield('scripts')
+    <script src="{{asset('js/argon.js?v=1.0.0')}}"></script>
+    <script src="//cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap4.min.js"></script>
 
 </body>
+
 </html>

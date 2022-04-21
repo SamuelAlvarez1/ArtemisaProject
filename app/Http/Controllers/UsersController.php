@@ -78,20 +78,16 @@ class UsersController extends Controller
     public function store(Request $request)
     {
         $campos = [
-            'last_name' => 'required',
-            'name' => 'required',
-            'email' => 'required',
-            'phone' => 'required',
+            'last_name' => 'required|string|min:3|max:40',
+            'name' => 'required|string|min:3|max:40',
+            'email' => 'required|email|min:10|max:80|unique:users',
+            'phone' => 'required|string|max:11',
             'idRol' => 'required',
-            'password' => 'required'
+            'password' => 'required|min:10|max:80',
+            'password_confirmation' => 'required|min:10|max:80|same:password'
         ];
 
-        $mensaje = [
-            'required' => 'El :attribute es requerido',
-            'password.required' => 'La :attribute es requerida',
-        ];
-
-        $this->validate($request, $campos, $mensaje);
+        $this->validate($request, $campos);
 
         User::create([
             'last_name' => $request['last_name'],
@@ -155,21 +151,15 @@ class UsersController extends Controller
     {
         if ($id != null) {
             $campos = [
-                'last_name' => 'required',
-                'name' => 'required',
-                'email' => 'required',
-                'phone' => 'required',
+                'last_name' => 'required|string|min:3|max:40',
+                'name' => 'required|string|min:3|max:40',
+                'email' => 'required|email|min:10|max:80',
+                'phone' => 'required|numeric|max:10',
                 'idRol' => 'required',
-                'password' => 'required',
+                'password' => 'required|min:10|max:80'
 
             ];
-
-            $mensaje = [
-                'required' => 'El :attribute es requerido',
-                'password.required' => 'La contraseña es requerida',
-            ];
-
-            $this->validate($request, $campos, $mensaje);
+            $this->validate($request, $campos);
             try {
                 User::where("id", "=", $id)->update([
                     'last_name' => $request['last_name'],
@@ -192,25 +182,35 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id, $estado)
+    public function destroy($id)
+    {
+    }
+    public function profile($id)
     {
         if ($id != null) {
-            try {
-                User::where("id", "=", $id)->update([
-                    "state" => $estado
-                ]);
-                if ($estado == 1) {
-                    return redirect('/users/verDeshabilitados')->with("success", "cambio de estado exitoso");
-                } else {
-                    return redirect('/users')->with("success", "cambio de estado exitoso");;
+            if (auth()->user()->idRol == 1) {
+                $user = User::select("users.*", "roles.name as rol")
+                    ->join("roles", "users.idRol", "=", "roles.id")
+                    ->where("users.id", "=", $id)
+                    ->first();
+
+                if ($user != null) {
+                    return view("users.profile", compact('user'));
                 }
-            } catch (\Exception $e) {
-                return redirect('/users')->with("error", "el estado del usuario no se pudo cambiar");
+                return redirect('/users')->with("error", 'el usuario no se ha encontrado');
+            } else {
+                if ($id != auth()->user()->id) {
+                    return redirect('/home')->with("error", 'Usted solo puede ver su información personal');
+                }
+                $user = User::select("users.*", "roles.name as rol")
+                    ->join("roles", "users.idRol", "=", "roles.id")
+                    ->where("users.id", "=", $id)
+                    ->first();
+
+                if ($user != null) {
+                    return view("users.profile", compact('user'));
+                }
             }
         }
-    }
-    public function verDeshabilitados()
-    {
-        return view("users.verDeshabilitados");
     }
 }

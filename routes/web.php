@@ -56,6 +56,9 @@ Route::group(['middleware' => ['auth', 'validarRol']], function () {
 Route::group(['middleware' => 'auth'], function () {
 
 
+    Route::get('/users/profile/{id}', [UsersController::class, 'profile']);
+
+
     //<---------Bookings----------->
 
     Route::get('/bookings/updateState/{id}/{state}', [BookingsController::class, "updateState"]);
@@ -78,6 +81,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/plates/notActive', [PlatesController::class, 'notActive']);
     Route::get('/plates/updateState/{id}', [PlatesController::class, 'updateState']);
     Route::get('/plates/updateStateVariation/{id}', [PlatesController::class, 'updateStateVariation']);
+    Route::get('/plates/getPricePlate/{id}', [PlatesController::class, 'getPricePlate']);
 
     //<-----------Sales------------>
     Route::get('/sales/canceledSales', [SalesController::class, 'canceledSales']);

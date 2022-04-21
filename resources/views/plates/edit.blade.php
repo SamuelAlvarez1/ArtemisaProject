@@ -24,17 +24,17 @@
                     <div class="row card-body d-flex justify-content-center">
                         <div class="form-group col-4">
                             <label for="">Categoría</label>
-                            <select name="categories" class="form-control" id="categories">
+                            <select name="category" class="form-control" id="categories">
                                 <option value="">Seleccione</option>
                                 @foreach($categories as $value)
-                                    <option value="{{$value->id}}">{{$value->name}}</option>
+                                    <option value="{{$value->id}}" {{($plate->idCategory == $value->id) ? 'selected' : ''}}>{{$value->name}}</option>
                                 @endforeach
                             </select>
                         </div>
                         <div class="form-group col-4">
                             <label for="">Nombre del platillo</label>
                             <input type="text" class="form-control @error('plate') is-invalid @enderror"
-                                   name="plate" id="plate">
+                        name="plate" id="plate" value="{{$plate->name}}">
                             @error('plate')
                             <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -44,7 +44,7 @@
                         <div class="form-group col-3">
                             <label for="">Precio base</label>
                             <input type="number" class="form-control @error('price') is-invalid @enderror"
-                                   name="price" id="price">
+                        name="price" id="price" value="{{$plate->price}}">
                             @error('price')
                             <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
