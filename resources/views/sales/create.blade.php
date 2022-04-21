@@ -1,7 +1,8 @@
 @extends('layouts.panel')
 
 @section('styles')
-
+<link rel="stylesheet" href="/css/alertify.min.css" />
+<link rel="stylesheet" href="/css/themes/bootstrap.css" />
 
 @endsection
 
@@ -94,7 +95,7 @@
                     </div>
                 </div>
 
-                <table id="tbl_plates"  class="table text-center table-responsive">
+                <table id="table_plates"  class="table text-center table-responsive">
                     <thead>
                         <tr>
                             <th>Nombre platillo</th>
@@ -118,7 +119,12 @@
 @endsection
 
 @section("scripts")
+<script src="/js/alertify.min.js"></script>
+
 <script>
+
+
+
     function assign_price() {
         let plateId = $("#plates option:selected").val();
         
@@ -134,42 +140,68 @@
     }
 
     function add_plate() {
-        let idPlatillo = $("#plates option:selected").val();
-        let platillo_text = $("#plates option:selected").text();
-        let cantidad = $("#quantity").val();
-        let precio = $("#platePrice").val();
-
-        if (precio > 0 && cantidad > 0) {
-
-
-            $("#tbl_plates").append(`
-            <tr id="tr-${idPlatillo}">
-            <td>
-                <input type="hidden" name="idPlatillo[]" value="${idPlatillo}">
-                <input type="hidden" name="cantidades[]" value="${cantidad}">
-                <input type="hidden" name="precios[]" value="${precio}">
-                ${platillo_text}
-            </td>
-            <td>${precio}</td>
-            <td>${cantidad}</td>
-            <td>${parseInt(cantidad) * parseInt(precio)}</td>
-            <td>
-            <button type="button" class="btn btn-danger bg-danger" style="width: 35px; height: 35px; display: flex;justify-content:center" onclick="delete_plate(${idPlatillo}, ${parseInt(cantidad) * parseInt(precio)})"><i class="fas fa-ban"></i></button>
-            </td>
-            </tr>
-            `);
-            let precio_total = $("#totalPrice").val() || 0;
-            $("#totalPrice").val(parseInt(precio_total) + parseInt(cantidad) * parseInt(precio));
-
-        } else {
-
+        let validate = validatePlate()
+        console.log(validate);
+        if(!validate){
+                let idPlatillo = $("#plates option:selected").val();
+                let platillo_text = $("#plates option:selected").text();
+                let cantidad = $("#quantity").val();
+                let precio = $("#platePrice").val();
+                $("#tbl_plates").append(`
+                <tr id="tr-${idPlatillo}" class="trPlatillos">
+                <td>
+                    <input type="hidden" name="idPlatillo[]" value="${idPlatillo}" class="idPlates">
+                    <input type="hidden" name="cantidades[]" value="${cantidad}" class="cantidades">
+                    <input type="hidden" name="precios[]" value="${precio}">
+                    ${platillo_text}
+                </td>
+                <td>${precio}</td>
+                <td class="cantidades-text">${cantidad}</td>
+                <td class="subtotales">${parseInt(cantidad) * parseInt(precio)}</td>
+                <td>
+                <button type="button" class="btn btn-danger bg-danger" style="width: 35px; height: 35px; display: flex;justify-content:center" onclick="delete_plate(${idPlatillo}, ${parseInt(cantidad) * parseInt(precio)})"><i class="fas fa-ban"></i></button>
+                </td>
+                </tr>
+                `);
+                let precio_total = $("#totalPrice").val() || 0;
+                $("#totalPrice").val(parseInt(precio_total) + parseInt(cantidad) * parseInt(precio));
         }
-
+        
     }
+
+
     function delete_plate(id, subtotal) {
         $("#tr-" + id).remove();
         let precio_total = $("#totalPrice").val() || 0;
         $("#totalPrice").val(parseInt(precio_total) - subtotal);
+    }
+
+
+    function validatePlate(){
+
+        let validation = false;
+
+        if ($('table#table_plates tbody tr').length > 0){
+            
+            $('table#table_plates tbody tr').each(function(){
+                if ($(this).find('input.idPlates').val() == $("#plates option:selected").val()){
+                    validation = true;
+                    $(this).find('input.cantidades').val(parseInt($(this).find('input.cantidades').val()) + parseInt($("#quantity").val()))
+
+                    
+                    let subtotal = parseInt($("#quantity").val() * parseInt($("#platePrice").val()));
+                    let precio_total = $("#totalPrice").val() || 0;
+                    
+                    $("#totalPrice").val(parseInt(precio_total) + parseInt(subtotal));
+
+                    $(this).find('td.subtotales').text(parseInt($(this).find('td.subtotales').text()) + parseInt(parseInt($("#quantity").val()) * parseInt($("#platePrice").val())))
+                    $(this).find('td.cantidades-text').text(parseInt($(this).find('td.cantidades-text').text()) + parseInt($("#quantity").val()));
+                }
+            });
+        }    
+
+        return validation;
+        
     }
 </script>
 

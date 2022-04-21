@@ -134,6 +134,27 @@
 
         }
 
+    //     function validatePlate(){
+    //     if ($('table#table_plates tbody tr').length > 0){
+    //         var v_valor = 0;
+    //         $('table#table_plates tbody tr').each(function(){
+    //             if ($(this).find('input.idPlates').val() == $("#plates option:selected").val()){
+    //                 alertify.set('notifier','position', 'top-right');
+    //                 alertify.error('el platillo ya se ha agregado');
+    //                 v_valor = 1;
+    //             }
+    //         });
+                    
+    //         if(v_valor == 1){
+    //             return false;
+    //         }else{
+    //             return true;
+    //         }
+    //     }else{
+    //         return true;
+    //     }      
+    // }
+
     </script>
 
 

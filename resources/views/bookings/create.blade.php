@@ -47,7 +47,7 @@
                 <input type="text" class="form-control mt-2" placeholder="Cantidad de personas" name="amount_people"
                     value="{{ old('amount_people') }}" />
 
-                <input type="date" class="form-control mt-2" name="final_date" value="{{ old('final_date') }}">
+                <input type="datetime-local" class="form-control mt-2" name="final_date" value="{{ old('final_date') }}">
 
                 <button type="submit" class="btn btn-primary mt-2">
                     Crear reserva
