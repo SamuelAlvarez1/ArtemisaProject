@@ -12020,3 +12020,52 @@ section#contact form#contactForm :-ms-input-placeholder {
 }
 
 
+@media(max-width: 1400px){
+    .masthead-heading img{
+        width: 400px;
+    }
+
+    .text{
+        font-size: 20px;
+        width: 100%;
+    }
+
+    .img{
+        width: 250px;
+        height: auto;
+    }
+    .quienessomos{
+        margin-bottom: 30px;
+    }
+    .logo{
+        width: 50px;
+        height: 50px !important;
+    }
+    #mainNav .navbar-toggler{
+        font-size: .5rem;
+    }
+
+    #Quienessomos, #Ubicacion{
+        padding-top: 20px;
+        padding-bottom: 24px;
+    }
+
+    .menu .titulo{
+        margin-bottom: 20px;
+    }
+
+    .titulo::after, .titulo::before{
+
+        width: 100px;
+        height: 2px;
+        background-color: #ffc800;
+        top: 1.3rem;
+
+    }
+
+    .btn .btn-primary .btn-xl .text-uppercase{
+        font-size: 15px;
+        margin-bottom: 50px;
+    }
+}
+
