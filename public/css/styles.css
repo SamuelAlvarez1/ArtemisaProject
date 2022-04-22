@@ -297,6 +297,10 @@ figure {
   margin: 0 0 1rem;
 }
 
+.img{
+  width: 50vh;
+}
+
 img,
 svg {
   vertical-align: middle;
@@ -11894,6 +11898,7 @@ section#contact form#contactForm :-ms-input-placeholder {
     font-size: 22px;
     font-weight: 700;
     margin-bottom: 40px;
+    color: #ffc800;
     text-align: center;
     font-family: Oregano;
 }
@@ -11934,7 +11939,7 @@ section#contact form#contactForm :-ms-input-placeholder {
 }
 
 .form{
-    width: 500px;
+    width: 50%;
     margin: auto;
     color: white;
 }
@@ -11963,7 +11968,7 @@ section#contact form#contactForm :-ms-input-placeholder {
 .contact{
     background: rgba(0,0,0,.5);
     padding: 30px;
-    width: 48rem;
+    width: 100%;
     margin: auto;
 }
 
@@ -11971,15 +11976,33 @@ section#contact form#contactForm :-ms-input-placeholder {
     .masthead-heading img{
         width: 250px;
     }
+    .form{
+      width: 100% !important;
+    }
+    .form input{
+      
+      width: 250px;
+  }
+
+  #submitButton{
+    font-size: 15px;
+  }
+  
+.contact{
+ 
+  width: 100%;
+  margin: auto;
+}
+
+  .form .sugerencia {
+    width: 250px;
+}
 
     .text{
         font-size: 20px;
         width: 100%;
     }
 
-    .contact{
-        width: 24rem;
-    }
     .img{
         width: 250px;
         height: auto;
@@ -12006,23 +12029,46 @@ section#contact form#contactForm :-ms-input-placeholder {
 
     .titulo::after, .titulo::before{
 
-        width: 100px;
-        height: 2px;
-        background-color: #ffc800;
-        top: 1.3rem;
+        width: 0px;
+        height: 0px;
 
     }
-
+ 
     .btn .btn-primary .btn-xl .text-uppercase{
         font-size: 15px;
         margin-bottom: 50px;
     }
+
+    .contact-text{
+      font-size: 15px !important;
+    }
+
+    .menu article{
+      width: 100%;
+    }
+
+    .menu article .nombre {
+      font-size:17px;
+  }
+  
+  .menu article .precio {
+      float: right;
+      font-size: 17px;
+      margin-bottom: 15px;
+      font-family: Oregano;
+  }
+  
+  .menu article .descripcion {
+      font-size: 13px;
+      color: #999999;
+      clear: both;
+  }
 }
 
 
-@media(max-width: 1400px){
+@media(min-width: 1200px){
     .masthead-heading img{
-        width: 400px;
+        width: 420px;
     }
 
     .text{
@@ -12031,7 +12077,7 @@ section#contact form#contactForm :-ms-input-placeholder {
     }
 
     .img{
-        width: 250px;
+        width: 300px;
         height: auto;
     }
     .quienessomos{
@@ -12050,22 +12096,6 @@ section#contact form#contactForm :-ms-input-placeholder {
         padding-bottom: 24px;
     }
 
-    .menu .titulo{
-        margin-bottom: 20px;
-    }
 
-    .titulo::after, .titulo::before{
-
-        width: 100px;
-        height: 2px;
-        background-color: #ffc800;
-        top: 1.3rem;
-
-    }
-
-    .btn .btn-primary .btn-xl .text-uppercase{
-        font-size: 15px;
-        margin-bottom: 50px;
-    }
 }
 

@@ -56,26 +56,44 @@ class PlatesController extends Controller
 
     public function store(Request $request)
     {
+        // $request->validate(Plate::$rules);
+
         $input = $request->all();
 
+        
         try {
             DB::beginTransaction();
 
 
             if (isset($input["id"])) {
+
+                $plates = Plate::all();
+                $namePlates = []; 
                 foreach ($input["id"] as $key => $value) {
-                    Plate::create([
+
+                    $plates = Plate::where('name', $input["plate"][$key])->first();
+                    if ($plates) {
+                        $namePlates[sizeof($namePlates)] = $input["plate"][$key];
+                    }else{
+                        Plate::create([
                         "name" => $input["plate"][$key],
                         "price" => $input["prices"][$key],
                         "idCategory" => $input["categories"][$key],
                         "state" => 1
                     ]);
+                    }
+                    
                 }
             }
 
             DB::commit();
-
+            if (sizeof($namePlates) > 0) {
+               
+            return redirect('/plates')->with(['nameDuplicate' => $namePlates]);
+                
+            }
             return redirect('/plates')->with('success', 'Platillo creado exitosamente');
+
         } catch (\Exception $e) {
             DB::rollBack();
             return redirect('/plates')->with('error', $e->getMessage());

@@ -1,11 +1,21 @@
 @extends('layouts.panel')
 
-@section('styles')
 
-
-@endsection
 
 @section('main-content')
+@if(Session::has('nameDuplicate'))
+                <div class="alert alert-warning alert-dismissible" role="alert">
+                    <ul>
+                        Producto/s agredado/s a excepción de:
+                        @foreach(Session::get('nameDuplicate') as $namesDuplicates)
+                            <li>{{$namesDuplicates}}</li>
+                        @endforeach
+                    </ul>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            @endif
     <div class="card">
         <div class="card-header">
             <div class="row">

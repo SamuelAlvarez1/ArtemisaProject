@@ -20,7 +20,7 @@ class Plate extends Model
     ];
 
     public static $rules = [
-        'name' => "required|min:3",
+        'name' => "required|min:3|unique:plates",
         'price' => "required",
         'idCategory' => "required",
         'state' => "required"

@@ -1,7 +1,22 @@
 @extends('layouts.panel')
+@section('styles')
+<link rel="stylesheet" href="/css/alertify.min.css" />
+    <link rel="stylesheet" href="/css/themes/bootstrap.css" />
+@endsection
 
 @section('main-content')
-
+@if($errors->any())
+                <div class="alert alert-danger alert-dismissible" role="alert">
+                    <ul>
+                        @foreach($errors->all() as $error)
+                            <li>{{$error}}</li>
+                        @endforeach
+                    </ul>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            @endif
     <div class="row">
         <div class="col">
             <h2 class="text-center">Crear platillo</h2>
@@ -65,7 +80,7 @@
                     </div>
 
                     <div class="row m-auto">
-                        <table id="tbl_plates" class="table text-center table-responsive">
+                        <table id="table_plates" class="table text-center table-responsive">
                             <thead>
                             <tr>
                                 <th>Categoría</th>
@@ -91,28 +106,33 @@
 @endsection
 
 @section("scripts")
+
+<script src="/js/alertify.min.js"></script>
+
     <script>
 
         let id = 0;
 
         function agregar_plate() {
+            let validate = validatePlate();
             let plate_text = $("#plate").val();
             let price = $("#price").val();
             let category_text = $("#categories option:selected").text();
             let category = $("#categories option:selected").val();
 
-            if (price > 0) {
+            if (price > 0 && plate_text != "" && category != "") {
+            if (!validate) {
+                   
                 id++;
                 $("#tbl_plates").append(`    
             <tr id="tr-${id}">
-            <td>${category_text}</td>
             <td>
-            <input type="hidden" name="plate[]" value="${plate_text}">
+            <input type="hidden" class="plate" name="plate[]" value="${plate_text}">
                 <input type="hidden" name="id[]" value="${id}">
                 <input type="hidden" name="prices[]" value="${price}">
                 <input type="hidden" name="categories[]" value="${category}">
-                ${plate_text}
-            </td>
+            ${category_text}</td>
+            <td class="name">${plate_text}</td>
             <td>${price}</td>
 
             <td>
@@ -121,9 +141,10 @@
             </tr>
             `);
 
-
+        }
             } else {
-
+                alertify.set('notifier','position', 'top-right');
+                    alertify.error('Debes completar los campos');
             }
 
         }
@@ -134,26 +155,21 @@
 
         }
 
-    //     function validatePlate(){
-    //     if ($('table#table_plates tbody tr').length > 0){
-    //         var v_valor = 0;
-    //         $('table#table_plates tbody tr').each(function(){
-    //             if ($(this).find('input.idPlates').val() == $("#plates option:selected").val()){
-    //                 alertify.set('notifier','position', 'top-right');
-    //                 alertify.error('el platillo ya se ha agregado');
-    //                 v_valor = 1;
-    //             }
-    //         });
+        function validatePlate(){
+           var validate = false;
+        if ($('table#table_plates tbody tr').length > 0){  
+            $('table#table_plates tbody tr').each(function(){
+                if ($(this).find('.name').text().toLowerCase().toLowerCase().split(" ").join("") === $("#plate").val().toLowerCase().toLowerCase().split(" ").join("")){
+                    alertify.set('notifier','position', 'top-right');
+                    alertify.error('el platillo ya se ha agregado');
+                    validate = true;
+                }
+            });
                     
-    //         if(v_valor == 1){
-    //             return false;
-    //         }else{
-    //             return true;
-    //         }
-    //     }else{
-    //         return true;
-    //     }      
-    // }
+        }      
+        return validate;
+    }
+
 
     </script>
 

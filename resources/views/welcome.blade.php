@@ -16,7 +16,7 @@
 </head>
 <body id="page-top"  style=" background-image: url('{{asset('img/landing/header-bg.jpg')}}');">
 <!-- Navigation-->
-<nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
+<nav class="navbar navbar-expand-lg navbar-dark " id="mainNav">
     <div class="container">
         <a class="navbar-brand" href="#page-top"><img class="logo" src="{{asset('img/landing/navbar-logo.png')}}" alt="..."/></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive"
@@ -36,7 +36,7 @@
     </div>
 </nav>
 <!-- Masthead-->
-<header class="masthead"  style=" background-image: url('{{asset('img/landing/header-bg.jpg')}}');">
+<header class="masthead"  style="padding:0%; background-image: url('{{asset('img/landing/header-bg.jpg')}}');">
     <div class="container">
         <div class="masthead-heading text-uppercase"><img src="{{asset('img/landing/navbar-logo.png')}}" alt="..." /></div>
         <a class="btn btn-primary btn-xl text-uppercase" href="#Destacados">Destacados</a>
@@ -150,7 +150,7 @@
     <div class="container">
         <div class="text-center contact">
             <h2 class="titulo">Contáctanos</h2>
-            <h3 class="section-subheading text-white">Cuentanos tus sugerencias e inquietudes</h3>
+            <h3 class="section-subheading text-white contact-text">Cuentanos tus sugerencias e inquietudes</h3>
             <div class="form">
             <form>
                 <div class="mb-3">
