@@ -11830,6 +11830,9 @@ section#contact form#contactForm :-ms-input-placeholder {
     font-family: Oregano;
     text-decoration: none;
 }
+.menu .titulo{
+    margin-bottom: 40px;
+}
 
 .titulo::after, .titulo::before{
     content: '';
@@ -11870,12 +11873,7 @@ section#contact form#contactForm :-ms-input-placeholder {
     margin-bottom: 50px;
 }
 
- .menu .titulo {
-    font-size: 40px;
-    font-weight: 300;
-    text-align: center;
-    margin-bottom: 40px;
-}
+
 
 .menu .contenedor-menu {
     border: 1px solid #fff;
@@ -11935,6 +11933,7 @@ section#contact form#contactForm :-ms-input-placeholder {
     overflow: hidden;
 }
 
+
 .form{
     width: 500px;
     margin: auto;
@@ -11969,4 +11968,105 @@ section#contact form#contactForm :-ms-input-placeholder {
     margin: auto;
 }
 
+@media(max-width: 520px){
+    .masthead-heading img{
+        width: 250px;
+    }
+
+    .text{
+        font-size: 20px;
+        width: 100%;
+    }
+
+    .contact{
+        width: 24rem;
+    }
+    .img{
+        width: 250px;
+        height: auto;
+    }
+    .quienessomos{
+        margin-bottom: 30px;
+    }
+    .logo{
+        width: 50px;
+        height: 50px !important;
+    }
+    #mainNav .navbar-toggler{
+        font-size: .5rem;
+    }
+
+    #Quienessomos, #Ubicacion{
+        padding-top: 20px;
+        padding-bottom: 24px;
+    }
+
+    .menu .titulo{
+        margin-bottom: 20px;
+    }
+
+    .titulo::after, .titulo::before{
+
+        width: 100px;
+        height: 2px;
+        background-color: #ffc800;
+        top: 1.3rem;
+
+    }
+
+    .btn .btn-primary .btn-xl .text-uppercase{
+        font-size: 15px;
+        margin-bottom: 50px;
+    }
+}
+
+
+@media(min-width: 1200px){
+    .masthead-heading img{
+        width: 450px;
+    }
+.img{
+        width: 350px;
+        height: auto;
+    }
+    /* .text{
+        font-size: 20px;
+        width: 100%;
+    }
+
+    
+    .quienessomos{
+        margin-bottom: 30px;
+    }
+    .logo{
+        width: 50px;
+        height: 50px !important;
+    }
+    #mainNav .navbar-toggler{
+        font-size: .5rem;
+    }
+
+    #Quienessomos, #Ubicacion{
+        padding-top: 20px;
+        padding-bottom: 24px;
+    }
+
+    .menu .titulo{
+        margin-bottom: 20px;
+    }
+
+    .titulo::after, .titulo::before{
+
+        width: 100px;
+        height: 2px;
+        background-color: #ffc800;
+        top: 1.3rem;
+
+    }
+
+    .btn .btn-primary .btn-xl .text-uppercase{
+        font-size: 15px;
+        margin-bottom: 50px;
+    } */
+}
 

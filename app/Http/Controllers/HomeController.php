@@ -6,7 +6,6 @@ use App\Models\Booking;
 use Illuminate\Http\Request;
 use App\Models\Sale;
 use App\Models\SaleDetail;
-use App\Models\PlateVariation;
 use App\Models\Plate;
 use App\Models\Customer;
 use Illuminate\Support\Carbon;

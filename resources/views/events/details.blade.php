@@ -1,7 +1,7 @@
 @extends('layouts.panel')
 @section('main-content')
 
-    <div class="col-md-7 offset-2 my-2">
+    <div class="col-md-10 offset-1 my-2">
         <div class="card">
             <div class="card-header">
                 <div class="row align-items-center">
@@ -19,6 +19,8 @@
                 </div>
             </div>
             <div class="card-body">
+                <div class="row mb-4">
+                <div class="col-5">
                 <h4 class="card-subtitle mt-2">Nombre del evento</h4>
                 <p class="card-text">{{$event->name}}</p>
                 <h4 class="card-subtitle mt-2">Descripción</h4>
@@ -43,6 +45,9 @@
                 <p class="card-text">{{$event->startDate}}</p>
                 <h4 class="card-subtitle mt-2">Fecha fin</h4>
                 <p class="card-text">{{$event->endDate}}</p>
+                
+            </div>
+                <div class="col-5">
                 <h4 class="card-subtitle mt-2">Fecha de creación del evento</h4>
                 <p class="card-text">{{$event->created_at}}</p>
                 <h4 class="card-subtitle mt-2">Ultima actualización del evento</h4>
@@ -53,36 +58,50 @@
                     <li><p class="card-text">Número de telefono: {{$user->phone}}</p></li>
                     <li><p class="card-text">Rol: {{$role->name}}</p></li>
                 </ul>
-                <p class="card-text">{{$user->name}}</p>
                 <h4 class="card-subtitle mt-2">Estado</h4>
                 @if ($event->state == 0)
                     <span class="badge badge-danger">No activo</span>
                 @else
                     <span class="badge badge-success">Activo</span>
                 @endif
-                <h4 class="card-subtitle mt-2">Imagen</h4>
-                @if($event->image == null)
-                    <span class="badge badge-danger">Sin imagen</span>
-                @else
-                    <button type="button" class="bg-transparent d-block m-auto border-0" data-toggle="modal" data-target=".bd-image-modal-lg">
-                        <img src="/uploads/{{$event->image}}" width="250px" alt="Imagen no disponible">
-                    </button>
-                    <div class="modal fade bd-image-modal-lg" tabindex="-1" role="dialog" aria-labelledby="imageModal" aria-hidden="true">
-                        <div class="modal-dialog modal-lg">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h4 class="modal-title" id="exampleModalLabel">Imagen</h4>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <img class="align-self-center mb-4" src="/uploads/{{$event->image}}" alt="Imagen no disponible">
+                <h4 class="card-subtitle mt-2">Número de reservas con este evento</h4>
+                <p class="card-text">{{$countBookings}}</p>
+                <h4 class="card-subtitle mt-2">Número de asientos requeridos</h4>
+                <p class="card-text">{{$countSeats}}</p>
+             </div>
+            </div>
+             <div >
+                 <div class="row">
+                    <h4 class="card-subtitle mt-2">Imagen</h4>
+
+                 </div>
+                <div class="row">
+                     @if($event->image == null)
+                <span class="badge badge-danger">Sin imagen</span>
+            @else
+                <button type="button" class="bg-transparent d-block m-auto border-0" data-toggle="modal" data-target=".bd-image-modal-lg">
+                    <img src="/uploads/{{$event->image}}" width="250px" alt="Imagen no disponible">
+                </button>
+                <div class="modal fade bd-image-modal-lg" tabindex="-1" role="dialog" aria-labelledby="imageModal" aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title" id="exampleModalLabel">Imagen</h4>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
                             </div>
+                            <img class="align-self-center mb-4" src="/uploads/{{$event->image}}" alt="Imagen no disponible">
                         </div>
                     </div>
-                @endif
+                </div>
+            @endif 
+                </div>
+                 
             </div>
-
+            
+           
+        </div>
 
         </div>
 

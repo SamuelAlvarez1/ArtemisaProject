@@ -37,6 +37,8 @@ class CustomersController extends Controller
                 'idUser' => auth()->user()->id,
                 'phoneNumber' => $input['phoneNumber'],
                 'state' => $input['state'],
+                'created_at' => date('Y-m-d H:i:s'),
+                'updated_at' => date('Y-m-d H:i:s')
             ]);
             return redirect('/customers')->with('success', 'Se registró el cliente correctamente');
         } catch (\Exception $e) {
@@ -73,6 +75,7 @@ class CustomersController extends Controller
             'document' => $input['document'],
             'phoneNumber' => $input['phoneNumber'],
             'state' => $input['state'],
+            'updated_at' => date('Y-m-d H:i:s')
         ];
         try {
             $customer = Customer::find($id);
