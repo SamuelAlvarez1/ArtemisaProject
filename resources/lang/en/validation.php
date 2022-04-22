@@ -148,6 +148,26 @@ return [
     */
 
     'attributes' => [
+<<<<<<< HEAD
+        'name' => 'nombre',
+        'last_name' => 'apellido',
+        'phone' => 'numero',
+        'id_rol' => 'rol',
+        'amount_people' => 'cantidad de personas',
+        'password' => 'contraseña',
+        'password_confirmation' => 'confirmar contraseña',
+        'endDate' => 'fecha fin',
+        'start_date' => 'la fecha inicial',
+        'final_date' => 'fecha final',
+        'startDate' => 'fecha inicio',
+        'state' => 'estado',
+        'description' => 'descripcion',
+        'decorationPrice' => 'precio decoración',
+        'entryPrice' => 'precio entrada',
+        'document' => 'documento',
+        'address' => 'dirección',
+        'phoneNumber' => 'numero de telefono'
+=======
         'name' => 'Nombre',
         'last_name' => 'Apellido',
         'phone' => 'Número',
@@ -167,6 +187,7 @@ return [
         'phoneNumber' => 'Numero de telefono',
         'image' => 'Imagen',
         'now' => 'Hoy'
+>>>>>>> 17de27d7046710bdd33c43a4867e12c76484e800
     ],
 
 ];

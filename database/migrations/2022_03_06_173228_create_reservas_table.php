@@ -23,8 +23,8 @@ class CreateReservasTable extends Migration
             $table->foreign('idUser')->references('id')->on('users');
             $table->bigInteger("amount_people");
             $table->boolean("state");
-            $table->date("start_date");
-            $table->date("final_date");
+            $table->dateTimeTz("start_date");
+            $table->dateTimeTz("final_date");
             $table->timestamps();
         });
     }
