@@ -41,8 +41,7 @@
                 </div>
                 <div class="form-group">
                     <label for="emailInput">Descripción</label>
-                    <textarea rows="2" class="form-control" name="description" id="descriptionInput" placeholder="Evento">{{old('description')}}
-                    </textarea>
+                    <textarea rows="2" class="form-control" name="description" id="descriptionInput" placeholder="Evento">{{old('description')}}</textarea>
                 </div>
                 <div class="form-group">
                     <label for="idCardInput">Precio de entrada</label>
@@ -65,7 +64,7 @@
                                 <input value="{{old('date', date('Y-m-d'))}}" type="text" class="form-control datepicker"
                                        name="startDate"
                                        id="date" data-date-format="yyyy-mm-dd" data-date-start-date="{{date('Y-m-d')}}"
-                                       data-date-end-date="+30d">
+                                       data-date-end-date="+60d">
                             </div>
                         </div>
                     </div>
@@ -79,7 +78,7 @@
                                 <input value="{{old('date', date('Y-m-d'))}}" type="text" class="form-control datepicker"
                                        name="endDate"
                                        id="date" data-date-format="yyyy-mm-dd" data-date-start-date="{{date('Y-m-d')}}"
-                                       data-date-end-date="+30d">
+                                       data-date-end-date="+62d">
                             </div>
                         </div>
                     </div>
@@ -90,8 +89,9 @@
                 </div>
                 <div class="form-check mb-3">
                     <input type="hidden" name="state" value="0">
-                    <input class="form-check-input" name="state" checked type="checkbox" value="1" id="state">
-                    <label class="form-check-label" for="state">
+                                  <input class="form-check-input" name="state" checked type="checkbox" value="1" id="state">
+                            
+                                  <label class="form-check-label" for="state">
                         Estado
                     </label>
                 </div>

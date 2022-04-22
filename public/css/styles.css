@@ -11933,6 +11933,7 @@ section#contact form#contactForm :-ms-input-placeholder {
     overflow: hidden;
 }
 
+
 .form{
     width: 500px;
     margin: auto;
@@ -12020,20 +12021,20 @@ section#contact form#contactForm :-ms-input-placeholder {
 }
 
 
-@media(max-width: 1400px){
+@media(min-width: 1200px){
     .masthead-heading img{
-        width: 400px;
+        width: 450px;
     }
-
-    .text{
+.img{
+        width: 350px;
+        height: auto;
+    }
+    /* .text{
         font-size: 20px;
         width: 100%;
     }
 
-    .img{
-        width: 250px;
-        height: auto;
-    }
+    
     .quienessomos{
         margin-bottom: 30px;
     }
@@ -12066,6 +12067,6 @@ section#contact form#contactForm :-ms-input-placeholder {
     .btn .btn-primary .btn-xl .text-uppercase{
         font-size: 15px;
         margin-bottom: 50px;
-    }
+    } */
 }
 

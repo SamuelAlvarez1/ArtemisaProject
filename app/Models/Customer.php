@@ -19,20 +19,22 @@ class Customer extends Model
         'address',
         'phoneNumber',
         'state',
+        'created_at',
+        'updated_at'
     ];
 
     public static $rules = [
         'name' => 'required|min:5|max:50',
         'document' => 'required|min:8|max:11|unique:customers',
-        'address' => 'required',
-        'phoneNumber' => 'required',
+        'address' => 'required|min:5|max:70',
+        'phoneNumber' => 'required|min:7|max:13',
         'state' => 'required|boolean',
     ];
     public static $rulesUpdate = [
         'name' => 'required|min:5|max:50',
         'document' => 'required|min:8|max:11',
-        'address' => 'required',
-        'phoneNumber' => 'required',
+        'address' => 'required|min:5|max:70',
+        'phoneNumber' => 'required|min:7|max:13',
         'state' => 'required|boolean',
     ];
 

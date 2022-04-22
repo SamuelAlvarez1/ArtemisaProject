@@ -148,23 +148,25 @@ return [
     */
 
     'attributes' => [
-        'name' => 'nombre',
-        'last_name' => 'apellido',
-        'phone' => 'numero',
-        'id_rol' => 'rol',
-        'amount_people' => 'cantidad de personas',
-        'password' => 'contraseña',
-        'password_confirmation' => 'confirmar contraseña',
-        'endDate' => 'fecha fin',
-        'final_date' => 'fecha de la reserva',
-        'startDate' => 'fecha inicio',
-        'state' => 'estado',
-        'description' => 'descripcion',
-        'decorationPrice' => 'precio decoración',
-        'entryPrice' => 'precio entrada',
-        'document' => 'documento',
-        'address' => 'dirección',
-        'phoneNumber' => 'numero de telefono'
+        'name' => 'Nombre',
+        'last_name' => 'Apellido',
+        'phone' => 'Número',
+        'id_rol' => 'Rol',
+        'amount_people' => 'Cantidad de personas',
+        'password' => 'Contraseña',
+        'password_confirmation' => 'Confirmar contraseña',
+        'endDate' => 'Fecha fin',
+        'final_date' => 'Fecha de la reserva',
+        'startDate' => 'Fecha inicio',
+        'state' => 'Estado',
+        'description' => 'Descripcion',
+        'decorationPrice' => 'Precio decoración',
+        'entryPrice' => 'Precio entrada',
+        'document' => 'Documento',
+        'address' => 'Dirección',
+        'phoneNumber' => 'Numero de telefono',
+        'image' => 'Imagen',
+        'now' => 'Hoy'
     ],
 
 ];

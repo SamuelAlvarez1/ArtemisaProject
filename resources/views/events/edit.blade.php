@@ -46,8 +46,7 @@
                 </div>
                 <div class="form-group">
                     <label for="emailInput">Descripción</label>
-                    <textarea rows="2" class="form-control" name="description" id="descriptionInput" placeholder="Evento">{{old('description', $event->description)}}
-                    </textarea>
+                    <textarea rows="2" class="form-control" name="description" id="descriptionInput" placeholder="Evento">{{old('description', $event->description)}}</textarea>
                 </div>
                 <div class="form-group">
                     <label for="idCardInput">Precio de entrada</label>
