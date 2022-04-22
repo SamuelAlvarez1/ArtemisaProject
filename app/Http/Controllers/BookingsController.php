@@ -96,12 +96,14 @@ class BookingsController extends Controller
         $campos = [
             'idCustomer' => 'required|numeric',
             'amount_people' => 'required|numeric|min:1|max:20',
-            'final_date' => 'required|date|after_or_equal:' . date('d-m-Y'),
+            'start_date' => 'required|date|after_or_equal:' . date('d-m-Y h:i a'),
+            'final_date' => 'required|date|after:start_date'
         ];
 
         $this->validate($request, $campos);
 
         $bookings = Booking::select("amount_people")
+            ->whereDate("start_date", $request['start_date'])
             ->whereDate("final_date", $request['final_date'])
             ->where('state', 1)
             ->get();
@@ -122,7 +124,7 @@ class BookingsController extends Controller
                 'idEvent' =>  $request['idEvent'],
                 'idUser' => auth()->user()->id,
                 'amount_people' => $request['amount_people'],
-                'start_date' => date('Y-m-d'),
+                'start_date' => $request['start_date'],
                 'final_date' => $request['final_date'],
                 'state' => 1
             ]);

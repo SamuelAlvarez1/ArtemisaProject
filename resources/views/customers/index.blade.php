@@ -21,10 +21,10 @@
                 </div>
                 <div class="col-4 d-flex justify-content-center d-flex align-items-center">
                     <div class="input-group">
-                        <input type="text" class="form-control border border-dark" id="searchInput" placeholder="Busqueda"
+                        <input type="text" class="form-control-sm border border-dark" id="searchInput" placeholder="Busqueda"
                                aria-label="Recipient's username" aria-describedby="basic-addon2">
                         <div class="input-group-append">
-                            <button class="btn btn-sm btn-outline-dark" id="searchButton" type="button">Buscar</button>
+                            <button class="btn btn-sm btn-outline-dark" id="searchButton" type="Button">Buscar</button>
                         </div>
                     </div>
                 </div>
@@ -62,12 +62,12 @@
 
                             </td>
                             <td>
-                                <a class="mx-2" href="{{url('/customers/'.$customer->id)}}"><i class="fa-solid text-dark fa-info-circle"></i></a>
-                                <a class="mx-2" href="{{url('/customers/'.$customer->id.'/edit')}}"><i class="fa text-dark fa-edit"></i></a>
+                                <a class="mx-2" data-delay="500" data-toggle="tooltip" data-placement="bottom" title="Detalles" href="{{url('/customers/'.$customer->id)}}"><i class="fa-solid text-dark fa-info-circle"></i></a>
+                                <a class="mx-2" data-delay="500" data-toggle="tooltip" data-placement="bottom" title="Editar" href="{{url('/customers/'.$customer->id.'/edit')}}"><i class="fa text-dark fa-edit"></i></a>
                                 @if($customer->state == 1)
-                                    <a class="mx-2" href="{{url('/customers/updateState/'.$customer->id)}}"><i class="fa text-dark fa-ban"></i></a>
+                                    <a class="mx-2" data-delay="500" data-toggle="tooltip" data-placement="bottom" title="Desactivar" href="{{url('/customers/updateState/'.$customer->id)}}"><i class="fa text-dark fa-ban"></i></a>
                                 @else
-                                    <a class="mx-2" href="{{url('/customers/updateState/'.$customer->id)}}"><i class="fa text-dark fa-check"></i></a>
+                                    <a class="mx-2" data-delay="500" data-toggle="tooltip" data-placement="bottom" title="Activar" href="{{url('/customers/updateState/'.$customer->id)}}"><i class="fa text-dark fa-check"></i></a>
                                 @endif
 
 

@@ -11938,6 +11938,7 @@ section#contact form#contactForm :-ms-input-placeholder {
     overflow: hidden;
 }
 
+
 .form{
     width: 50%;
     margin: auto;
@@ -12068,18 +12069,29 @@ section#contact form#contactForm :-ms-input-placeholder {
 
 @media(min-width: 1200px){
     .masthead-heading img{
+<<<<<<< HEAD
         width: 420px;
+=======
+        width: 450px;
+>>>>>>> 4fca562eee0244f5b41d9f8c9a1b13550bb7ce18
     }
-
-    .text{
+.img{
+        width: 350px;
+        height: auto;
+    }
+    /* .text{
         font-size: 20px;
         width: 100%;
     }
 
+<<<<<<< HEAD
     .img{
         width: 300px;
         height: auto;
     }
+=======
+    
+>>>>>>> 4fca562eee0244f5b41d9f8c9a1b13550bb7ce18
     .quienessomos{
         margin-bottom: 30px;
     }
@@ -12097,5 +12109,21 @@ section#contact form#contactForm :-ms-input-placeholder {
     }
 
 
+<<<<<<< HEAD
+=======
+    .titulo::after, .titulo::before{
+
+        width: 100px;
+        height: 2px;
+        background-color: #ffc800;
+        top: 1.3rem;
+
+    }
+
+    .btn .btn-primary .btn-xl .text-uppercase{
+        font-size: 15px;
+        margin-bottom: 50px;
+    } */
+>>>>>>> 4fca562eee0244f5b41d9f8c9a1b13550bb7ce18
 }
 

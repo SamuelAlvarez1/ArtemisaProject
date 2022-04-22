@@ -154,7 +154,7 @@ class UsersController extends Controller
                 'last_name' => 'required|string|min:3|max:40',
                 'name' => 'required|string|min:3|max:40',
                 'email' => 'required|email|min:10|max:80',
-                'phone' => 'required|numeric|max:10',
+                'phone' => 'required|string|max:10',
                 'idRol' => 'required',
                 'password' => 'required|min:10|max:80'
 

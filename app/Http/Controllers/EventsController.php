@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Event;
 use App\Models\Rol;
 use \App\Models\User;
+use \App\Models\Booking;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 class EventsController extends Controller
 {
@@ -48,7 +50,10 @@ class EventsController extends Controller
                 'endDate' => $input['endDate'],
                 'startDate' => $input['startDate'],
                 'state' => $input['state'],
-                'image' => $image
+                'image' => $image,
+                'created_at' => date('Y-m-d H:i:s'),
+                'updated_at' => date('Y-m-d H:i:s')
+
             ]);
             return redirect('/events')->with('success', 'Se registró el evento correctamente');
         } catch (\Exception $e) {
@@ -63,8 +68,14 @@ class EventsController extends Controller
         if ($event == null)  return redirect("/events")->with('error', 'Evento no encontrado');
         $user = User::find($event->idUser);
         $role = Rol::find($user->idRol);
+        $countBookings = Booking::where('idEvent', $id)->count(); 
+        $bookings = Booking::where('idEvent', $id)->get(); 
+        $countSeats = 0;
+        foreach ($bookings as $key => $booking) {
+            $countSeats += $booking->amount_people; 
+        }
 
-        return view('events.details', compact('event', 'user','role'));
+        return view('events.details', compact('event', 'user','role', 'countBookings', 'countSeats'));
     }
 
 
@@ -94,7 +105,8 @@ class EventsController extends Controller
             'endDate' => $input['endDate'],
             'startDate' => $input['startDate'],
             'state' => $input['state'],
-            'image' => $image
+            'image' => $image,
+            'updated_at' => date('Y-m-d H:i:s')
         ];
         try {
             $event = Event::find($id);
@@ -107,17 +119,22 @@ class EventsController extends Controller
 
     public function updateState($id)
     {
-        try {
+        try {   
             $event = Event::find($id);
+            $today = date('Y-m-d');
+            $yesterday = Carbon::yesterday()->format('Y-m-d');
+            if ($event->startDate==$yesterday || $event->startDate==$today) {
+                return redirect('/events')->with('error', 'No es posible cancelar el evento que está proximo a ocurrir');
+            }
             $event->update(['state' => !$event->state]);
             return redirect('/events')->with('success', 'Se cambió el estado correctamente');
         } catch (\Exception $e) {
-            return redirect('/events')->with('error', $e->getMessage());
+            return redirect('/events')->with('error', 'No fue posible cambiar el estado, intentelo mas tarde');
         }
     }
 
     public function destroy($id)
     {
-        //
+        dd("What are you trying, bro?");
     }
 }

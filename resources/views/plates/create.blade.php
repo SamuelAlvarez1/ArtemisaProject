@@ -155,6 +155,7 @@
 
         }
 
+<<<<<<< HEAD
         function validatePlate(){
            var validate = false;
         if ($('table#table_plates tbody tr').length > 0){  
@@ -171,6 +172,9 @@
     }
 
 
+=======
+    
+>>>>>>> 4fca562eee0244f5b41d9f8c9a1b13550bb7ce18
     </script>
 
 
