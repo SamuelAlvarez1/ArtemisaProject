@@ -7,6 +7,7 @@ use App\Models\Rol;
 use \App\Models\User;
 use \App\Models\Booking;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 class EventsController extends Controller
 {
@@ -118,12 +119,17 @@ class EventsController extends Controller
 
     public function updateState($id)
     {
-        try {
+        try {   
             $event = Event::find($id);
+            $today = date('Y-m-d');
+            $yesterday = Carbon::yesterday()->format('Y-m-d');
+            if ($event->startDate==$yesterday || $event->startDate==$today) {
+                return redirect('/events')->with('error', 'No es posible cancelar el evento que está proximo a ocurrir');
+            }
             $event->update(['state' => !$event->state]);
             return redirect('/events')->with('success', 'Se cambió el estado correctamente');
         } catch (\Exception $e) {
-            return redirect('/events')->with('error', $e->getMessage());
+            return redirect('/events')->with('error', 'No fue posible cambiar el estado, intentelo mas tarde');
         }
     }
 

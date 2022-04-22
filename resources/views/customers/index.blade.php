@@ -24,7 +24,7 @@
                         <input type="text" class="form-control-sm border border-dark" id="searchInput" placeholder="Busqueda"
                                aria-label="Recipient's username" aria-describedby="basic-addon2">
                         <div class="input-group-append">
-                            <button class="btn btn-sm btn-outline-dark" id="searchButton" type="button">Buscar</button>
+                            <button class="btn btn-sm btn-outline-dark" id="searchButton" type="Button">Buscar</button>
                         </div>
                     </div>
                 </div>

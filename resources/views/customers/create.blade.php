@@ -2,7 +2,7 @@
 
 @section('main-content')
 
-
+<div class="col-md-8 offset-2 my-2">
     <div class="card shadow">
         <div class="card-header border-0">
             <div class="row align-items-center">
@@ -31,20 +31,22 @@
             @endif
             <form action="{{url('customers')}}" method="post">
                 @csrf
-                <div class="form-group">
-                    <label for="nameInput">Nombre</label>
+                <div class="row mb-4">
+                <div class="col">
+                    <label for="nameInput">Nombre<b class="text-danger">*</b></label>
                     <input value="{{old('name')}}" type="text" class="form-control" name="name" id="nameInput" placeholder="Cliente">
                 </div>
-                <div class="form-group">
-                    <label for="emailInput">Documento</label>
+                <div class="col">
+                    <label for="emailInput">Documento<b class="text-danger">*</b></label>
                     <input value="{{old('document')}}" type="text" class="form-control" name="document" id="documentInput" placeholder="Cliente">
                 </div>
+            </div>
                 <div class="form-group">
-                    <label for="idCardInput">Dirección</label>
+                    <label for="idCardInput">Dirección<b class="text-danger">*</b></label>
                     <input value="{{old('address')}}" type="text" class="form-control" name="address" id="addressInput" placeholder="Cliente">
                 </div>
                 <div class="form-group">
-                    <label for="addressInput">Número de telefono</label>
+                    <label for="addressInput">Número de telefono<b class="text-danger">*</b></label>
                     <input value="{{old('phoneNumber')}}" type="text" class="form-control" name="phoneNumber" id="phoneNumberInput" placeholder="Cliente">
                 </div>
                 <div class="form-check mb-3">
@@ -58,4 +60,5 @@
             </form>
         </div>
     </div>
+</div>  
 @endsection

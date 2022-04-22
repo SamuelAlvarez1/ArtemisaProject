@@ -81,7 +81,7 @@
         <nav class="navbar navbar-top navbar-expand-md navbar-white" id="navbar-main">
             <div class="container-fluid">
                 <!-- Brand -->
-                <a class="h4 mb-0 text-dark text-uppercase d-none d-lg-inline-block" href="">Dashboard</a>
+                <a class="h4 mb-0 text-dark text-uppercase d-none d-lg-inline-block" href="">@yield('title-nav')</a>
 
                 <!-- User -->
                 <ul class="navbar-nav align-items-center d-none d-md-flex">

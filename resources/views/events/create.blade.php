@@ -5,7 +5,7 @@
 @endsection
 @section('main-content')
 
-
+<div class="col-md-8 offset-2 my-2">
     <div class="card shadow">
         <div class="card-header border-0">
             <div class="row align-items-center">
@@ -35,28 +35,30 @@
             <form action="{{url('events')}}" method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="form-group">
-                    <label for="nameInput">Nombre</label>
+                    <label for="nameInput">Nombre<b class="text-danger">*</b></label>
                     <input value="{{old('name')}}" type="text" class="form-control" name="name" id="nameInput"
                            placeholder="Evento">
                 </div>
                 <div class="form-group">
-                    <label for="emailInput">Descripción</label>
+                    <label for="emailInput">Descripción<b class="text-danger">*</b></label>
                     <textarea rows="2" class="form-control" name="description" id="descriptionInput" placeholder="Evento">{{old('description')}}</textarea>
                 </div>
-                <div class="form-group">
-                    <label for="idCardInput">Precio de entrada</label>
-                    <input value="{{old('entryPrice')}}" type="number" class="form-control" name="entryPrice"
-                           id="addressInput" placeholder="Evento">
-                </div>
-                <div class="form-group">
-                    <label for="idCardInput">Precio de decoration </label>
-                    <input value="{{old('decorationPrice')}}" type="number" class="form-control" name="decorationPrice"
-                           id="decorationPriceInput" placeholder="Evento">
+                <div class="row mb-4">
+                    <div class="col">
+                        <label for="idCardInput">Precio de entrada</label>
+                        <input value="{{old('entryPrice')}}" type="number" class="form-control" name="entryPrice"
+                            id="addressInput" placeholder="Evento">
+                    </div>
+                    <div class="col">
+                        <label for="idCardInput">Precio de decoration </label>
+                        <input value="{{old('decorationPrice')}}" type="number" class="form-control" name="decorationPrice"
+                            id="decorationPriceInput" placeholder="Evento">
+                    </div>
                 </div>
                 <div class="row">
                     <div class="col">
                         <div class="form-group">
-                            <label for="dateInput">Fecha de inicio</label>
+                            <label for="dateInput">Fecha de inicio<b class="text-danger">*</b></label>
                             <div class="input-group input-group-alternative">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
@@ -70,7 +72,7 @@
                     </div>
                     <div class="col">
                         <div class="form-group">
-                            <label for="dateInput">Fecha fin</label>
+                            <label for="dateInput">Fecha fin<b class="text-danger">*</b></label>
                             <div class="input-group input-group-alternative">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
@@ -99,6 +101,7 @@
             </form>
         </div>
     </div>
+</div>
 @endsection
 
 @section('scripts')

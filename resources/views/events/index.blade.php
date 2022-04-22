@@ -26,7 +26,7 @@
                 </div> 
             </div>
         </div>
-        <div class="card-body">
+        <div class="card-body mt-3">
             <div class="table-responsive text-center">
                 <table id="events" class="table table-bordered">
                     <thead class="thead-light">
