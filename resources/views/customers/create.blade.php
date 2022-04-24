@@ -1,5 +1,9 @@
 @extends('layouts.panel')
 
+@section('title-nav')
+    Crear cliente
+@endsection
+
 @section('main-content')
 
 <div class="col-md-8 offset-2 my-2">

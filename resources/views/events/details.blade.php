@@ -1,4 +1,9 @@
 @extends('layouts.panel')
+
+@section('title-nav')
+    Detalles del evento
+@endsection
+
 @section('main-content')
 
     <div class="col-md-10 offset-1 my-2">

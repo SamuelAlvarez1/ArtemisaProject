@@ -1,4 +1,14 @@
 @extends('layouts.panel')
+
+
+@section('title-nav')
+    @if ($states == 'active')
+        Clientes
+    @else
+       Clientes no activos 
+    @endif
+@endsection
+
 @section('main-content')
     <div class="card">
         <div class="card-header">

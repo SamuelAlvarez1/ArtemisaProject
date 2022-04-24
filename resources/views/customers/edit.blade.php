@@ -1,5 +1,9 @@
 @extends('layouts.panel')
 
+@section('title-nav')
+    Editar cliente {{$customer->name}}
+@endsection
+
 @section('main-content')
 
 

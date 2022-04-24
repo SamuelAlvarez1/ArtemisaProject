@@ -4,6 +4,14 @@
     
 @endsection
 
+@section('title-nav')
+    @if ($states == '1')
+        Usuarios
+    @else
+        Usuarios no activos
+    @endif
+@endsection
+
 @section('main-content')
 
 <div class="card">
@@ -44,6 +52,7 @@
                     <th>Nombre</th>
                     <th>Apellido</th>
                     <th>Correo</th>
+                    <th>rol</th>
                     <th>telefono</th>
                     <th>Estado</th>
                     <th>Acciones</th>
@@ -59,6 +68,7 @@
                         <td>{{$value->name}}</td>
                         <td>{{$value->last_name}}</td>
                         <td>{{$value->email}}</td>
+                        <td>{{$value->rol}}</td>
                         <td>{{$value->phone}}</td>
                         <td>
                             @if($value->state == 1)
@@ -74,6 +84,9 @@
                                     class="fa-solid text-dark fa-magnifying-glass"></i></a>
                             <a class="mx-2" href="{{url('/users/'.$value->id . '/edit')}}"><i
                                     class="fa text-dark fa-edit"></i></a>
+
+                            @if ($value->idRol != 1)
+
                             @if($value->state == 1)
                                 <a class="mx-2" href="{{url('/users/updateState/'.$value->id)}}/0"><i
                                         class="fa text-dark fa-ban"></i></a>
@@ -81,6 +94,10 @@
                                 <a class="mx-2" href="{{url('/users/updateState/'.$value->id)}}/1"><i
                                         class="fa text-dark fa-check"></i></a>
                             @endif
+                                
+                            @endif
+                            
+                            
 
 
                         </td>

@@ -1,6 +1,12 @@
 @extends('layouts.panel')
 
-
+@section('title-nav')
+    @if ($states == 'active')
+        Platillos
+    @else
+        Platillos no activos
+    @endif
+@endsection
 
 @section('main-content')
 @if(Session::has('nameDuplicate'))

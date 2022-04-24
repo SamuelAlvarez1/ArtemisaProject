@@ -1,4 +1,10 @@
 @extends('layouts.panel') 
+
+
+@section('title-nav')
+    Editar reserva
+@endsection
+
 @section('main-content')
 
 @if(count($errors)>0)

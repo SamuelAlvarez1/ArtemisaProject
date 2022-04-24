@@ -4,6 +4,13 @@
 
 @endsection
 
+@section('title-nav')
+    @if ($states == '1')
+        Roles
+    @else
+        Roles no activos
+    @endif
+@endsection
 
 @section('main-content')
 

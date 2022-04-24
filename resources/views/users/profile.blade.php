@@ -1,11 +1,18 @@
 @extends('layouts.panel')
 
+@section('title-nav')
+    Perfil del usuario {{$user->name}}
+@endsection
+
 @section('main-content')
 <div class="row d-flex justify-content-center">
     <div class="col-4">
         <div class="card">
-            <div class="card-header d-flex justify-content-center">
-                <div style="width: 120px; height: 120px; background: #e2dede; border-radius: 80px;" class="d-flex justify-content-center align-items-center">
+            <div class="card-header d-flex justify-content-center" style="position: relative">
+                <div class="col text-right" style="position: absolute">
+                    <a class="mx-2 btn btn-sm btn-warning" href="{{url('/users/'.auth()->user()->id . '/edit')}}">Editar</a>
+                </div>
+                <div style="width: 120px; height: 120px; background: #e2dede; border-radius: 80px;" class="d-flex justify-content-center align-items-center mt-4">
                     <i class="fa-solid fa-user" style="font-size: 4rem"></i>    
                 </div>
             </div>

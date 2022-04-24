@@ -1,6 +1,21 @@
 @extends('layouts.panel')
 
+
+
 @section('styles')
+
+@endsection
+
+@section('title-nav')
+    @if ($states == '0')
+        Reservas canceladas
+    @endif
+    @if ($states == '1')
+        Reservas en proceso
+    @endif
+    @if ($states == '2')
+        Reservas aprobadas
+    @endif
 
 @endsection
 

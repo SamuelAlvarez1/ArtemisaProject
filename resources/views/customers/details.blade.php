@@ -1,4 +1,10 @@
 @extends('layouts.panel')
+
+
+@section('title-nav')
+    Detalles del cliente
+@endsection
+
 @section('main-content')
 
     <div class="col-md-7 offset-2 my-2">

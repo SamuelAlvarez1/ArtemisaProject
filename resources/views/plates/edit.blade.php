@@ -2,6 +2,10 @@
 
 @extends('layouts.panel')
 
+@section('title-nav')
+    Editar platillo
+@endsection
+
 @section('main-content')
 
     <div class="row">

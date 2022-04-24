@@ -4,8 +4,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\RolesController;
-use App\Http\Controllers\UsersController;
+use App\Http\Controllers\Admin\RolesController;
+use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\BookingsController;
 use App\Http\Controllers\Admin\PlatesController;
 use App\Http\Controllers\CustomersController;

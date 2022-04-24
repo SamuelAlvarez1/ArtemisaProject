@@ -4,6 +4,10 @@
 
 @endsection
 
+@section('title-nav')
+    Detalles del platillo
+@endsection
+
 @section('main-content')
     <div class="card">
         <div class="card-header">

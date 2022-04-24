@@ -1,4 +1,9 @@
 @extends('layouts.panel')
+
+@section('title-nav')
+    Dashboard
+@endsection
+
 @section('main-content')
     <div class="container">
         <div class="row mb-5">

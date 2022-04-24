@@ -1,4 +1,9 @@
 @extends('layouts.panel') 
+
+@section('title-nav')
+  Detalles del rol
+@endsection
+
 @section('main-content')
 
 <div class="col-md-4 offset-4 mt-4">

@@ -6,6 +6,10 @@
 
 @endsection
 
+@section('title-nav')
+    Crear venta
+@endsection
+
 @section('main-content')
 
 <div class="row">
@@ -141,7 +145,7 @@
 
     function add_plate() {
         let validate = validatePlate()
-        console.log(validate);
+        
         if(!validate){
                 let idPlatillo = $("#plates option:selected").val();
                 let platillo_text = $("#plates option:selected").text();
@@ -152,14 +156,14 @@
                 <td>
                     <input type="hidden" name="idPlatillo[]" value="${idPlatillo}" class="idPlates">
                     <input type="hidden" name="cantidades[]" value="${cantidad}" class="cantidades">
-                    <input type="hidden" name="precios[]" value="${precio}">
+                    <input type="hidden" name="precios[]" value="${precio}" class="precios">
                     ${platillo_text}
                 </td>
                 <td>${precio}</td>
                 <td class="cantidades-text">${cantidad}</td>
                 <td class="subtotales">${parseInt(cantidad) * parseInt(precio)}</td>
                 <td>
-                <button type="button" class="btn btn-danger bg-danger" style="width: 35px; height: 35px; display: flex;justify-content:center" onclick="delete_plate(${idPlatillo}, ${parseInt(cantidad) * parseInt(precio)})"><i class="fas fa-ban"></i></button>
+                <button type="button" class="btn btn-danger bg-danger" style="width: 35px; height: 35px; display: flex;justify-content:center" onclick="delete_plate(${idPlatillo})"><i class="fas fa-ban"></i></button>
                 </td>
                 </tr>
                 `);
@@ -170,10 +174,16 @@
     }
 
 
-    function delete_plate(id, subtotal) {
+    function delete_plate(id) {
+
+        let cantidad = $("#tr-" + id).find('input.cantidades').val();
+        let precioPlatillo = $("#tr-" + id).find('input.precios').val();
+        
+
+        
         $("#tr-" + id).remove();
         let precio_total = $("#totalPrice").val() || 0;
-        $("#totalPrice").val(parseInt(precio_total) - subtotal);
+        $("#totalPrice").val(parseInt(precio_total) - parseInt(cantidad * precioPlatillo));
     }
 
 

@@ -4,6 +4,10 @@
     <link rel="stylesheet" href="/css/themes/bootstrap.css" />
 @endsection
 
+@section('title-nav')
+    Crear platillo/s
+@endsection
+
 @section('main-content')
 @if($errors->any())
                 <div class="alert alert-danger alert-dismissible" role="alert">

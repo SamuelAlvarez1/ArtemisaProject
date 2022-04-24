@@ -1,4 +1,10 @@
 @extends('layouts.panel') 
+
+
+@section('title-nav')
+    Editar rol
+@endsection
+
 @section('main-content')
 
 @if(count($errors)>0)

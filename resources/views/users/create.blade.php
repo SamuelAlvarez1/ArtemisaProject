@@ -1,5 +1,11 @@
 @extends('layouts.panel')
 
+
+@section('title-nav')
+    Crear usuario
+@endsection
+
+
 @section('main-content')
 @if(count($errors)>0)
   <div class="alert alert-danger" role="alert">

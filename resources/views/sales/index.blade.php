@@ -5,6 +5,14 @@
 
 @endsection
 
+@section('title-nav')
+    @if ($states == 'activeSales')
+        Ventas
+    @else
+        Ventas anuladas
+    @endif
+@endsection
+
 @section('main-content')
     <div class="card">
         <div class="card-header">

@@ -6,6 +6,11 @@
           integrity="sha512-mSYUmp1HYZDFaVKK//63EcZq4iFWFjxSL+Z3T/aCt4IO9Cejm03q3NKKYN6pFQzY0SBOr8h+eCIAZHPXcpZaNw=="
           crossorigin="anonymous" referrerpolicy="no-referrer"/>
 @endsection
+
+@section('title-nav')
+    Editar evento
+@endsection
+
 @section('main-content')
 
 

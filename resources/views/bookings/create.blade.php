@@ -1,4 +1,9 @@
 @extends('layouts.panel')
+
+@section('title-nav')
+    Crear reserva
+@endsection
+
 @section('main-content')
 
 @if(count($errors)>0)

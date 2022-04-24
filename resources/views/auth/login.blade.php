@@ -1,5 +1,11 @@
 @extends('layouts.form')
 
+
+@section('styles')
+<link rel="stylesheet" href="/css/alertify.min.css" />
+<link rel="stylesheet" href="/css/themes/bootstrap.css" />
+@endsection
+
 @section('content')
                 <h1 class="font-weight-bold mb-5 mt-5 text-center">Iniciar sesión</h1>
                 <form class="mb-5" method="POST" action="{{ route('login') }}">
@@ -9,11 +15,7 @@
                                name="email" value="{{ old('email') }}" id="exampleInputEmail1"
                                aria-describedby="emailHelp" required="required">
                         <label for="exampleInputEmail1" class="form-label font-weight-bold">Email</label>
-                        @error('email')
-                        <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                        @enderror
+                        
                     </div>
 
                     <div class="inputBox mb-3">
@@ -23,12 +25,7 @@
                                name="password" autocomplete="current-password"
                                required="required">
                         <label for="exampleInputPassword1" class="form-label font-weight-bold">Contraseña</label>
-
-                        @error('password')
-                        <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                        @enderror
+                        
                     </div>
                     <div class="col-md-6 offset-md-4 mb-3" style="display: initial;">
                         <div class="form-check">
@@ -54,3 +51,28 @@
 
 @endsection
 
+
+@section('scripts')
+    <script src="/js/alertify.min.js"></script>
+    @error('email')
+        <script>
+            alertify.set('notifier','position', 'top-right');
+            alertify.error('{{ $message }}');
+        </script>
+    @enderror
+
+    @error('password')
+        <script>
+            alertify.set('notifier','position', 'top-right');
+            alertify.error('{{ $message }}');
+        </script>
+    @enderror                        
+
+
+    @if(Session::has('error'))
+        <script>
+            alertify.set('notifier','position', 'top-right');
+            alertify.error('{{ Session::get('error') }}');
+        </script>
+    @endif
+@endsection
