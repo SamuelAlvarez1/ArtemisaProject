@@ -154,6 +154,7 @@ return [
         'id_rol' => 'rol',
         'amount_people' => 'cantidad de personas',
         'password' => 'contraseña',
+        'new_password' => 'contraseña nueva',
         'password_confirmation' => 'confirmar contraseña',
         'endDate' => 'fecha fin',
         'start_date' => 'la fecha inicial',

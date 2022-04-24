@@ -50,7 +50,7 @@
                     </div>
                 </div>
                 <div class="col-4 d-flex justify-content-center" style="margin: 5% auto;">
-                    <button type="submit" class="btn btn-outline-dark">Guardar platillo</button>
+                    <button type="submit" class="btn btn-outline-dark">Guardar venta</button>
                     <a href="{{url('sales')}}" class="btn btn-outline-danger">
                         Volver
                     </a>
