@@ -48,6 +48,8 @@ class DatabaseSeeder extends Seeder
         foreach ($categories as $value) {
             Category::create([
                 'name' => $value,
+                'idUser' => '1',
+                'state' => '1',
             ]);
         }
 

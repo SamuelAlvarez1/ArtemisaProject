@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\PlatesController;
 use App\Http\Controllers\CustomersController;
 use App\Http\Controllers\EventsController;
 use App\Http\Controllers\SalesController;
+use App\Http\Controllers\CategoriesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,12 +25,14 @@ use App\Http\Controllers\SalesController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    $plates = \App\Models\Plate::all()->take(3);
+    return view('welcome', compact('plates'));
 });
 
 Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::post('home', [HomeController::class, 'fecha'])->name('fecha');
 
 
 Route::group(['middleware' => ['auth', 'validarRol']], function () {
@@ -83,6 +86,11 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/plates/updateStateVariation/{id}', [PlatesController::class, 'updateStateVariation']);
     Route::get('/plates/getPricePlate/{id}', [PlatesController::class, 'getPricePlate']);
 
+    //<---------Categories----------->
+
+    Route::get('/categories/notActive', [CategoriesController::class, 'notActive']);
+    Route::get('/categories/updateState/{id}', [CategoriesController::class, 'updateState']);
+
     //<-----------Sales------------>
     Route::get('/sales/canceledSales', [SalesController::class, 'canceledSales']);
     Route::get('/sales/updateState/{id}', [SalesController::class, 'updateState']);
@@ -94,6 +102,7 @@ Route::group(['middleware' => 'auth'], function () {
         'customers' => CustomersController::class,
         'events' => EventsController::class,
         'bookings' => BookingsController::class,
-        'sales' => SalesController::class
+        'sales' => SalesController::class,
+        'categories' => CategoriesController::class
     ]);
 });

@@ -9,19 +9,19 @@
 @endsection
 
 @section('main-content')
-@if(Session::has('nameDuplicate'))
-                <div class="alert alert-warning alert-dismissible" role="alert">
-                    <ul>
-                        Producto/s agredado/s a excepción de:
-                        @foreach(Session::get('nameDuplicate') as $namesDuplicates)
-                            <li>{{$namesDuplicates}}</li>
-                        @endforeach
-                    </ul>
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-            @endif
+    @if(Session::has('nameDuplicate'))
+        <div class="alert alert-warning alert-dismissible" role="alert">
+            <ul>
+                Producto/s agredado/s a excepción de:
+                @foreach(Session::get('nameDuplicate') as $namesDuplicates)
+                    <li>{{$namesDuplicates}}</li>
+                @endforeach
+            </ul>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    @endif
     <div class="card">
         <div class="card-header">
             <div class="row">
@@ -34,7 +34,8 @@
 
                     @if($states == 'active')
 
-                        <a href="{{url('/plates/notActive')}}" class="btn mx-2 btn-sm mr-4 btn-outline-dark">Ver platillos
+                        <a href="{{url('/plates/notActive')}}" class="btn mx-2 btn-sm mr-4 btn-outline-dark">Ver
+                            platillos
                             desactivados</a>
                     @else
                         <a href="{{url('/plates')}}" class="btn btn-sm mx-2 btn-outline-dark">Ver platillos
@@ -42,14 +43,15 @@
                     @endif
                 </div>
                 <div class="col-3 d-flex justify-content-center d-flex align-items-center">
-                <div class="input-group">
-                    <input type="text" class="form-control border border-dark" id="searchInput" placeholder="Busqueda"
-                        aria-label="Recipient's username" aria-describedby="basic-addon2">
-                    <div class="input-group-append">
-                        <button class="btn btn-sm btn-outline-dark" id="searchButton" type="button">Buscar</button>
+                    <div class="input-group">
+                        <input type="text" class="form-control border border-dark" id="searchInput"
+                               placeholder="Busqueda"
+                               aria-label="Recipient's username" aria-describedby="basic-addon2">
+                        <div class="input-group-append">
+                            <button class="btn btn-sm btn-outline-dark" id="searchButton" type="button">Buscar</button>
+                        </div>
                     </div>
                 </div>
-            </div>
             </div>
         </div>
         <div class="card-body">
@@ -84,15 +86,16 @@
 
                             </td>
                             <td>
-                                <a class="mx-2" href="{{url('/plates/'.$value->id)}}"><i
-                                        class="fa-solid text-dark fa-magnifying-glass"></i></a>
-                                <a class="mx-2" href="{{url('/plates/'.$value->id.'/edit')}}"><i
+                                <a class="mx-2" data-delay="500" data-toggle="tooltip" data-placement="bottom"
+                                   title="Detalles" href="{{url('/plates/'.$value->id)}}"><i
+                                        class="fa-solid text-dark fa-info-circle"></i></a>
+                                <a class="mx-2" data-delay="500" data-toggle="tooltip" data-placement="bottom" title="Editar" href="{{url('/plates/'.$value->id.'/edit')}}"><i
                                         class="fa text-dark fa-edit"></i></a>
                                 @if($value->state == 1)
-                                    <a class="mx-2" href="{{url('/plates/updateState/'.$value->id)}}"><i
+                                    <a class="mx-2" data-delay="500" data-toggle="tooltip" data-placement="bottom" title="Desactivar" href="{{url('/plates/updateState/'.$value->id)}}"><i
                                             class="fa text-dark fa-ban"></i></a>
                                 @else
-                                    <a class="mx-2" href="{{url('/plates/updateState/'.$value->id)}}"><i
+                                    <a class="mx-2" data-delay="500" data-toggle="tooltip" data-placement="bottom" title="Activar" href="{{url('/plates/updateState/'.$value->id)}}"><i
                                             class="fa text-dark fa-check"></i></a>
                                 @endif
 
@@ -110,29 +113,29 @@
     </div>
 
 
-            @endsection
+@endsection
 
 
-            @section('scripts')
-                <script>
-                    $(document).ready(function () {
-                        var table = $('#plates').DataTable({
-                            "dom": 'tp',
-                            'language': {
-                                "paginate": {
-                                    "first": "Inicio",
-                                    "last": "Fin",
-                                    "next": "→",
-                                    "previous": "←"
-                                }
-                            }
-                        });
+@section('scripts')
+    <script>
+        $(document).ready(function () {
+            var table = $('#plates').DataTable({
+                "dom": 'tp',
+                'language': {
+                    "paginate": {
+                        "first": "Inicio",
+                        "last": "Fin",
+                        "next": "→",
+                        "previous": "←"
+                    }
+                }
+            });
 
-                        $('#searchButton').on('keyup click', function () {
-                            table.search($('#searchInput').val()).draw();
-                        });
-                    });
-                </script>
+            $('#searchButton').on('keyup click', function () {
+                table.search($('#searchInput').val()).draw();
+            });
+        });
+    </script>
 
 
 

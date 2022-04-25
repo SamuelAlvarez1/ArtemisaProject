@@ -92,24 +92,26 @@
                         <div class="contenedor-menu2">
                             <article>
                                 <p class="categoria">De Comer</p>
+                                @foreach($plates as $plate)
                                 <div class="platillo">
-                                    <p class="nombre">Sed sagittis nisl dictum</p>
-                                    <p class="precio">$15</p>
+                                    <p class="nombre">{{$plate->name}}</p>
+                                    <p class="precio">${{number_format($plate->price)}}</p>
                                     <p class="descripcion">Praesent gravida, augue sit amet dignissim rutrum,
                                         enim tellus suscipit risus.</p>
                                 </div>
-                                <div class="platillo">
-                                    <p class="nombre">Lorem ipsum dolor sit amet</p>
-                                    <p class="precio">$10</p>
-                                    <p class="descripcion">Vestibulum ac sem id massa tempor vestibulum sed
-                                        ut magna</p>
-                                </div>
-                                <div class="platillo">
-                                    <p class="nombre">Sed sagittis nisl dictum</p>
-                                    <p class="precio">$20</p>
-                                    <p class="descripcion">Praesent gravida, augue sit amet dignissim rutrum,
-                                        enim tellus suscipit risus.</p>
-                                </div>
+                                @endforeach
+{{--                                <div class="platillo">--}}
+{{--                                    <p class="nombre">Lorem ipsum dolor sit amet</p>--}}
+{{--                                    <p class="precio">$10</p>--}}
+{{--                                    <p class="descripcion">Vestibulum ac sem id massa tempor vestibulum sed--}}
+{{--                                        ut magna</p>--}}
+{{--                                </div>--}}
+{{--                                <div class="platillo">--}}
+{{--                                    <p class="nombre">Sed sagittis nisl dictum</p>--}}
+{{--                                    <p class="precio">$20</p>--}}
+{{--                                    <p class="descripcion">Praesent gravida, augue sit amet dignissim rutrum,--}}
+{{--                                        enim tellus suscipit risus.</p>--}}
+{{--                                </div>--}}
 
                             </article>
 

@@ -14,6 +14,8 @@ class Category extends Model
     protected $fillable = [
         'id',
         'name',
+        'state',
+        'idUser',
     ];
 
     public static $rules = [

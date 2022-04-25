@@ -11981,16 +11981,16 @@ section#contact form#contactForm :-ms-input-placeholder {
       width: 100% !important;
     }
     .form input{
-      
+
       width: 250px;
   }
 
   #submitButton{
     font-size: 15px;
   }
-  
+
 .contact{
- 
+
   width: 100%;
   margin: auto;
 }
@@ -12034,7 +12034,7 @@ section#contact form#contactForm :-ms-input-placeholder {
         height: 0px;
 
     }
- 
+
     .btn .btn-primary .btn-xl .text-uppercase{
         font-size: 15px;
         margin-bottom: 50px;
@@ -12051,14 +12051,14 @@ section#contact form#contactForm :-ms-input-placeholder {
     .menu article .nombre {
       font-size:17px;
   }
-  
+
   .menu article .precio {
       float: right;
       font-size: 17px;
       margin-bottom: 15px;
       font-family: Oregano;
   }
-  
+
   .menu article .descripcion {
       font-size: 13px;
       color: #999999;
@@ -12069,11 +12069,9 @@ section#contact form#contactForm :-ms-input-placeholder {
 
 @media(min-width: 1200px){
     .masthead-heading img{
-<<<<<<< HEAD
-        width: 420px;
-=======
-        width: 450px;
->>>>>>> 4fca562eee0244f5b41d9f8c9a1b13550bb7ce18
+
+        width: 36%;
+
     }
 .img{
         width: 350px;
@@ -12090,7 +12088,7 @@ section#contact form#contactForm :-ms-input-placeholder {
         height: auto;
     }
 =======
-    
+
 >>>>>>> 4fca562eee0244f5b41d9f8c9a1b13550bb7ce18
     .quienessomos{
         margin-bottom: 30px;
@@ -12124,6 +12122,6 @@ section#contact form#contactForm :-ms-input-placeholder {
         font-size: 15px;
         margin-bottom: 50px;
     } */
->>>>>>> 4fca562eee0244f5b41d9f8c9a1b13550bb7ce18
+
 }
 

@@ -23,11 +23,42 @@ class HomeController extends Controller
         $this->middleware('auth');
     }
 
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
+
+
+    private function graficas($data){
+        $Chart = DB::table($data)->select(DB::raw('COUNT(*) as count'))
+            ->whereYear('created_at', date('Y'))
+            ->groupBy(DB::raw('Month(created_at)'))
+            ->pluck('count');
+
+        $Months = DB::table($data)->select(DB::raw('Month(created_at) as month'))
+            ->whereYear('created_at', date('Y'))
+            ->groupBy(DB::raw('Month(created_at)'))
+            ->pluck('month');
+        $Data = array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+        foreach ($Months as $index => $month) {
+            $Data[$month - 1] = $Chart[$index];
+        }
+        return $Data;
+    }
+    private function graficasSemana($data){
+
+        $Chart = DB::table($data)->select(DB::raw('COUNT(*) as count'))
+            ->whereYear('created_at', date('Y'))
+            ->groupBy(DB::raw('Month(created_at)'))
+            ->pluck('count');
+
+        $Months = DB::table($data)->select(DB::raw('Month(created_at) as month'))
+            ->whereYear('created_at', date('Y'))
+            ->groupBy(DB::raw('Month(created_at)'))
+            ->pluck('month');
+        $Data = array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+        foreach ($Months as $index => $month) {
+            $Data[$month - 1] = $Chart[$index];
+        }
+        return $Data;
+    }
+
     public function index()
     {
         //Plates
@@ -73,33 +104,11 @@ class HomeController extends Controller
 
         //        Charts
 
-        $salesChart = Sale::select(DB::raw('COUNT(*) as count'))
-            ->whereYear('created_at', date('Y'))
-            ->groupBy(DB::raw('Month(created_at)'))
-            ->pluck('count');
+        $salesData = $this->graficas('sales');
+        $bookingsData = $this->graficas('bookings');
 
-        $salesMonths = Sale::select(DB::raw('Month(created_at) as month'))
-            ->whereYear('created_at', date('Y'))
-            ->groupBy(DB::raw('Month(created_at)'))
-            ->pluck('month');
-        $salesData = array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-        foreach ($salesMonths as $index => $month) {
-            $salesData[$month - 1] = $salesChart[$index];
-        }
-
-        $bookingsChart = Booking::select(DB::raw('COUNT(*) as count'))
-            ->whereYear('created_at', date('Y'))
-            ->groupBy(DB::raw('Month(created_at)'))
-            ->pluck('count');
-
-        $bookingsMonths = Booking::select(DB::raw('Month(created_at) as month'))
-            ->whereYear('created_at', date('Y'))
-            ->groupBy(DB::raw('Month(created_at)'))
-            ->pluck('month');
-        $bookingsData = array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-        foreach ($bookingsMonths as $index => $month) {
-            $bookingsData[$month - 1] = $bookingsChart[$index];
-        }
+        $salesWeek = $this->graficasSemana('sales');
+        $bookingsWeek = $this->graficasSemana('bookings');
 
         return view('home', compact('plate', 'countBookings', 'countSales', 'salesData', 'bookingsData'));
     }

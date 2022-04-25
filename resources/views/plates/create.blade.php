@@ -126,9 +126,9 @@
 
             if (price > 0 && plate_text != "" && category != "") {
             if (!validate) {
-                   
+
                 id++;
-                $("#tbl_plates").append(`    
+                $("#tbl_plates").append(`
             <tr id="tr-${id}">
             <td>
             <input type="hidden" class="plate" name="plate[]" value="${plate_text}">
@@ -159,26 +159,23 @@
 
         }
 
-<<<<<<< HEAD
+
         function validatePlate(){
            var validate = false;
-        if ($('table#table_plates tbody tr').length > 0){  
+        if ($('table#table_plates tbody tr').length > 0){
             $('table#table_plates tbody tr').each(function(){
-                if ($(this).find('.name').text().toLowerCase().toLowerCase().split(" ").join("") === $("#plate").val().toLowerCase().toLowerCase().split(" ").join("")){
+                if ($(this).find('.name').text().toLowerCase().split(" ").join("") === $("#plate").val().toLowerCase().split(" ").join("")){
                     alertify.set('notifier','position', 'top-right');
                     alertify.error('el platillo ya se ha agregado');
                     validate = true;
                 }
             });
-                    
-        }      
+
+        }
         return validate;
     }
 
 
-=======
-    
->>>>>>> 4fca562eee0244f5b41d9f8c9a1b13550bb7ce18
     </script>
 
 

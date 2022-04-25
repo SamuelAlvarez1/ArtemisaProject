@@ -8,7 +8,7 @@
     <div class="container">
         <div class="row mb-5">
              <div class="col-md-4">
-                <div class="card-counter bg-warning text-light ">
+                <div class="card-counter bg-warning text-dark ">
                     <i class="fa-solid fa-pizza-slice"></i>
 
                         @if(empty($plate))
@@ -20,27 +20,43 @@
                 </div>
             </div>
             <div class="col-md-4">
-                <div class="card-counter danger">
+                <div class="card-counter danger text-dark">
                     <i class="fa fa-users"></i>
-                    <span class="count-numbers">{{$countSales}}</span>
+                    <span class="count-numbers text-white">{{$countSales}}</span>
                     <span class="count-name">Ventas de hoy</span>
                 </div>
             </div>
             <div class="col-md-4">
-                <div class="card-counter info">
+                <div class="card-counter info text-dark">
                     <i class="fa-solid fa-calendar"></i>
-                    <span class="count-numbers">{{$countBookings}}</span>
+                    <span class="count-numbers text-white">{{$countBookings}}</span>
                     <span class="count-name">Reservas de hoy</span>
                 </div>
             </div>
 
 
         </div>
-
-        <div class="row mb-5 d-grid">
-            <div class="col-6" id="sales">
+        <br>
+        <form action="{{route('home')}}" method="post">
+<div class="row mb-5">
+     <div class="col-12 col-md-3">
+         <span>Fecha inicial</span>
+         <div class="form-group">
+             <input type="date" class="form-control" value="{{old('fecha_ini')}}" name="fecha_ini" id="fecha_ini">
+         </div>
+     </div>
+    <div class="col-12 col-md-3">
+         <span>Fecha Final</span>
+         <div class="form-group">
+             <input type="date" class="form-control" value="{{old('fecha_fin')}}" name="fecha_fin" id="fecha_fin">
+         </div>
+     </div>
+</div>
+        </form>
+        <div class="row ">
+            <div class="col-12" id="graficaMes">
             </div>
-            <div class="col-6" id="bookings">
+            <div class="col-12" id="graficaSemana">
             </div>
         </div>
 
@@ -59,14 +75,22 @@
 
 
     <script>
+        $('#graficaSemana').hide();
+        function mostrarMeses(){
+            $('#graficaSemana').hide();
+            $('#graficaMes').show();
+        }
+        function mostrarSemana(){
+            $('#graficaMes').hide();
+            $('#graficaSemana').show();
+        }
 
-        const salesData = <?php echo json_encode($salesData); ?>;
-        Highcharts.chart('sales', {
+        Highcharts.chart('graficaMes', {
             chart: {
                 type: 'areaspline'
             },
             title: {
-                text: 'Ventas del año'
+                text: 'Ventas y reservas del año'
             },
             legend: {
                 layout: 'vertical',
@@ -86,12 +110,23 @@
             },
             yAxis: {
                 title: {
-                    text: 'Número de ventas'
+                    text: 'Número de ventas y reservas del año'
                 }
             },
             tooltip: {
                 shared: true,
-                valueSuffix: ' units'
+            },
+            responsive: {
+                rules: [{
+                    condition: {
+                        maxWidth: 500
+                    },
+                    chartOptions: {
+                        legend: {
+                            enabled: false
+                        }
+                    }
+                }]
             },
             credits: {
                 enabled: false
@@ -103,17 +138,20 @@
             },
             series: [{
                 name: 'Ventas',
-                data: salesData,
-            }]
+                data: <?php echo json_encode($salesData); ?>,
+            },
+                {
+                    name: 'Reservas',
+                    data: <?php echo json_encode($bookingsData); ?>
+                }]
         });
 
-        const bookingsData = <?php echo json_encode($bookingsData); ?>;
-        Highcharts.chart('bookings', {
+        Highcharts.chart('graficaSemana', {
             chart: {
                 type: 'areaspline'
             },
             title: {
-                text: 'reservas del año'
+                text: 'Ventas y reservas de la semana'
             },
             legend: {
                 layout: 'vertical',
@@ -127,30 +165,36 @@
                     Highcharts.defaultOptions.legend.backgroundColor || '#FFFFFF'
             },
             xAxis: {
-                categories: ['Ene','Feb', 'Mar','Abr','May','Jun','Jul','Agt','Sep','Oct','Nov','Dic'],
-
-
+                categories: [
+                    'Lunes',
+                    'Martes',
+                    'Miercoles',
+                    'Jueves',
+                    'Viernes',
+                    'Sabado',
+                    'Domingo'
+                ],
+                plotBands: [{ // visualize the weekend
+                    from: 4.5,
+                    to: 6.5,
+                    color: 'rgba(234,75,75,0.2)'
+                }]
             },
             yAxis: {
                 title: {
-                    text: 'Número de reservas'
+                    text: 'Número de ventas y reservas de la semana'
                 }
             },
             tooltip: {
                 shared: true,
-                valueSuffix: ' units'
-            },
-            credits: {
-                enabled: false
-            },
-            plotOptions: {
-                areaspline: {
-                    fillOpacity: 0.5
-                }
+                valueSuffix: ''
             },
             series: [{
+                name: 'Ventas',
+                data: [0, 0, 0, 0, 0, 0, 0]
+            }, {
                 name: 'Reservas',
-                data: bookingsData,
+                data: [0, 0, 0, 0, 0, 0, 0]
             }]
         });
     </script>

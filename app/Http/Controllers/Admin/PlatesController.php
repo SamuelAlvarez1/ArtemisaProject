@@ -15,7 +15,7 @@ class PlatesController extends Controller
     {
         $plates = Plate::select('categories.name as categories', 'plates.*')
             ->join('categories', 'plates.idCategory', '=', 'categories.id')
-            ->where('state', '1')->get();
+            ->where('plates.state', '1')->get();
         $states = "active";
 
         return view("plates.index", compact('plates', 'states'));
@@ -60,7 +60,7 @@ class PlatesController extends Controller
 
         $input = $request->all();
 
-        
+
         try {
             DB::beginTransaction();
 
@@ -68,7 +68,7 @@ class PlatesController extends Controller
             if (isset($input["id"])) {
 
                 $plates = Plate::all();
-                $namePlates = []; 
+                $namePlates = [];
                 foreach ($input["id"] as $key => $value) {
 
                     $plates = Plate::where('name', $input["plate"][$key])->first();
@@ -82,15 +82,15 @@ class PlatesController extends Controller
                         "state" => 1
                     ]);
                     }
-                    
+
                 }
             }
 
             DB::commit();
             if (sizeof($namePlates) > 0) {
-               
+
             return redirect('/plates')->with(['nameDuplicate' => $namePlates]);
-                
+
             }
             return redirect('/plates')->with('success', 'Platillo creado exitosamente');
 
@@ -129,7 +129,12 @@ class PlatesController extends Controller
     public function update(Request $request, $id)
     {
         if ($id != null) {
-            try {       
+            $name = Plate::where('name', $request["plate"]);
+            if ($name){
+                return redirect('/plates')->with("error", "El nombre al que quiere actualizar el platillo ya existe");
+            }
+            try {
+
                 Plate::where("id", $id)->update([
                     "name" => $request["plate"],
                     "price" => $request["price"],
