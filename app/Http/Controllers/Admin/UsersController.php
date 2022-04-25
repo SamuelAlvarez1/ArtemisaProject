@@ -155,10 +155,12 @@ class UsersController extends Controller
                 'name' => 'required|string|min:3|max:40',
                 'email' => 'required|email|min:10|max:80',
                 'phone' => 'required|string|max:10',
-                'idRol' => 'required',
-                'password' => 'required|min:10|max:80'
 
             ];
+            if (auth()->user()->idRol == 2 && auth()->user()->id != $id) {
+                return redirect('/users/profile/' . auth()->user()->id)->with("error", 'Los empleados solo pueden cambiar su propia información');
+            }
+
             $this->validate($request, $campos);
             try {
                 User::where("id", "=", $id)->update([
@@ -166,10 +168,11 @@ class UsersController extends Controller
                     'name' =>  $request['name'],
                     'email' => $request['email'],
                     'phone' => $request['phone'],
-                    'idRol' => $request['idRol'],
-                    'password' => Hash::make($request['password']),
                 ]);
-                return redirect('/users')->with("success", "el usuario fue editado satisfactoriamente");
+                if (auth()->user()->idRol == 1) {
+                    return redirect('/users')->with("success", "el usuario fue editado satisfactoriamente");
+                }
+                return redirect('/users/profile/' . auth()->user()->id)->with("success", 'La información ha sido editada satisfactoriamente');
             } catch (\Exception $e) {
                 return redirect('/users')->with("error", $e->getMessage());
             }
@@ -211,6 +214,41 @@ class UsersController extends Controller
                     return view("users.profile", compact('user'));
                 }
             }
+        }
+    }
+
+    public function EditPassword($id)
+    {
+        if ($id != null) {
+            $user = User::find($id);
+            return view('users.EditPassword', compact('user'));
+        }
+        return redirect('/users/profile/' . auth()->user()->id)->with("error", 'El usuario no fue encontrado');
+    }
+
+    public function updatePassword(Request $request, $id)
+    {
+        if ($id != null) {
+            $campos = [
+                'old_password' => 'required|min:10|max:80',
+                'new_password' => 'required|min:10|max:80',
+                'password_confirmation' => 'required|min:10|max:80|same:new_password'
+            ];
+
+            $this->validate($request, $campos);
+            if (auth()->user()->idRol == 2 && auth()->user()->id != $id) {
+                return redirect('/users/profile/' . auth()->user()->id)->with("error", 'Los empleados solo pueden cambiar su propia información');
+            }
+
+
+
+            if (Hash::check($request->old_password, auth()->user()->password)) {
+                User::where("id", $id)->update([
+                    'password' => Hash::make($request["new_password"])
+                ]);
+                return redirect('/users/profile/' . auth()->user()->id)->with("success", 'La contraseña ha sido cambiada satisfactoriamente');
+            }
+            return redirect('/users/EditPassword/' . auth()->user()->id)->with("error", 'Usted no ha digitado correctamente la antigua contraseña');
         }
     }
 }
