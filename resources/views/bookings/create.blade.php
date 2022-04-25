@@ -85,15 +85,6 @@
                             </div>
                         </div>
 
-                        <div class="row mb-3">
-                            <label for="final_date" class="col-md-4 col-form-label text-md-end">{{ __('Fecha final') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="final_date" type="datetime-local" class="form-control" name="final_date" value="{{ old('final_date') }}" required autocomplete="final_date">
-                                
-                            </div>
-                        </div>
-
                         <div class="row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">

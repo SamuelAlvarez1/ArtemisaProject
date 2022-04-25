@@ -1,17 +1,18 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use App\Models\Category;
 use App\Models\Rol;
 use App\Models\User;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class CategoriesController extends Controller
 {
     public function index()
     {
-        $categories = Category::where('state',1)->get();
+        $categories = Category::where('state', 1)->get();
         $states = 'active';
         return view('categories.index', compact('categories', 'states'));
     }
@@ -25,11 +26,6 @@ class CategoriesController extends Controller
     {
         $request->validate(Category::$rules);
         $input = $request->all();
-        $categoryName = Category::where('name', $input['name'])->first();
-
-        if ($categoryName){
-            return redirect('/categories/create')->with('error', 'La categoría '.$input['name'].' ya existe');
-        }
         try {
             Category::create([
                 'name' => $input['name'],

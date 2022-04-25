@@ -7,6 +7,7 @@ use App\Models\Booking;
 use App\Models\Customer;
 use App\Models\Event;
 use DataTables;
+use Carbon\Carbon;
 
 class BookingsController extends Controller
 {
@@ -22,6 +23,10 @@ class BookingsController extends Controller
 
 
         $states = "1";
+
+        foreach ($bookings as $booking) {
+            $booking->start_date = new Carbon($booking->start_date);
+        }
         return view("bookings.index", compact("bookings", "states"));
     }
 
@@ -34,6 +39,10 @@ class BookingsController extends Controller
             ->join("users", "bookings.idUser", "=", "users.id")
             ->where("bookings.state", "=", 0)
             ->get();
+
+        foreach ($bookings as $booking) {
+            $booking->start_date = Carbon::parse($booking->start_date)->format('d-m-Y h:i a');
+        }
 
         $states = "0";
         return view("bookings.index", compact("bookings", "states"));
@@ -48,6 +57,11 @@ class BookingsController extends Controller
             ->where("bookings.state", "=", 2)
             ->get();
 
+        foreach ($bookings as $booking) {
+            $booking->start_date = Carbon::parse($booking->start_date)->format('d-m-Y h:i a');
+            $booking->final_date = Carbon::parse($booking->final_date)->format('d-m-Y h:i a');
+        }
+
         $states = "2";
         return view("bookings.index", compact("bookings", "states"));
     }
@@ -55,31 +69,43 @@ class BookingsController extends Controller
 
     public function updateState($id, $state)
     {
-        if ($id != null && $state < 3) {
+        // if ($id != null && $state < 3) {
 
-            try {
+        //     // try {
 
-                $booking = Booking::find($id);
+        //     $booking = Booking::find($id);
 
-                if ($booking != null && $booking->state != $state) {
-                    $booking->update([
-                        "state" => $state
-                    ]);
-                } else {
-                    return redirect('/bookings')->with("error", "El cambio de estado de la reserva no se pudo realizar");
-                }
+        //     if ($booking != null && $booking->state != $state) {
+        //         if ($state == 2) {
+        //             $booking->update([
+        //                 "state" => $state,
+        //                 "final_date" => date("d-m-Y h:i")
+        //             ]);
+        //         } else {
+        //             $booking->update([
+        //                 "state" => $state
+        //             ]);
+        //         }
+        //     } else {
+        //         return redirect('/bookings')->with("error", "El cambio de estado de la reserva no se pudo realizar");
+        //     }
 
-                if ($state == 1) {
-                    return redirect('/bookings/seeCanceled')->with("success", "cambio de estado exitoso");;
-                } else {
-                    return redirect('/bookings')->with("success", "cambio de estado exitoso");;
-                }
-            } catch (\Exception $e) {
+        //     if ($state == 1) {
+        //         return redirect('/bookings/seeCanceled')->with("success", "cambio de estado exitoso");;
+        //     } else {
+        //         return redirect('/bookings')->with("success", "cambio de estado exitoso");;
+        //     }
+        //     // } catch (\Exception $e) {
 
-                return redirect('/bookings')->with("error", "El cambio de estado de la reserva no se pudo realizar");
-            }
-        }
-        return redirect('/bookings')->with("error", "El cambio de estado de la reserva no se pudo realizar");
+        //     //     return redirect('/bookings')->with("error", "El cambio de estado de la reserva no se pudo realizar");
+        //     // }
+
+        // }
+
+
+        // return redirect('/bookings')->with("error", "El cambio de estado de la reserva no se pudo realizar");
+
+        echo date('d-m-Y h:m');
     }
 
 
@@ -97,14 +123,12 @@ class BookingsController extends Controller
             'idCustomer' => 'required|numeric',
             'amount_people' => 'required|numeric|min:1|max:20',
             'start_date' => 'required|date|after_or_equal:' . date('d-m-Y h:i a'),
-            'final_date' => 'required|date|after:start_date'
         ];
 
         $this->validate($request, $campos);
 
         $bookings = Booking::select("amount_people")
             ->whereDate("start_date", $request['start_date'])
-            ->whereDate("final_date", $request['final_date'])
             ->where('state', 1)
             ->get();
 
@@ -125,7 +149,6 @@ class BookingsController extends Controller
                 'idUser' => auth()->user()->id,
                 'amount_people' => $request['amount_people'],
                 'start_date' => $request['start_date'],
-                'final_date' => $request['final_date'],
                 'state' => 1
             ]);
         } catch (\Exception $e) {

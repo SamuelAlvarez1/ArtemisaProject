@@ -110,7 +110,7 @@
                             @endif
 
                         </td>
-                        <td>{{$value->start_date}}</td>
+                        <td>{{$value->start_date->formatLocalized('%D-%m-%d %H:%M')}}</td>
                         <td>{{$value->final_date}}</td>
 
                         <td>

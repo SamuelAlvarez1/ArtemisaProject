@@ -73,7 +73,7 @@ class RolesController extends Controller
     public function store(Request $request)
     {
         $campos = [
-            'name' => 'required|string|min:5|max:20',
+            'name' => 'required|string|unique:roles|min:5|max:20',
             'description' => 'required|string|min:10|max:50'
 
         ];

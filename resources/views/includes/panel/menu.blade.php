@@ -34,11 +34,14 @@
             <i class="fa-solid fa-circle-user text-warning"></i> Clientes
         </a>
     </li>
+    @if (auth()->user()->idRol == 1)
     <li class="nav-item">
         <a class="nav-link" href="{{url('/categories')}}">
             <i class="fa-solid fa-utensils"></i> Categorías
         </a>
-    </li>
+    </li>    
+    @endif
+    
     @if(auth()->user()->idRol == 2 || auth()->user()->idRol == 1)
     @if (auth()->user()->idRol == 1)
             <li class="nav-item">
