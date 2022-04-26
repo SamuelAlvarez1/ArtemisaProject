@@ -74,7 +74,9 @@
                         @endif
                         <th>Estado</th>
                         <th>fecha inicial</th>
-                        <th>fecha final</th>
+                        @if ($states == "2")
+                        <th>fecha final</th>    
+                        @endif
                         <th>Acciones</th>
                     </tr>
                 </thead>
@@ -110,8 +112,10 @@
                             @endif
 
                         </td>
-                        <td>{{$value->start_date->formatLocalized('%D-%m-%d %H:%M')}}</td>
-                        <td>{{$value->final_date}}</td>
+                        <td>{{$value->start_date->isoFormat('dddd D MMMM YYYY, h:mm a')}}</td>
+                        @if ($states == "2")
+                        <td>{{$value->final_date->isoFormat('dddd D MMMM YYYY, h:mm a')}}</td>
+                        @endif
 
                         <td>
                             <a class="mx-2" href="{{url('/bookings/'.$value->id)}}"><i

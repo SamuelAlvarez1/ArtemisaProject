@@ -41,7 +41,7 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <!-- Brand -->
-            <a class="navbar-brand text-white" href="#">
+            <a class="navbar-brand text-white" href="#" data-toggle="tooltip" data-placement="right" title="Ir a la página de bienvenida">
                 <img src="{{asset('img/landing/navbar-logo.png')}}" alt="Logo">
                 Artemisa
             </a>

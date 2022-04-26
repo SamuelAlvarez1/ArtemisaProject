@@ -26,7 +26,7 @@
                                     <h3 class="mb-0">Crear reserva</h3>
                                 </div>
                                 <div class="col text-right">
-                                    <a href="{{url('bookings')}}" class="btn btn-sm btn-danger">
+                                    <a href="{{url('bookings')}}" class="btn btn-sm btn-danger" data-toggle="tooltip" data-placement="top" title="Regresar a la lista de reservas">
                                         Regresar
                                     </a>
                                 </div>
@@ -41,7 +41,7 @@
                             <label for="idCustomer" class="col-md-4 col-form-label text-md-end">{{ __('Cliente') }}</label>
 
                             <div class="col-md-6">
-                                <select name="idCustomer" id="idCustomer" class="form-control">
+                                <select name="idCustomer" id="idCustomer" class="form-control" data-toggle="tooltip" data-placement="right" title="Seleccionar el cliente">
                                     <option value="">seleccione el cliente</option>
                                     @foreach ($customers as $customer)
                                         <option value="{{$customer->id}}" {{($customer->id == old('idCustomer') ? 'selected' : '')}}>{{$customer->name}}</option>
@@ -56,7 +56,7 @@
                             <label for="idEvent" class="col-md-4 col-form-label text-md-end">{{ __('Evento') }}</label>
 
                             <div class="col-md-6">
-                                <select name="idEvent" id="idEvent" class="form-control">
+                                <select name="idEvent" id="idEvent" class="form-control" data-toggle="tooltip" data-placement="right" title="Seleccione el evento">
                                     <option value="">seleccione el evento</option>
                                     @foreach ($events as $event)
                                         <option value="{{$event->id}}" {{($event->id == old('idEvent') ? 'selected' : '')}}>{{$event->name}}</option>
@@ -70,7 +70,7 @@
                             <label for="amount_people" class="col-md-4 col-form-label text-md-end">{{ __('Cantidad de personas') }}</label>
 
                             <div class="col-md-6">
-                                <input id="amount_people" type="text" class="form-control" name="amount_people" value="{{ old('amount_people') }}" required autocomplete="amount_people">
+                                <input id="amount_people" type="text" class="form-control" name="amount_people" value="{{ old('amount_people') }}" required autocomplete="amount_people" data-toggle="tooltip" data-placement="right" title="Digite la cantidad de personas">
 
                                
                             </div>
@@ -80,14 +80,54 @@
                             <label for="start_date" class="col-md-4 col-form-label text-md-end">{{ __('Fecha inicial') }}</label>
 
                             <div class="col-md-6">
-                                <input id="start_date" type="datetime-local" class="form-control" name="start_date" value="{{ old('start_date') }}" required autocomplete="start_date">
+                                <input id="booking_date" type="date" class="form-control" name="booking_date" value="{{ old('booking_date') }}" required autocomplete="booking_date" data-toggle="tooltip" data-placement="right" title="Fecha dia/mes/año de la reserva">
+                            </div>
+                        </div>    
+                        <div class="row mb-3">
+                            <label for="booking_hour" class="col-md-4 col-form-label text-md-end">{{ __('Hora de la reserva') }}</label>
+                            <div class="col-md-6">
+                                
+                                <select name="booking_hour" id="booking_hour" class="form-control" data-toggle="tooltip" data-placement="right" title="Hora solicitada para la reserva">
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+                                    <option value="8">8</option>
+                                    <option value="9">9</option>
+                                    <option value="10">10</option>
+                                    <option value="11">11</option>
+                                    <option value="12">12</option>
+                                </select>
+                                
                                 
                             </div>
-                        </div>
+                        </div>    
+                        <div class="row mb-3">
+                            <label for="booking_minutes" class="col-md-4 col-form-label text-md-end">{{ __('Minutos de la reserva') }}</label>
+                            <div class="col-md-6">
+                                
+                                <input id="booking_minutes" type="text" class="form-control" name="booking_minutes" value="{{ old('booking_minutes') }}" required autocomplete="booking_minutes" data-toggle="tooltip" data-placement="right" title="Minutos solicitados de la reserva">
+                                
+                            </div>
+                        </div>    
+
+                        <div class="row mb-3">
+                            <div class="col-md-6 offset-4">
+                                
+                                <select name="moment" id="moment" class="form-control" data-toggle="tooltip" data-placement="right" title="Seleccione si la reserva es para la mañana o para la tarde">
+                                    <option value="a.m">AM</option>
+                                    <option value="p.m">PM</option>
+                                </select>
+                                
+                            </div>
+                        </div>    
 
                         <div class="row mb-0">
                             <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
+                                <button type="submit" class="btn btn-primary" data-toggle="tooltip" data-placement="right" title="Click para crear la reserva">
                                     {{ __('Crear') }}
                                 </button>
                             </div>
