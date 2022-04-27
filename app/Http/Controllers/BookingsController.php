@@ -135,11 +135,11 @@ class BookingsController extends Controller
 
         $this->validate($request, $campos);
 
-        $start_date = Carbon::parse($request["booking_date"] . " " . $request["booking_hour"] . ":" . $request["booking_minutes"]) . " " . $request["moment"];
-        // echo (Carbon::now()->isoFormat('dddd D MMMM YYYY, h:mm a') > Carbon::parse($start_date)->isoFormat('dddd D MMMM YYYY, h:mm a'));
+        $start_date = Carbon::parse($request["booking_date"] . " " . $request["booking_hour"] . ":" . $request["booking_minutes"]);
 
-        if (Carbon::now()->isoFormat('dddd D MMMM YYYY, h:mm a') > Carbon::parse($start_date)->isoFormat('dddd D MMMM YYYY, h:mm a')) {
-            return redirect('/bookings')->with("error", "La reserva no se pudo crear debido a que la fecha actual es mayor a la fecha solicitada");
+
+        if (Carbon::now() > Carbon::parse($start_date)) {
+            return redirect('/bookings/create')->with("error", "La reserva no se pudo crear debido a que la fecha actual es mayor a la fecha solicitada");
         }
 
 
@@ -200,7 +200,6 @@ class BookingsController extends Controller
     {
         if ($id != null) {
             $booking = Booking::find($id);
-
             if ($booking != null) {
                 $customers = Customer::all();
                 $events = Event::all();
@@ -220,14 +219,24 @@ class BookingsController extends Controller
             $campos = [
                 'idCustomer' => 'required|numeric',
                 'amount_people' => 'required|numeric|min:1|max:20',
-                'final_date' => 'required|date|after_or_equal:' . date('d-m-Y'),
+                'booking_date' => 'required|date|after_or_equal:' . date('d-m-Y'),
+                'booking_hour' => 'required|numeric',
+                'booking_minutes' => 'required|numeric',
             ];
 
             $this->validate($request, $campos);
 
+            $start_date = Carbon::parse($request["booking_date"] . " " . $request["booking_hour"] . ":" . $request["booking_minutes"]);
+
+
+            if (Carbon::now() > Carbon::parse($start_date)) {
+                return redirect('/bookings/create')->with("error", "La reserva no se pudo crear debido a que la fecha actual es mayor a la fecha solicitada");
+            }
+
+
 
             $bookings = Booking::select("amount_people")
-                ->whereDate("final_date", $request['final_date'])
+                ->whereDate("start_date", $request['start_date'])
                 ->where('state', 1)
                 ->get();
 
@@ -249,8 +258,9 @@ class BookingsController extends Controller
                     $booking->update([
                         'idCustomer' => $request['idCustomer'],
                         'idEvent' =>  $request['idEvent'],
+                        'idUser' => auth()->user()->id,
                         'amount_people' => $request['amount_people'],
-                        'final_date' => $request['final_date'],
+                        'start_date' => $start_date,
                     ]);
                 }
 
