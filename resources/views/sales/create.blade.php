@@ -154,7 +154,11 @@
     }
 
     function add_plate() {
-        let validate = validatePlate()
+        let cantidadInput = $("#quantity").val();
+        let platillo = $("#plates option:selected").val();
+
+        if(cantidadInput > 0 && platillo > 0){
+            let validate = validatePlate()
         
         if(!validate){
                 let idPlatillo = $("#plates option:selected").val();
@@ -179,6 +183,10 @@
                 `);
                 let precio_total = $("#totalPrice").val() || 0;
                 $("#totalPrice").val(parseInt(precio_total) + parseInt(cantidad) * parseInt(precio));
+        }
+        }else{
+            alertify.set('notifier','position', 'top-right');
+            alertify.error('Debe seleccionar un platillo y digitar una cantidad.');
         }
         
     }
