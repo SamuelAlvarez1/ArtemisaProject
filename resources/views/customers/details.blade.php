@@ -15,27 +15,23 @@
                         <h2>Detalles del cliente</h2>
                     </div>
                     <div class="col text-right">
-                        <a href="{{url('/customers/'.$customer->id.'/edit')}}" class="btn btn-sm btn-warning">
-                            Editar este cliente
-                        </a>
-                        <a href="{{url('/customers')}}" class="btn btn-sm btn-danger">
-                            Regresar
-                        </a>
+                        <a href="{{url('/customers/'.$customer->id.'/edit')}}" class="btn btn-sm btn-warning">Editar este cliente</a>
+                        <a href="{{url('/customers')}}" class="btn btn-sm btn-danger">Regresar</a>
                     </div>
                 </div>
             </div>
             <div class="card-body">
-                <h4 class="card-subtitle mt-2">Nombre del evento</h4>
+                <h4 class="card-subtitle mt-2">Nombre del cliente</h4>
                 <p class="card-text">{{$customer->name}}</p>
-                <h4 class="card-subtitle mt-2">Descripción</h4>
+                <h4 class="card-subtitle mt-2">Documento</h4>
                 <p class="card-text">{{$customer->document}}</p>
-                <h4 class="card-subtitle mt-2">Precio de decoración</h4>
+                <h4 class="card-subtitle mt-2">Número de telefono</h4>
                 <p class="card-text">{{$customer->phoneNumber}}</p>
-                <h4 class="card-subtitle mt-2">Precio de entrada</h4>
+                <h4 class="card-subtitle mt-2">Dirección</h4>
                 <p class="card-text">{{$customer->address}}</p>
                 <h4 class="card-subtitle mt-2">Fecha de creación del cliente</h4>
                 <p class="card-text">{{$customer->created_at}}</p>
-                <h4 class="card-subtitle mt-2">Ultima actualización del cliente</h4>
+                <h4 class="card-subtitle mt-2">Ultima actualización de información</h4>
                 <p class="card-text">{{$customer->updated_at}}</p>
                 <h4 class="card-subtitle mt-2">Usuario que creó el Cliente</h4>
                 <ul>
