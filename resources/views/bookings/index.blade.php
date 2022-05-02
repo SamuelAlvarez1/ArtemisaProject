@@ -29,32 +29,32 @@
             </div>
             <div class="col-6">
 
-                <a href="{{url('/bookings/create')}}" class="btn-sm btn btn-outline-dark">crear reserva</a>
+                <a href="{{url('/bookings/create')}}" class="btn-sm btn btn-outline-dark" data-toggle="tooltip" data-placement="top" title="Crear una reserva">crear reserva</a>
 
                 @if($states == '0')
-                <a href="{{url('/bookings')}}" class="btn-sm btn btn-outline-dark">Ver reservas en proceso</a>
-                <a href="{{url('/bookings/seeApproved')}}" class="btn-sm btn btn-outline-dark">Ver reservas aprobadas</a>
+                <a href="{{url('/bookings')}}" class="btn-sm btn btn-outline-dark" data-toggle="tooltip" data-placement="top" title="Ver las reservas que se encuentran en proceso">Ver reservas en proceso</a>
+                <a href="{{url('/bookings/seeApproved')}}" class="btn-sm btn btn-outline-dark" data-toggle="tooltip" data-placement="top" title="Ver las reservas que se aprobaron">Ver reservas aprobadas</a>
                 @endif
                 @if ($states == "1")
-                <a href="{{url('/bookings/seeCanceled')}}" class="btn-sm btn btn-outline-dark">Ver reservas
+                <a href="{{url('/bookings/seeCanceled')}}" class="btn-sm btn btn-outline-dark" data-toggle="tooltip" data-placement="top" title="Ver las reservas que se cancelaron">Ver reservas
                     canceladas</a>
-                <a href="{{url('/bookings/seeApproved')}}" class="btn-sm btn btn-outline-dark">Ver reservas
+                <a href="{{url('/bookings/seeApproved')}}" class="btn-sm btn btn-outline-dark"  data-toggle="tooltip" data-placement="top" title="Ver las reservas que se aprobaron">Ver reservas
                     aprobadas</a>
                 @endif
 
                 @if ($states == "2")
-                <a href="{{url('/bookings/seeCanceled')}}" class="btn-sm btn btn-outline-dark">Ver reservas
+                <a href="{{url('/bookings/seeCanceled')}}" class="btn-sm btn btn-outline-dark"  data-toggle="tooltip" data-placement="top" title="Ver las reservas que se cancelaron">Ver reservas
                     canceladas</a>
-                <a href="{{url('/bookings')}}" class="btn-sm btn btn-outline-dark">Ver reservas en proceso</a>
+                <a href="{{url('/bookings')}}" class="btn-sm btn btn-outline-dark"  data-toggle="tooltip" data-placement="top" title="Ver las reservas que se encuentran en proceso">Ver reservas en proceso</a>
                 @endif
 
             </div>
             <div class="col-4 d-flex justify-content-center d-flex align-items-center">
                 <div class="input-group">
                     <input type="text" class="form-control border border-dark" id="searchInput" placeholder="Busqueda"
-                        aria-label="Recipient's username" aria-describedby="basic-addon2">
+                        aria-label="Recipient's username" aria-describedby="basic-addon2"  data-toggle="tooltip" data-placement="top" title="digite para buscar una reserva que se desee encontrar">
                     <div class="input-group-append">
-                        <button class="btn btn-sm btn-outline-dark" id="searchButton" type="button">Buscar</button>
+                        <button class="btn btn-sm btn-outline-dark" id="searchButton" type="button"  data-toggle="tooltip" data-placement="top" title="Click para encontrar una reserva con lo previamente digitado">Buscar</button>
                     </div>
                 </div>
             </div>
@@ -74,7 +74,9 @@
                         @endif
                         <th>Estado</th>
                         <th>fecha inicial</th>
-                        <th>fecha final</th>
+                        @if ($states == "2")
+                        <th>fecha final</th>    
+                        @endif
                         <th>Acciones</th>
                     </tr>
                 </thead>
@@ -110,28 +112,30 @@
                             @endif
 
                         </td>
-                        <td>{{$value->start_date->formatLocalized('%D-%m-%d %H:%M')}}</td>
-                        <td>{{$value->final_date}}</td>
+                        <td>{{$value->start_date->isoFormat('dddd D MMMM YYYY, h:mm a')}}</td>
+                        @if ($states == "2")
+                        <td>{{$value->final_date->isoFormat('dddd D MMMM YYYY, h:mm a')}}</td>
+                        @endif
 
                         <td>
-                            <a class="mx-2" href="{{url('/bookings/'.$value->id)}}"><i
+                            <a class="mx-2" href="{{url('/bookings/'.$value->id)}}"  data-toggle="tooltip" data-placement="top" title="ver los detalles de esta reserva"><i
                                     class="fa-solid text-dark fa-magnifying-glass"></i></a>
 
                             @if($value->state == 0)
 
-                            <a class="mx-2" href="{{url('/bookings/'.$value->id.'/edit')}}"><i
+                            <a class="mx-2" href="{{url('/bookings/'.$value->id.'/edit')}}"  data-toggle="tooltip" data-placement="top" title="Editar esta reserva"><i
                                 class="fa text-dark fa-edit"></i></a>        
-                            <a class="mx-2" href="{{url('/bookings/updateState/'.$value->id)}}/1"><i
+                            <a class="mx-2" href="{{url('/bookings/updateState/'.$value->id)}}/1"  data-toggle="tooltip" data-placement="top" title="poner esta reserva en proceso"><i
                                     class="fa text-dark fa-check"></i></a>
                             @endif
 
                             @if($value->state == 1)
                             
-                            <a class="mx-2" href="{{url('/bookings/'.$value->id.'/edit')}}"><i
+                            <a class="mx-2" href="{{url('/bookings/'.$value->id.'/edit')}}"  data-toggle="tooltip" data-placement="top" title="Editar esta reserva"><i
                                 class="fa text-dark fa-edit"></i></a>
-                            <a class="mx-2" href="{{url('/bookings/updateState/'.$value->id)}}/0"><i
+                            <a class="mx-2" href="{{url('/bookings/updateState/'.$value->id)}}/0"  data-toggle="tooltip" data-placement="top" title="Cancelar esta reserva"><i
                                     class="fa text-dark fa-ban"></i></a>
-                            <a class="mx-2" href="{{url('/bookings/updateState/'.$value->id)}}/2"><i
+                            <a class="mx-2" href="{{url('/bookings/updateState/'.$value->id)}}/2"  data-toggle="tooltip" data-placement="top" title="Aprobar esta reserva"><i
                                     class="fa text-dark fa-check"></i></a>
                             @endif
                         </td>

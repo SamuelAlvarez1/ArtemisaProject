@@ -8,6 +8,7 @@ use App\Models\Rol;
 use DataTables;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\Controller;
+use Illuminate\Validation\Rule;
 
 class UsersController extends Controller
 {
@@ -150,13 +151,15 @@ class UsersController extends Controller
     public function update(Request $request, $id)
     {
         if ($id != null) {
+            $user = User::find($id);
             $campos = [
                 'last_name' => 'required|string|min:3|max:40',
                 'name' => 'required|string|min:3|max:40',
-                'email' => 'required|email|min:10|max:80',
+                'email' => 'required|email|min:10|max:80|unique:users,email,' . $user->id,
                 'phone' => 'required|string|max:10',
 
             ];
+
             if (auth()->user()->idRol == 2 && auth()->user()->id != $id) {
                 return redirect('/users/profile/' . auth()->user()->id)->with("error", 'Los empleados solo pueden cambiar su propia información');
             }
@@ -230,7 +233,7 @@ class UsersController extends Controller
     {
         if ($id != null) {
             $campos = [
-                'old_password' => 'required|min:10|max:80',
+                'old_password' => 'required|max:80',
                 'new_password' => 'required|min:10|max:80',
                 'password_confirmation' => 'required|min:10|max:80|same:new_password'
             ];

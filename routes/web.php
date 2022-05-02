@@ -65,7 +65,7 @@ Route::group(['middleware' => ['auth', 'validarRol']], function () {
     Route::resources([
         'roles' => RolesController::class,
         'plates' => PlatesController::class,
-        'categories' => PlatesController::class,
+        'categories' => CategoriesController::class,
     ]);
 });
 
