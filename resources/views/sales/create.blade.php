@@ -12,6 +12,16 @@
 
 @section('main-content')
 
+@if(count($errors)>0)
+  <div class="alert alert-danger" role="alert">
+    <ul>
+    @foreach($errors->all() as $error)
+        <li>{{ $error }}</li>
+    @endforeach
+    </ul>
+  </div>
+@endif
+
 <div class="row">
     <div class="col">
         <h3 class="text-center">Crear Venta</h3>
@@ -30,7 +40,7 @@
                 <div class="row card-body d-flex justify-content-center">
                     <div class="form-group col-6">
                         <label for="customer">Cliente</label>
-                        <select name="customer" class="form-control" id="customer">
+                        <select name="idCustomers" class="form-control" id="customer">
                             <option value="">Seleccione</option>
                             @foreach($customers as $value)
                             @if($value->state == 1)
