@@ -32,7 +32,6 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
-Route::post('home', [HomeController::class, 'fecha'])->name('fecha');
 
 
 Route::group(['middleware' => ['auth', 'validarRol']], function () {

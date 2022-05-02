@@ -37,26 +37,20 @@
 
         </div>
         <br>
-        <form action="{{route('home')}}" method="post">
+
 <div class="row mb-5">
-     <div class="col-12 col-md-3">
-         <span>Fecha inicial</span>
-         <div class="form-group">
-             <input type="date" class="form-control" value="{{old('fecha_ini')}}" name="fecha_ini" id="fecha_ini">
-         </div>
-     </div>
-    <div class="col-12 col-md-3">
-         <span>Fecha Final</span>
-         <div class="form-group">
-             <input type="date" class="form-control" value="{{old('fecha_fin')}}" name="fecha_fin" id="fecha_fin">
-         </div>
-     </div>
+     <button class="btn btn-outline-dark" id="buttonMonth" onclick="mostrarMeses()">Ver ventas y reservas del año</button>
+     <button class="btn btn-outline-dark" id="buttonWeek" onclick="mostrarSemana()">Ver ventas y reservas de la semana</button>
 </div>
-        </form>
+
         <div class="row ">
-            <div class="col-12" id="graficaMes">
+            <div class="col-6" id="SalesMonth">
             </div>
-            <div class="col-12" id="graficaSemana">
+            <div class="col-6" id="BookingsMonth">
+            </div>
+            <div class="col-6" id="SalesWeek">
+            </div>
+            <div class="col-6" id="BookingsWeek">
             </div>
         </div>
 
@@ -75,22 +69,32 @@
 
 
     <script>
-        $('#graficaSemana').hide();
+        $('#SalesWeek').hide();
+        $('#BookingsWeek').hide();
+        $('#buttonMonth').hide();
         function mostrarMeses(){
-            $('#graficaSemana').hide();
-            $('#graficaMes').show();
+            $('#SalesWeek').hide();
+            $('#BookingsWeek').hide();
+            $('#SalesMonth').show();
+            $('#BookingsMonth').show();
+            $('#buttonMonth').hide();
+            $('#buttonWeek').show();
         }
         function mostrarSemana(){
-            $('#graficaMes').hide();
-            $('#graficaSemana').show();
+            $('#SalesWeek').show();
+            $('#BookingsWeek').show();
+            $('#SalesMonth').hide();
+            $('#BookingsMonth').hide();
+            $('#buttonMonth').show();
+            $('#buttonWeek').hide();
         }
 
-        Highcharts.chart('graficaMes', {
+        Highcharts.chart('SalesMonth', {
             chart: {
                 type: 'areaspline'
             },
             title: {
-                text: 'Ventas y reservas del año'
+                text: 'Ventas del año'
             },
             legend: {
                 layout: 'vertical',
@@ -110,7 +114,7 @@
             },
             yAxis: {
                 title: {
-                    text: 'Número de ventas y reservas del año'
+                    text: 'Número de ventas del año'
                 }
             },
             tooltip: {
@@ -139,19 +143,81 @@
             series: [{
                 name: 'Ventas',
                 data: <?php echo json_encode($salesData); ?>,
+            }]
+        });
+
+        Highcharts.chart('BookingsMonth', {
+            chart: {
+                type: 'areaspline'
             },
+            color: {
+                linearGradient: { x1: 0, x2: 0, y1: 0, y2: 1 },
+                stops: [
+                    [0, '#003399'],
+                    [1, '#3366AA']
+                ]
+            },
+            title: {
+                text: 'Reservas del año'
+            },
+            legend: {
+                layout: 'vertical',
+                align: 'left',
+                verticalAlign: 'top',
+                x: 150,
+                y: 100,
+                floating: true,
+                borderWidth: 1,
+                backgroundColor:
+                    Highcharts.defaultOptions.legend.backgroundColor || '#FFFFFF'
+            },
+            xAxis: {
+                categories: ['Ene','Feb', 'Mar','Abr','May','Jun','Jul','Agt','Sep','Oct','Nov','Dic'],
+
+
+            },
+            yAxis: {
+                title: {
+                    text: 'Número de reservas del año'
+                }
+            },
+            tooltip: {
+                shared: true,
+            },
+            responsive: {
+                rules: [{
+                    condition: {
+                        maxWidth: 500
+                    },
+                    chartOptions: {
+                        legend: {
+                            enabled: false
+                        }
+                    }
+                }]
+            },
+            credits: {
+                enabled: false
+            },
+            plotOptions: {
+                areaspline: {
+                    fillOpacity: 0.5
+                }
+            },
+            series: [
                 {
                     name: 'Reservas',
                     data: <?php echo json_encode($bookingsData); ?>
                 }]
         });
 
-        Highcharts.chart('graficaSemana', {
+        Highcharts.chart('SalesWeek', {
             chart: {
-                type: 'areaspline'
+                type: 'areaspline',
+                background: '#000'
             },
             title: {
-                text: 'Ventas y reservas de la semana'
+                text: 'Ventas de la semana'
             },
             legend: {
                 layout: 'vertical',
@@ -191,10 +257,56 @@
             },
             series: [{
                 name: 'Ventas',
-                data: [0, 0, 0, 0, 0, 0, 0]
-            }, {
+                data: <?php echo json_encode($salesDataWeek); ?>,
+            }]
+        });
+
+        Highcharts.chart('BookingsWeek', {
+            chart: {
+                type: 'areaspline'
+            },
+            title: {
+                text: 'Reservas de la semana'
+            },
+            legend: {
+                layout: 'vertical',
+                align: 'left',
+                verticalAlign: 'top',
+                x: 150,
+                y: 100,
+                floating: true,
+                borderWidth: 1,
+                backgroundColor:
+                    Highcharts.defaultOptions.legend.backgroundColor || '#FFFFFF'
+            },
+            xAxis: {
+                categories: [
+                    'Lunes',
+                    'Martes',
+                    'Miercoles',
+                    'Jueves',
+                    'Viernes',
+                    'Sabado',
+                    'Domingo'
+                ],
+                plotBands: [{ // visualize the weekend
+                    from: 4.5,
+                    to: 6.5,
+                    color: 'rgba(234,75,75,0.2)'
+                }]
+            },
+            yAxis: {
+                title: {
+                    text: 'Número de reservas de la semana'
+                }
+            },
+            tooltip: {
+                shared: true,
+                valueSuffix: ''
+            },
+            series: [{
                 name: 'Reservas',
-                data: [0, 0, 0, 0, 0, 0, 0]
+                data: <?php echo json_encode($bookingsDataWeek); ?>,
             }]
         });
     </script>
