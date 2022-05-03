@@ -45,7 +45,7 @@
         <a class="arrow" href="#Quienessomos"><i class="fa-solid fa-angle-down" ></i></a>
     </div>
 </header>
-
+@include('includes.events')
 <!-- Quienes somos-->
 <section class="page-section" id="Quienessomos" >
 

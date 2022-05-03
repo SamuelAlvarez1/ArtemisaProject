@@ -10,6 +10,7 @@ use App\Http\Controllers\BookingsController;
 use App\Http\Controllers\Admin\PlatesController;
 use App\Http\Controllers\CustomersController;
 use App\Http\Controllers\EventsController;
+use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\SalesController;
 use App\Http\Controllers\Admin\CategoriesController;
 
@@ -24,10 +25,7 @@ use App\Http\Controllers\Admin\CategoriesController;
 |
 */
 
-Route::get('/', function () {
-    $plates = \App\Models\Plate::all()->take(3);
-    return view('welcome', compact('plates'));
-});
+Route::get('/', [WelcomeController::class, "index"]);
 
 Auth::routes();
 
