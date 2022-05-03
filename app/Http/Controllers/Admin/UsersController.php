@@ -172,7 +172,7 @@ class UsersController extends Controller
                     'email' => $request['email'],
                     'phone' => $request['phone'],
                 ]);
-                if (auth()->user()->idRol == 1) {
+                if (auth()->user()->idRol == 1 && auth()->user()->id != $id) {
                     return redirect('/users')->with("success", "el usuario fue editado satisfactoriamente");
                 }
                 return redirect('/users/profile/' . auth()->user()->id)->with("success", 'La información ha sido editada satisfactoriamente');
