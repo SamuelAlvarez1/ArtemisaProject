@@ -32,11 +32,9 @@
                 </div>
                 <div class="col-3 d-flex justify-content-center d-flex align-items-center">
                         <div class="input-group">
-                            <input type="text" class="form-control border border-dark" id="searchInput" placeholder="Busqueda"
+                            <input type="text" class="form-control-sm border border-dark" id="searchInput" placeholder="Busqueda"
                                 aria-label="Recipient's username" aria-describedby="basic-addon2">
-                            <div class="input-group-append">
-                                <button class="btn btn-sm btn-outline-dark" id="searchButton" type="button">Buscar</button>
-                            </div>
+                            
                         </div>
                     </div>
             </div>
@@ -113,9 +111,9 @@
                             }
                         });
 
-                        $('#searchButton').on('keyup click', function () {
-                            table.search($('#searchInput').val()).draw();
-                        });
+                        $('#searchInput').on('keyup', function () {
+                table.search($('#searchInput').val()).draw();
+            });
                     });
                 </script>
 @endsection

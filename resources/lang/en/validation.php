@@ -152,7 +152,11 @@ return [
         'last_name' => 'apellido',
         'phone' => 'numero',
         'id_rol' => 'rol',
+<<<<<<< HEAD
         'idRol' => 'Rol',
+=======
+        'idCustomers' => "Cliente",
+>>>>>>> a7d1254b1e8667dc8a064ea3bd05fe79b1b0e9dd
         'amount_people' => 'cantidad de personas',
         'password' => 'contraseña',
         'new_password' => 'contraseña nueva',

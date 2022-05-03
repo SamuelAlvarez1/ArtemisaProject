@@ -29,13 +29,11 @@
                             activos</a>
                     @endif
                 </div>
-                <div class="col-4 d-flex justify-content-center d-flex align-items-center">
+                <div class="col-3 offset-1 d-flex justify-content-center d-flex align-items-center">
                     <div class="input-group">
-                        <input type="text" class="form-control-sm border border-dark" id="searchInput" placeholder="Busqueda"
+                        <input type="text" class="form-control-sm border border-dark float-right" id="searchInput" placeholder="Busqueda"
                                aria-label="Recipient's username" aria-describedby="basic-addon2">
-                        <div class="input-group-append">
-                            <button class="btn btn-sm btn-outline-dark" id="searchButton" type="Button">Buscar</button>
-                        </div>
+                        
                     </div>
                 </div>
             </div>
@@ -110,7 +108,7 @@
                 }
             });
 
-            $('#searchButton').on('keyup click', function () {
+            $('#searchInput').on('keyup', function () {
                 table.search($('#searchInput').val()).draw();
             });
 

@@ -57,7 +57,6 @@ class PlatesController extends Controller
     public function store(Request $request)
     {
         // $request->validate(Plate::$rules);
-
         $input = $request->all();
 
 

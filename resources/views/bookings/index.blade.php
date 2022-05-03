@@ -49,13 +49,10 @@
                 @endif
 
             </div>
-            <div class="col-4 d-flex justify-content-center d-flex align-items-center">
+            <div class="col-3 offset-1 d-flex justify-content-center d-flex align-items-center">
                 <div class="input-group">
-                    <input type="text" class="form-control border border-dark" id="searchInput" placeholder="Busqueda"
+                    <input type="text" class="form-control-sm border border-dark" id="searchInput" placeholder="Busqueda"
                         aria-label="Recipient's username" aria-describedby="basic-addon2"  data-toggle="tooltip" data-placement="top" title="digite para buscar una reserva que se desee encontrar">
-                    <div class="input-group-append">
-                        <button class="btn btn-sm btn-outline-dark" id="searchButton" type="button"  data-toggle="tooltip" data-placement="top" title="Click para encontrar una reserva con lo previamente digitado">Buscar</button>
-                    </div>
                 </div>
             </div>
         </div>
@@ -118,8 +115,7 @@
                         @endif
 
                         <td>
-                            <a class="mx-2" href="{{url('/bookings/'.$value->id)}}"  data-toggle="tooltip" data-placement="top" title="ver los detalles de esta reserva"><i
-                                    class="fa-solid text-dark fa-magnifying-glass"></i></a>
+                            <a class="mx-2" href="{{url('/bookings/'.$value->id)}}"  data-toggle="tooltip" data-placement="top" title="ver los detalles de esta reserva"><i class="fa-solid text-dark fa-info-circle"></i></a>
 
                             @if($value->state == 0)
 
@@ -171,7 +167,7 @@
                             }
                         });
 
-        $('#searchButton').on('keyup click', function () {
+        $('#searchInput').on('keyup', function () {
             table.search($('#searchInput').val()).draw();
         });
     });

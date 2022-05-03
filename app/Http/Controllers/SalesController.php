@@ -54,27 +54,28 @@ class SalesController extends Controller
 
     public function store(Request $request)
     {
-        // $request->validate(Sale::$rules);
+        $request->validate(Sale::$rules);
+        $input = $request->all();
 
         try {
             DB::beginTransaction();
             $sale = Sale::create([
-                "idCustomers" => $request["customer"],
+                "idCustomers" => $request["idCustomers"],
                 "finalPrice" => $request["totalPrice"],
                 "state" => 1,
-                'idUser' => auth()->user()->id
+                'idUser' => auth()->id()
             ]);
-
-            if (isset($request["idPlatillo"])) {
+            if ($request["idPlatillo"]!=null) {
                 foreach ($request["idPlatillo"] as $key => $value) {
                     SaleDetail::create([
                         'idSales' => $sale->id,
                         "idPlate" => $value,
                         "quantity" => $request["cantidades"][$key],
                         "platePrice" => $request["precios"][$key],
-
                     ]);
                 }
+            } else {
+                return back()->with('error', 'Seleccione, por favor, un platillo para generar la venta.');
             }
 
             DB::commit();
