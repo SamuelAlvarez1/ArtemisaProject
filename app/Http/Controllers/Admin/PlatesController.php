@@ -77,8 +77,8 @@ class PlatesController extends Controller
                     }else{
                         Plate::create([
                         "name" => $input["plate"][$key],
-                        "price" => $input["prices"][$key],
-                        "idCategory" => $input["categories"][$key],
+                        "price" => $input["price"][$key],
+                        "idCategory" => $input["idCategory"][$key],
                         "state" => 1
                     ]);
                     }
@@ -133,6 +133,7 @@ class PlatesController extends Controller
 
     public function update(Request $request, $id)
     {
+        $request->validate(Plate::$rulesEdit);
         if ($id != null) {
             $name = Plate::where('name', $request["plate"]);
             if ($name){
