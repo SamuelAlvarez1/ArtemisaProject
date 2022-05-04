@@ -24,8 +24,8 @@ class HomeController extends Controller
     }
 
 
-
-    private function graficas($data){
+    private function Mes($data)
+    {
         $Chart = DB::table($data)->select(DB::raw('COUNT(*) as count'))
             ->whereYear('created_at', date('Y'))
             ->groupBy(DB::raw('Month(created_at)'))
@@ -35,29 +35,48 @@ class HomeController extends Controller
             ->whereYear('created_at', date('Y'))
             ->groupBy(DB::raw('Month(created_at)'))
             ->pluck('month');
+
         $Data = array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
         foreach ($Months as $index => $month) {
             $Data[$month - 1] = $Chart[$index];
         }
+//        dd($Months, $Chart);
+
         return $Data;
     }
-    private function graficasSemana($data){
 
+
+
+    private function Semana($data)
+    {
+        $now = Carbon::now();
+        $weekStartDate = $now->startOfWeek()->format('Y-m-d H:i');
+        $weekEndDate = $now->endOfWeek()->format('Y-m-d H:i');
         $Chart = DB::table($data)->select(DB::raw('COUNT(*) as count'))
-            ->whereYear('created_at', date('Y'))
-            ->groupBy(DB::raw('Month(created_at)'))
+            ->whereBetween('created_at', [$weekStartDate, $weekEndDate])
+            ->groupBy(DB::raw('EXTRACT(DAY from created_at)'))
             ->pluck('count');
 
-        $Months = DB::table($data)->select(DB::raw('Month(created_at) as month'))
-            ->whereYear('created_at', date('Y'))
-            ->groupBy(DB::raw('Month(created_at)'))
-            ->pluck('month');
-        $Data = array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-        foreach ($Months as $index => $month) {
-            $Data[$month - 1] = $Chart[$index];
+
+
+        $Week = DB::table($data)->select(DB::raw('date(created_at) as fecha'))
+            ->whereBetween('created_at', [$weekStartDate, $weekEndDate])
+            ->groupBy(DB::raw('fecha'))
+            ->get();
+
+
+        $Data = array(0, 0, 0, 0, 0, 0, 0);
+        foreach ($Week as $index => $week) {
+            $semana = new Carbon($week->fecha);
+
+            $Data[$semana->dayOfWeek - 1] = $Chart[$index];
+
+
         }
         return $Data;
     }
+
+
 
     public function index()
     {
@@ -100,16 +119,30 @@ class HomeController extends Controller
         $countSales = sizeof($Sales);
 
 
-
-
         //        Charts
 
-        $salesData = $this->graficas('sales');
-        $bookingsData = $this->graficas('bookings');
+        $salesData = $this->Mes('sales');
+        $bookingsData = $this->Mes('bookings');
+        $salesDataWeek = $this->Semana('sales');
+        $bookingsDataWeek = $this->Semana('bookings');
 
-        $salesWeek = $this->graficasSemana('sales');
-        $bookingsWeek = $this->graficasSemana('bookings');
 
-        return view('home', compact('plate', 'countBookings', 'countSales', 'salesData', 'bookingsData'));
+        //        Customers
+
+        $FClientes = Sale::selectRaw('count(id) as sales, sales.idCustomers as customers')->where('sales.state', 1)
+            ->take(5)
+            ->groupBy('customers')
+            ->orderBy('sales', 'Desc')
+            ->get();
+
+        $customers = [];
+
+        foreach ($FClientes as $key => $cliente){
+            $customers[$key] = Customer::select('name')->where('id', $cliente->customers)->first();
+            $customers[$key]['sales'] = $cliente->sales;
+        }
+
+
+        return view('home', compact('plate', 'countBookings', 'countSales', 'salesData', 'bookingsData', 'salesDataWeek', 'bookingsDataWeek', 'customers'));
     }
 }
