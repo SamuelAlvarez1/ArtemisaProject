@@ -35,10 +35,13 @@ class HomeController extends Controller
             ->whereYear('created_at', date('Y'))
             ->groupBy(DB::raw('Month(created_at)'))
             ->pluck('month');
+
         $Data = array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
         foreach ($Months as $index => $month) {
             $Data[$month - 1] = $Chart[$index];
         }
+//        dd($Months, $Chart);
+
         return $Data;
     }
 
@@ -46,18 +49,19 @@ class HomeController extends Controller
 
     private function Semana($data)
     {
-
-        $Chart = DB::table($data)->select(DB::raw('COUNT(*) as count'))
-            ->whereYear('created_at', date('Y'))
-            ->groupBy(DB::raw('Month(created_at)'))
-            ->pluck('count');
-
         $now = Carbon::now();
         $weekStartDate = $now->startOfWeek()->format('Y-m-d H:i');
         $weekEndDate = $now->endOfWeek()->format('Y-m-d H:i');
-
-        $Week = DB::table($data)->select(DB::raw('date((created_at)) as fecha'))
+        $Chart = DB::table($data)->select(DB::raw('COUNT(*) as count'))
             ->whereBetween('created_at', [$weekStartDate, $weekEndDate])
+            ->groupBy(DB::raw('EXTRACT(DAY from created_at)'))
+            ->pluck('count');
+
+
+
+        $Week = DB::table($data)->select(DB::raw('date(created_at) as fecha'))
+            ->whereBetween('created_at', [$weekStartDate, $weekEndDate])
+            ->groupBy(DB::raw('fecha'))
             ->get();
 
 
@@ -66,6 +70,8 @@ class HomeController extends Controller
             $semana = new Carbon($week->fecha);
 
             $Data[$semana->dayOfWeek - 1] = $Chart[$index];
+
+
         }
         return $Data;
     }
@@ -117,11 +123,26 @@ class HomeController extends Controller
 
         $salesData = $this->Mes('sales');
         $bookingsData = $this->Mes('bookings');
-
         $salesDataWeek = $this->Semana('sales');
         $bookingsDataWeek = $this->Semana('bookings');
 
 
-        return view('home', compact('plate', 'countBookings', 'countSales', 'salesData', 'bookingsData', 'salesDataWeek', 'bookingsDataWeek'));
+        //        Customers
+
+        $FClientes = Sale::selectRaw('count(id) as sales, sales.idCustomers as customers')->where('sales.state', 1)
+            ->take(5)
+            ->groupBy('customers')
+            ->orderBy('sales', 'Desc')
+            ->get();
+
+        $customers = [];
+
+        foreach ($FClientes as $key => $cliente){
+            $customers[$key] = Customer::select('name')->where('id', $cliente->customers)->first();
+            $customers[$key]['sales'] = $cliente->sales;
+        }
+
+
+        return view('home', compact('plate', 'countBookings', 'countSales', 'salesData', 'bookingsData', 'salesDataWeek', 'bookingsDataWeek', 'customers'));
     }
 }

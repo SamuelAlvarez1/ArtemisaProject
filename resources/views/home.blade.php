@@ -53,7 +53,31 @@
             <div class="col-6" id="BookingsWeek">
             </div>
         </div>
-
+<div class="row mt-5">
+        <div class="card">
+            <div class="card-header text-center">
+                <h2>Clientes más frecuentes</h2>
+                <div class="card-body">
+                    <table class="table table-striped m-auto" style="width: 30rem">
+                        <thead class="thead-dark">
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Número de ventas</th>
+                        </tr>
+                        </thead>
+                        <tbody class="text-center">
+                        @foreach($customers as $customer)
+                        <tr>
+                            <td>{{$customer->name}}</td>
+                            <td>{{$customer->sales}}</td>
+                        </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+</div>
 
     </div>
 @endsection
@@ -96,17 +120,7 @@
             title: {
                 text: 'Ventas del año'
             },
-            legend: {
-                layout: 'vertical',
-                align: 'left',
-                verticalAlign: 'top',
-                x: 150,
-                y: 100,
-                floating: true,
-                borderWidth: 1,
-                backgroundColor:
-                    Highcharts.defaultOptions.legend.backgroundColor || '#FFFFFF'
-            },
+
             xAxis: {
                 categories: ['Ene','Feb', 'Mar','Abr','May','Jun','Jul','Agt','Sep','Oct','Nov','Dic'],
 
@@ -160,17 +174,7 @@
             title: {
                 text: 'Reservas del año'
             },
-            legend: {
-                layout: 'vertical',
-                align: 'left',
-                verticalAlign: 'top',
-                x: 150,
-                y: 100,
-                floating: true,
-                borderWidth: 1,
-                backgroundColor:
-                    Highcharts.defaultOptions.legend.backgroundColor || '#FFFFFF'
-            },
+
             xAxis: {
                 categories: ['Ene','Feb', 'Mar','Abr','May','Jun','Jul','Agt','Sep','Oct','Nov','Dic'],
 
@@ -219,17 +223,7 @@
             title: {
                 text: 'Ventas de la semana'
             },
-            legend: {
-                layout: 'vertical',
-                align: 'left',
-                verticalAlign: 'top',
-                x: 150,
-                y: 100,
-                floating: true,
-                borderWidth: 1,
-                backgroundColor:
-                    Highcharts.defaultOptions.legend.backgroundColor || '#FFFFFF'
-            },
+
             xAxis: {
                 categories: [
                     'Lunes',
@@ -251,10 +245,7 @@
                     text: 'Número de ventas y reservas de la semana'
                 }
             },
-            tooltip: {
-                shared: true,
-                valueSuffix: ''
-            },
+
             series: [{
                 name: 'Ventas',
                 data: <?php echo json_encode($salesDataWeek); ?>,
@@ -268,17 +259,7 @@
             title: {
                 text: 'Reservas de la semana'
             },
-            legend: {
-                layout: 'vertical',
-                align: 'left',
-                verticalAlign: 'top',
-                x: 150,
-                y: 100,
-                floating: true,
-                borderWidth: 1,
-                backgroundColor:
-                    Highcharts.defaultOptions.legend.backgroundColor || '#FFFFFF'
-            },
+
             xAxis: {
                 categories: [
                     'Lunes',
@@ -300,10 +281,7 @@
                     text: 'Número de reservas de la semana'
                 }
             },
-            tooltip: {
-                shared: true,
-                valueSuffix: ''
-            },
+
             series: [{
                 name: 'Reservas',
                 data: <?php echo json_encode($bookingsDataWeek); ?>,
