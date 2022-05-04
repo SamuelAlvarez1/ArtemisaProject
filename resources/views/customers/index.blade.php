@@ -13,9 +13,6 @@
     <div class="card">
         <div class="card-header">
             <div class="row">
-                <div class="col-2 d-flex justify-content-center d-flex align-items-center">
-                    <strong>Clientes</strong>
-                </div>
                 <div class="col-6 d-flex justify-content-center d-flex align-items-center">
 
                     <a href="{{url('/customers/create')}}" class="btn-sm btn mx-2 btn-outline-dark">Registrar cliente</a>

@@ -6,12 +6,12 @@
 
 @section('main-content')
 
-
+    <div class="col-md-8 offset-2 my-2">
     <div class="card shadow">
         <div class="card-header border-0">
             <div class="row align-items-center">
                 <div class="col">
-                    <h3 class="mb-0">Crear cliente</h3>
+                    <h3 class="mb-0">Editar información</h3>
                 </div>
                 <div class="col text-right">
                     <a href="{{url('customers')}}" class="btn btn-sm btn-danger">
@@ -72,5 +72,6 @@
             </form>
         </div>
     </div>
+</div>
 @endsection
 
