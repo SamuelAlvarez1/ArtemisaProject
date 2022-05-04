@@ -58,7 +58,7 @@
                     </div>
                     <div class="col-4 d-flex justify-content-center" style="margin: auto; ">
 
-                        <button type="submit" class="btn btn-outline-dark float-right">Guardar platillo/s</button>
+                        <button type="submit" class="btn btn-outline-dark float-right">Guardar platillo</button>
                         <a href="{{url('plates')}}" class="btn btn-outline-danger">
                             Volver
                         </a>
