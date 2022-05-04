@@ -33,23 +33,26 @@
         <div class="card-body">
             <form action="{{ url('roles') }}" method="post">
                 @csrf
-
-                <input
+                <div>
+                    <label for="">Nombre<b class="text-danger">*</b></label>
+                    <input
                     type="text"
                     class="form-control"
-                    placeholder="Nombre"
                     name="name"
                     value="{{ old('name') }}"
-                />
-
-                <input
+                    />
+                </div>
+                <div class="mt-2 mb-2">
+                    <label for="">Descripción<b class="text-danger">*</b></label>
+                <textarea
                     type="text"
-                    class="form-control mt-2"
-                    placeholder="descripcion"
+                    class="form-control"
                     name="description"
-                    value="{{ old('description') }}"
-                />
-
+                    resize = 'none'
+                    rows="3"
+                >{{ old('description') }}
+                </textarea>
+                </div>
                 <button type="submit" class="btn btn-primary mt-2">
                     Crear rol
                 </button>
