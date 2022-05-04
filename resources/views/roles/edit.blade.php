@@ -36,23 +36,22 @@
                 @csrf
                 @method('PUT')
                 <input type="hidden" name="id" value="{{$rol->id}}">
+                <div>
+                    <label for="">Nombre<b class="text-danger">*</b></label>
                 <input
                     type="text"
                     class="form-control"
-                    placeholder="nombre"
                     name="name"
                     value="{{$rol->name}}"
                 />
-
-                <input
-                type="text"
-                class="form-control mt-2"
-                placeholder="descripcion"
-                name="description"
-                value="{{$rol->description}}"
-            />
+                </div>
+                <div class="mt-2 mb-2">
+                    <label for="">Descripción<b class="text-danger">*</b></label>
+                    <textarea class="form-control" id="exampleFormControlTextarea1" resize = 'none' rows="4">{{$rol->description}}</textarea>
+                </textarea>
+                </div>
                 <button type="submit" class="btn btn-primary mt-2">
-                    editar rol
+                    Editar rol
                 </button>
             </form>
         </div>

@@ -37,7 +37,7 @@
                 @csrf
                 @method('PUT')
                 <div class="form-group">
-                    <label for="nameInput">Nombre</label>
+                    <label for="nameInput">Nombre<b class="text-danger">*</b></label>
                     <input value="{{old('name', $category->name)}}" type="text" class="form-control" name="name"
                            id="nameInput" placeholder="Cliente">
                 </div>
@@ -50,7 +50,7 @@
                     @endif
 
                     <label class="form-check-label" for="state">
-                        Estado
+                        Estado<b class="text-danger">*</b>
                     </label>
                 </div>
                 <button type="submit" class="btn btn-success">Actualizar</button>

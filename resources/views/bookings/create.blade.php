@@ -38,7 +38,7 @@
                         @csrf
 
                         <div class="row mb-3">
-                            <label for="idCustomer" class="col-md-4 col-form-label text-md-end">{{ __('Cliente') }}</label>
+                            <label for="idCustomer" class="col-md-4 col-form-label text-md-end">{{ __('Cliente') }}<b class="text-danger">*</b></label>
 
                             <div class="col-md-6">
                                 <select name="idCustomer" id="idCustomer" class="form-control" data-toggle="tooltip" data-placement="right" title="Seleccionar el cliente">
@@ -67,7 +67,7 @@
                         </div>
 
                         <div class="row mb-3">
-                            <label for="amount_people" class="col-md-4 col-form-label text-md-end">{{ __('Cantidad de personas') }}</label>
+                            <label for="amount_people" class="col-md-4 col-form-label text-md-end">{{ __('Cantidad de personas') }}<b class="text-danger">*</b></label>
 
                             <div class="col-md-6">
                                 <input id="amount_people" type="text" class="form-control" name="amount_people" value="{{ old('amount_people') }}" required autocomplete="amount_people" data-toggle="tooltip" data-placement="right" title="Digite la cantidad de personas">
@@ -77,14 +77,14 @@
                         </div>
 
                         <div class="row mb-3">
-                            <label for="start_date" class="col-md-4 col-form-label text-md-end">{{ __('Fecha inicial') }}</label>
+                            <label for="start_date" class="col-md-4 col-form-label text-md-end">{{ __('Fecha inicial') }}<b class="text-danger">*</b></label>
 
                             <div class="col-md-6">
                                 <input id="booking_date" type="date" class="form-control" name="booking_date" value="{{ old('booking_date') }}" required autocomplete="booking_date" data-toggle="tooltip" data-placement="right" title="Fecha dia/mes/año de la reserva">
                             </div>
                         </div>    
                         <div class="row mb-3">
-                            <label for="booking_hour" class="col-md-4 col-form-label text-md-end">{{ __('Hora de la reserva') }}</label>
+                            <label for="booking_hour" class="col-md-4 col-form-label text-md-end">{{ __('Hora de la reserva') }}<b class="text-danger">*</b></label>
                             <div class="col-md-6">
                                 
                                 <select name="booking_hour" id="booking_hour" class="form-control" data-toggle="tooltip" data-placement="right" title="Hora solicitada para la reserva">
@@ -118,7 +118,7 @@
                             </div>
                         </div>    
                         <div class="row mb-3">
-                            <label for="booking_minutes" class="col-md-4 col-form-label text-md-end">{{ __('Minutos de la reserva') }}</label>
+                            <label for="booking_minutes" class="col-md-4 col-form-label text-md-end">{{ __('Minutos de la reserva') }}<b class="text-danger">*</b></label>
                             <div class="col-md-6">
                                 
                                 <input id="booking_minutes" type="text" class="form-control" name="booking_minutes" value="{{ old('booking_minutes') }}" required autocomplete="booking_minutes" data-toggle="tooltip" data-placement="right" title="Minutos solicitados de la reserva">

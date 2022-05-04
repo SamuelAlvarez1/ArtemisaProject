@@ -41,7 +41,7 @@
                 <input type="hidden" name="id" value="{{$user->id}}">
 
                 <div class="row mb-3">
-                    <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Nombres') }}</label>
+                    <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Nombres') }}<b class="text-danger">*</b></label>
 
                     <div class="col-md-6">
                         <input type="text" class="form-control" placeholder="nombre" name="name" value="{{$user->name}}" />
@@ -51,7 +51,7 @@
                 </div>
 
                 <div class="row mb-3">
-                    <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Apellidos') }}</label>
+                    <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Apellidos') }}<b class="text-danger">*</b></label>
 
                     <div class="col-md-6">
                        
@@ -62,7 +62,7 @@
                 </div>
 
                 <div class="row mb-3">
-                    <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Correo') }}</label>
+                    <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Correo') }}<b class="text-danger">*</b></label>
 
                     <div class="col-md-6">
                        
@@ -73,7 +73,7 @@
                 </div>
 
                 <div class="row mb-3">
-                    <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Celular') }}</label>
+                    <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Celular') }}<b class="text-danger">*</b></label>
 
                     <div class="col-md-6">
                        
@@ -84,7 +84,7 @@
                 </div>
                 
                 <button type="submit" class="btn btn-primary mt-2">
-                    editar usuario
+                    Editar usuario
                 </button>
             </form>
         </div>
