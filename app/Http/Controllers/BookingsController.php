@@ -7,12 +7,22 @@ use App\Models\Booking;
 use App\Models\Customer;
 use App\Models\Event;
 use DataTables;
+use Carbon\Carbon;
 
 class BookingsController extends Controller
 {
 
+    public function __construct()
+    {
+        Carbon::setLocale('es');
+        setlocale(LC_TIME, 'es_ES');
+    }
+
+
     public function index()
     {
+
+
         $bookings = Booking::select("bookings.*", "customers.name as customerName", "events.name as eventName", "users.name as user")
             ->join("customers", "bookings.idCustomer", "=", "customers.id")
             ->leftJoin('events', 'bookings.idEvent', '=', 'events.id')
@@ -22,6 +32,7 @@ class BookingsController extends Controller
 
 
         $states = "1";
+
         return view("bookings.index", compact("bookings", "states"));
     }
 
@@ -35,6 +46,10 @@ class BookingsController extends Controller
             ->where("bookings.state", "=", 0)
             ->get();
 
+        foreach ($bookings as $booking) {
+            $booking->start_date = Carbon::parse($booking->start_date)->format('d-m-Y h:i a');
+        }
+
         $states = "0";
         return view("bookings.index", compact("bookings", "states"));
     }
@@ -47,6 +62,11 @@ class BookingsController extends Controller
             ->join("users", "bookings.idUser", "=", "users.id")
             ->where("bookings.state", "=", 2)
             ->get();
+
+        foreach ($bookings as $booking) {
+            $booking->start_date = Carbon::parse($booking->start_date)->format('d-m-Y h:i a');
+            $booking->final_date = Carbon::parse($booking->final_date)->format('d-m-Y h:i a');
+        }
 
         $states = "2";
         return view("bookings.index", compact("bookings", "states"));
@@ -62,9 +82,19 @@ class BookingsController extends Controller
                 $booking = Booking::find($id);
 
                 if ($booking != null && $booking->state != $state) {
-                    $booking->update([
-                        "state" => $state
-                    ]);
+                    if ($state == 2) {
+                        if ($booking->start_date > Carbon::parse(date("d-m-Y h:i"))) {
+                            return redirect('/bookings')->with("error", "Aún no ha llegado la fecha de esta reserva");
+                        }
+                        $booking->update([
+                            "state" => $state,
+                            "final_date" => Carbon::parse(date("d-m-Y h:i"))
+                        ]);
+                    } else {
+                        $booking->update([
+                            "state" => $state
+                        ]);
+                    }
                 } else {
                     return redirect('/bookings')->with("error", "El cambio de estado de la reserva no se pudo realizar");
                 }
@@ -79,6 +109,8 @@ class BookingsController extends Controller
                 return redirect('/bookings')->with("error", "El cambio de estado de la reserva no se pudo realizar");
             }
         }
+
+
         return redirect('/bookings')->with("error", "El cambio de estado de la reserva no se pudo realizar");
     }
 
@@ -96,15 +128,24 @@ class BookingsController extends Controller
         $campos = [
             'idCustomer' => 'required|numeric',
             'amount_people' => 'required|numeric|min:1|max:20',
-            'start_date' => 'required|date|after_or_equal:' . date('d-m-Y h:i a'),
-            'final_date' => 'required|date|after:start_date'
+            'booking_date' => 'required|date|after_or_equal:' . date('d-m-Y'),
+            'booking_hour' => 'required|numeric',
+            'booking_minutes' => 'required|numeric',
         ];
 
         $this->validate($request, $campos);
 
+        $start_date = Carbon::parse($request["booking_date"] . " " . $request["booking_hour"] . ":" . $request["booking_minutes"]);
+
+
+        if (Carbon::now() > Carbon::parse($start_date)) {
+            return redirect('/bookings/create')->with("error", "La reserva no se pudo crear debido a que la fecha actual es mayor a la fecha solicitada");
+        }
+
+
+
         $bookings = Booking::select("amount_people")
             ->whereDate("start_date", $request['start_date'])
-            ->whereDate("final_date", $request['final_date'])
             ->where('state', 1)
             ->get();
 
@@ -124,8 +165,7 @@ class BookingsController extends Controller
                 'idEvent' =>  $request['idEvent'],
                 'idUser' => auth()->user()->id,
                 'amount_people' => $request['amount_people'],
-                'start_date' => $request['start_date'],
-                'final_date' => $request['final_date'],
+                'start_date' => $start_date,
                 'state' => 1
             ]);
         } catch (\Exception $e) {
@@ -160,7 +200,6 @@ class BookingsController extends Controller
     {
         if ($id != null) {
             $booking = Booking::find($id);
-
             if ($booking != null) {
                 $customers = Customer::all();
                 $events = Event::all();
@@ -180,14 +219,24 @@ class BookingsController extends Controller
             $campos = [
                 'idCustomer' => 'required|numeric',
                 'amount_people' => 'required|numeric|min:1|max:20',
-                'final_date' => 'required|date|after_or_equal:' . date('d-m-Y'),
+                'booking_date' => 'required|date|after_or_equal:' . date('d-m-Y'),
+                'booking_hour' => 'required|numeric',
+                'booking_minutes' => 'required|numeric',
             ];
 
             $this->validate($request, $campos);
 
+            $start_date = Carbon::parse($request["booking_date"] . " " . $request["booking_hour"] . ":" . $request["booking_minutes"]);
+
+
+            if (Carbon::now() > Carbon::parse($start_date)) {
+                return redirect('/bookings/create')->with("error", "La reserva no se pudo crear debido a que la fecha actual es mayor a la fecha solicitada");
+            }
+
+
 
             $bookings = Booking::select("amount_people")
-                ->whereDate("final_date", $request['final_date'])
+                ->whereDate("start_date", $request['start_date'])
                 ->where('state', 1)
                 ->get();
 
@@ -209,8 +258,9 @@ class BookingsController extends Controller
                     $booking->update([
                         'idCustomer' => $request['idCustomer'],
                         'idEvent' =>  $request['idEvent'],
+                        'idUser' => auth()->user()->id,
                         'amount_people' => $request['amount_people'],
-                        'final_date' => $request['final_date'],
+                        'start_date' => $start_date,
                     ]);
                 }
 

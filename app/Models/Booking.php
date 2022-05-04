@@ -22,5 +22,10 @@ class Booking extends Model
         'final_date',
     ];
 
+    protected $dates = [
+        'start_date',
+        'final_date',
+    ];
+
     public $timestamps = true;
 }

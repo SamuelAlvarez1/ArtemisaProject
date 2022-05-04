@@ -152,12 +152,20 @@ return [
         'last_name' => 'apellido',
         'phone' => 'numero',
         'id_rol' => 'rol',
+<<<<<<< HEAD
+        'idRol' => 'Rol',
+=======
+        'idCustomers' => "Cliente",
+>>>>>>> a7d1254b1e8667dc8a064ea3bd05fe79b1b0e9dd
         'amount_people' => 'cantidad de personas',
         'password' => 'contraseña',
         'new_password' => 'contraseña nueva',
         'password_confirmation' => 'confirmar contraseña',
         'endDate' => 'fecha fin',
         'start_date' => 'la fecha inicial',
+        'booking_date' => 'fecha de la reserva',
+        'booking_hour' => 'hora de la reserva',
+        'booking_minutes' => 'minutos de la reserva',
         'final_date' => 'fecha final',
         'startDate' => 'fecha inicio',
         'state' => 'estado',

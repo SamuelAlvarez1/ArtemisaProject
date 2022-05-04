@@ -10,8 +10,9 @@ use App\Http\Controllers\BookingsController;
 use App\Http\Controllers\Admin\PlatesController;
 use App\Http\Controllers\CustomersController;
 use App\Http\Controllers\EventsController;
+use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\SalesController;
-use App\Http\Controllers\CategoriesController;
+use App\Http\Controllers\Admin\CategoriesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,10 +25,7 @@ use App\Http\Controllers\CategoriesController;
 |
 */
 
-Route::get('/', function () {
-    $plates = \App\Models\Plate::all()->take(3);
-    return view('welcome', compact('plates'));
-});
+Route::get('/', [WelcomeController::class, "index"]);
 
 Auth::routes();
 
@@ -46,10 +44,26 @@ Route::group(['middleware' => ['auth', 'validarRol']], function () {
     Route::get('/users/updateState/{id}/{state}', [UsersController::class, "updateState"]);
     Route::get('/users/notActive', [UsersController::class, "notActive"]);
 
+    //<-----------Plates------------>
+
+    Route::get('/plates/notActive', [PlatesController::class, 'notActive']);
+    Route::get('/plates/updateState/{id}', [PlatesController::class, 'updateState']);
+    Route::get('/plates/updateStateVariation/{id}', [PlatesController::class, 'updateStateVariation']);
+    Route::get('/plates/getPricePlate/{id}', [PlatesController::class, 'getPricePlate']);
+
+    //<---------Categories----------->
+
+    Route::get('/categories/notActive', [CategoriesController::class, 'notActive']);
+    Route::get('/categories/updateState/{id}', [CategoriesController::class, 'updateState']);
+
     //<---------Resources---------->
 
     Route::resource('users', UsersController::class)->only(['index', 'create', 'store', 'show']);
-    Route::resource('roles', RolesController::class);
+    Route::resources([
+        'roles' => RolesController::class,
+        'plates' => PlatesController::class,
+        'categories' => CategoriesController::class,
+    ]);
 });
 
 
@@ -80,17 +94,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/events/updateState/{id}', [EventsController::class, 'updateState']);
 
 
-    //<-----------Plates------------>
-
-    Route::get('/plates/notActive', [PlatesController::class, 'notActive']);
-    Route::get('/plates/updateState/{id}', [PlatesController::class, 'updateState']);
-    Route::get('/plates/updateStateVariation/{id}', [PlatesController::class, 'updateStateVariation']);
-    Route::get('/plates/getPricePlate/{id}', [PlatesController::class, 'getPricePlate']);
-
-    //<---------Categories----------->
-
-    Route::get('/categories/notActive', [CategoriesController::class, 'notActive']);
-    Route::get('/categories/updateState/{id}', [CategoriesController::class, 'updateState']);
 
     //<-----------Sales------------>
     Route::get('/sales/canceledSales', [SalesController::class, 'canceledSales']);
@@ -99,11 +102,9 @@ Route::group(['middleware' => 'auth'], function () {
     //<----------Resources---------->
 
     Route::resources([
-        'plates' => PlatesController::class,
         'customers' => CustomersController::class,
         'events' => EventsController::class,
         'bookings' => BookingsController::class,
         'sales' => SalesController::class,
-        'categories' => CategoriesController::class
     ]);
 });

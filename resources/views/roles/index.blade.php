@@ -32,13 +32,11 @@
                 @endif        
                 
             </div>
-            <div class="col-4 d-flex justify-content-center d-flex align-items-center">
+            <div class="col-3 offset-1 d-flex justify-content-center d-flex align-items-center">
                     <div class="input-group">
-                        <input type="text" class="form-control border border-dark" id="searchInput" placeholder="Busqueda"
+                        <input type="text" class="form-control-sm border border-dark" id="searchInput" placeholder="Busqueda"
                             aria-label="Recipient's username" aria-describedby="basic-addon2">
-                        <div class="input-group-append">
-                            <button class="btn btn-sm btn-outline-dark" id="searchButton" type="button">Buscar</button>
-                        </div>
+                        
                     </div>
                 </div>
         </div>
@@ -74,8 +72,7 @@
                         </td>
                         
                         <td>
-                            <a class="mx-2" href="{{url('/roles/'.$value->id)}}"><i
-                                    class="fa-solid text-dark fa-magnifying-glass"></i></a>
+                            <a class="mx-2" href="{{url('/roles/'.$value->id)}}"><i class="fa-solid text-dark fa-info-circle"></i></a>
                             <a class="mx-2" href="{{url('/roles/'.$value->id . '/edit')}}"><i
                                     class="fa text-dark fa-edit"></i></a>
                             @if($value->state == 1)
@@ -120,9 +117,9 @@
                             }
                         });
 
-                        $('#searchButton').on('keyup click', function () {
-                            table.search($('#searchInput').val()).draw();
-                        });
+                        $('#searchInput').on('keyup', function () {
+                table.search($('#searchInput').val()).draw();
+            });
                     });
                 </script>
 

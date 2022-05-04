@@ -34,7 +34,7 @@ class CustomersController extends Controller
                 'name' => $input['name'],
                 'document' => $input['document'],
                 'address' => $input['address'],
-                'idUser' => auth()->user()->id,
+                'idUser' => auth()->id(),
                 'phoneNumber' => $input['phoneNumber'],
                 'state' => $input['state'],
                 'created_at' => date('Y-m-d H:i:s'),

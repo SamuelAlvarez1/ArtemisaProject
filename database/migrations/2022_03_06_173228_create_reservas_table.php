@@ -24,7 +24,7 @@ class CreateReservasTable extends Migration
             $table->bigInteger("amount_people");
             $table->boolean("state");
             $table->dateTimeTz("start_date");
-            $table->dateTimeTz("final_date");
+            $table->dateTimeTz("final_date")->nullable(true);
             $table->timestamps();
         });
     }
