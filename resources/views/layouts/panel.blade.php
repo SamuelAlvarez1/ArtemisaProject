@@ -92,9 +92,16 @@
                         </a>
                         <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-right"
                             aria-labelledby="navbar-default_dropdown_1">
-                            <a class="dropdown-item" href="#">Reportes de reservas</a>
+                            <div class=" dropdown-header noti-title">
+                                <h6 class="text-overflow m-0">Desde la ultima sesión</h6>
+                            </div>
+                            <a class="dropdown-item" href="{{url('sales/')}}">Ventas: <span class="badge badge-danger">
+                                {{-- {{$salesCount}} --}}
+                            </span></a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Reportes de ventas</a>
+                            <a class="dropdown-item" href="{{url('bookings')}}">Reservas: <span class="badge badge-danger">
+                                {{-- {{$bookingsCount}} --}}
+                            </span></a>
                         </div>
                     </li>
                     <li class="nav-item dropdown">
