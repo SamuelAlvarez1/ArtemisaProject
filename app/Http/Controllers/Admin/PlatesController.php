@@ -55,7 +55,7 @@ class PlatesController extends Controller
 
     public function store(Request $request)
     {
-//         $request->validate(Plate::$rules);
+        //         $request->validate(Plate::$rules);
 
         $input = $request->all();
 
@@ -82,17 +82,7 @@ class PlatesController extends Controller
                         ]);
                     }
                 }
-<<<<<<< HEAD
-            } else {
-                return redirect('/plates')->with('error', 'No agregaste ningún platillo');
-=======
-            }else{
-                return redirect('/plates')->with('error', 'No agregaste ningún platillo');
-
->>>>>>> 563cd7a024fde5cda3cc32eda55e555b2df692ab
             }
-
-
 
             DB::commit();
             if (sizeof($namePlates) > 0) {
