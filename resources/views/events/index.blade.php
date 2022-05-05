@@ -11,16 +11,12 @@
     <div class="card">
         <div class="card-header">
             <div class="row">
-                <div class="col-2 d-flex justify-content-center d-flex align-items-center">
-                    <strong>Eventos</strong>
-                </div>
                 <div class="col-6 d-flex justify-content-center d-flex align-items-center">
                     <a href="{{url('/events/create')}}" class="btn-sm btn mx-2 btn-outline-dark">Crear evento</a>
                     @if($states == 'active')
                         <a href="{{url('/events/old')}}" class="btn-sm btn mx-2 mr-4 btn-outline-dark">Ver eventos antiguos</a>
                     @else
-                        <a href="{{url('/events')}}" class="btn-sm btn mx-2 btn-outline-dark">Ver eventos
-                            activos</a>
+                        <a href="{{url('/events')}}" class="btn-sm btn mx-2 btn-outline-dark">Ver todos los eventos</a>
                     @endif
                 </div>
                 <div class="col-3 offset-1 d-flex justify-content-center d-flex align-items-center">

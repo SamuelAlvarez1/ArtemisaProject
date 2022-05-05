@@ -67,7 +67,7 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
                                 </div>
-                                <input value="{{old('date', date('Y-m-d'))}}" type="text" class="form-control datepicker"
+                                <input value="{{old('startDate', date('Y-m-d'))}}" type="text" class="form-control datepicker"
                                        name="startDate"
                                        id="date" data-date-format="yyyy-mm-dd" data-date-start-date="{{date('Y-m-d')}}"
                                        data-date-end-date="+60d">
@@ -81,7 +81,7 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
                                 </div>
-                                <input value="{{old('date', date('Y-m-d'))}}" type="text" class="form-control datepicker"
+                                <input value="{{old('endDate', date('Y-m-d'))}}" type="text" class="form-control datepicker"
                                        name="endDate"
                                        id="date" data-date-format="yyyy-mm-dd" data-date-start-date="{{date('Y-m-d')}}"
                                        data-date-end-date="+62d">
@@ -91,12 +91,11 @@
                 </div>
                 <div class="mb-3">
                     <label for="formFile" class="form-label">Selecciona una imagen</label>
-                    <input class="form-control" name="image" type="file" id="formFile">
+                    <input class="form-control" value="{{old('image')}}" name="image" type="file" id="formFile">
                 </div>
                 <div class="form-check mb-3">
                     <input type="hidden" name="state" value="0">
                                   <input class="form-check-input" name="state" checked type="checkbox" value="1" id="state">
-                            
                                   <label class="form-check-label" for="state">
                         Estado
                     </label>

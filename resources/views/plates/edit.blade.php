@@ -7,6 +7,18 @@
 @endsection
 
 @section('main-content')
+@if($errors->any())
+                <div class="alert alert-danger alert-dismissible" role="alert">
+                    <ul>
+                        @foreach($errors->all() as $error)
+                            <li>{{$error}}</li>
+                        @endforeach
+                    </ul>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            @endif
 
     <div class="row">
         <div class="col">
@@ -27,8 +39,8 @@
                     </div>
                     <div class="row card-body d-flex justify-content-center">
                         <div class="form-group col-4">
-                            <label for="">Categoría</label>
-                            <select name="category" class="form-control" id="categories">
+                            <label for="">Categoría <b class="text-danger">*</b></label>
+                            <select name="idCategory" class="form-control" id="categories">
                                 <option value="">Seleccione</option>
                                 @foreach($categories as $value)
                                     <option value="{{$value->id}}" {{($plate->idCategory == $value->id) ? 'selected' : ''}}>{{$value->name}}</option>
@@ -36,9 +48,9 @@
                             </select>
                         </div>
                         <div class="form-group col-4">
-                            <label for="">Nombre del platillo</label>
-                            <input type="text" class="form-control @error('plate') is-invalid @enderror"
-                        name="plate" id="plate" value="{{$plate->name}}">
+                            <label for="">Nombre del platillo <b class="text-danger">*</b></label>
+                            <input type="text" class="form-control @error('name') is-invalid @enderror"
+                        name="name" id="name" value="{{$plate->name}}">
                             @error('plate')
                             <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -46,7 +58,7 @@
                             @enderror
                         </div>
                         <div class="form-group col-3">
-                            <label for="">Precio base</label>
+                            <label for="">Precio base <b class="text-danger">*</b></label>
                             <input type="number" class="form-control @error('price') is-invalid @enderror"
                         name="price" id="price" value="{{$plate->price}}">
                             @error('price')
