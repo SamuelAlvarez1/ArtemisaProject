@@ -38,6 +38,7 @@ class DatabaseSeeder extends Seeder
             'state' => '1',
             'idRol' => '1',
             'phone' => '3002004040',
+            'lastlog' => date('Y-m-d'),
             'password' => bcrypt('12345678'),
             'lastLog0' => '1999/01/01',
         ]);
