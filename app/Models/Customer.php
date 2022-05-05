@@ -24,15 +24,15 @@ class Customer extends Model
     ];
 
     public static $rules = [
-        'name' => 'required|min:5|max:50|alpha',
-        'document' => 'required|min:6|max:15|unique:customers',
+        'name' => 'required|min:5|max:50|regex:/^[a-zA-ZÀ-ÿñÑ ]+$/',
+        'document' => 'required|digits_between:6,15|numeric|unique:customers',
         'address' => 'required|min:5|max:70',
         'phoneNumber' => 'required|min:7|max:13',
         'state' => 'required|boolean',
     ];
     public static $rulesUpdate = [
         'name' => 'required|min:5|max:50|alpha',
-        'document' => 'required|min:6|max:15',
+        'document' => 'required|digits_between:2,5',
         'address' => 'required|min:5|max:70',
         'phoneNumber' => 'required|min:7|max:13',
         'state' => 'required|boolean',

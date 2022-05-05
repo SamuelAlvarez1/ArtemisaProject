@@ -24,14 +24,11 @@ use App\Http\Controllers\Admin\CategoriesController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
 Route::get('/', [WelcomeController::class, "index"]);
 
 Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
-
-
 Route::group(['middleware' => ['auth', 'validarRol']], function () {
 
     //<------------Roles------------>
