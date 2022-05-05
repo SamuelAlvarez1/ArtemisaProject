@@ -82,7 +82,7 @@ class UsersController extends Controller
             'last_name' => 'required|string|min:3|max:40',
             'name' => 'required|string|min:3|max:40',
             'email' => 'required|email|min:10|max:80|unique:users',
-            'phone' => 'required|string|max:11',
+            'phone' => 'required|numeric|digits_between:7,10',
             'idRol' => 'required',
             'password' => 'required|min:10|max:80',
             'password_confirmation' => 'required|min:10|max:80|same:password'
