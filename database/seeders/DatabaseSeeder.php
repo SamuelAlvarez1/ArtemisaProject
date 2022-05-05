@@ -38,6 +38,7 @@ class DatabaseSeeder extends Seeder
             'state' => '1',
             'idRol' => '1',
             'phone' => '3002004040',
+            'lastlog' => date('Y-m-d'),
             'password' => bcrypt('12345678'),
         ]);
         Customer::factory(50)->create();

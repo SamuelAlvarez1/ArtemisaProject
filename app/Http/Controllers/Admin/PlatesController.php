@@ -75,19 +75,11 @@ class PlatesController extends Controller
                         $namePlates[sizeof($namePlates)] = $input["plate"][$key];
                     } else {
                         Plate::create([
-<<<<<<< HEAD
-                        "name" => $input["plate"][$key],
-                        "price" => $input["price"][$key],
-                        "idCategory" => $input["idCategory"][$key],
-                        "state" => 1
-                    ]);
-=======
                             "name" => $input["plate"][$key],
                             "price" => $input["prices"][$key],
                             "idCategory" => $input["categories"][$key],
                             "state" => 1
                         ]);
->>>>>>> 09280a396d714d009b99c0dcb60bbe57d67e70ce
                     }
                 }
             }
