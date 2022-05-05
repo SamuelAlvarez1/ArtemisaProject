@@ -17,12 +17,11 @@ class SalesController extends Controller
     public function index()
     {
         $sales = Sale::select("sales.*", "customers.name as customerName", "users.name as userName")
-            ->join("customers", "sales.idCustomers", "=", "customers.id")
+            ->leftjoin("customers", "sales.idCustomers", "=", "customers.id")
             ->join("users", "sales.idUser", "=", "users.id")
             ->where('sales.state', '1')
             ->get();
-        // dd($sales);
-
+        
         $states = "activeSales";
 
         return view('sales.index', compact('sales', 'states'));
@@ -47,7 +46,6 @@ class SalesController extends Controller
         $customers = Customer::all();
         $users = User::all();
         $plates = Plate::all();
-
 
         return view('sales.create', compact('customers', 'users', 'plates'));
     }

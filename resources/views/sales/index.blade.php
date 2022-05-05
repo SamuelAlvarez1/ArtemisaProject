@@ -60,7 +60,13 @@
                         <tr>
 
                             <td>{{$value-> id}}</td>
-                            <td>{{$value-> customerName}}</td>
+                            <td>
+                                @if ($value->idCustomers == null)
+                                    Cliente de Mostrador
+                                @else
+                                {{$value->customerName}}
+                            @endif
+                            </td>
                             <td>{{$value-> userName}}</td>
                             <td>{{$value-> finalPrice}}</td>
                             <td>{{$value-> created_at}}</td>
