@@ -19,7 +19,7 @@ class Category extends Model
     ];
 
     public static $rules = [
-        'name' => 'required|unique:categories|min:3|max:50',
+        'name' => 'required|unique:categories|min:3|max:50|alpha_num',
     ];
 
     public $timestamps = false;

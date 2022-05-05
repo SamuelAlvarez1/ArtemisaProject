@@ -118,6 +118,7 @@
         let id = 0;
 
         function agregar_plate() {
+
             $("#categories option[value="+"null"+"]").attr('selected',false);
 
             let validate = validatePlate();
@@ -127,12 +128,12 @@
             let category = $("#categories option:selected").val();
 
             if (price > 0 && plate_text != "" && category != "null") {
-                if(plate_text.length < 3){
+                if(plate_text.length <= 3){
                     alertify.set('notifier','position', 'top-right');
-                    alertify.error('El campo nombre debe tener mínimo 3 caracteres'); 
+                    alertify.error('El campo nombre platillo debe tener mínimo 3 caracteres');
                 }else{
 
-              
+
             if (!validate) {
 
                 id++;
@@ -153,14 +154,14 @@
             </tr>
             `);
 
-           
+
             $("#plate").val("");
             $("#price").val("");
             $("#categories option[value="+"null"+"]").attr('selected',true);
 
-           
 
-        }  
+
+        }
     }
             } else {
                 alertify.set('notifier','position', 'top-right');
@@ -193,7 +194,7 @@
 
     function check(e) {
     tecla = (document.all) ? e.keyCode : e.which;
-       
+
     //Tecla de retroceso para borrar, siempre la permite
     if (tecla == 8 || tecla == 32) {
         return true;
