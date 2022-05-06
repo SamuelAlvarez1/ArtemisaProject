@@ -67,7 +67,7 @@
                         </div>
 
                         <div class="row mb-3">
-                            <label for="phone" class="col-md-4 col-form-label text-md-end">{{ __('telefono') }}<b class="text-danger">*</b></label>
+                            <label for="phone" class="col-md-4 col-form-label text-md-end">{{ __('Teléfono') }}<b class="text-danger">*</b></label>
 
                             <div class="col-md-6">
                                 <input id="phone" type="text" class="form-control" name="phone" value="{{ old('phone') }}" required autocomplete="phone">
@@ -76,7 +76,7 @@
                         </div>
 
                         <div class="row mb-3">
-                            <label for="idRol" class="col-md-4 col-form-label text-md-end">{{ __('rol') }}<b class="text-danger">*</b></label>
+                            <label for="idRol" class="col-md-4 col-form-label text-md-end">{{ __('Rol') }}<b class="text-danger">*</b></label>
 
                             <div class="col-md-6">
                                 <select name="idRol" id="idRol" class="form-control">

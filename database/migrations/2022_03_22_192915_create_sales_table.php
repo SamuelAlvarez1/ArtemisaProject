@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use phpDocumentor\Reflection\Types\Nullable;
 
 class CreateSalesTable extends Migration
 {
@@ -15,7 +16,7 @@ class CreateSalesTable extends Migration
     {
         Schema::create('sales', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger("idCustomers");
+            $table->unsignedBigInteger("idCustomers")->nullable(true);
             $table->foreign("idCustomers")->references("id")->on("customers");
             $table->unsignedBigInteger('idUser');
             $table->foreign('idUser')->references('id')->on('users');
