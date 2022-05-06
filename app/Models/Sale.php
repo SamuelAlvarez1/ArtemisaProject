@@ -21,7 +21,7 @@ class Sale extends Model
 
     public static $rules = [
         'idCustomers' => "required",
-        
+
     ];
 
     public $timestamps = true;
