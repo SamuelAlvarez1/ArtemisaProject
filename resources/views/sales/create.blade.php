@@ -23,11 +23,8 @@ Crear venta
 @endif
 
 
-
 <form action="{{ url('sales') }}" method="post">
     @csrf
-
-
 
     <div class="card w-100 py-3">
         <div class="card-head">
@@ -46,7 +43,7 @@ Crear venta
                             @endforeach
                         </select>
                     </div>
-                    <a href="{{url('/customers/create')}}" class="btn btn-outline-success btn-sm my-auto mx-2 h-80" data-toggle="tooltip" data-placement="right" title="Cear cliente"><i class="fa-solid fa-plus"></i></a>
+                    <a href="{{url('/customers/create')}}" class="btn btn-outline-success btn-sm my-auto mx-2 h-80" data-toggle="tooltip" data-placement="top" title="Cear cliente"><i class="fa-solid fa-plus"></i></a>
 
                     <div class="form-group col-12">
                         <label for="plates">Platillo</label>
