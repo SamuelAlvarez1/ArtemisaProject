@@ -28,7 +28,8 @@ class SalesController extends Controller
             ->join("users", "sales.idUser", "=", "users.id")
             ->where('sales.state', '1')
             ->get();
-        
+
+
         $states = "activeSales";
 
         return view('sales.index', compact('sales', 'states'));
@@ -53,6 +54,7 @@ class SalesController extends Controller
         $customers = Customer::all();
         $users = User::all();
         $plates = Plate::all();
+
 
         return view('sales.create', compact('customers', 'users', 'plates'));
     }
