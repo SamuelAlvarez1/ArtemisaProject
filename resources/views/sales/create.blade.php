@@ -29,11 +29,9 @@ Crear venta
 
 
 
-    <div class="card w-100 py-3">
-        <div class="card-head">
-        </div>
+    <div class="card w-80 py-3">
         <div class="row">
-            <div class="col-4" style="border-right: 1px solid #ebebeb;">
+            <div class="col-5" style="border-right: 1px solid #ebebeb;">
                 <div class="row card-body d-flex justify-content-start py-4">
                     <div class="form-group col-10">
                         <label for="customer">Cliente</label>
@@ -84,7 +82,7 @@ Crear venta
                 </div>
 
             </div>
-            <div class="col-8">
+            <div class="col-7">
                 <div class="input-group my-3 justify-content-end">
                     <div class="input-group-prepend">
                         <span class="input-group-text bg-transparent" style="border:none">Precio total:&ensp;&ensp;<b class="text-success">$</b></span>
@@ -95,10 +93,11 @@ Crear venta
                     </span>
                     @enderror
                     </div>
-                    
+
                 </div>
-                <table id="table_plates" class="table text-center table-responsive table-striped mt-2">
-                    <thead>
+                <div class="row w-100 m-auto">
+                    <table id="table_plates" class="table text-center table-striped mt-2 table-responsive">
+                        <thead>
                         <tr>
                             <th>Nombre platillo</th>
                             <th>Precio platillo</th>
@@ -106,11 +105,13 @@ Crear venta
                             <th>Sub total</th>
                             <th>Acciones</th>
                         </tr>
-                    </thead>
-                    <tbody id="tbl_plates">
+                        </thead>
+                        <tbody id="tbl_plates">
 
-                    </tbody>
-                </table>
+                        </tbody>
+                    </table>
+                </div>
+
 
 
                 <div class="input-group mb-3 mt-3 justify-content-end">

@@ -1,13 +1,10 @@
-@extends('layouts.panel')
+@extends('layouts.forms')
 
 @section('title-nav')
     Crear cliente
 @endsection
 
-@section('main-content')
-
-<div class="col-md-8 offset-2 my-2">
-    <div class="card shadow">
+@section('form')
         <div class="card-header border-0">
             <div class="row align-items-center">
                 <div class="col">
@@ -63,6 +60,4 @@
                 <button type="submit" class="btn btn-success">Crear</button>
             </form>
         </div>
-    </div>
-</div>  
 @endsection

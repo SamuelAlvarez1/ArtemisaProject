@@ -1,4 +1,4 @@
-@extends('layouts.panel')
+@extends('layouts.forms')
 
 @section('styles')
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" integrity="sha512-mSYUmp1HYZDFaVKK//63EcZq4iFWFjxSL+Z3T/aCt4IO9Cejm03q3NKKYN6pFQzY0SBOr8h+eCIAZHPXcpZaNw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -7,10 +7,9 @@
 @section('title-nav')
     Crear evento
 @endsection
-@section('main-content')
+@section('form')
 
-<div class="col-md-8 offset-2 my-2">
-    <div class="card shadow">
+
         <div class="card-header border-0">
             <div class="row align-items-center">
                 <div class="col">
@@ -103,8 +102,6 @@
                 <button type="submit" class="btn btn-success">Crear</button>
             </form>
         </div>
-    </div>
-</div>
 @endsection
 
 @section('scripts')
