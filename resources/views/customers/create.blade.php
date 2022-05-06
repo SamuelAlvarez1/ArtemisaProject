@@ -11,7 +11,7 @@
                     <h3 class="mb-0">Crear cliente</h3>
                 </div>
                 <div class="col text-right">
-                    <a href="{{url('customers')}}" class="btn btn-sm btn-danger">
+                    <a href="{{url('customers')}}" class="btn btn-sm btn-outline-danger">
                         Regresar
                     </a>
                 </div>
@@ -57,7 +57,7 @@
                         Estado
                     </label>
                 </div>
-                <button type="submit" class="btn btn-success">Crear</button>
+                <button type="submit" class="btn btn-outline-success d-block m-auto">Crear</button>
             </form>
         </div>
 @endsection
