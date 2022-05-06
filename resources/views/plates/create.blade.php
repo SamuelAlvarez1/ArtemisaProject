@@ -1,7 +1,7 @@
 @extends('layouts.panel')
 @section('styles')
-<link rel="stylesheet" href="/css/alertify.min.css" />
-    <link rel="stylesheet" href="/css/themes/bootstrap.css" />
+    <link rel="stylesheet" href="/css/alertify.min.css"/>
+    <link rel="stylesheet" href="/css/themes/bootstrap.css"/>
 @endsection
 
 @section('title-nav')
@@ -9,18 +9,18 @@
 @endsection
 
 @section('main-content')
-@if($errors->any())
-                <div class="alert alert-danger alert-dismissible" role="alert">
-                    <ul>
-                        @foreach($errors->all() as $error)
-                            <li>{{$error}}</li>
-                        @endforeach
-                    </ul>
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-            @endif
+    @if($errors->any())
+        <div class="alert alert-danger alert-dismissible" role="alert">
+            <ul>
+                @foreach($errors->all() as $error)
+                    <li>{{$error}}</li>
+                @endforeach
+            </ul>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    @endif
     <div class="row">
         <div class="col">
             <h2 class="text-center">Crear platillo</h2>
@@ -40,7 +40,7 @@
                     <div class="row card-body d-flex justify-content-center">
                         <div class="form-group col-4">
                             <label for="">Categoría <b class="text-danger">*</b></label>
-                            <select name="categories" class="form-control" id="categories" >
+                            <select name="categories" class="form-control" id="categories">
                                 <option value="null">Seleccione</option>
                                 @foreach($categories as $value)
                                     <option value="{{$value->id}}">{{$value->name}}</option>
@@ -60,7 +60,7 @@
                         <div class="form-group col-3">
                             <label for="">Precio base <b class="text-danger">*</b></label>
                             <input type="number" class="form-control @error('price') is-invalid @enderror"
-                                   name="prices" id="price" >
+                                   name="prices" id="price">
                             @error('price')
                             <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -111,7 +111,7 @@
 
 @section("scripts")
 
-<script src="/js/alertify.min.js"></script>
+    <script src="/js/alertify.min.js"></script>
 
     <script>
 
@@ -119,7 +119,7 @@
 
         function agregar_plate() {
 
-            $("#categories option[value="+"null"+"]").attr('selected',false);
+            $("#categories option[value=" + "null" + "]").attr('selected', false);
 
             let validate = validatePlate();
             let plate_text = $("#plate").val();
@@ -128,16 +128,18 @@
             let category = $("#categories option:selected").val();
 
             if (price > 0 && plate_text != "" && category != "null") {
-                if(plate_text.length <= 3){
-                    alertify.set('notifier','position', 'top-right');
+                if (plate_text.length <= 3) {
+                    alertify.set('notifier', 'position', 'top-right');
                     alertify.error('El campo nombre platillo debe tener mínimo 3 caracteres');
-                }else{
+                } else {
+                    if (price <= 500) {
+                        alertify.set('notifier', 'position', 'top-right');
+                        alertify.error('El campo precio debe ser de mínimo 500');
+                    } else {
+                        if (!validate) {
 
-
-            if (!validate) {
-
-                id++;
-                $("#tbl_plates").append(`
+                            id++;
+                            $("#tbl_plates").append(`
             <tr id="tr-${id}">
             <td>
             <input type="hidden" class="plate" name="plate[]" value="${plate_text}">
@@ -149,23 +151,23 @@
             <td>${price}</td>
 
             <td>
-            <button type="button" class="btn btn-danger bg-danger" style="width: 35px; height: 35px; display: flex;margin: auto; justify-content: center" onclick="remove_plate(${id}, ${parseInt(price)})"><i class="fas fa-ban"></i></button>
+            <button type="button" class="btn btn-danger bg-danger"  style="width: 35px; height: 35px; display: flex;margin: auto; justify-content: center" onclick="remove_plate(${id}, ${parseInt(price)})"  data-toggle="tooltip" data-placement="right" title="Remover"><i class="fas fa-ban"></i></button>
             </td>
             </tr>
             `);
 
 
-            $("#plate").val("");
-            $("#price").val("");
-            $("#categories option[value="+"null"+"]").attr('selected',true);
+                            $("#plate").val("");
+                            $("#price").val("");
+                            $("#categories option[value=" + "null" + "]").attr('selected', true);
 
 
-
-        }
-    }
+                        }
+                    }
+                }
             } else {
-                alertify.set('notifier','position', 'top-right');
-                    alertify.error('Debes completar los campos');
+                alertify.set('notifier', 'position', 'top-right');
+                alertify.error('Debes completar los campos');
             }
 
         }
@@ -177,34 +179,34 @@
         }
 
 
-        function validatePlate(){
-           var validate = false;
-        if ($('table#table_plates tbody tr').length > 0){
-            $('table#table_plates tbody tr').each(function(){
-                if ($(this).find('.name').text().toLowerCase().split(" ").join("") === $("#plate").val().toLowerCase().split(" ").join("")){
-                    alertify.set('notifier','position', 'top-right');
-                    alertify.error('el platillo ya se ha agregado');
-                    validate = true;
-                }
-            });
+        function validatePlate() {
+            var validate = false;
+            if ($('table#table_plates tbody tr').length > 0) {
+                $('table#table_plates tbody tr').each(function () {
+                    if ($(this).find('.name').text().toLowerCase().split(" ").join("") === $("#plate").val().toLowerCase().split(" ").join("")) {
+                        alertify.set('notifier', 'position', 'top-right');
+                        alertify.error('el platillo ya se ha agregado');
+                        validate = true;
+                    }
+                });
 
+            }
+            return validate;
         }
-        return validate;
-    }
 
-    function check(e) {
-    tecla = (document.all) ? e.keyCode : e.which;
+        function check(e) {
+            tecla = (document.all) ? e.keyCode : e.which;
 
-    //Tecla de retroceso para borrar, siempre la permite
-    if (tecla == 8 || tecla == 32) {
-        return true;
-    }
+            //Tecla de retroceso para borrar, siempre la permite
+            if (tecla == 8 || tecla == 32) {
+                return true;
+            }
 
-    // Patrón de entrada, en este caso solo acepta numeros y letras
-    patron = /[A-Za-z0-9á-úÁ-Ú]/;
-    tecla_final = String.fromCharCode(tecla);
-    return patron.test(tecla_final);
-}
+            // Patrón de entrada, en este caso solo acepta numeros y letras
+            patron = /[A-Za-z0-9á-úÁ-Ú]/;
+            tecla_final = String.fromCharCode(tecla);
+            return patron.test(tecla_final);
+        }
 
 
     </script>

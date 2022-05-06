@@ -69,7 +69,7 @@
                             </td>
                             <td>{{$value-> userName}}</td>
                             <td>{{$value-> finalPrice}}</td>
-                            <td>{{$value-> created_at}}</td>
+                            <td>{{$value->created_at->isoFormat('dddd D MMMM YYYY, h:mm a')}}</td>
                             <td>
                                 @if($value->state == 1)
                                     <span class="badge badge-success">Activa</span>

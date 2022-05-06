@@ -10,10 +10,17 @@ use App\Models\User;
 use App\Models\SaleDetail;
 use http\Client;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 use Yajra\DataTables\DataTables;
 
 class SalesController extends Controller
 {
+    public function __construct()
+    {
+        Carbon::setLocale('es');
+        setlocale(LC_TIME, 'es_ES');
+    }
+
     public function index()
     {
         $sales = Sale::select("sales.*", "customers.name as customerName", "users.name as userName")
@@ -21,7 +28,8 @@ class SalesController extends Controller
             ->join("users", "sales.idUser", "=", "users.id")
             ->where('sales.state', '1')
             ->get();
-        
+
+
         $states = "activeSales";
 
         return view('sales.index', compact('sales', 'states'));
@@ -46,6 +54,7 @@ class SalesController extends Controller
         $customers = Customer::all();
         $users = User::all();
         $plates = Plate::all();
+
 
         return view('sales.create', compact('customers', 'users', 'plates'));
     }
