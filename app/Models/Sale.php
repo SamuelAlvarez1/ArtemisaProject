@@ -24,4 +24,8 @@ class Sale extends Model
     ];
 
     public $timestamps = true;
+
+    protected $dates = [
+        'created_at',
+    ];
 }
