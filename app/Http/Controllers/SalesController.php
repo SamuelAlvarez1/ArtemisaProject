@@ -10,10 +10,17 @@ use App\Models\User;
 use App\Models\SaleDetail;
 use http\Client;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 use Yajra\DataTables\DataTables;
 
 class SalesController extends Controller
 {
+    public function __construct()
+    {
+        Carbon::setLocale('es');
+        setlocale(LC_TIME, 'es_ES');
+    }
+
     public function index()
     {
         $sales = Sale::select("sales.*", "customers.name as customerName", "users.name as userName")

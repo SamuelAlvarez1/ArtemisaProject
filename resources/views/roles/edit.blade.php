@@ -50,7 +50,7 @@
                     <textarea class="form-control" id="exampleFormControlTextarea1" resize = 'none' rows="4">{{$rol->description}}</textarea>
                 </textarea>
                 </div>
-                <button type="submit" class="btn btn-primary mt-2">
+                <button type="submit" class="btn btn-success mt-2">
                     Editar rol
                 </button>
             </form>

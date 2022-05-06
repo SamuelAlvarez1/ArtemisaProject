@@ -123,11 +123,15 @@
                         </div>
                         <div class="row mb-0">
                             <div class="col-md-6 offset-md-4">
+<<<<<<< HEAD
                                 <button type="submit" class="btn btn-primary" data-toggle="tooltip" data-placement="right" title="Click para crear la reserva">
                                     {{ __('Crear') }}
 
 
                                 </button>
+=======
+                                <button type="submit" class="btn btn-success">Crear</button>
+>>>>>>> f98dd933331e64017fddbe225d0499f58b106ab0
                             </div>
                         </div>
                     </form>

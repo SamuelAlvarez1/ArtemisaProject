@@ -129,7 +129,7 @@
     
                     <div class="row mb-0">
                         <div class="col-md-6 offset-md-4">
-                            <button type="submit" class="btn btn-primary" data-toggle="tooltip" data-placement="right" title="Click para crear la reserva">
+                            <button type="submit" class="btn btn-success" data-toggle="tooltip" data-placement="right" title="Click para crear la reserva">
                                 {{ __('Editar reserva') }}
 
                                 

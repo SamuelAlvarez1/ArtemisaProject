@@ -53,9 +53,7 @@
                 >{{ old('description') }}
                 </textarea>
                 </div>
-                <button type="submit" class="btn btn-primary mt-2">
-                    Crear rol
-                </button>
+                <button type="submit" class="btn btn-success">Crear</button>
             </form>
         </div>
     </div>
