@@ -80,7 +80,7 @@
 
 
                     <div class="col-12 mb-4">
-                        <button type="submit" class="btn btn-outline-dark float-right">Guardar platillo/s</button>
+                        <button type="submit" class="btn btn-outline-success float-right">Guardar platillo/s</button>
                     </div>
 
                     <div class="row m-auto">
