@@ -1,7 +1,11 @@
 @if(auth()->user()->idRol == 1)
     <ul class="navbar-nav">
         <li class="nav-item">
+<<<<<<< HEAD
+            <a class="nav-link" href="{{url('/home')}}" data-delay="500" data-toggle="tooltip" data-placement="right" title="Entrar a ver los reportes del restaurante">
+=======
             <a class="nav-link" href="{{url('/home')}}"  data-delay="300" data-toggle="tooltip" data-placement="right" title="Ver reportes del restaurante">
+>>>>>>> c6e7ac4f02398c298e2485f4b2f24eb7cca548df
                 <i class="ni ni-tv-2 text-primary"></i> Dashboard
             </a>
         </li>
@@ -24,7 +28,11 @@
         </a>
     </li>
     <li class="nav-item">
+<<<<<<< HEAD
+        <a class="nav-link" href="{{url('/events')}}">
+=======
         <a class="nav-link" href="{{url('/events')}}"  >
+>>>>>>> c6e7ac4f02398c298e2485f4b2f24eb7cca548df
             <i class="fa-solid fa-star"></i> Eventos
         </a>
     </li>

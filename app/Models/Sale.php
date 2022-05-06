@@ -19,8 +19,6 @@ class Sale extends Model
         'state',
     ];
 
-    public static $rules = [
-    ];
 
     public $timestamps = true;
 

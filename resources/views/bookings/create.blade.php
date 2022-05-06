@@ -1,10 +1,10 @@
-@extends('layouts.panel')
+@extends('layouts.forms')
 
 @section('title-nav')
     Crear reserva
 @endsection
 
-@section('main-content')
+@section('form')
 
 @if(count($errors)>0)
 <div class="alert alert-danger" role="alert">
@@ -16,10 +16,6 @@
 </div>
 @endif
 
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-                <div class="card shadow">
                         <div class="card-header border-0">
                             <div class="row align-items-center">
                                 <div class="col">
@@ -48,7 +44,7 @@
                                     @endforeach
                                 </select>
 
-                                
+
                             </div>
                         </div>
 
@@ -62,7 +58,7 @@
                                         <option value="{{$event->id}}" {{($event->id == old('idEvent') ? 'selected' : '')}}>{{$event->name}}</option>
                                     @endforeach
                                 </select>
-                                
+
                             </div>
                         </div>
 
@@ -72,7 +68,7 @@
                             <div class="col-md-6">
                                 <input id="amount_people" type="text" class="form-control" name="amount_people" value="{{ old('amount_people') }}" required autocomplete="amount_people" data-toggle="tooltip" data-placement="right" title="Digite la cantidad de personas">
 
-                               
+
                             </div>
                         </div>
 
@@ -82,11 +78,11 @@
                             <div class="col-md-6">
                                 <input id="booking_date" type="date" class="form-control" name="booking_date" value="{{ old('booking_date') }}" required autocomplete="booking_date" data-toggle="tooltip" data-placement="right" title="Fecha dia/mes/año de la reserva">
                             </div>
-                        </div>    
+                        </div>
                         <div class="row mb-3">
                             <label for="booking_hour" class="col-md-4 col-form-label text-md-end">{{ __('Hora de la reserva') }}<b class="text-danger">*</b></label>
                             <div class="col-md-6">
-                                
+
                                 <select name="booking_hour" id="booking_hour" class="form-control" data-toggle="tooltip" data-placement="right" title="Hora solicitada para la reserva">
                                     <option value="1">1 AM</option>
                                     <option value="2">2 AM</option>
@@ -113,25 +109,29 @@
                                     <option value="23">11 PM</option>
                                     <option value="12">12 PM</option>
                                 </select>
-                                
-                                
+
+
                             </div>
-                        </div>    
+                        </div>
                         <div class="row mb-3">
                             <label for="booking_minutes" class="col-md-4 col-form-label text-md-end">{{ __('Minutos de la reserva') }}<b class="text-danger">*</b></label>
                             <div class="col-md-6">
-                                
+
                                 <input id="booking_minutes" type="text" class="form-control" name="booking_minutes" value="{{ old('booking_minutes') }}" required autocomplete="booking_minutes" data-toggle="tooltip" data-placement="right" title="Minutos solicitados de la reserva">
-                                
+
                             </div>
-                        </div>    
+                        </div>
                         <div class="row mb-0">
                             <div class="col-md-6 offset-md-4">
+<<<<<<< HEAD
                                 <button type="submit" class="btn btn-primary" data-toggle="tooltip" data-placement="right" title="Click para crear la reserva">
                                     {{ __('Crear') }}
 
-                                    
+
                                 </button>
+=======
+                                <button type="submit" class="btn btn-success">Crear</button>
+>>>>>>> f98dd933331e64017fddbe225d0499f58b106ab0
                             </div>
                         </div>
                     </form>

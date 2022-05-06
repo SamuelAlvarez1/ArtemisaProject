@@ -72,7 +72,7 @@ Cambiar contraseña
                     </div>
                 </div>
 
-                <button type="submit" class="btn btn-primary mt-2">
+                <button type="submit" class="btn btn-success mt-2">
                     editar contraseña
                 </button>
             </form>
