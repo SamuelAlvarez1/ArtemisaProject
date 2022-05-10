@@ -12,6 +12,7 @@ use App\Models\Rol;
 use App\Models\Category;
 
 
+
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -55,6 +56,13 @@ class DatabaseSeeder extends Seeder
         }
 
         Plate::create([
+            'id' => 1,
+            'name' => 'Platillo customizable',
+            'price' => '0',
+            'state' => '1',
+        ]);
+        Plate::create([
+            'id' => 2,
             'name' => 'pizza hawaiana',
             'price' => '1500',
             'state' => '1',

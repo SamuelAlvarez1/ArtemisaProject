@@ -61,7 +61,6 @@ class SalesController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate(Sale::$rules);
         $input = $request->all();
 
         try {
@@ -72,7 +71,7 @@ class SalesController extends Controller
                 "state" => 1,
                 'idUser' => auth()->id()
             ]);
-            if ($request["idPlatillo"]!=null) {
+            if ($request["idPlatillo"] != null) {
                 foreach ($request["idPlatillo"] as $key => $value) {
                     SaleDetail::create([
                         'idSales' => $sale->id,

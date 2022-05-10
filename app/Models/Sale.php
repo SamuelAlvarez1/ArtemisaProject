@@ -18,16 +18,7 @@ class Sale extends Model
         'finalPrice',
         'state',
     ];
-
-    public static $rules = [
-<<<<<<< HEAD
-        'idCustomers' => "required",
-
-=======
-        // 'idCustomers' => "required",    
->>>>>>> 44f695cc7460b06fd787493656dbe3feab67ffc6
-    ];
-
+    
     public $timestamps = true;
 
     protected $dates = [
