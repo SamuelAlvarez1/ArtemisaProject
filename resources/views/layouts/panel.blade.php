@@ -26,6 +26,9 @@
     {{-- Select2 --}}
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="//cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js">
+    <link rel="stylesheet" href="https://cdn.datatables.net/rowreorder/1.2.8/css/rowReorder.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.dataTables.min.css">
+
 
 
     @yield('styles')
@@ -95,12 +98,10 @@
                             <div class=" dropdown-header noti-title">
                                 <h6 class="text-overflow m-0">Desde la ultima sesión</h6>
                             </div>
-                            <a class="dropdown-item" href="{{url('sales/')}}">Ventas: <span class="badge badge-danger">
-                                {{-- {{$salesCount}} --}}
+                            <a class="dropdown-item" href="{{url('sales/')}}">Ventas: <span class="badge badge-danger" id="salesCount">
                             </span></a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="{{url('bookings')}}">Reservas: <span class="badge badge-danger">
-                                {{-- {{$bookingsCount}} --}}
+                            <a class="dropdown-item" href="{{url('bookings')}}">Reservas: <span class="badge badge-danger" id="bookingsCount">
                             </span></a>
                         </div>
                     </li>
@@ -162,9 +163,27 @@
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <!-- Argon JS -->
     @yield('scripts')
+    <script>
+        $.ajax({
+            url: `/sales/getSalesCount`,
+            type: 'GET',
+            success: function(platesCount) {
+                $("#salesCount").html(platesCount);
+            }
+        })
+        $.ajax({
+            url: `/bookings/getBookingsCount`,
+            type: 'GET',
+            success: function(bookingsCount) {
+                $("#bookingsCount").html(bookingsCount);
+            }
+        })
+    </script>
     <script src="{{asset('js/argon.js?v=1.0.0')}}"></script>
     <script src="//cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap4.min.js"></script>
+    <script src="https://cdn.datatables.net/rowreorder/1.2.8/js/dataTables.rowReorder.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
 
 </body>
 

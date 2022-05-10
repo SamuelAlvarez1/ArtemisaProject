@@ -13,40 +13,26 @@ use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
     public function __construct()
     {
         $this->middleware('auth');
     }
-
-
     private function Mes($data)
     {
         $Chart = DB::table($data)->select(DB::raw('COUNT(*) as count'))
             ->whereYear('created_at', date('Y'))
             ->groupBy(DB::raw('Month(created_at)'))
             ->pluck('count');
-
         $Months = DB::table($data)->select(DB::raw('Month(created_at) as month'))
             ->whereYear('created_at', date('Y'))
             ->groupBy(DB::raw('Month(created_at)'))
             ->pluck('month');
-
         $Data = array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
         foreach ($Months as $index => $month) {
             $Data[$month - 1] = $Chart[$index];
         }
-//        dd($Months, $Chart);
-
         return $Data;
     }
-
-
-
     private function Semana($data)
     {
         $now = Carbon::now();
@@ -56,93 +42,59 @@ class HomeController extends Controller
             ->whereBetween('created_at', [$weekStartDate, $weekEndDate])
             ->groupBy(DB::raw('EXTRACT(DAY from created_at)'))
             ->pluck('count');
-
-
-
         $Week = DB::table($data)->select(DB::raw('date(created_at) as fecha'))
             ->whereBetween('created_at', [$weekStartDate, $weekEndDate])
             ->groupBy(DB::raw('fecha'))
             ->get();
-
-
         $Data = array(0, 0, 0, 0, 0, 0, 0);
         foreach ($Week as $index => $week) {
             $semana = new Carbon($week->fecha);
-
             $Data[$semana->dayOfWeek - 1] = $Chart[$index];
-
-
         }
         return $Data;
     }
-
-
-
     public function index()
     {
-        //Plates
-
         $Plates = SaleDetail::select('sales_details.idPlate', 'plates.id as Plate')
             ->join('plates', 'sales_details.idPlate', '=', 'plates.id')
             ->get();
-
         $idPlate = [];
-
         foreach ($Plates as $i => $value) {
             $idPlate[$i] = $value->Plate;
         }
         $plates = array_count_values($idPlate);
-
-
         $outstandingPlate = 0;
-
         foreach ($plates as $key => $value) {
             if ($value > $outstandingPlate) {
                 $outstandingPlate = $key;
             }
         }
-
         $plate = Plate::find($outstandingPlate);
-
         //Bookings
         $date = Carbon::now()->toDateString();
-
         $Bookings = Booking::select('id')
             ->where('start_date', $date)
             ->get();
         $countBookings = sizeof($Bookings);
-
         //sales
-
         $Sales = Sale::whereRaw('Date(created_at) = CURDATE()')->get();
-
         $countSales = sizeof($Sales);
-
-
         //        Charts
-
         $salesData = $this->Mes('sales');
         $bookingsData = $this->Mes('bookings');
         $salesDataWeek = $this->Semana('sales');
         $bookingsDataWeek = $this->Semana('bookings');
-
-
         //        Customers
-
         $FClientes = Sale::selectRaw('count(id) as sales, sales.idCustomers as customers')->where('sales.state', 1)
             ->take(5)
             ->groupBy('customers')
             ->orderBy('sales', 'Desc')
             ->get();
-
         $customers = [];
-
         foreach ($FClientes as $key => $cliente){
             $customers[$key] = Customer::select('name')->where('id', $cliente->customers)->first();
             $customers[$key]['sales'] = $cliente->sales;
         }
-
-
         return view('home', compact('plate', 'countBookings', 'countSales', 'salesData', 'bookingsData', 'salesDataWeek', 'bookingsDataWeek', 'customers'));
     }
 }

@@ -121,7 +121,7 @@
                             <label for="booking_minutes" class="col-md-4 col-form-label text-md-end">{{ __('Minutos de la reserva') }}<b class="text-danger">*</b></label>
                             <div class="col-md-6">
                                 
-                                <input id="booking_minutes" type="text" class="form-control" name="booking_minutes" value="{{ old('booking_minutes') }}" required autocomplete="booking_minutes" data-toggle="tooltip" data-placement="right" title="Minutos solicitados de la reserva">
+                                <input id="booking_minutes" type="number" max="60" min="0" class="form-control" name="booking_minutes" value="{{ old('booking_minutes') }}" required autocomplete="booking_minutes" data-toggle="tooltip" data-placement="right" title="Minutos solicitados de la reserva">
                                 
                             </div>
                         </div>    
