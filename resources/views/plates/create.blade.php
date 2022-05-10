@@ -12,27 +12,33 @@ Crear platillo/s
 
 
 <div class="card-header">
-<div class="col text-right">
-                    <a href="{{url('plates')}}" class="btn btn-sm btn-outline-danger">
-                        Regresar
-                    </a>
-                </div>
+    <div class="row align-items-center">
+        <div class="col">
+            <h3 class="mb-0">Crear platillo</h3>
+        </div>
+        <div class="col text-right">
+            <a href="{{url('events')}}" class="btn btn-sm btn-outline-danger">
+                Regresar
+            </a>
+        </div>
+    </div>
 </div>
 <div class="row card-body d-flex justify-content-center">
-@if($errors->any())
-<div class="alert alert-danger alert-dismissible" role="alert">
-    <ul>
-        @foreach($errors->all() as $error)
-        <li>{{$error}}</li>
-        @endforeach
-    </ul>
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-    </button>
-</div>
-@endif
+    @if($errors->any())
+    <div class="alert alert-danger alert-dismissible" role="alert">
+        <ul>
+            @foreach($errors->all() as $error)
+            <li>{{$error}}</li>
+            @endforeach
+        </ul>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    @endif
     <form action="{{url('plates')}}" method="post">
         @csrf
+
         <div class="form-group">
             <label for="">Categoría <b class="text-danger">*</b></label>
             <select name="categories" class="form-control" id="categories">
@@ -42,6 +48,7 @@ Crear platillo/s
                 @endforeach
             </select>
         </div>
+
         <div class="form-group">
             <label for="">Nombre del platillo <b class="text-danger">*</b></label>
             <input type="text" class="form-control @error('plate') is-invalid @enderror" name="plate" id="plate"
@@ -52,6 +59,8 @@ Crear platillo/s
             </span>
             @enderror
         </div>
+
+
         <div class="form-group ">
             <label for="">Precio base <b class="text-danger">*</b></label>
             <input type="number" class="form-control @error('price') is-invalid @enderror" name="prices" id="price">
@@ -60,33 +69,40 @@ Crear platillo/s
                 <strong>{{ $message }}</strong>
             </span>
             @enderror
-        </div>
-</div>
-<div class="col-4 d-flex justify-content-center" style="margin: auto; ">
 
-    <button type="button" class="btn btn btn-outline-dark " onclick="agregar_plate()">Agregar
+        </div>
+
+
+</div>
+<div class="col-4 d-flex justify-content-center mx-auto mb-3">
+
+    <button type="button" class="btn btn-outline-dark " onclick="agregar_plate()">Agregar
     </button>
 </div>
 
 
-<div class="col-12 mb-4">
+
+
+<div class="row m-auto w-100">
+    <div class="col-12">
+        <table id="table_plates" class="table text-center my-2  table-responsive col-10 offset-1">
+            <thead>
+                <tr>
+                    <th>Categoría</th>
+                    <th>Nombre platillo</th>
+                    <th>Precio</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody id="tbl_plates">
+
+            </tbody>
+        </table>
+        <div class="col-12 mb-4 mt-4">
     <button type="submit" class="btn btn-outline-success float-right">Guardar platillo/s</button>
 </div>
+    </div>
 
-<div class="row m-auto">
-    <table id="table_plates" class="table text-center table-responsive">
-        <thead>
-            <tr>
-                <th>Categoría</th>
-                <th>Nombre platillo</th>
-                <th>Precio</th>
-                <th>Acciones</th>
-            </tr>
-        </thead>
-        <tbody id="tbl_plates">
-
-        </tbody>
-    </table>
 </div>
 </form>
 

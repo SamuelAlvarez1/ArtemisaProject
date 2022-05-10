@@ -19,10 +19,6 @@ class Sale extends Model
         'state',
     ];
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 2563cb6fc7fa932292f51865bc898bcfaf8fc39a
     public $timestamps = true;
 
     protected $dates = [
