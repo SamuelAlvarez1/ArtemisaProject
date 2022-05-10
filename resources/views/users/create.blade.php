@@ -1,4 +1,4 @@
-@extends('layouts.panel')
+@extends('layouts.forms')
 
 
 @section('title-nav')
@@ -6,7 +6,7 @@
 @endsection
 
 
-@section('main-content')
+@section('form')
 @if(count($errors)>0)
   <div class="alert alert-danger" role="alert">
     <ul>
@@ -16,10 +16,7 @@
     </ul>
   </div>
 @endif
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-                <div class="card shadow">
+
                         <div class="card-header border-0">
                             <div class="row align-items-center">
                                 <div class="col">
@@ -43,7 +40,7 @@
                             <div class="col-md-6">
                                 <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
 
-                                
+
                             </div>
                         </div>
 
@@ -52,7 +49,7 @@
 
                             <div class="col-md-6">
                                 <input id="last_name" type="text" class="form-control" name="last_name" value="{{ old('last_name') }}" required autocomplete="last_name">
-                                
+
                             </div>
                         </div>
 
@@ -62,7 +59,7 @@
                             <div class="col-md-6">
                                 <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
 
-                               
+
                             </div>
                         </div>
 
@@ -71,7 +68,7 @@
 
                             <div class="col-md-6">
                                 <input id="phone" type="text" class="form-control" name="phone" value="{{ old('phone') }}" required autocomplete="phone">
-                                
+
                             </div>
                         </div>
 
@@ -85,8 +82,8 @@
                                         <option value="{{$rol->id}}" {{($rol->id == old('idRol') ? 'selected' : '')}}>{{$rol->name}}</option>
                                     @endforeach
                                 </select>
-                                
-                            
+
+
                             </div>
                         </div>
 
@@ -96,7 +93,7 @@
                             <div class="col-md-6">
                                 <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
 
-                                
+
                             </div>
                         </div>
 
@@ -115,8 +112,4 @@
                         </div>
                     </form>
                 </div>
-            </div>
-        </div>
-    </div>
-</div>
 @endsection
