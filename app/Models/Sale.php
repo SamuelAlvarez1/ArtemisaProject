@@ -18,12 +18,8 @@ class Sale extends Model
         'finalPrice',
         'state',
     ];
-<<<<<<< HEAD
-    
-=======
 
 
->>>>>>> 0e2857175f10ea88d4fc9b00d92f2e0e22232da8
     public $timestamps = true;
 
     protected $dates = [
