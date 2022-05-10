@@ -69,7 +69,7 @@
                             </td>
                             <td>{{$value-> userName}}</td>
                             <td>{{$value-> finalPrice}}</td>
-                            <td>{{$value-> created_at}}</td>
+                            <td>{{$value->created_at->isoFormat('dddd D MMMM YYYY, h:mm a')}}</td>
                             <td>
                                 @if($value->state == 1)
                                     <span class="badge badge-success">Activa</span>
@@ -79,13 +79,13 @@
 
                             </td>
                             <td>
-                                <a class="mx-2" href="{{url('/sales/'.$value->id)}}"><i
-                                        class="fa-solid text-dark fa-magnifying-glass"></i></a>
+                                <a class="mx-2" data-toggle="tooltip" data-placement="top" title="Detalles" href="{{url('/sales/'.$value->id)}}"><i
+                                class="fa-solid text-dark fa-info-circle"></i></a>
                                 @if($value->state == 1)
-                                    <a class="mx-2" href="{{url('/sales/updateState/'.$value->id)}}"><i
+                                    <a class="mx-2" data-toggle="tooltip" data-placement="top" title="Anular" href="{{url('/sales/updateState/'.$value->id)}}"><i
                                             class="fa text-dark fa-ban"></i></a>
                                 @else
-                                    <a class="mx-2" href="{{url('/sales/updateState/'.$value->id)}}"><i
+                                    <a class="mx-2"  data-toggle="tooltip" data-placement="top" title="Activar" href="{{url('/sales/updateState/'.$value->id)}}"><i
                                             class="fa text-dark fa-check"></i></a>
                                 @endif
 

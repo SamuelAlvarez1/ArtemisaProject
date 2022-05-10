@@ -83,7 +83,7 @@
                     </div>
                 </div>
                 
-                <button type="submit" class="btn btn-primary mt-2">
+                <button type="submit" class="btn btn-success mt-2">
                     Editar usuario
                 </button>
             </form>

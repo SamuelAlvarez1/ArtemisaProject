@@ -48,7 +48,7 @@ class PlatesController extends Controller
 
     public function create()
     {
-        $categories = Category::all();
+        $categories = Category::where('state', '1')->get();
         return view("plates.create", compact("categories"));
     }
 

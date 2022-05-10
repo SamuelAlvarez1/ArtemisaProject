@@ -19,7 +19,7 @@ class CreatePlatesTable extends Migration
             $table->string("name")->unique();
             $table->double("price");
             $table->boolean("state");
-            $table->unsignedBigInteger("idCategory");
+            $table->unsignedBigInteger("idCategory")->nullable(true);
             $table->foreign("idCategory")->references("id")->on("categories");
             $table->timestamps();
         });

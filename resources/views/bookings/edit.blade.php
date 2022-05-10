@@ -1,11 +1,11 @@
-@extends('layouts.panel') 
+@extends('layouts.forms')
 
 
 @section('title-nav')
     Editar reserva
 @endsection
 
-@section('main-content')
+@section('form')
 
 @if(count($errors)>0)
   <div class="alert alert-danger" role="alert">
@@ -17,78 +17,75 @@
   </div>
 @endif
 
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card shadow">
+
                     <div class="card-header border-0">
                         <div class="row align-items-center">
                             <div class="col">
                                 <h3 class="mb-0">editar reserva</h3>
                             </div>
                             <div class="col text-right">
-                                <a href="{{url('bookings')}}" class="btn btn-sm btn-danger" data-toggle="tooltip" data-placement="top" title="Regresar a la lista de reservas">
+                                <a href="{{url('bookings')}}" class="btn btn-sm btn-outline-danger">
                                     Regresar
                                 </a>
                             </div>
                         </div>
                     </div>
             <div class="card-body">
-                
+
                 <form action="{{url('/bookings/' . $booking->id)}}" method="post">
                     @csrf
                     @method('PUT')
                     <div class="row mb-3">
                         <label for="idCustomer" class="col-md-4 col-form-label text-md-end">{{ __('Cliente') }}<b class="text-danger">*</b></label>
-    
+
                         <div class="col-md-6">
-                            <select name="idCustomer" id="idCustomer" class="form-control" data-toggle="tooltip" data-placement="right" title="Seleccionar el cliente">
+                            <select name="idCustomer" id="idCustomer" class="form-control">
                                 <option value="">seleccione el cliente</option>
                                 @foreach ($customers as $customer)
                                     <option value="{{$customer->id}}" {{($customer->id == $booking->idCustomer ? 'selected' : '')}}>{{$customer->name}}</option>
                                 @endforeach
                             </select>
-    
-                            
+
+
                         </div>
                     </div>
-    
+
                     <div class="row mb-3">
                         <label for="idEvent" class="col-md-4 col-form-label text-md-end">{{ __('Evento') }}</label>
-    
+
                         <div class="col-md-6">
-                            <select name="idEvent" id="idEvent" class="form-control" data-toggle="tooltip" data-placement="right" title="Seleccione el evento">
+                            <select name="idEvent" id="idEvent" class="form-control">
                                 <option value="">seleccione el evento</option>
                                 @foreach ($events as $event)
                                     <option value="{{$event->id}}" {{($event->id == $booking->idEvent ? 'selected' : '')}}>{{$event->name}}</option>
                                 @endforeach
                             </select>
-                            
+
                         </div>
                     </div>
-    
+
                     <div class="row mb-3">
                         <label for="amount_people" class="col-md-4 col-form-label text-md-end">{{ __('Cantidad de personas') }}<b class="text-danger">*</b></label>
-    
+
                         <div class="col-md-6">
-                            <input id="amount_people" type="text" class="form-control" name="amount_people" value="{{ $booking->amount_people }}" required autocomplete="amount_people" data-toggle="tooltip" data-placement="right" title="Digite la cantidad de personas">
-    
-                           
+                            <input id="amount_people" type="text" class="form-control" name="amount_people" value="{{ $booking->amount_people }}" required autocomplete="amount_people">
+
+
                         </div>
                     </div>
-    
+
                     <div class="row mb-3">
                         <label for="booking_date" class="col-md-4 col-form-label text-md-end">{{ __('Fecha inicial') }}<b class="text-danger">*</b></label>
-                        
+
                         <div class="col-md-6">
-                            <input id="booking_date" type="date" class="form-control" name="booking_date" value="" required autocomplete="booking_date" data-toggle="tooltip" data-placement="right" title="Fecha dia/mes/año de la reserva">
+                            <input id="booking_date" type="date" class="form-control" name="booking_date" value="" required autocomplete="booking_date" >
                         </div>
-                    </div>    
+                    </div>
                     <div class="row mb-3">
                         <label for="booking_hour" class="col-md-4 col-form-label text-md-end">{{ __('Hora de la reserva') }}<b class="text-danger">*</b></label>
                         <div class="col-md-6">
-                            
-                            <select name="booking_hour" id="booking_hour" class="form-control" data-toggle="tooltip" data-placement="right" title="Hora solicitada para la reserva">
+
+                            <select name="booking_hour" id="booking_hour" class="form-control">
                                 <option value="1">1 AM</option>
                                 <option value="2">2 AM</option>
                                 <option value="3">3 AM</option>
@@ -114,34 +111,30 @@
                                 <option value="23">11 PM</option>
                                 <option value="12">12 PM</option>
                             </select>
-                            
-                            
+
+
                         </div>
-                    </div>    
+                    </div>
                     <div class="row mb-3">
                         <label for="booking_minutes" class="col-md-4 col-form-label text-md-end">{{ __('Minutos de la reserva') }}<b class="text-danger">*</b></label>
                         <div class="col-md-6">
-                            
-                            <input id="booking_minutes" type="text" class="form-control" name="booking_minutes" value="{{ old('booking_minutes') }}" required autocomplete="booking_minutes" data-toggle="tooltip" data-placement="right" title="Minutos solicitados de la reserva">
-                            
+
+                            <input id="booking_minutes" type="text" class="form-control" name="booking_minutes" value="{{ old('booking_minutes') }}" required autocomplete="booking_minutes">
+
                         </div>
-                    </div>    
-    
+                    </div>
+
                     <div class="row mb-0">
                         <div class="col-md-6 offset-md-4">
-                            <button type="submit" class="btn btn-primary" data-toggle="tooltip" data-placement="right" title="Click para crear la reserva">
-                                {{ __('Editar reserva') }}
+                            <button type="submit" class="btn btn-outline-success">
+                              Actualizar
 
-                                
+
                             </button>
                         </div>
                     </div>
                 </form>
             </div>
-        </div>
-    </div>
-    </div>
-</div>
 
 
 @endsection
