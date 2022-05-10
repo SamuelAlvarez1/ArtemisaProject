@@ -78,6 +78,7 @@ class SalesController extends Controller
                         "idPlate" => $value,
                         "quantity" => $request["cantidades"][$key],
                         "platePrice" => $request["precios"][$key],
+                        "description" => $request["descripciones"][$key],
                     ]);
                 }
             } else {
@@ -119,7 +120,12 @@ class SalesController extends Controller
             ->where("sales_details.idSales", "=", $id)
             ->get();
 
-
         return view('sales.show', compact('sale', 'saleDetail'));
     }
+
+    public function getSalesCount(){
+        $salesCount = Sale::where('created_at', '>=', auth()->user()->lastLog)->count();
+        return $salesCount;
+    }
 }
+

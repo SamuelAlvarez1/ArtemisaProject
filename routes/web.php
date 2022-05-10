@@ -79,6 +79,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/bookings/updateState/{id}/{state}', [BookingsController::class, "updateState"]);
     Route::get('/bookings/seeCanceled', [BookingsController::class, "seeCanceled"]);
     Route::get('/bookings/seeApproved', [BookingsController::class, "seeApproved"]);
+    Route::get('/bookings/getBookingsCount', [BookingsController::class, 'getBookingsCount']);
 
     //<---------Customers----------->
 
@@ -95,6 +96,7 @@ Route::group(['middleware' => 'auth'], function () {
     //<-----------Sales------------>
     Route::get('/sales/canceledSales', [SalesController::class, 'canceledSales']);
     Route::get('/sales/updateState/{id}', [SalesController::class, 'updateState']);
+    Route::get('/sales/getSalesCount', [SalesController::class, 'getSalesCount']);
 
     //<----------Resources---------->
 

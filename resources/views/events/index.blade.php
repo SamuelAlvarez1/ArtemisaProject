@@ -10,17 +10,17 @@
 @section('main-content')
     <div class="card">
         <div class="card-header">
-            <div class="row">
-                <div class="col-6 d-flex justify-content-center d-flex align-items-center">
-                    <a href="{{url('/events/create')}}" class="btn-sm btn mx-2 btn-outline-dark">Crear evento</a>
+            <div class="row mx-auto row-cols-2">
+                <div class="col">
+                    <a href="{{url('/events/create')}}" class="btn-sm btn m-2 btn-outline-dark">Crear evento</a>
                     @if($states == 'active')
-                        <a href="{{url('/events/old')}}" class="btn-sm btn mx-2 mr-4 btn-outline-dark">Ver eventos antiguos</a>
+                        <a href="{{url('/events/old')}}" class="btn-sm btn m-2 mr-4 btn-outline-dark">Ver eventos antiguos</a>
                     @else
-                        <a href="{{url('/events')}}" class="btn-sm btn mx-2 btn-outline-dark">Ver todos los eventos</a>
+                        <a href="{{url('/events')}}" class="btn-sm btn m-2 btn-outline-dark">Ver todos los eventos</a>
                     @endif
                 </div>
-                <div class="col-3 offset-1 d-flex justify-content-center d-flex align-items-center">
-                    <div class="input-group">
+                <div class="col">
+                    <div class="input-group m-2">
                         <input type="text" class="form-control-sm border border-dark" id="searchInput" placeholder="Busqueda"
                                aria-label="Recipient's username" aria-describedby="basic-addon2">
                     </div>
@@ -28,7 +28,7 @@
             </div>
         </div>
         <div class="card-body mt-3">
-            <div class="table-responsive text-center">
+            <div class="text-center">
                 <table id="events" class="table table-bordered">
                     <thead class="thead-light">
                     <tr>
@@ -98,6 +98,10 @@
     <script>
         $(document).ready(function () {
             var table = $('#events').DataTable({
+                rowReorder: {
+                    selector: 'td:nth-child(2)'
+                },
+                responsive: true,    
                 "dom": 'tp',
                 'language': {
                     "paginate": {

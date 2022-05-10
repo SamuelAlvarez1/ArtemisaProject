@@ -221,7 +221,7 @@ class BookingsController extends Controller
                 'amount_people' => 'required|numeric|min:1|max:20',
                 'booking_date' => 'required|date|after_or_equal:' . date('d-m-Y'),
                 'booking_hour' => 'required|numeric',
-                'booking_minutes' => 'required|numeric',
+                'booking_minutes' => 'required|numeric|',
             ];
 
             $this->validate($request, $campos);
@@ -272,6 +272,10 @@ class BookingsController extends Controller
         return redirect('/bookings')->with("error", 'La reserva no se pudo editar');
     }
 
+    public function getBookingsCount(){
+        $bookingsCount = Booking::where('created_at', '>=', auth()->user()->lastLog)->count();
+        return $bookingsCount;
+    }
 
     public function destroy($id)
     {

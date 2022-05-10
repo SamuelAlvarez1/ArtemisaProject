@@ -40,7 +40,7 @@
             </div>
         </div>
         <div class="card-body">
-            <div class="table-responsive mb-3 text-center">
+            <div class=" mb-3 text-center">
                 <table id="sales" class="table table-bordered">
                     <thead class="thead-light">
                     <tr>
@@ -106,6 +106,10 @@
                 <script>
                     $(document).ready(function () {
                         var table = $('#sales').DataTable({
+                            rowReorder: {
+                    selector: 'td:nth-child(2)'
+                },
+                responsive: true, 
                             "dom": 'tp',
                             'language': {
                                 "paginate": {
