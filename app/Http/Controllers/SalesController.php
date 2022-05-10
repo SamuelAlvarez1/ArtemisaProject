@@ -78,6 +78,7 @@ class SalesController extends Controller
                         "idPlate" => $value,
                         "quantity" => $request["cantidades"][$key],
                         "platePrice" => $request["precios"][$key],
+                        "description" => $request["descripciones"][$key],
                     ]);
                 }
             } else {
