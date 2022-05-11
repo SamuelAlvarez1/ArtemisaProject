@@ -65,7 +65,7 @@ class DatabaseSeeder extends Seeder
 
         Plate::create([
             'id' => 1,
-            'name' => 'Platillo customizable',
+            'name' => 'Platillo Personalizado',
             'price' => '0',
             'state' => '1',
         ]);

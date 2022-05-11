@@ -33,15 +33,22 @@
                     <tbody>
 
                         <tr>
+<<<<<<< HEAD
                             <td>{{$sale->id}}</td>
+=======
+                            <td>{{$sale-> id}}</td>
+>>>>>>> 5ec96ba7c5252288db104837452ba662a3039dd1
                             <td>
                                 @if ($sale->idCustomers == null)
                                     Cliente de Mostrador
                                 @else
-                                {{$sale->customerName}}
-                            @endif
-                            <td>{{$sale->userName}}</td>
-                            <td>{{$sale->finalPrice}}</td>
+
+                                    {{$sale->customerName}}
+                                @endif
+                            </td>
+                            <td>{{$sale-> userName}}</td>
+                            <td>{{$sale-> finalPrice}}</td>
+                            <td>{{$sale->created_at->isoFormat('dddd D MMMM YYYY, h:mm a')}}</td>
                             <td>{{$sale->created_at->isoFormat('dddd D MMMM YYYY, h:mm a')}}</td>
                             <td>
                                 @if($sale->state == 1)
@@ -72,11 +79,12 @@
                     <tbody>
                             @foreach ($saleDetail as $value)
                             <tr>
-                            <td>{{$value->id}}</td>
-                            <td>{{$value->namePlate}}</td>
-                            <td>{{$value->quantity}}</td>
-                            <td>{{$value->platePrice}}</td>
-                            <td>{{($value->quantity * $value->platePrice)}}</td>
+                            <td>{{$value-> id}}</td>
+                            <td>{{$value-> namePlate}} <br> {{$value->description}}  </td>
+                            <td>{{$value-> quantity}}</td>
+                            <td>{{$value-> platePrice}}</td>
+                            <td>{{($value-> quantity * $value->platePrice)}}</td>
+
                         </tr>
                             @endforeach
                             
