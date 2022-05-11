@@ -110,10 +110,12 @@ class SalesController extends Controller
     public function show($id)
     {
         $sale = Sale::select("sales.*", "customers.name as customerName", "users.name as userName")
-            ->join("customers", "sales.idCustomers", "=", "customers.id")
+            ->leftjoin("customers", "sales.idCustomers", "=", "customers.id")
             ->join("users", "sales.idUser", "=", "users.id")
             ->where("sales.id", "=", $id)
             ->first();
+
+        // dd($sale);
 
         $saleDetail = SaleDetail::select("sales_details.*", "plates.name as namePlate")
             ->join("plates", "sales_details.idPlate", "=", "plates.id")
@@ -123,9 +125,9 @@ class SalesController extends Controller
         return view('sales.show', compact('sale', 'saleDetail'));
     }
 
-    public function getSalesCount(){
+    public function getSalesCount()
+    {
         $salesCount = Sale::where('created_at', '>=', auth()->user()->lastLog)->count();
         return $salesCount;
     }
 }
-

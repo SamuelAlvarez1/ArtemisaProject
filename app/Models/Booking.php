@@ -17,7 +17,7 @@ class Booking extends Model
         'idUser',
         'idEvent',
         'amount_people',
-        'state',
+        'idState',
         'start_date',
         'final_date',
     ];

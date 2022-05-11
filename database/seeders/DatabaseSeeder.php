@@ -2,16 +2,17 @@
 
 namespace Database\Seeders;
 
+use App\Models\Booking;
 use App\Models\customer;
 use App\Models\Event;
 use App\Models\Plate;
+use App\Models\bookingState;
 use Database\Factories\CustomerFactory;
 use Illuminate\Database\Seeder;
 use App\Models\User;
 use App\Models\Rol;
 use App\Models\Category;
-
-
+use BookingsStates;
 
 class DatabaseSeeder extends Seeder
 {
@@ -47,11 +48,18 @@ class DatabaseSeeder extends Seeder
 
 
         $categories = ['Papas', 'Pizzas', 'Arroz'];
+        $states = ['Cancelada', 'En proceso', 'Aprobada'];
         foreach ($categories as $value) {
             Category::create([
                 'name' => $value,
                 'idUser' => '1',
                 'state' => '1',
+            ]);
+        }
+
+        foreach ($states as $value) {
+            bookingState::create([
+                'name' => $value
             ]);
         }
 

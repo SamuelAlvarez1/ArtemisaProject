@@ -23,14 +23,13 @@ class BookingsController extends Controller
     {
 
 
-        $bookings = Booking::select("bookings.*", "customers.name as customerName", "events.name as eventName", "users.name as user")
+        $bookings = Booking::select("bookings.*", "customers.name as customerName", "events.name as eventName", "users.name as user", "bookings_states.name as stateName")
             ->join("customers", "bookings.idCustomer", "=", "customers.id")
             ->leftJoin('events', 'bookings.idEvent', '=', 'events.id')
             ->join("users", "bookings.idUser", "=", "users.id")
-            ->where("bookings.state", "=", 1)
+            ->join("bookings_states", "bookings.idState", "=", "bookings_states.id")
+            ->where("bookings.idState", "=", 2)
             ->get();
-
-
         $states = "1";
 
         return view("bookings.index", compact("bookings", "states"));
@@ -39,11 +38,12 @@ class BookingsController extends Controller
 
     public function seeCanceled()
     {
-        $bookings = Booking::select("bookings.*", "customers.name as customerName", "events.name as eventName", "users.name as user")
+        $bookings = Booking::select("bookings.*", "customers.name as customerName", "events.name as eventName", "users.name as user", "bookings_states.name as stateName")
             ->join("customers", "bookings.idCustomer", "=", "customers.id")
             ->leftJoin('events', 'bookings.idEvent', '=', 'events.id')
             ->join("users", "bookings.idUser", "=", "users.id")
-            ->where("bookings.state", "=", 0)
+            ->join("bookings_states", "bookings.idState", "=", "bookings_states.id")
+            ->where("bookings.idState", "=", 1)
             ->get();
 
         foreach ($bookings as $booking) {
@@ -56,11 +56,12 @@ class BookingsController extends Controller
 
     public function seeApproved()
     {
-        $bookings = Booking::select("bookings.*", "customers.name as customerName", "events.name as eventName", "users.name as user")
+        $bookings = Booking::select("bookings.*", "customers.name as customerName", "events.name as eventName", "users.name as user", "bookings_states.name as stateName")
             ->join("customers", "bookings.idCustomer", "=", "customers.id")
             ->leftJoin('events', 'bookings.idEvent', '=', 'events.id')
             ->join("users", "bookings.idUser", "=", "users.id")
-            ->where("bookings.state", "=", 2)
+            ->join("bookings_states", "bookings.idState", "=", "bookings_states.id")
+            ->where("bookings.idState", "=", 3)
             ->get();
 
         foreach ($bookings as $booking) {
@@ -75,31 +76,31 @@ class BookingsController extends Controller
 
     public function updateState($id, $state)
     {
-        if ($id != null && $state < 3) {
+        if ($id != null && $state > 0 && $state < 4) {
 
             try {
 
                 $booking = Booking::find($id);
 
-                if ($booking != null && $booking->state != $state) {
-                    if ($state == 2) {
-                        if ($booking->start_date > Carbon::parse(date("d-m-Y h:i"))) {
+                if ($booking != null && $booking->idState != $state) {
+                    if ($state == 3) {
+                        if (Carbon::parse($booking->start_date) > Carbon::now()) {
                             return redirect('/bookings')->with("error", "Aún no ha llegado la fecha de esta reserva");
                         }
                         $booking->update([
-                            "state" => $state,
+                            "idState" => $state,
                             "final_date" => Carbon::parse(date("d-m-Y h:i"))
                         ]);
                     } else {
                         $booking->update([
-                            "state" => $state
+                            "idState" => $state
                         ]);
                     }
                 } else {
                     return redirect('/bookings')->with("error", "El cambio de estado de la reserva no se pudo realizar");
                 }
 
-                if ($state == 1) {
+                if ($state == 2) {
                     return redirect('/bookings/seeCanceled')->with("success", "cambio de estado exitoso");;
                 } else {
                     return redirect('/bookings')->with("success", "cambio de estado exitoso");;
@@ -146,7 +147,7 @@ class BookingsController extends Controller
 
         $bookings = Booking::select("amount_people")
             ->whereDate("start_date", $request['start_date'])
-            ->where('state', 1)
+            ->where('idState', 2)
             ->get();
 
         $countPeople = 0;
@@ -166,7 +167,7 @@ class BookingsController extends Controller
                 'idUser' => auth()->user()->id,
                 'amount_people' => $request['amount_people'],
                 'start_date' => $start_date,
-                'state' => 1
+                'idState' => 2
             ]);
         } catch (\Exception $e) {
             return redirect('/bookings')->with("error", "La reserva no se pudo crear");
@@ -272,7 +273,8 @@ class BookingsController extends Controller
         return redirect('/bookings')->with("error", 'La reserva no se pudo editar');
     }
 
-    public function getBookingsCount(){
+    public function getBookingsCount()
+    {
         $bookingsCount = Booking::where('created_at', '>=', auth()->user()->lastLog)->count();
         return $bookingsCount;
     }
