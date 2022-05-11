@@ -17,7 +17,8 @@ class SaleDetail extends Model
         'idSales',
         'idPlate',
         'quantity',
-        'platePrice'
+        'platePrice',
+        'description'
     ];
 
     public static $rules = [];
