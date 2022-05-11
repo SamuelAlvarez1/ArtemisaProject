@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\PlatesController;
 use App\Http\Controllers\CustomersController;
 use App\Http\Controllers\EventsController;
 use App\Http\Controllers\WelcomeController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\SalesController;
 use App\Http\Controllers\Admin\CategoriesController;
 
@@ -25,6 +26,7 @@ use App\Http\Controllers\Admin\CategoriesController;
 |
 */
 Route::get('/', [WelcomeController::class, "index"]);
+Route::post('/contact', [ContactController::class, 'save']);
 
 Auth::routes();
 
