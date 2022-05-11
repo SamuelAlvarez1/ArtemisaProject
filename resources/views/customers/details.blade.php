@@ -7,7 +7,7 @@
 
 @section('main-content')
 
-    <div class="col-md-7 offset-2 my-2">
+    <div class="col-md-7 mx-auto my-2">
         <div class="card">
             <div class="card-header">
                 <div class="row align-items-center">
@@ -15,8 +15,8 @@
                         <h2>Detalles del cliente</h2>
                     </div>
                     <div class="col text-right">
-                        <a href="{{url('/customers/'.$customer->id.'/edit')}}" class="btn btn-sm btn-warning">Editar este cliente</a>
-                        <a href="{{url('/customers')}}" class="btn btn-sm btn-danger">Regresar</a>
+                        <a href="{{url('/customers/'.$customer->id.'/edit')}}" class="btn mt-2 btn-sm btn-warning">Editar este cliente</a>
+                        <a href="{{url('/customers')}}" class="btn mt-2 btn-sm btn-danger">Regresar</a>
                     </div>
                 </div>
             </div>

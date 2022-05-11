@@ -6,7 +6,7 @@
 
 @section('main-content')
 
-    <div class="col-md-10 offset-1 my-2">
+    <div class="col-md-10 mx-auto my-2">
         <div class="card">
             <div class="card-header">
                 <div class="row align-items-center">
@@ -14,10 +14,10 @@
                         <h2>Detalles del evento</h2>
                     </div>
                     <div class="col text-right">
-                        <a href="{{url('/events/'.$event->id.'/edit')}}" class="btn btn-sm btn-warning">
+                        <a href="{{url('/events/'.$event->id.'/edit')}}" class="btn mt-2 btn-sm btn-warning">
                             Editar este evento
                         </a>
-                        <a href="{{url('events')}}" class="btn btn-sm btn-danger">
+                        <a href="{{url('events')}}" class="btn btn-sm mt-2 btn-danger">
                             Regresar
                         </a>
                     </div>

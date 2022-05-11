@@ -31,10 +31,10 @@ class Customer extends Model
         'state' => 'required|boolean',
     ];
     public static $rulesUpdate = [
-        'name' => 'required|min:5|max:50|alpha',
-        'document' => 'required|digits_between:2,5',
+        'name' => 'required|min:5|max:50|regex:/^[a-zA-ZÀ-ÿñÑ ]+$/',
+        'document' => 'required|digits_between:6,15',
         'address' => 'required|min:5|max:70',
-        'phoneNumber' => 'required|min:7|max:13',
+        'phoneNumber' => 'required|min:7|max:',
         'state' => 'required|boolean',
     ];
 

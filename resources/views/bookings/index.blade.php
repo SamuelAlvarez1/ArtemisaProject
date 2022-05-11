@@ -97,14 +97,14 @@
                         <td>{{$value->user}}</td>
                         @endif
                         <td>
-                            @if($value->state == 0)
-                            <span class="badge badge-danger">Cancelada</span>
+                            @if($value->idState == 1)
+                            <span class="badge badge-danger">{{$value->stateName}}</span>
                             @endif
-                            @if($value->state == 1)
-                            <span class="badge badge-primary">En proceso</span>
+                            @if($value->idState ==2)
+                            <span class="badge badge-primary">{{$value->stateName}}</span>
                             @endif
-                            @if($value->state == 2)
-                            <span class="badge badge-success">Aprobada</span>
+                            @if($value->idState == 3)
+                            <span class="badge badge-success">{{$value->stateName}}</span>
 
                             @endif
 
@@ -117,21 +117,31 @@
                         <td>
                             <a class="mx-2" href="{{url('/bookings/'.$value->id)}}" data-delay="500" data-toggle="tooltip" data-placement="bottom" title="ver los detalles de esta reserva"><i class="fa-solid text-dark fa-info-circle"></i></a>
 
-                            @if($value->state == 0)
+                            @if($value->idState == 1)
 
                             <a class="mx-2" href="{{url('/bookings/'.$value->id.'/edit')}}" data-delay="500" data-toggle="tooltip" data-placement="bottom" title="Editar esta reserva"><i
                                 class="fa text-dark fa-edit"></i></a>
+<<<<<<< HEAD
                             <a class="mx-2" href="{{url('/bookings/updateState/'.$value->id)}}/1" data-delay="500" data-toggle="tooltip" data-placement="bottom" title="poner esta reserva en proceso"><i
+=======
+                            <a class="mx-2" href="{{url('/bookings/updateState/'.$value->id)}}/2"  data-toggle="tooltip" data-placement="top" title="poner esta reserva en proceso"><i
+>>>>>>> 36d372515326fc835441cb828432195ad1d6fee2
                                     class="fa text-dark fa-check"></i></a>
                             @endif
 
-                            @if($value->state == 1)
+                            @if($value->idState == 2)
 
                             <a class="mx-2" href="{{url('/bookings/'.$value->id.'/edit')}}"  data-delay="500" data-toggle="tooltip" data-placement="bottom" title="Editar esta reserva"><i
                                 class="fa text-dark fa-edit"></i></a>
+<<<<<<< HEAD
                             <a class="mx-2" href="{{url('/bookings/updateState/'.$value->id)}}/0"  data-delay="500" data-toggle="tooltip" data-placement="bottom" title="Cancelar esta reserva"><i
                                     class="fa text-dark fa-ban"></i></a>
                             <a class="mx-2" href="{{url('/bookings/updateState/'.$value->id)}}/2"  data-delay="500" data-toggle="tooltip" data-placement="bottom" title="Aprobar esta reserva"><i
+=======
+                            <a class="mx-2" href="{{url('/bookings/updateState/'.$value->id)}}/1"  data-toggle="tooltip" data-placement="top" title="Cancelar esta reserva"><i
+                                    class="fa text-dark fa-ban"></i></a>
+                            <a class="mx-2" href="{{url('/bookings/updateState/'.$value->id)}}/3"  data-toggle="tooltip" data-placement="top" title="Aprobar esta reserva"><i
+>>>>>>> 36d372515326fc835441cb828432195ad1d6fee2
                                     class="fa text-dark fa-check"></i></a>
                             @endif
                         </td>
