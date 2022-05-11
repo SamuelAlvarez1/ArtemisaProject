@@ -115,23 +115,23 @@
                         @endif
 
                         <td>
-                            <a class="mx-2" href="{{url('/bookings/'.$value->id)}}"  data-toggle="tooltip" data-placement="top" title="ver los detalles de esta reserva"><i class="fa-solid text-dark fa-info-circle"></i></a>
+                            <a class="mx-2" href="{{url('/bookings/'.$value->id)}}" data-delay="500" data-toggle="tooltip" data-placement="bottom" title="ver los detalles de esta reserva"><i class="fa-solid text-dark fa-info-circle"></i></a>
 
                             @if($value->state == 0)
 
-                            <a class="mx-2" href="{{url('/bookings/'.$value->id.'/edit')}}"  data-toggle="tooltip" data-placement="top" title="Editar esta reserva"><i
+                            <a class="mx-2" href="{{url('/bookings/'.$value->id.'/edit')}}" data-delay="500" data-toggle="tooltip" data-placement="bottom" title="Editar esta reserva"><i
                                 class="fa text-dark fa-edit"></i></a>
-                            <a class="mx-2" href="{{url('/bookings/updateState/'.$value->id)}}/1"  data-toggle="tooltip" data-placement="top" title="poner esta reserva en proceso"><i
+                            <a class="mx-2" href="{{url('/bookings/updateState/'.$value->id)}}/1" data-delay="500" data-toggle="tooltip" data-placement="bottom" title="poner esta reserva en proceso"><i
                                     class="fa text-dark fa-check"></i></a>
                             @endif
 
                             @if($value->state == 1)
 
-                            <a class="mx-2" href="{{url('/bookings/'.$value->id.'/edit')}}"  data-toggle="tooltip" data-placement="top" title="Editar esta reserva"><i
+                            <a class="mx-2" href="{{url('/bookings/'.$value->id.'/edit')}}"  data-delay="500" data-toggle="tooltip" data-placement="bottom" title="Editar esta reserva"><i
                                 class="fa text-dark fa-edit"></i></a>
-                            <a class="mx-2" href="{{url('/bookings/updateState/'.$value->id)}}/0"  data-toggle="tooltip" data-placement="top" title="Cancelar esta reserva"><i
+                            <a class="mx-2" href="{{url('/bookings/updateState/'.$value->id)}}/0"  data-delay="500" data-toggle="tooltip" data-placement="bottom" title="Cancelar esta reserva"><i
                                     class="fa text-dark fa-ban"></i></a>
-                            <a class="mx-2" href="{{url('/bookings/updateState/'.$value->id)}}/2"  data-toggle="tooltip" data-placement="top" title="Aprobar esta reserva"><i
+                            <a class="mx-2" href="{{url('/bookings/updateState/'.$value->id)}}/2"  data-delay="500" data-toggle="tooltip" data-placement="bottom" title="Aprobar esta reserva"><i
                                     class="fa text-dark fa-check"></i></a>
                             @endif
                         </td>

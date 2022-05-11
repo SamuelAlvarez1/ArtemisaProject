@@ -1,88 +1,70 @@
-
-
-@extends('layouts.panel')
+@extends('layouts.forms')
 
 @section('title-nav')
     Editar platillo
 @endsection
 
-@section('main-content')
-@if($errors->any())
-                <div class="alert alert-danger alert-dismissible" role="alert">
-                    <ul>
-                        @foreach($errors->all() as $error)
-                            <li>{{$error}}</li>
-                        @endforeach
-                    </ul>
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-            @endif
-
-    <div class="row">
-        <div class="col">
-            <h2 class="text-center">Editar</h2>
-        </div>
-    </div>
-
-    <form action="{{url('plates/'.$plate->id)}}" method="post">
-            @csrf
-            @method('PUT')
-        <div class="row">
-
-            <div class="col-10">
-
-                <div class="card pb-3">
-                    <div class="card-head">
-                        <br>
-                    </div>
-                    <div class="row card-body d-flex justify-content-center">
-                        <div class="form-group col-4">
-                            <label for="">Categoría <b class="text-danger">*</b></label>
-                            <select name="idCategory" class="form-control" id="categories">
-                                <option value="">Seleccione</option>
-                                @foreach($categories as $value)
-                                    <option value="{{$value->id}}" {{($plate->idCategory == $value->id) ? 'selected' : ''}}>{{$value->name}}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="form-group col-4">
-                            <label for="">Nombre del platillo <b class="text-danger">*</b></label>
-                            <input type="text" class="form-control @error('name') is-invalid @enderror"
-                        name="name" id="name" value="{{$plate->name}}">
-                            @error('plate')
-                            <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                            @enderror
-                        </div>
-                        <div class="form-group col-3">
-                            <label for="">Precio base <b class="text-danger">*</b></label>
-                            <input type="number" class="form-control @error('price') is-invalid @enderror"
-                        name="price" id="price" value="{{$plate->price}}">
-                            @error('price')
-                            <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                            @enderror
-                        </div>
-                    </div>
-                    <div class="col-4 d-flex justify-content-center" style="margin: auto; ">
-
-                        <button type="submit" class="btn btn-outline-dark float-right">Guardar platillo</button>
-                        <a href="{{url('plates')}}" class="btn btn-outline-danger">
-                            Volver
-                        </a>
-                    </div>
-
-
-                </div>
-
-
+@section('form')
+    <div class="card-header">
+        <div class="row align-items-center">
+            <div class="col">
+                <h3 class="mb-0">Editar platillo</h3>
+            </div>
+            <div class="col text-right">
+                <a href="{{url('plates')}}" class="btn btn-sm btn-outline-danger">
+                    Regresar
+                </a>
             </div>
         </div>
+    </div>
+    <form action="{{url('plates/'.$plate->id)}}" method="post">
+        @csrf
+        @method('PUT')
+    <div class="card-body">
+        @if($errors->any())
+            <div class="alert alert-danger alert-dismissible" role="alert">
+                <ul>
+                    @foreach($errors->all() as $error)
+                        <li>{{$error}}</li>
+                    @endforeach
+                </ul>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        @endif
+
+            <div class="form-group ">
+                <label for="">Categoría <b class="text-danger">*</b></label>
+                <select name="idCategory" class="form-control @error('name') is-invalid @enderror" id="categories">
+                    <option value="">Seleccione</option>
+                    @foreach($categories as $value)
+                        <option
+                            value="{{$value->id}}" {{($plate->idCategory == $value->id) ? 'selected' : ''}}>{{$value->name}}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="form-group ">
+                <label for="">Nombre del platillo <b class="text-danger">*</b></label>
+                <input type="text" class="form-control @error('name') is-invalid @enderror"
+                       name="name" id="name" onkeypress="return check(event)" value="{{$plate->name}}">
+            </div>
+            <div class="form-group">
+                <label for="">Precio base <b class="text-danger">*</b></label>
+                <input type="number" class="form-control @error('price') is-invalid @enderror"
+                       name="price" id="price" value="{{$plate->price}}">
+            </div>
+
+    </div>
+    <div class="d-flex justify-content-center mx-auto mb-4">
+        <button type="submit" class="btn btn-outline-success float-right">Guardar platillo
+        </button>
+    </div>
     </form>
+
+
+
+
 
 @endsection
 
@@ -100,7 +82,7 @@
         function agregar_variacion() {
             let variacion_text = $("#nombre_variacion").val();
             let description = $("#description").val();
-            let description_text = description.substring(0,20);
+            let description_text = description.substring(0, 20);
             let precio = $("#precio_adicional").val();
 
             if (precio > 0) {
@@ -133,7 +115,23 @@
 
         }
 
+        function check(e) {
+            tecla = (document.all) ? e.keyCode : e.which;
+
+            //Tecla de retroceso para borrar, siempre la permite
+            if (tecla == 8 || tecla == 32) {
+                return true;
+            }
+
+            // Patrón de entrada, en este caso solo acepta numeros y letras
+            patron = /[A-Za-z0-9á-úÁ-Ú]/;
+            tecla_final = String.fromCharCode(tecla);
+            return patron.test(tecla_final);
+        }
+
+
     </script>
+
 
 
 @endsection

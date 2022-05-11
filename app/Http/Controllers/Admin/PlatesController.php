@@ -55,48 +55,18 @@ class PlatesController extends Controller
 
     public function store(Request $request)
     {
-//         $request->validate(Plate::$rules);
 
+         $request->validate(Plate::$rules);
         $input = $request->all();
-
-
         try {
-            DB::beginTransaction();
 
-
-            if (isset($input["id"])) {
-
-                $plates = Plate::all();
-                $namePlates = [];
-                foreach ($input["id"] as $key => $value) {
-
-                    $plates = Plate::where('name', $input["plate"][$key])->first();
-                    if ($plates) {
-                        $namePlates[sizeof($namePlates)] = $input["plate"][$key];
-                    } else {
                         Plate::create([
-
-                        "name" => $input["plate"][$key],
-                        "price" => $input["price"][$key],
-                        "idCategory" => $input["idCategory"][$key],
+                        "name" => $input["name"],
+                        "price" => $input["price"],
+                        "idCategory" => $input["idCategory"],
                         "state" => 1
                     ]);
 
-                    }
-                }
-
-            }else{
-                return redirect('/plates')->with('error', 'No agregaste ningún platillo');
-
-            }
-
-
-
-            DB::commit();
-            if (sizeof($namePlates) > 0) {
-
-                return redirect('/plates')->with(['nameDuplicate' => $namePlates]);
-            }
             return redirect('/plates')->with('success', 'Platillo creado exitosamente');
         } catch (\Exception $e) {
             DB::rollBack();
@@ -137,9 +107,9 @@ class PlatesController extends Controller
             try {
 
                 Plate::where("id", $id)->update([
-                    "name" => $request["plate"],
+                    "name" => $request["name"],
                     "price" => $request["price"],
-                    "idCategory" => $request["category"]
+                    "idCategory" => $request["idCategory"]
                 ]);
                 return redirect('/plates')->with("success", "El platillo fue editado satisfactoriamente");
             } catch (\Exception $e) {
@@ -158,5 +128,5 @@ class PlatesController extends Controller
         $price = Plate::select("plates.price")->where("id", $id)->first();
         return $price;
     }
-    
+
 }

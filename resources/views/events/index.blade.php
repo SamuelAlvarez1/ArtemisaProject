@@ -10,7 +10,10 @@
 @section('main-content')
     <div class="card">
         <div class="card-header">
-            <div class="row mx-auto row-cols-2">
+            <div class="row mx-auto row-cols-3">
+                <div class="col">
+                    <strong>Eventos</strong>
+                </div>
                 <div class="col">
                     <a href="{{url('/events/create')}}" class="btn-sm btn m-2 btn-outline-dark">Crear evento</a>
                     @if($states == 'active')
@@ -24,7 +27,7 @@
                         <input type="text" class="form-control-sm border border-dark" id="searchInput" placeholder="Busqueda"
                                aria-label="Recipient's username" aria-describedby="basic-addon2">
                     </div>
-                </div> 
+                </div>
             </div>
         </div>
         <div class="card-body mt-3">
@@ -101,7 +104,7 @@
                 rowReorder: {
                     selector: 'td:nth-child(2)'
                 },
-                responsive: true,    
+                responsive: true,
                 "dom": 'tp',
                 'language': {
                     "paginate": {

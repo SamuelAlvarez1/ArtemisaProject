@@ -3,13 +3,16 @@
     @if ($states == 'active')
         Clientes
     @else
-       Clientes no activos 
+       Clientes no activos
     @endif
 @endsection
 @section('main-content')
     <div class="card">
         <div class="card-header">
-            <div class="row mx-auto row-cols-2">
+            <div class="row mx-auto row-cols-3">
+                <div class="col">
+                    <strong>Clientes</strong>
+                </div>
                 <div class="col">
                     <a href="{{url('/customers/create')}}" class="btn-sm btn m-2 btn-outline-dark">Registrar cliente</a>
                     @if($states == 'active')
@@ -83,7 +86,7 @@
                 rowReorder: {
                     selector: 'td:nth-child(2)'
                 },
-                responsive: true, 
+                responsive: true,
                 "dom": 'tp',
                 'language': {
                     "paginate": {

@@ -21,7 +21,7 @@
                         <h3 class="mb-0">Editar información</h3>
                     </div>
                     <div class="col text-right">
-                        <a href="{{url('events')}}" class="btn btn-sm btn-danger">
+                        <a href="{{url('events')}}" class="btn btn-sm btn-outline-danger">
                             Regresar
                         </a>
                     </div>
@@ -110,7 +110,10 @@
                             Estado
                         </label>
                     </div>
-                    <button type="submit" class="btn btn-success">Actualizar</button>
+                    <div class="row mx-auto">
+                        <button type="submit" class="btn btn-outline-success">Actualizar</button>
+
+                    </div>
                 </form>
             </div>
         </div>

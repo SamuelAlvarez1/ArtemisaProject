@@ -3,7 +3,8 @@
 <link rel="stylesheet" href="/css/themes/bootstrap.css" />
 
 @endsection @section('title-nav') Crear venta @endsection
-@section('main-content') @if(count($errors)>0)
+@section('main-content')
+    @if(count($errors)>0)
 <div class="alert alert-danger" role="alert">
     <ul>
         @foreach($errors->all() as $error)

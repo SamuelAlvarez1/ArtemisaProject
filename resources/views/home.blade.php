@@ -59,7 +59,7 @@ Dashboard
  </div>
 
     <div class="row my-5">
-        <div class="card w-100">
+        <div class="card">
             <div class="card-header text-center">
                 <h2>Clientes más frecuentes</h2>
                 <div class="card-body">
