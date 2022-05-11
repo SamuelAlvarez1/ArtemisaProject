@@ -34,7 +34,13 @@
 
                         <tr>
                             <td>{{$sale-> id}}</td>
-                            <td>{{$sale-> customerName}}</td>
+                            <td>
+                                @if ($sale->idCustomers == null)
+                                    Cliente de Mostrador
+                                @else
+                                    {{$sale->customerName}}
+                                @endif
+                            </td>
                             <td>{{$sale-> userName}}</td>
                             <td>{{$sale-> finalPrice}}</td>
                             <td>{{$sale-> created_at}}</td>
@@ -68,7 +74,7 @@
                             @foreach ($saleDetail as $value)
                             <tr>
                             <td>{{$value-> id}}</td>
-                            <td>{{$value-> namePlate}}</td>
+                            <td>{{$value-> namePlate}} <br> {{$value->description}}  </td>
                             <td>{{$value-> quantity}}</td>
                             <td>{{$value-> platePrice}}</td>
                             <td>{{($value-> quantity * $value->platePrice)}}</td>
