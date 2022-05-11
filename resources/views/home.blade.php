@@ -49,21 +49,21 @@ Dashboard
 
     <div class="col" id="SBMonth">
     </div>
-    
+
 </div>
 <div class="row row-cols-2" id="Week">
 
     <div class="col" id="SBWeek">
-    </div>  
-   
+    </div>
+
  </div>
 
     <div class="row my-5">
-        <div class="card">
+        <div class="card w-100">
             <div class="card-header text-center">
                 <h2>Clientes más frecuentes</h2>
                 <div class="card-body">
-                    <table class="table table-striped m-auto">
+                    <table class="table table-striped m-auto table-responsive-sm">
                         <thead class="thead-dark">
                             <tr>
                                 <th>Nombre</th>
@@ -124,7 +124,7 @@ function mostrarSemana() {
 
 Highcharts.chart('SBMonth', {
     chart: {
-      
+
         type: 'column'
     },
     title: {
@@ -180,7 +180,7 @@ Highcharts.chart('SBWeek', {
             'Sabado',
             'Domingo'
         ],
-        
+
         plotBands: [{ // visualize the weekend
             from: 4.5,
             to: 6.5,
@@ -195,9 +195,9 @@ Highcharts.chart('SBWeek', {
     },
 
     tooltip: {
-      
+
         shared: true,
-       
+
     },
     plotOptions: {
         column: {
