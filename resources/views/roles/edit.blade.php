@@ -46,7 +46,7 @@
             </div>
             <div class="mt-2 mb-2">
                 <label for="">Descripción<b class="text-danger"> *</b></label>
-                <textarea class="form-control" id="exampleFormControlTextarea1" resize='none'
+                <textarea class="form-control" name="description" id="exampleFormControlTextarea1" resize='none'
                           rows="4">{{$rol->description}}</textarea>
                 </textarea>
             </div>
