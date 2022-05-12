@@ -24,11 +24,11 @@
           <h5 class="card-subtitle mt-2">cantidad de personas</h5>
           <p class="card-text">{{$booking->amount_people}}</p>
 
-          <h5 class="card-subtitle mt-2">Fecha de inicio</h5>
+          <h5 class="card-subtitle mt-2">Fecha de la reserva</h5>
           <p class="card-text">{{$booking->start_date->isoFormat('dddd D MMMM YYYY, h:mm a')}}</p>
 
           @if ($booking->idState == "3")
-          <h5 class="card-subtitle mt-2">fecha de la reserva</h5>
+          <h5 class="card-subtitle mt-2">fecha final de la reserva</h5>
           <p class="card-text">{{$booking->final_date->isoFormat('dddd D MMMM YYYY, h:mm a')}}</p>
           @endif
 
