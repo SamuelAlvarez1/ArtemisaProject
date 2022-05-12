@@ -239,7 +239,7 @@
                     <input type="hidden" name="idPlatillo[]" value="${idPlatillo}" class="idPlates">
                     <input type="hidden" name="cantidades[]" value="${cantidad}" class="cantidades">
                     <input type="hidden" name="precios[]" value="${precio}" class="precios">
-                    <input type="hidden" name="descripciones[]" value="${descripcion}" class="text-plate">
+                    <input type="hidden" name="descripciones[]" value="${descripcion}"  >
                     ${platillo_text}
                 </td>
                 <td>${descripcion}</td>
@@ -334,12 +334,8 @@
             if ($("table#table_plates tbody tr").length > 0) {
                 $("table#table_plates tbody tr").each(function () {
                     if (
-                        $(this)
-                            .find("input.text-plate")
-                            .val()
-                            .trim()
-                            .toLowerCase() ==
-                        $("#detailsDescriptionText").val().trim().toLowerCase()
+                        $(this).find("td.text-plate").val() ==
+                        $("#plates option:selected").val()
                     ) {
                         validation = true;
                         $(this)

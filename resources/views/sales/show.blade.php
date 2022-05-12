@@ -33,11 +33,7 @@
                     <tbody>
 
                         <tr>
-<<<<<<< HEAD
-                            <td>{{$sale->id}}</td>
-=======
                             <td>{{$sale-> id}}</td>
->>>>>>> 5ec96ba7c5252288db104837452ba662a3039dd1
                             <td>
                                 @if ($sale->idCustomers == null)
                                     Cliente de Mostrador
@@ -48,7 +44,6 @@
                             </td>
                             <td>{{$sale-> userName}}</td>
                             <td>{{$sale-> finalPrice}}</td>
-                            <td>{{$sale->created_at->isoFormat('dddd D MMMM YYYY, h:mm a')}}</td>
                             <td>{{$sale->created_at->isoFormat('dddd D MMMM YYYY, h:mm a')}}</td>
                             <td>
                                 @if($sale->state == 1)
