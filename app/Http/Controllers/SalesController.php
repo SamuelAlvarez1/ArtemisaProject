@@ -38,7 +38,7 @@ class SalesController extends Controller
     public function canceledSales()
     {
         $sales = Sale::select("sales.*", "customers.name as customerName", "users.name as userName")
-            ->join("customers", "sales.idCustomers", "=", "customers.id")
+            ->leftjoin("customers", "sales.idCustomers", "=", "customers.id")
             ->join("users", "sales.idUser", "=", "users.id")
             ->where('sales.state', '0')
             ->get();
