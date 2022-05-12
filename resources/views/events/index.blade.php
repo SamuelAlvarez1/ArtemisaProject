@@ -31,12 +31,10 @@
             </div>
         </div>
         <div class="card-body mt-3">
-            <div class="">
                 <table id="events" class="table table-bordered">
                     <thead class="thead-light">
                     <tr>
                         <th>#</th>
-                        <th>Acciones</th>
                         <th>Nombre</th>
                         <th>Descripción</th>
                         <th>Valor <br> decoración</th>
@@ -44,6 +42,7 @@
                         <th>Fecha <br> inicio</th>
                         <th>Fecha <br> fin</th>
                         <th>Estado</th>
+                        <th>Acciones</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -51,19 +50,6 @@
                     @foreach($events as $event)
                         <tr>
                             <td>{{$event->id}}</td>
-                            <td>
-                                <a class="mx-2" data-delay="500" data-toggle="tooltip" data-placement="bottom" title="Detalles" href="{{url('/events/'.$event->id)}}"><i
-                                        class="fa-solid text-dark fa-info-circle"></i></a>
-                                <a class="mx-2" data-delay="500" data-toggle="tooltip" data-placement="bottom" title="Editar" href="{{url('/events/'.$event->id.'/edit')}}"><i
-                                        class="fa text-dark fa-edit"></i></a>
-                                @if($event->state == 1)
-                                    <a class="mx-2" data-delay="500" data-toggle="tooltip" data-placement="bottom" title="Desactivar" href="{{url('/events/updateState/'.$event->id)}}"><i
-                                            class="fa text-dark fa-ban"></i></a>
-                                @else
-                                    <a data-delay="500" data-toggle="tooltip" data-placement="bottom" title="Activar" class="mx-2" href="{{url('/events/updateState/'.$event->id)}}"><i
-                                            class="fa text-dark fa-check"></i></a>
-                                @endif
-                            </td>
                             <td>{{Str::limit($event->name, 15)}}</td>
                             <td>{{Str::limit($event->description, 13)}}</td>
                             <td>
@@ -89,12 +75,24 @@
                                     <span class="badge badge-danger">No activo</span>
                                 @endif
                             </td>
+                            <td>
+                                <a class="mx-2" data-delay="500" data-toggle="tooltip" data-placement="bottom" title="Detalles" href="{{url('/events/'.$event->id)}}"><i
+                                        class="fa-solid text-dark fa-info-circle"></i></a>
+                                <a class="mx-2" data-delay="500" data-toggle="tooltip" data-placement="bottom" title="Editar" href="{{url('/events/'.$event->id.'/edit')}}"><i
+                                        class="fa text-dark fa-edit"></i></a>
+                                @if($event->state == 1)
+                                    <a class="mx-2" data-delay="500" data-toggle="tooltip" data-placement="bottom" title="Desactivar" href="{{url('/events/updateState/'.$event->id)}}"><i
+                                            class="fa text-dark fa-ban"></i></a>
+                                @else
+                                    <a data-delay="500" data-toggle="tooltip" data-placement="bottom" title="Activar" class="mx-2" href="{{url('/events/updateState/'.$event->id)}}"><i
+                                            class="fa text-dark fa-check"></i></a>
+                                @endif
+                            </td>
                         </tr>
                     @endforeach
                     </tbody>
                 </table>
             </div>
-        </div>
     </div>
 @endsection
 @section('scripts')

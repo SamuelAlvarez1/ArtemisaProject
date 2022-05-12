@@ -70,7 +70,6 @@
                 </div>
                 <div class="row mx-auto">
                     <button type="submit" class="btn btn-outline-success">Actualizar</button>
-
                 </div>
             </form>
         </div>
