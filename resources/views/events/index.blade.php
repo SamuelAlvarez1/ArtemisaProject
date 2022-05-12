@@ -11,10 +11,10 @@
     <div class="card">
         <div class="card-header">
             <div class="row mx-auto row-cols-3">
-                <div class="col">
+                <div class="col m-2">
                     <strong>Eventos</strong>
                 </div>
-                <div class="col">
+                <div class="col-lg-7">
                     <a href="{{url('/events/create')}}" class="btn-sm btn m-2 btn-outline-dark">Crear evento</a>
                     @if($states == 'active')
                         <a href="{{url('/events/old')}}" class="btn-sm btn m-2 mr-4 btn-outline-dark">Ver eventos antiguos</a>
@@ -22,7 +22,7 @@
                         <a href="{{url('/events')}}" class="btn-sm btn m-2 btn-outline-dark">Ver todos los eventos</a>
                     @endif
                 </div>
-                <div class="col">
+                <div class="col-lg">
                     <div class="input-group m-2">
                         <input type="text" class="form-control-sm border border-dark" id="searchInput" placeholder="Busqueda"
                                aria-label="Recipient's username" aria-describedby="basic-addon2">
@@ -99,9 +99,6 @@
     <script>
         $(document).ready(function () {
             var table = $('#events').DataTable({
-                rowReorder: {
-                    selector: 'td:nth-child(2)'
-                },
                 responsive: true,
                 "dom": 'tp',
                 'language': {
@@ -109,7 +106,8 @@
                         "first": "Inicio",
                         "last": "Fin",
                         "next": "→",
-                        "previous": "←"
+                        "previous": "←",
+                        "emptyTable": "No hay información disponible."
                     }
                 }
             });
