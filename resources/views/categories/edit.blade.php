@@ -53,7 +53,10 @@
                         Estado<b class="text-danger">*</b>
                     </label>
                 </div>
-                <button type="submit" class="btn btn-outline-success">Actualizar</button>
+                <div class="row mx-auto">
+                    <button type="submit" class="btn btn-outline-success">Actualizar</button>
+
+                </div>
             </form>
         </div>
 

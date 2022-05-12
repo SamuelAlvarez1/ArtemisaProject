@@ -6,17 +6,8 @@
 
 @section('form')
 
-    @if(count($errors)>0)
-        <div class="alert alert-danger" role="alert">
-            <ul>
-                @foreach($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
 
-    <div class="card-header border-0">
+    <div class="card-header">
         <div class="row align-items-center">
             <div class="col">
                 <h3 class="mb-0">Crear reserva</h3>
@@ -30,6 +21,15 @@
     </div>
 
     <div class="card-body">
+        @if(count($errors)>0)
+            <div class="alert alert-danger" role="alert">
+                <ul>
+                    @foreach($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
         <form method="POST" action="{{ url('bookings') }}">
             @csrf
 
@@ -72,7 +72,7 @@
                         class="text-danger">*</b></label>
 
                 <div class="col-md-6">
-                    <input id="amount_people" type="text" class="form-control" name="amount_people"
+                    <input id="amount_people" type="number" class="form-control" name="amount_people"
                            value="{{ old('amount_people') }}" required autocomplete="amount_people"
                          >
 

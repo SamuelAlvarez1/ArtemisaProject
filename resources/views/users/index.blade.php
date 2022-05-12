@@ -1,7 +1,7 @@
 @extends('layouts.panel')
 
 @section('styles')
-    
+
 @endsection
 
 @section('title-nav')
@@ -29,14 +29,14 @@
                 @endif
                 @if ($states == "1")
                     <a href="{{url('/users/notActive')}}" class="btn-sm btn btn-outline-dark">Ver usuarios deshabilitados</a>
-                @endif        
-                
+                @endif
+
             </div>
             <div class="col-3 offset-1 d-flex justify-content-center d-flex align-items-center">
                     <div class="input-group">
                         <input type="text" class="form-control-sm border border-dark" id="searchInput" placeholder="Busqueda"
                             aria-label="Recipient's username" aria-describedby="basic-addon2">
-                        
+
                     </div>
                 </div>
         </div>
@@ -76,25 +76,25 @@
                             @endif
 
                         </td>
-                        
+
                         <td>
-                            <a class="mx-2" href="{{url('/users/'.$value->id)}}"><i class="fa-solid text-dark fa-info-circle"></i></a>
-                            <a class="mx-2" href="{{url('/users/'.$value->id . '/edit')}}"><i
+                            <a class="mx-2" data-delay="500" data-toggle="tooltip" data-placement="bottom" title="Detalles" href="{{url('/users/'.$value->id)}}"><i class="fa-solid text-dark fa-info-circle"></i></a>
+                            <a class="mx-2" data-delay="500" data-toggle="tooltip" data-placement="bottom" title="Editar" href="{{url('/users/'.$value->id . '/edit')}}"><i
                                     class="fa text-dark fa-edit"></i></a>
 
                             @if ($value->idRol != 1)
 
                             @if($value->state == 1)
-                                <a class="mx-2" href="{{url('/users/updateState/'.$value->id)}}/0"><i
+                                <a class="mx-2" data-delay="500" data-toggle="tooltip" data-placement="bottom" title="Desactivar" href="{{url('/users/updateState/'.$value->id)}}/0"><i
                                         class="fa text-dark fa-ban"></i></a>
                             @else
-                                <a class="mx-2" href="{{url('/users/updateState/'.$value->id)}}/1"><i
+                                <a class="mx-2" data-delay="500" data-toggle="tooltip" data-placement="bottom" title="Activar" href="{{url('/users/updateState/'.$value->id)}}/1"><i
                                         class="fa text-dark fa-check"></i></a>
                             @endif
-                                
+
                             @endif
-                            
-                            
+
+
 
 
                         </td>

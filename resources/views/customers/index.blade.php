@@ -3,13 +3,16 @@
     @if ($states == 'active')
         Clientes
     @else
-       Clientes no activos 
+       Clientes no activos
     @endif
 @endsection
 @section('main-content')
     <div class="card">
         <div class="card-header">
-            <div class="row mx-auto row-cols-2">
+            <div class="row mx-auto row-cols-3">
+                <div class="col">
+                    <strong>Clientes</strong>
+                </div>
                 <div class="col">
                     <a href="{{url('/customers/create')}}" class="btn-sm btn m-2 btn-outline-dark">Registrar cliente</a>
                     @if($states == 'active')
@@ -34,18 +37,27 @@
                     <thead class="thead-light">
                     <tr>
                         <th>#</th>
+                        <th scope="col">Acciones</th>
                         <th scope="col">Nombre</th>
                         <th scope="col">Documento</th>
                         <th scope="col">Dirección</th>
                         <th scope="col">Telefono</th>
                         <th scope="col">Estado</th>
-                        <th scope="col">Acciones</th>
                     </tr>
                     </thead>
                     <tbody>
                     @foreach($customers as $customer)
                         <tr>
                             <td>{{$customer->id}}</td>
+                            <td>
+                                <a class="mx-2" data-delay="500" data-toggle="tooltip" data-placement="bottom" title="Detalles" href="{{url('/customers/'.$customer->id)}}"><i class="fa-solid text-dark fa-info-circle"></i></a>
+                                <a class="mx-2" data-delay="500" data-toggle="tooltip" data-placement="bottom" title="Editar" href="{{url('/customers/'.$customer->id.'/edit')}}"><i class="fa text-dark fa-edit"></i></a>
+                                @if($customer->state == 1)
+                                    <a class="mx-2" data-delay="500" data-toggle="tooltip" data-placement="bottom" title="Desactivar" href="{{url('/customers/updateState/'.$customer->id)}}"><i class="fa text-dark fa-ban"></i></a>
+                                @else
+                                    <a class="mx-2" data-delay="500" data-toggle="tooltip" data-placement="bottom" title="Activar" href="{{url('/customers/updateState/'.$customer->id)}}"><i class="fa text-dark fa-check"></i></a>
+                                @endif
+                            </td>
                             <td>{{$customer->name}}</td>
                             <td>{{$customer->document}}</td>
                             <td>{{Str::limit($customer->address, 20)}}</td>
@@ -57,15 +69,7 @@
                                     <span class="badge badge-danger">No activo</span>
                                 @endif
                             </td>
-                            <td>
-                                <a class="mx-2" data-delay="500" data-toggle="tooltip" data-placement="bottom" title="Detalles" href="{{url('/customers/'.$customer->id)}}"><i class="fa-solid text-dark fa-info-circle"></i></a>
-                                <a class="mx-2" data-delay="500" data-toggle="tooltip" data-placement="bottom" title="Editar" href="{{url('/customers/'.$customer->id.'/edit')}}"><i class="fa text-dark fa-edit"></i></a>
-                                @if($customer->state == 1)
-                                    <a class="mx-2" data-delay="500" data-toggle="tooltip" data-placement="bottom" title="Desactivar" href="{{url('/customers/updateState/'.$customer->id)}}"><i class="fa text-dark fa-ban"></i></a>
-                                @else
-                                    <a class="mx-2" data-delay="500" data-toggle="tooltip" data-placement="bottom" title="Activar" href="{{url('/customers/updateState/'.$customer->id)}}"><i class="fa text-dark fa-check"></i></a>
-                                @endif
-                            </td>
+                            
                         </tr>
                     @endforeach
                     </tbody>
@@ -83,7 +87,7 @@
                 rowReorder: {
                     selector: 'td:nth-child(2)'
                 },
-                responsive: true, 
+                responsive: true,
                 "dom": 'tp',
                 'language': {
                     "paginate": {

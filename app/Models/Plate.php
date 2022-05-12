@@ -19,10 +19,16 @@ class Plate extends Model
         'state'
     ];
 
- 
+
+
+    public static $rules = [
+        'name' => "required|min:3|unique:plates",
+        'price' => "required|numeric",
+        'idCategory' => "required"
+    ];
 
     public static $rulesEdit = [
-        'name' => "required|min:3",
+        'name' => "required|min:3|unique:plates",
         'price' => "required|numeric",
         'idCategory' => "required"
     ];

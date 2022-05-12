@@ -190,7 +190,9 @@ return [
         'address' => 'Dirección',
         'phoneNumber' => 'Numero de telefono',
         'image' => 'Imagen',
-        'now' => 'Hoy'
+        'now' => 'Hoy',
+        'idCategory' => 'Categoría',
+        'price' => 'Precio',
 
     ],
 
