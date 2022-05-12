@@ -75,7 +75,11 @@
                             @foreach ($saleDetail as $value)
                             <tr>
                             <td>{{$value-> id}}</td>
-                            <td>{{$value-> namePlate}} <br> {{$value->description}}  </td>
+                            <td>{{$value-> namePlate}} 
+                                @if ($value->idPlate == 1)
+                                    <br>{{$value->description}}
+                                @endif    
+                            </td>
                             <td>{{$value-> quantity}}</td>
                             <td>{{$value-> platePrice}}</td>
                             <td>{{($value-> quantity * $value->platePrice)}}</td>

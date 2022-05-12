@@ -14,10 +14,10 @@
                         <h2>Detalles del evento</h2>
                     </div>
                     <div class="col text-right">
-                        <a href="{{url('/events/'.$event->id.'/edit')}}" class="btn mt-2 btn-sm btn-warning">
+                        <a href="{{url('/events/'.$event->id.'/edit')}}" class="btn mt-2 btn-sm btn-outline-warning">
                             Editar este evento
                         </a>
-                        <a href="{{url('events')}}" class="btn btn-sm mt-2 btn-danger">
+                        <a href="{{url('events')}}" class="btn btn-sm mt-2 btn-outline-danger">
                             Regresar
                         </a>
                     </div>

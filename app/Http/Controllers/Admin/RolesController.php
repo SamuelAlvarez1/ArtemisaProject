@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use DataTables;
 use App\Models\Rol;
 use App\Http\Controllers\Controller;
+use App\Models\User;
 
 class RolesController extends Controller
 {
@@ -38,8 +39,12 @@ class RolesController extends Controller
     public function updateState($id, $state)
     {
         if ($id != null) {
+            $rol = Rol::findOrFail($id);
             try {
                 Rol::where("id", "=", $id)->update([
+                    "state" => $state
+                ]);
+                User::where("idRol", $rol->id)->update([
                     "state" => $state
                 ]);
                 if ($state == 1) {

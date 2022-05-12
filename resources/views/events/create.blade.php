@@ -10,7 +10,7 @@
 @section('form')
 
 
-        <div class="card-header border-0">
+        <div class="card-header">
             <div class="row align-items-center">
                 <div class="col">
                     <h3 class="mb-0">Crear evento</h3>
@@ -43,7 +43,7 @@
                 </div>
                 <div class="form-group">
                     <label for="emailInput">Descripción<b class="text-danger">*</b></label>
-                    <textarea rows="2" class="form-control @error('description') is-invalid @enderror" name="description" id="descriptionInput">{{old('description')}}</textarea>
+                    <textarea rows="3" class="form-control @error('description') is-invalid @enderror" name="description" id="descriptionInput" resize="none">{{old('description')}}</textarea>
                 </div>
                 <div class="row mb-4">
                     <div class="col">

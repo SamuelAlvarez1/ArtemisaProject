@@ -12,10 +12,10 @@
             <div class="card-header">
                 <div class="row align-items-center">
                     <div class="col text-right">
-                        <a href="{{url('/categories/'.$category->id.'/edit')}}" class="btn btn-sm btn-warning">
+                        <a href="{{url('/categories/'.$category->id.'/edit')}}" class="btn btn-sm btn-outline-warning">
                             Editar esta categoría
                         </a>
-                        <a href="{{url('/categories')}}" class="btn btn-sm btn-danger">
+                        <a href="{{url('/categories')}}" class="btn btn-sm btn-outline-danger">
                             Regresar
                         </a>
                     </div>
