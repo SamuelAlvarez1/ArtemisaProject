@@ -29,7 +29,7 @@
             </div>
             <div class="col-6">
 
-                <a href="{{url('/bookings/create')}}" class="btn-sm btn btn-outline-dark" >crear reserva</a>
+                <a href="{{url('/bookings/create')}}" class="btn-sm btn btn-outline-dark" >Crear reserva</a>
 
                 @if($states == '0')
                 <a href="{{url('/bookings')}}" class="btn-sm btn btn-outline-dark" >Ver reservas en proceso</a>

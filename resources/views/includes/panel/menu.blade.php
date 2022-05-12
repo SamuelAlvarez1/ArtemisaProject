@@ -1,4 +1,4 @@
-@if(auth()->user()->idRol == 1)
+
     <ul class="navbar-nav">
         <li class="nav-item">
             <a class="nav-link" href="{{url('/home')}}"  data-delay="300" data-toggle="tooltip" data-placement="right" title="Ver reportes del restaurante">
@@ -6,7 +6,7 @@
             </a>
         </li>
     </ul>
-@endif
+
 
 <h6 class="navbar-heading text-muted">
     Gestionar

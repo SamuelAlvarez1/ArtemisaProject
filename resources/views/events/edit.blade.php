@@ -15,7 +15,7 @@
 
     <div class="col-md-8 offset-2 my-2">
         <div class="card shadow">
-            <div class="card-header border-0">
+            <div class="card-header">
                 <div class="row align-items-center">
                     <div class="col">
                         <h3 class="mb-0">Editar información</h3>
@@ -51,7 +51,7 @@
                     </div>
                     <div class="form-group">
                         <label for="emailInput">Descripción</label>
-                        <textarea rows="2" class="form-control @error('description') is-invalid @enderror" name="description" id="descriptionInput" >{{old('description', $event->description)}}</textarea>
+                        <textarea rows="3" class="form-control @error('description') is-invalid @enderror" name="description" id="descriptionInput" resize="none">{{old('description', $event->description)}}</textarea>
                     </div>
                     <div class="row mb-4">
                         <div class="col">

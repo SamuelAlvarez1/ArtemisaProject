@@ -5,7 +5,7 @@
 @endsection
 
 @section('form')
-    <div class="card-header border-0">
+    <div class="card-header">
         <div class="row align-items-center">
             <div class="col">
                 <h3 class="mb-0">Crear cliente</h3>
