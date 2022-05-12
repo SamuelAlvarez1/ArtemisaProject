@@ -99,11 +99,7 @@ class PlatesController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate(Plate::$rulesEdit);
-        if ($id != null) {
-            $name = Plate::where('name', $request["plate"]);
-            if ($name) {
-                return redirect('/plates')->with("error", "El nombre al que quiere actualizar el platillo ya existe");
-            }
+
             try {
 
                 Plate::where("id", $id)->update([
@@ -115,7 +111,7 @@ class PlatesController extends Controller
             } catch (\Exception $e) {
                 return redirect('/plates')->with("error", $e->getMessage());
             }
-        }
+
     }
 
     public function destroy($id)

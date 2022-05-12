@@ -22,5 +22,9 @@ class Category extends Model
         'name' => 'required|unique:categories|min:3|max:50|alpha_num',
     ];
 
+    public static $rulesEdit = [
+        'name' => 'required|min:3|max:250|alpha_num',
+    ];
+
     public $timestamps = false;
 }

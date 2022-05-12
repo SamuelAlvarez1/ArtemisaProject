@@ -22,7 +22,7 @@
             </div>
             <div class="col-5">
 
-                <a href="{{url('/roles/create')}}" class="btn-sm btn mx-2 btn-outline-dark">crear rol</a>
+                <a href="{{url('/roles/create')}}" class="btn-sm btn mx-2 btn-outline-dark">Crear rol</a>
 
                 @if($states == '0')
                 <a href="{{url('/roles')}}" class="btn-sm btn btn-outline-dark">Ver roles activos</a>

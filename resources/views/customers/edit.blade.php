@@ -38,22 +38,22 @@
                 @method('PUT')
                 <div class="form-group">
                     <label for="nameInput">Nombre</label>
-                    <input value="{{old('name', $customer->name)}}" type="text" class="form-control" name="name"
+                    <input value="{{old('name', $customer->name)}}" type="text" class="form-control @error('name') is-invalid @enderror" name="name"
                            id="nameInput" placeholder="Cliente">
                 </div>
                 <div class="form-group">
                     <label for="emailInput">Documento</label>
-                    <input value="{{old('document', $customer->document)}}" type="text" class="form-control"
+                    <input value="{{old('document', $customer->document)}}" type="text" class="form-control @error('document') is-invalid @enderror"
                            name="document" id="documentInput" placeholder="Cliente">
                 </div>
                 <div class="form-group">
                     <label for="idCardInput">Dirección</label>
-                    <input value="{{old('address', $customer->address)}}" type="text" class="form-control"
+                    <input value="{{old('address', $customer->address)}}" type="text" class="form-control @error('address') is-invalid @enderror"
                            name="address" id="addressInput" placeholder="Cliente">
                 </div>
                 <div class="form-group">
                     <label for="addressInput">Número de telefono</label>
-                    <input value="{{old('phoneNumber', $customer->phoneNumber)}}" type="text" class="form-control"
+                    <input value="{{old('phoneNumber', $customer->phoneNumber)}}" type="text" class="form-control @error('phoneNumber') is-invalid @enderror"
                            name="phoneNumber" id="phoneNumberInput" placeholder="Cliente">
                 </div>
                 <div class="form-check mb-3">

@@ -22,7 +22,7 @@
             </div>
             <div class="col-5">
 
-                <a href="{{url('/users/create')}}" class="btn-sm btn mx-2 btn-outline-dark">crear usuario</a>
+                <a href="{{url('/users/create')}}" class="btn-sm btn mx-2 btn-outline-dark">Crear usuario</a>
 
                 @if($states == '0')
                 <a href="{{url('/users')}}" class="btn-sm btn btn-outline-dark">Ver usuarios activos</a>

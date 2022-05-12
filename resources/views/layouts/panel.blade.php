@@ -44,7 +44,7 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <!-- Brand -->
-            <a class="navbar-brand text-white" href="#" data-toggle="tooltip" data-placement="right" title="Ir a la página de bienvenida">
+            <a class="navbar-brand text-white" href="{{url('/')}}" data-toggle="tooltip" data-placement="right" title="Ir a la página de bienvenida">
                 <img src="{{asset('img/landing/navbar-logo.png')}}" alt="Logo">
                 Artemisa
             </a>
@@ -55,7 +55,7 @@
                 <div class="navbar-collapse-header d-md-none">
                     <div class="row">
                         <div class="col-6 collapse-brand">
-                            <a href="{{url('/home')}}" class="text-dark">
+                            <a href="{{url('/')}}" class="text-dark">
                                 Artemisa
                             </a>
                         </div>

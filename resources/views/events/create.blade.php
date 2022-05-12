@@ -39,23 +39,22 @@
                 @csrf
                 <div class="form-group">
                     <label for="nameInput">Nombre<b class="text-danger">*</b></label>
-                    <input value="{{old('name')}}" type="text" class="form-control" name="name" id="nameInput"
-                           placeholder="Evento">
+                    <input value="{{old('name')}}" type="text" class="form-control @error('name') is-invalid @enderror" name="name" id="nameInput">
                 </div>
                 <div class="form-group">
                     <label for="emailInput">Descripción<b class="text-danger">*</b></label>
-                    <textarea rows="2" class="form-control" name="description" id="descriptionInput" placeholder="Evento">{{old('description')}}</textarea>
+                    <textarea rows="2" class="form-control @error('description') is-invalid @enderror" name="description" id="descriptionInput">{{old('description')}}</textarea>
                 </div>
                 <div class="row mb-4">
                     <div class="col">
                         <label for="idCardInput">Precio de entrada</label>
-                        <input value="{{old('entryPrice')}}" type="number" class="form-control" name="entryPrice"
-                            id="addressInput" placeholder="Evento">
+                        <input value="{{old('entryPrice')}}" type="number" class="form-control @error('entryPrice') is-invalid @enderror" name="entryPrice"
+                            id="addressInput">
                     </div>
                     <div class="col">
                         <label for="idCardInput">Precio de decoration </label>
-                        <input value="{{old('decorationPrice')}}" type="number" class="form-control" name="decorationPrice"
-                            id="decorationPriceInput" placeholder="Evento">
+                        <input value="{{old('decorationPrice')}}" type="number" class="form-control @error('decorationPrice') is-invalid @enderror" name="decorationPrice"
+                            id="decorationPriceInput">
                     </div>
                 </div>
                 <div class="row">
@@ -66,7 +65,7 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
                                 </div>
-                                <input value="{{old('startDate', date('Y-m-d'))}}" type="text" class="form-control datepicker"
+                                <input value="{{old('startDate', date('Y-m-d'))}}" type="text" class="form-control @error('startDate') is-invalid @enderror datepicker"
                                        name="startDate"
                                        id="date" data-date-format="yyyy-mm-dd" data-date-start-date="{{date('Y-m-d')}}"
                                        data-date-end-date="+60d">
@@ -80,7 +79,7 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
                                 </div>
-                                <input value="{{old('endDate', date('Y-m-d'))}}" type="text" class="form-control datepicker"
+                                <input value="{{old('endDate', date('Y-m-d'))}}" type="text" class="form-control @error('endDate') is-invalid @enderror datepicker"
                                        name="endDate"
                                        id="date" data-date-format="yyyy-mm-dd" data-date-start-date="{{date('Y-m-d')}}"
                                        data-date-end-date="+62d">
@@ -90,7 +89,7 @@
                 </div>
                 <div class="mb-3">
                     <label for="formFile" class="form-label">Selecciona una imagen</label>
-                    <input class="form-control" value="{{old('image')}}" name="image" type="file" id="formFile">
+                    <input class="form-control @error('image') is-invalid @enderror" value="{{old('image')}}" name="image" type="file" id="formFile">
                 </div>
                 <div class="form-check mb-3">
                     <input type="hidden" name="state" value="0">

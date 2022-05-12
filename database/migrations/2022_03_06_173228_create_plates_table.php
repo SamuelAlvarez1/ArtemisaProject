@@ -16,7 +16,7 @@ class CreatePlatesTable extends Migration
         Schema::create('plates', function (Blueprint $table) {
 
             $table->id();
-            $table->string("name")->unique();
+            $table->string("name");
             $table->double("price");
             $table->boolean("state");
             $table->unsignedBigInteger("idCategory")->nullable(true);

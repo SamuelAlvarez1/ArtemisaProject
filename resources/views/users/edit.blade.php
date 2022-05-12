@@ -54,7 +54,7 @@
 
 
         <div class="form-group">
-            <label for="name">{{ __('Correo') }}<b class="text-danger"> *</b></label>
+            <label for="name">{{ __('Correo electrónico') }}<b class="text-danger"> *</b></label>
                 <input type="text" class="form-control" placeholder="email" name="email"
                        value="{{$user->email}}"/>
         </div>

@@ -45,26 +45,26 @@
                     @method('PUT')
                     <div class="form-group">
                         <label for="nameInput">Nombre</label>
-                        <input value="{{old('name', $event->name)}}" type="text" class="form-control" name="name"
+                        <input value="{{old('name', $event->name)}}" type="text" class="form-control @error('name') is-invalid @enderror" name="name"
                             id="nameInput"
-                            placeholder="Evento">
+                            >
                     </div>
                     <div class="form-group">
                         <label for="emailInput">Descripción</label>
-                        <textarea rows="2" class="form-control" name="description" id="descriptionInput" placeholder="Evento">{{old('description', $event->description)}}</textarea>
+                        <textarea rows="2" class="form-control @error('description') is-invalid @enderror" name="description" id="descriptionInput" >{{old('description', $event->description)}}</textarea>
                     </div>
                     <div class="row mb-4">
                         <div class="col">
                             <label for="idCardInput">Precio de entrada</label>
-                            <input value="{{old('entryPrice', $event->entryPrice)}}" type="number" class="form-control"
+                            <input value="{{old('entryPrice', $event->entryPrice)}}" type="number" class="form-control @error('entryPrice') is-invalid @enderror"
                                 name="entryPrice"
-                                id="addressInput" placeholder="Evento">
+                                id="addressInput" >
                         </div>
                         <div class="col">
                             <label for="idCardInput">Precio de decoration </label>
                             <input value="{{old('decorationPrice', $event->decorationPrice)}}" type="number"
-                                class="form-control" name="decorationPrice"
-                                id="decorationPriceInput" placeholder="Evento">
+                                class="form-control @error('decorationPrice') is-invalid @enderror" name="decorationPrice"
+                                id="decorationPriceInput" >
                         </div>
                     </div>
                     <div class="row">
@@ -76,7 +76,7 @@
                                         <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
                                     </div>
                                     <input value="{{old('startDate', $event->startDate)}}" type="text"
-                                        class="form-control datepicker"
+                                        class="form-control @error('startDate') is-invalid @enderror datepicker"
                                         name="startDate"
                                         id="date" data-date-format="yyyy-mm-dd" data-date-start-date="{{date('Y-m-d')}}"
                                         data-date-end-date="+30d">
@@ -91,7 +91,7 @@
                                         <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
                                     </div>
                                     <input value="{{old('endDate',  $event->endDate)}}" type="text"
-                                        class="form-control datepicker"
+                                        class="form-control @error('endDate') is-invalid @enderror datepicker"
                                         name="endDate"
                                         id="date" data-date-format="yyyy-mm-dd" data-date-start-date="{{date('Y-m-d')}}"
                                         data-date-end-date="+30d">
@@ -101,7 +101,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="formFile" class="form-label">Imagen</label>
-                        <input class="form-control" name="image" type="file" id="formFile">
+                        <input class="form-control @error('image') is-invalid @enderror" name="image" type="file" id="formFile">
                     </div>
                     <div class="form-check mb-3">
                         <input type="hidden" name="state" value="0">

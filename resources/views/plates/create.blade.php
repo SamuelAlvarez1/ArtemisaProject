@@ -41,7 +41,7 @@
 
             <div class="form-group ">
                 <label for="">Categoría <b class="text-danger">*</b></label>
-                <select name="idCategory" class="form-control" id="categories">
+                <select name="idCategory" class="form-control @error('idCategory') is-invalid @enderror" id="categories">
                     <option value="">Seleccione</option>
                     @foreach($categories as $value)
                         <option value="{{$value->id}}">{{$value->name}}</option>
@@ -50,17 +50,17 @@
             </div>
             <div class="form-group ">
                 <label for="">Nombre del platillo <b class="text-danger">*</b></label>
-                <input type="text" class="form-control"
+                <input type="text" class="form-control @error('name') is-invalid @enderror"
                        name="name" id="plate" onkeypress="return check(event)">
             </div>
             <div class="form-group ">
                 <label for="">Precio base <b class="text-danger">*</b></label>
-                <input type="number" class="form-control"
+                <input type="number" class="form-control @error('price') is-invalid @enderror"
                        name="price" id="price">
             </div>
 
     <div class="d-flex justify-content-center" style="margin: auto; ">
-            <button type="submit" class="btn btn-outline-success float-right">Guardar platillo
+            <button type="submit" class="btn btn-outline-success float-right">Crear
             </button>
     </div>
 

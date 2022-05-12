@@ -33,71 +33,55 @@
         <form method="POST" action="{{ url('bookings') }}">
             @csrf
 
-            <div class="row mb-3">
-                <label for="idCustomer" class="col-md-4 col-form-label text-md-end">{{ __('Cliente') }}
-                    <b class="text-danger">*</b></label>
+            <div class="form-group">
+                <label for="idCustomer">{{ __('Cliente') }}
+                    <b class="text-danger"> *</b></label>
 
-                <div class="col-md-6">
-                    <select name="idCustomer" id="idCustomer" class="form-control">
-                        <option value="">seleccione el cliente</option>
-                        @foreach ($customers as $customer)
-                            <option
-                                value="{{$customer->id}}" {{($customer->id == old('idCustomer') ? 'selected' : '')}}>{{$customer->name}}</option>
-                        @endforeach
-                    </select>
+                <select name="idCustomer" id="idCustomer"
+                        class="form-control @error('idCustomer') is-invalid @enderror">
+                    <option value="">seleccione el cliente</option>
+                    @foreach ($customers as $customer)
+                        <option
+                            value="{{$customer->id}}" {{($customer->id == old('idCustomer') ? 'selected' : '')}}>{{$customer->name}}</option>
+                    @endforeach
+                </select>
+            </div>
 
+            <div class="form-group">
+                <label for="idEvent">{{ __('Evento') }}</label>
+                <select name="idEvent" id="idEvent" class="form-control @error('idEvent') is-invalid @enderror">
+                    <option value="">seleccione el evento</option>
+                    @foreach ($events as $event)
+                        <option
+                            value="{{$event->id}}" {{($event->id == old('idEvent') ? 'selected' : '')}}>{{$event->name}}</option>
+                    @endforeach
+                </select>
+            </div>
 
+            <div class="row mb-4">
+                <div class="col">
+                    <label for="amount_people"
+                    >{{ __('Cantidad de personas') }}<b
+                            class="text-danger"> *</b></label>
+
+                    <input id="amount_people" type="number" class="form-control @error('amount_people') is-invalid @enderror" name="amount_people"
+                           value="{{ old('amount_people') }}" required autocomplete="amount_people">
+                </div>
+                <div class="col">
+                    <label for="start_date"
+                    >{{ __('Fecha inicial') }}<b
+                            class="text-danger"> *</b></label>
+                    <input id="booking_date" type="date" class="form-control @error('booking_date') is-invalid @enderror" name="booking_date"
+                           value="{{ old('booking_date') }}" required autocomplete="booking_date">
                 </div>
             </div>
 
-            <div class="row mb-3">
-                <label for="idEvent"
-                       class="col-md-4 col-form-label text-md-end">{{ __('Evento') }}</label>
-
-                <div class="col-md-6">
-                    <select name="idEvent" id="idEvent" class="form-control">
-                        <option value="">seleccione el evento</option>
-                        @foreach ($events as $event)
-                            <option
-                                value="{{$event->id}}" {{($event->id == old('idEvent') ? 'selected' : '')}}>{{$event->name}}</option>
-                        @endforeach
-                    </select>
-
-                </div>
-            </div>
-
-            <div class="row mb-3">
-                <label for="amount_people"
-                       class="col-md-4 col-form-label text-md-end">{{ __('Cantidad de personas') }}<b
-                        class="text-danger">*</b></label>
-
-                <div class="col-md-6">
-                    <input id="amount_people" type="number" class="form-control" name="amount_people"
-                           value="{{ old('amount_people') }}" required autocomplete="amount_people"
-                         >
-
-
-                </div>
-            </div>
-
-            <div class="row mb-3">
-                <label for="start_date"
-                       class="col-md-4 col-form-label text-md-end">{{ __('Fecha inicial') }}<b
-                        class="text-danger">*</b></label>
-
-                <div class="col-md-6">
-                    <input id="booking_date" type="date" class="form-control" name="booking_date"
-                           value="{{ old('booking_date') }}" required autocomplete="booking_date"
-                          >
-                </div>
-            </div>
-            <div class="row mb-3">
-                <label for="booking_hour"
-                       class="col-md-4 col-form-label text-md-end">{{ __('Hora de la reserva') }}<b
-                        class="text-danger">*</b></label>
-                <div class="col-md-6">
-
-                    <select name="booking_hour" id="booking_hour" class="form-control">
+            <div class="row mb-4">
+                <div class="col">
+                    <label for="booking_hour"
+                    >{{ __('Hora de la reserva') }}<b
+                            class="text-danger"> *</b></label>
+                    <select name="booking_hour" id="booking_hour" class="form-control @error('booking_hour') is-invalid @enderror">
                         <option value="1">1 AM</option>
                         <option value="2">2 AM</option>
                         <option value="3">3 AM</option>
@@ -123,30 +107,24 @@
                         <option value="23">11 PM</option>
                         <option value="12">12 PM</option>
                     </select>
-
-
                 </div>
-            </div>
-            <div class="row mb-3">
-                <label for="booking_minutes"
-                       class="col-md-4 col-form-label text-md-end">{{ __('Minutos de la reserva') }}<b
-                        class="text-danger">*</b></label>
-                <div class="col-md-6">
+                <div class="col">
+                    <label for="booking_minutes"
+                    >{{ __('Minutos de la reserva') }}<b
+                            class="text-danger"> *</b></label>
 
-                    <input id="booking_minutes" type="number" max="60" min="0" class="form-control"
+                    <input id="booking_minutes" type="number" max="60" min="0" class="form-control @error('booking_minutes') is-invalid @enderror"
                            name="booking_minutes" value="{{ old('booking_minutes') }}" required
                            autocomplete="booking_minutes">
-
                 </div>
             </div>
-            <div class="row mb-0">
-                <div class="col-md-6 offset-md-4">
+
+
+
+                <div class="row mx-auto">
                     <button type="submit" class="btn btn-outline-success">
                         {{ __('Crear') }}
-
-
                     </button>
-                </div>
             </div>
         </form>
     </div>

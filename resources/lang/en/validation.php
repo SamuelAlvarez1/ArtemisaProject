@@ -154,6 +154,7 @@ return [
         'id_rol' => 'rol',
         'idRol' => 'Rol',
         'idCustomers' => "Cliente",
+        'idCustomer' => "Cliente",
         'amount_people' => 'cantidad de personas',
         'password' => 'contraseña',
         'new_password' => 'contraseña nueva',
