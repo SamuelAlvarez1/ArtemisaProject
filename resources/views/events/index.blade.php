@@ -11,17 +11,10 @@
     <div class="card">
         <div class="card-header">
             <div class="row mx-auto row-cols-3">
-<<<<<<< HEAD
                 <div class="col m-2">
                     <strong>Eventos</strong>
                 </div>
                 <div class="col-lg-7">
-=======
-                <div class="col-2">
-                    <strong>Eventos</strong>
-                </div>
-                <div class="col-6 offset-1">
->>>>>>> 460c97da00ac8d7fb04cdea69c0c6d9f933e37b5
                     <a href="{{url('/events/create')}}" class="btn-sm btn m-2 btn-outline-dark">Crear evento</a>
                     @if($states == 'active')
                         <a href="{{url('/events/old')}}" class="btn-sm btn m-2 mr-4 btn-outline-dark">Ver eventos antiguos</a>
@@ -29,11 +22,7 @@
                         <a href="{{url('/events')}}" class="btn-sm btn m-2 btn-outline-dark">Ver todos los eventos</a>
                     @endif
                 </div>
-<<<<<<< HEAD
                 <div class="col-lg">
-=======
-                <div class="col-3">
->>>>>>> 460c97da00ac8d7fb04cdea69c0c6d9f933e37b5
                     <div class="input-group m-2">
                         <input type="text" class="form-control-sm border border-dark" id="searchInput" placeholder="Busqueda"
                                aria-label="Recipient's username" aria-describedby="basic-addon2">

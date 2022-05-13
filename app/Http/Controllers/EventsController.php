@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Appointment;
 use App\Models\Event;
 use App\Models\Rol;
 use \App\Models\User;
 use \App\Models\Booking;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Validator;
 
 class EventsController extends Controller
 {
@@ -68,11 +70,11 @@ class EventsController extends Controller
         if ($event == null)  return redirect("/events")->with('error', 'Evento no encontrado');
         $user = User::find($event->idUser);
         $role = Rol::find($user->idRol);
-        $countBookings = Booking::where('idEvent', $id)->count(); 
-        $bookings = Booking::where('idEvent', $id)->get(); 
+        $countBookings = Booking::where('idEvent', $id)->count();
+        $bookings = Booking::where('idEvent', $id)->get();
         $countSeats = 0;
         foreach ($bookings as $key => $booking) {
-            $countSeats += $booking->amount_people; 
+            $countSeats += $booking->amount_people;
         }
 
         return view('events.details', compact('event', 'user','role', 'countBookings', 'countSeats'));
@@ -90,7 +92,16 @@ class EventsController extends Controller
 
     public function update(Request $request, $id)
     {
-        $request->validate(Event::$rules);
+//        $request->validate(Event::$rulesUpdate);
+        $validator = Validator::make($request->all(), Event::$rulesUpdate);
+        $validator->after(function ($validator) use ($request, $id){
+            $event = Event::where('name', $request->input('name'))->where('id','!=', $id)->first();
+            if ($event)
+                $validator->errors()->add('name', 'Este nombre ya está en uso');
+        });
+        if ($validator->fails()){
+            return back()->withErrors($validator)->withInput();
+        }
         $image = null;
         $input = $request->only('name', 'description','decorationPrice','entryPrice','state', 'endDate','startDate');
         if ($request->image){
@@ -119,7 +130,7 @@ class EventsController extends Controller
 
     public function updateState($id)
     {
-        try {   
+        try {
             $event = Event::find($id);
             $today = date('Y-m-d');
             $yesterday = Carbon::yesterday()->format('Y-m-d');

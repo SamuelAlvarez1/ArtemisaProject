@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\Category;
 use App\Models\Plate;
+use App\Models\Sale;
+use App\Models\SaleDetail;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
@@ -78,8 +80,8 @@ class PlatesController extends Controller
     public function show($id)
     {
         $plates = Plate::find($id);
-
-        return view('plates.show', compact('plates'));
+        $platesSalesCount = SaleDetail::where('idPlate', $id)->sum('quantity'); //cantidad de ventas del platillo
+        return view('plates.show', compact('plates', 'platesSalesCount'));
     }
 
 

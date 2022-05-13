@@ -21,8 +21,6 @@ class BookingsController extends Controller
 
     public function index()
     {
-
-
         $bookings = Booking::select("bookings.*", "customers.name as customerName", "events.name as eventName", "users.name as user", "bookings_states.name as stateName")
             ->join("customers", "bookings.idCustomer", "=", "customers.id")
             ->leftJoin('events', 'bookings.idEvent', '=', 'events.id')
@@ -101,9 +99,9 @@ class BookingsController extends Controller
                 }
 
                 if ($state == 2) {
-                    return redirect('/bookings/seeCanceled')->with("success", "cambio de estado exitoso");;
+                    return redirect('/bookings/seeCanceled')->with("success", "cambio de estado exitoso");
                 } else {
-                    return redirect('/bookings')->with("success", "cambio de estado exitoso");;
+                    return redirect('/bookings')->with("success", "cambio de estado exitoso");
                 }
             } catch (\Exception $e) {
 
@@ -133,38 +131,27 @@ class BookingsController extends Controller
             'booking_hour' => 'required|numeric',
             'booking_minutes' => 'required|numeric',
         ];
-
         $this->validate($request, $campos);
-
         $start_date = Carbon::parse($request["booking_date"] . " " . $request["booking_hour"] . ":" . $request["booking_minutes"]);
-
-
         if (Carbon::now() > Carbon::parse($start_date)) {
             return redirect('/bookings/create')->with("error", "La reserva no se pudo crear debido a que la fecha actual es mayor a la fecha solicitada");
         }
-
-
-
         $bookings = Booking::select("amount_people")
             ->whereDate("start_date", $request['start_date'])
             ->where('idState', 2)
             ->get();
-
         $countPeople = 0;
         foreach ($bookings as $booking) {
             $countPeople += $booking->amount_people;
         }
-
-
         if (($countPeople + $request['amount_people']) >= 100) {
             return redirect('/bookings')->with("error", "ya no hay mas reservas disponibles para esa fecha");
         }
-
         try {
             Booking::create([
                 'idCustomer' => $request['idCustomer'],
                 'idEvent' =>  $request['idEvent'],
-                'idUser' => auth()->user()->id,
+                'idUser' => auth()->id(),
                 'amount_people' => $request['amount_people'],
                 'start_date' => $start_date,
                 'idState' => 2
@@ -172,9 +159,6 @@ class BookingsController extends Controller
         } catch (\Exception $e) {
             return redirect('/bookings')->with("error", "La reserva no se pudo crear");
         }
-
-
-
         return redirect("/bookings")->with("success", "reserva creada satisfactoriamente");
     }
 
@@ -196,7 +180,6 @@ class BookingsController extends Controller
         return view("bookings.showDetails", compact("booking"));
     }
 
-
     public function edit($id)
     {
         if ($id != null) {
@@ -204,8 +187,7 @@ class BookingsController extends Controller
             if ($booking != null) {
                 $customers = Customer::all();
                 $events = Event::all();
-
-                return view("bookings.edit", compact("booking", "customers", "events"));
+                return view("bookings.edit", compact("booking", "customers", "events",'date'));
             }
         } else {
             return redirect('/bookings')->with("error", "La reserva no fue encontrada");

@@ -35,29 +35,38 @@
             <div class="row mb-4">
                 <div class="col">
                     <label for="nameInput">Nombre<b class="text-danger"> *</b></label>
-                    <input value="{{old('name')}}" type="text" class="form-control @error('name') is-invalid @enderror" name="name" id="nameInput">
+                    <input value="{{old('name')}}" type="text" class="form-control @error('name') is-invalid @enderror"
+                           name="name" id="nameInput">
                 </div>
                 <div class="col">
-                    <label for="emailInput">Documento<b class="text-danger"> *</b></label>
-                    <input value="{{old('document')}}" type="text" class="form-control @error('document') is-invalid @enderror" name="document"
+                    <label for="documentInput">Documento<b class="text-danger"> *</b></label>
+                    <input value="{{old('document')}}" type="number"
+                           class="form-control @error('document') is-invalid @enderror" name="document"
                            id="documentInput">
                 </div>
             </div>
             <div class="form-group">
-                <label for="idCardInput">Dirección<b class="text-danger"> *</b></label>
-                <input value="{{old('address')}}" type="text" class="form-control @error('address') is-invalid @enderror" name="address" id="addressInput">
+                <label for="addressInput">Dirección<b class="text-danger"> *</b></label>
+                <input value="{{old('address')}}" type="text"
+                       class="form-control @error('address') is-invalid @enderror" name="address" id="addressInput">
             </div>
-            <div class="form-group">
-                <label for="addressInput">Número de telefono<b class="text-danger"> *</b></label>
-                <input value="{{old('phoneNumber')}}" type="text" class="form-control @error('phoneNumber') is-invalid @enderror" name="phoneNumber"
-                       id="phoneNumberInput">
-            </div>
-            <div class="form-check mb-3">
-                <input type="hidden" name="state" value="0">
-                <input class="form-check-input" name="state" checked type="checkbox" value="1" id="state">
-                <label class="form-check-label" for="state">
-                    Estado
-                </label>
+            <div class="row mb-4">
+                <div class="col">
+                    <label for="phoneNumberInput">Número de telefono<b class="text-danger"> *</b></label>
+                    <input value="{{old('phoneNumber')}}" type="text"
+                           class="form-control @error('phoneNumber') is-invalid @enderror" name="phoneNumber"
+                           id="phoneNumberInput">
+                </div>
+                <div class="col">
+                    <div class="form-group">
+                        <input type="hidden" name="state" value="0">
+                        <label for="phoneNumberInput">Estado</label>
+                        <label class="custom-toggle">
+                            <input type="checkbox" value="1" class="form-check-input" id="state" name="state" checked>
+                            <span class="custom-toggle-slider rounded-circle"></span>
+                        </label>
+                    </div>
+                </div>
             </div>
             <button type="submit" class="btn btn-outline-success d-block m-auto">Crear</button>
         </form>
