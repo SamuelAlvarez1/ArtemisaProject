@@ -16,11 +16,11 @@
 
 <div class="card">
     <div class="card-header">
-        <div class="row">
-            <div class="col-3">
+        <div class="row mx-auto row-cols-3">
+            <div class="col my-2">
                 <strong>Roles</strong>
             </div>
-            <div class="col-5">
+            <div class="col-xl-7">
 
                 <a href="{{url('/roles/create')}}" class="btn-sm btn mx-2 btn-outline-dark">Crear rol</a>
 
@@ -32,8 +32,8 @@
                 @endif
 
             </div>
-            <div class="col-3 offset-1 d-flex justify-content-center d-flex align-items-center">
-                    <div class="input-group">
+            <div class="col-lg">
+                    <div class="input-group my-2">
                         <input type="text" class="form-control-sm border border-dark" id="searchInput" placeholder="Busqueda"
                             aria-label="Recipient's username" aria-describedby="basic-addon2">
 
@@ -42,7 +42,7 @@
         </div>
     </div>
     <div class="card-body">
-        <div class="table-responsive mb-3 text-center">
+        <div class="mx-auto mb-3">
             <table id="roles" class="table table-bordered">
                 <thead class="thead-light">
                 <tr>
@@ -106,7 +106,9 @@
                 <script>
                     $(document).ready(function () {
                         var table = $('#roles').DataTable({
+                            responsive: true,
                             "dom": 'tp',
+                            responsive: true,
                             'language': {
                                 "paginate": {
                                     "first": "Inicio",

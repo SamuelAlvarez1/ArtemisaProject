@@ -16,22 +16,22 @@
 @section('main-content')
     <div class="card">
         <div class="card-header">
-            <div class="row">
-                <div class="col-3">
+            <div class="row mx-auto row-cols-3">
+                <div class="col my-2">
                     <strong>Ventas</strong>
                 </div>
-                <div class="col-6">
+                <div class="col-xl-7">
 
-                    <a href="{{url('/sales/create')}}" class=" btn btn-sm mx-2 btn-outline-dark">Registrar Venta</a>
+                    <a href="{{url('/sales/create')}}" class=" btn btn-sm my-2 btn-outline-dark">Registrar Venta</a>
 
                     @if($states == 'activeSales')
-                    <a href="{{url('/sales/canceledSales')}}" class="btn btn-sm mx-2 btn-outline-dark">Ver Ventas Anuladas</a>
+                    <a href="{{url('/sales/canceledSales')}}" class="btn btn-sm my-2 btn-outline-dark">Ver Ventas Anuladas</a>
                     @else
-                    <a href="{{url('/sales')}}" class="btn mx-2 btn-sm mr-4 btn-outline-dark">Ver Ventas Realizadas</a>
+                    <a href="{{url('/sales')}}" class="btn my-2 btn-sm mr-4 btn-outline-dark">Ver Ventas Realizadas</a>
                     @endif
                 </div>
-                <div class="col-3 d-flex justify-content-center d-flex align-items-center">
-                        <div class="input-group">
+                <div class="col-lg">
+                        <div class="input-group my-2">
                             <input type="text" class="form-control-sm border border-dark" id="searchInput" placeholder="Busqueda"
                                 aria-label="Recipient's username" aria-describedby="basic-addon2">
                             
@@ -40,7 +40,7 @@
             </div>
         </div>
         <div class="card-body">
-            <div class=" mb-3 text-center">
+            <div class="mx-auto mb-3">
                 <table id="sales" class="table table-bordered">
                     <thead class="thead-light">
                     <tr>

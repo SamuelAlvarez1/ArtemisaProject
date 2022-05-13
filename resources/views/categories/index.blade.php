@@ -12,25 +12,22 @@
 @section('main-content')
     <div class="card">
         <div class="card-header">
-            <div class="row">
-                <div class="col-2 d-flex justify-content-center d-flex align-items-center">
+            <div class="row mx-auto row-cols-3">
+                <div class="col my-2">
                     <strong>Categorias</strong>
                 </div>
-                <div class="col-6 d-flex justify-content-center d-flex align-items-center">
-
-                    <a href="{{url('/categories/create')}}" class="btn-sm btn mx-2 btn-outline-dark">Registrar Categoria</a>
-
+                <div class="col-xl-7">
+                    <a href="{{url('/categories/create')}}" class="btn-sm btn my-2 btn-outline-dark">Registrar Categoria</a>
                     @if($states == 'active')
-
-                        <a href="{{url('/categories/notActive')}}" class="btn-sm btn mx-2 mr-4 btn-outline-dark">Ver categorias
+                        <a href="{{url('/categories/notActive')}}" class="btn-sm btn my-2 mr-4 btn-outline-dark">Ver categorias
                             desactivadas</a>
                     @else
-                        <a href="{{url('/categories')}}" class="btn-sm btn mx-2 btn-outline-dark">Ver categorias
+                        <a href="{{url('/categories')}}" class="btn-sm btn my-2 btn-outline-dark">Ver categorias
                             activas</a>
                     @endif
                 </div>
-                <div class="col-3 offset-1 d-flex justify-content-center d-flex align-items-center">
-                    <div class="input-group">
+                <div class="col-lg">
+                    <div class="input-group my-2">
                         <input type="text" class="form-control-sm border border-dark" id="searchInput" placeholder="Busqueda"
                                aria-label="Recipient's username" aria-describedby="basic-addon2">
 
@@ -39,7 +36,7 @@
             </div>
         </div>
         <div class="card-body">
-            <div class="table-responsive mb-3 text-center">
+            <div class="mx-auto mb-3">
                 <table id="categories" class="table table-bordered">
                     <thead class="thead-light">
                     <tr>
@@ -94,7 +91,9 @@
 
         $(document).ready(function () {
             var table = $('#categories').DataTable({
+                responsive: true,
                 "dom": 'tp',
+                responsive: true,
                 'language': {
                     "paginate": {
                         "first": "Primero",
