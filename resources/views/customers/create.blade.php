@@ -39,7 +39,7 @@
                            name="name" id="nameInput">
                 </div>
                 <div class="col">
-                    <label for="documentInput">Documento<b class="text-danger"> *</b></label>
+                    <label for="documentInput">Documento<b class="text-danger">*</b></label>
                     <input value="{{old('document')}}" type="number"
                            class="form-control @error('document') is-invalid @enderror" name="document"
                            id="documentInput">
@@ -51,21 +51,27 @@
                        class="form-control @error('address') is-invalid @enderror" name="address" id="addressInput">
             </div>
             <div class="row mb-4">
-                <div class="col">
+                <div class="col-lg">
                     <label for="phoneNumberInput">Número de telefono<b class="text-danger"> *</b></label>
                     <input value="{{old('phoneNumber')}}" type="text"
                            class="form-control @error('phoneNumber') is-invalid @enderror" name="phoneNumber"
                            id="phoneNumberInput">
                 </div>
-                <div class="col">
-                    <div class="form-group">
-                        <input type="hidden" name="state" value="0">
-                        <label for="phoneNumberInput">Estado</label>
+                <div class="col-lg">
+                    <label for="stateInput">Estado</label><br>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-outline-success active">
+                            <input type="radio" name="options" id="option1" autocomplete="off" checked> Activo
+                        </label>
+                        <label class="btn btn-outline-danger">
+                            <input type="radio" name="options" id="option2" autocomplete="off"> No activo
+                        </label>
+                    </div>
+                        {{-- <br>    
                         <label class="custom-toggle">
                             <input type="checkbox" value="1" class="form-check-input" id="state" name="state" checked>
                             <span class="custom-toggle-slider rounded-circle"></span>
-                        </label>
-                    </div>
+                        </label> --}}
                 </div>
             </div>
             <button type="submit" class="btn btn-outline-success d-block m-auto">Crear</button>
