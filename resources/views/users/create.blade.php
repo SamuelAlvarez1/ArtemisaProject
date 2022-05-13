@@ -7,15 +7,7 @@
 
 
 @section('form')
-    @if(count($errors)>0)
-        <div class="alert alert-danger" role="alert">
-            <ul>
-                @foreach($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
+
 
     <div class="card-header border-0">
         <div class="row align-items-center">
@@ -31,6 +23,15 @@
     </div>
 
     <div class="card-body">
+        @if(count($errors)>0)
+            <div class="alert alert-danger" role="alert">
+                <ul>
+                    @foreach($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
         <form method="POST" action="{{ url('users') }}">
             @csrf
 
