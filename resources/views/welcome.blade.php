@@ -42,7 +42,7 @@
 <header class="masthead"  style="padding:0%; background-image: url('{{asset('img/landing/header-bg.jpg')}}');">
     <div class="container">
         <div class="masthead-heading text-uppercase"><img src="{{asset('img/landing/navbar-logo.png')}}" alt="..." /></div>
-        <a class="btn btn-primary btn-xl text-uppercase" href="#Destacados">Destacados</a>
+        <a class="btn btn-primary btn-xl text-uppercase" href="/login">Iniciar sesión</a>
     </div>
     <div class="container" style="height: 6rem; background: rgba(0,0,0, 0.8); max-width: 1000rem !important; margin-top: 30px; display: flex;">
         <a class="arrow" href="#Quienessomos"><i class="fa-solid fa-angle-down" ></i></a>
