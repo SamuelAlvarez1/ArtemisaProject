@@ -44,7 +44,7 @@ class DatabaseSeeder extends Seeder
             'password' => bcrypt('12345678'),
         ]);
         Customer::factory(50)->create();
-        Event::factory(20)->create();
+        // Event::factory(20)->create();
 
 
         $categories = ['Papas', 'Pizzas', 'Arroz'];

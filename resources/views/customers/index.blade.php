@@ -13,7 +13,7 @@
                 <div class="col my-2">
                     <strong>Clientes</strong>
                 </div>
-                <div class="col-lg-7">
+                <div class="col-xl-7">
                     <a href="{{url('/customers/create')}}" class="btn-sm btn my-2 btn-outline-dark">Registrar cliente</a>
                     @if($states == 'active')
                         <a href="{{url('/customers/notActive')}}" class="btn-sm btn my-2 mr-4 btn-outline-dark">Ver clientes
@@ -24,7 +24,7 @@
                     @endif
                 </div>
                 <div class="col-lg">
-                    <div class="input-group m-2">
+                    <div class="input-group my-2">
                         <input type="text" class="form-control-sm border border-dark float-right" id="searchInput" placeholder="Busqueda"
                                aria-label="Recipient's username" aria-describedby="basic-addon2">
                     </div>
@@ -74,8 +74,6 @@
                     </tbody>
                 </table>
             </div>
-            <div  class="d-flex justify-content-end">
-            </div>
         </div>
     </div>
 @endsection
@@ -90,9 +88,9 @@
                         "first": "Primero",
                         "last": "Último",
                         "next": "→",
-                        "previous": "←",
-                        "emptyTable": "No hay información disponible."
-    }
+                        "previous": "←"
+                        },  
+                    "emptyTable": "No hay información disponible."
                 }
             });
             $('#searchInput').on('keyup', function () {

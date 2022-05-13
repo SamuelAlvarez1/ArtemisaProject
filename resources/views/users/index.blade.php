@@ -16,29 +16,29 @@
 
 <div class="card">
     <div class="card-header">
-        <div class="row">
-            <div class="col-3">
+        <div class="row row-cols-3 mx-auto">
+            <div class="col my-2">
                 <strong>Usuarios</strong>
             </div>
-            <div class="col-5">
+            <div class="col-xl-7">
 
-                <a href="{{url('/users/create')}}" class="btn-sm btn mx-2 btn-outline-dark">Crear usuario</a>
+                <a href="{{url('/users/create')}}" class="btn-sm btn my-2 btn-outline-dark">Crear usuario</a>
 
                 @if($states == '0')
-                <a href="{{url('/users')}}" class="btn-sm btn btn-outline-dark">Ver usuarios activos</a>
+                <a href="{{url('/users')}}" class="btn-sm btn my-2 btn-outline-dark">Ver usuarios activos</a>
                 @endif
                 @if ($states == "1")
-                    <a href="{{url('/users/notActive')}}" class="btn-sm btn btn-outline-dark">Ver usuarios deshabilitados</a>
+                    <a href="{{url('/users/notActive')}}" class="btn-sm btn my-2 btn-outline-dark">Ver usuarios deshabilitados</a>
                 @endif
 
             </div>
-            <div class="col-3 offset-1 d-flex justify-content-center d-flex align-items-center">
-                    <div class="input-group">
-                        <input type="text" class="form-control-sm border border-dark" id="searchInput" placeholder="Busqueda"
-                            aria-label="Recipient's username" aria-describedby="basic-addon2">
+            <div class="col-lg">
+                <div class="input-group my-2">
+                    <input type="text" class="form-control-sm border border-dark" id="searchInput" placeholder="Busqueda"
+                        aria-label="Recipient's username" aria-describedby="basic-addon2">
 
-                    </div>
                 </div>
+            </div>
         </div>
     </div>
     <div class="card-body">
@@ -119,6 +119,7 @@
                 <script>
                     $(document).ready(function () {
                         var table = $('#users').DataTable({
+                            responsive:true,
                             "dom": 'tp',
                             'language': {
                                 "paginate": {
