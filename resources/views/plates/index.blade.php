@@ -120,6 +120,7 @@
             var table = $('#plates').DataTable({
                 responsive:true,
                 "dom": 'tp',
+                responsive: true,
                 'language': {
                     "paginate": {
                         "first": "Inicio",

@@ -14,10 +14,10 @@
             <div class="card-header">
                 <div class="row align-items-center">
                     <div class="col text-right">
-                        <a href="{{url('/roles/'.$rol->id.'/edit')}}" class="btn btn-sm btn-warning">
+                        <a href="{{url('/roles/'.$rol->id.'/edit')}}" class="btn btn-sm btn-outline-warning">
                             Editar esta rol
                         </a>
-                        <a href="{{url('/roles')}}" class="btn btn-sm btn-danger">
+                        <a href="{{url('/roles')}}" class="btn btn-sm btn-outline-danger">
                             Regresar
                         </a>
                     </div>

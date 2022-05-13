@@ -156,6 +156,7 @@
         var table = $('#bookings').DataTable({
                             responsive: true,
                             "dom": 'tp',
+                            responsive: true,
                             'language': {
                                 "paginate": {
                                     "first": "Inicio",
