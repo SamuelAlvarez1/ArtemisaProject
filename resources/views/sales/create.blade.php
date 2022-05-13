@@ -71,7 +71,7 @@
                         id="divDescription"
                         style="display: none"
                     >
-                        <label for="plates">Descripcion</label>
+                        <label for="plates">Descripción</label>
                         <input
                             type="text"
                             name="detailsDescription"

@@ -126,8 +126,8 @@ class BookingsController extends Controller
     {
         $campos = [
             'idCustomer' => 'required|numeric',
-            'amount_people' => 'required|numeric|min:1|max:20',
-            'booking_date' => 'required|date|after_or_equal:' . date('d-m-Y'),
+            'amount_people' => 'required|numeric|min:1|max:80',
+            'booking_date' => 'required|date|after_or_equal:' . date('d-m-Y') . '|',
             'booking_hour' => 'required|numeric',
             'booking_minutes' => 'required|numeric',
         ];
@@ -137,14 +137,14 @@ class BookingsController extends Controller
             return redirect('/bookings/create')->with("error", "La reserva no se pudo crear debido a que la fecha actual es mayor a la fecha solicitada");
         }
         $bookings = Booking::select("amount_people")
-            ->whereDate("start_date", $request['start_date'])
+            ->whereDate("start_date", Carbon::parse($start_date))
             ->where('idState', 2)
             ->get();
         $countPeople = 0;
         foreach ($bookings as $booking) {
             $countPeople += $booking->amount_people;
         }
-        if (($countPeople + $request['amount_people']) >= 100) {
+        if (($countPeople + $request['amount_people']) >= 80) {
             return redirect('/bookings')->with("error", "ya no hay mas reservas disponibles para esa fecha");
         }
         try {
@@ -201,7 +201,7 @@ class BookingsController extends Controller
         if ($id != null) {
             $campos = [
                 'idCustomer' => 'required|numeric',
-                'amount_people' => 'required|numeric|min:1|max:20',
+                'amount_people' => 'required|numeric|min:1|max:80',
                 'booking_date' => 'required|date|after_or_equal:' . date('d-m-Y'),
                 'booking_hour' => 'required|numeric',
                 'booking_minutes' => 'required|numeric|',

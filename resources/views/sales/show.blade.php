@@ -70,7 +70,6 @@ Detalles de la venta
                     <tr>
                         <th scope="col">#</th>
                         <th scope="col">Productos</th>
-                        <th scope="col">Descripción</th>
                         <th scope="col">Cantidad</th>
                         <th scope="col">Precio Unidad</th>
                         <th scope="col">Subtotal</th>
@@ -80,8 +79,13 @@ Detalles de la venta
                  @foreach ($saleDetail as $value)
                         <tr>
                             <td>{{$value-> id}}</td>
-                            <td>{{$value-> namePlate}}</td>
-                            <td>{{$value->description}}</td>
+                            <td>
+                                @if ($value->idPlate == 1)
+                                {{$value-> description}}</td>
+                                @else
+                                {{$value-> namePlate}}</td>
+                                @endif
+                            
                             <td>{{$value-> quantity}}</td>
                             <td>{{$value-> platePrice}}</td>
                             <td>{{($value-> quantity * $value->platePrice)}}</td>

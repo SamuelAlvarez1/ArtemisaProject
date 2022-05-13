@@ -194,6 +194,7 @@ return [
         'now' => 'Hoy',
         'idCategory' => 'Categoría',
         'price' => 'Precio',
+        'email' => 'Correo electrónico',
 
     ],
 

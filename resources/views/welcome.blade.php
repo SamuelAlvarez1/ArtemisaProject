@@ -96,12 +96,12 @@
                             <article>
                                 <p class="categoria">De Comer</p>
                                 @foreach($plates as $plate)
+                                @if ($plate->id != 1)
                                 <div class="platillo">
                                     <p class="nombre">{{$plate->name}}</p>
                                     <p class="precio">${{number_format($plate->price)}}</p>
-                                    <p class="descripcion">Praesent gravida, augue sit amet dignissim rutrum,
-                                        enim tellus suscipit risus.</p>
-                                </div>
+                                </div>    
+                                @endif
                                 @endforeach
 {{--                                <div class="platillo">--}}
 {{--                                    <p class="nombre">Lorem ipsum dolor sit amet</p>--}}

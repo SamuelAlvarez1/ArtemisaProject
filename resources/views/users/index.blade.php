@@ -51,7 +51,7 @@
                     <th>Apellido</th>
                     <th>Correo</th>
                     <th>rol</th>
-                    <th>telefono</th>
+                    <th>teléfono</th>
                     <th>Estado</th>
                     <th>Acciones</th>
                 </tr>
