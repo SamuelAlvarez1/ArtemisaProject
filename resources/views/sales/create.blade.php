@@ -132,8 +132,7 @@
                             style="border: none"
                             >Precio total:&ensp;&ensp;<b class="text-success"
                                 >$</b
-                            ></span
-                        >
+                            ></span>
                         <input
                             type="number"
                             class="form-control bg-transparent @error('totalPrice') is-invalid @enderror"
