@@ -19,7 +19,7 @@
 
     <div class="card w-80 py-3">
         <div class="row">
-            <div class="col-5" style="border-right: 1px solid #ebebeb">
+            <div class="col-4" style="border-right: 1px solid #ebebeb">
                 <div class="row card-body d-flex justify-content-start py-4">
                     <div class="form-group col-10">
                         <label for="customer">Cliente</label>
@@ -45,7 +45,7 @@
                         class="btn btn-outline-success btn-sm my-auto mx-2 h-80"
                         data-toggle="tooltip"
                         data-placement="top"
-                        title="Cear cliente"
+                        title="Crear cliente"
                         ><i class="fa-solid fa-plus"></i
                     ></a>
 
@@ -124,7 +124,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-7">
+            <div class="col-8">
                 <div class="input-group my-3 justify-content-end">
                     <div class="input-group-prepend">
                         <span
