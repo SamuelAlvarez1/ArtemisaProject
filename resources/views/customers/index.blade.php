@@ -82,7 +82,7 @@
         $(document).ready(function () {
             var table = $('#customers').DataTable({
                 responsive: true,
-                "dom": 'tp',
+                "dom": 'tp',    
                 'language': {
                     "paginate": {
                         "first": "Primero",

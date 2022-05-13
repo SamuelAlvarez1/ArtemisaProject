@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Models\Plate;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Validator;
 
 class CategoriesController extends Controller
 {
@@ -62,7 +63,15 @@ class CategoriesController extends Controller
 
     public function update(Request $request, $id)
     {
-        $request->validate(Category::$rulesEdit);
+        $validator = Validator::make($request->all(), Category::$rulesEdit);
+        $validator->after(function ($validator) use ($request, $id){
+            $category = Category::where('name', $request->input('name'))->where('id','!=', $id)->first();
+            if ($category)
+                $validator->errors()->add('name', 'Este nombre ya está en uso');
+        });
+        if ($validator->fails()){
+            return back()->withErrors($validator)->withInput();
+        }
         $input = $request->all();
         $data = [
             'name' => $input['name'],

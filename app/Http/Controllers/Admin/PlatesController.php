@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use DataTables;
+use Illuminate\Support\Facades\Validator;
 
 class PlatesController extends Controller
 {
@@ -100,8 +101,15 @@ class PlatesController extends Controller
 
     public function update(Request $request, $id)
     {
-        $request->validate(Plate::$rulesEdit);
-
+        $validator = Validator::make($request->all(), Plate::$rulesEdit);
+        $validator->after(function ($validator) use ($request, $id){
+            $plate = Plate::where('name', $request->input('name'))->where('id','!=', $id)->first();
+            if ($plate)
+                $validator->errors()->add('name', 'Este nombre ya está en uso');
+        });
+        if ($validator->fails()){
+            return back()->withErrors($validator)->withInput();
+        }
             try {
 
                 Plate::where("id", $id)->update([
