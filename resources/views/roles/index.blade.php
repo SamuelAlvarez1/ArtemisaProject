@@ -107,6 +107,7 @@
                     $(document).ready(function () {
                         var table = $('#roles').DataTable({
                             "dom": 'tp',
+                            responsive: true,
                             'language': {
                                 "paginate": {
                                     "first": "Inicio",

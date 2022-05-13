@@ -119,6 +119,7 @@
         $(document).ready(function () {
             var table = $('#plates').DataTable({
                 "dom": 'tp',
+                responsive: true,
                 'language': {
                     "paginate": {
                         "first": "Inicio",

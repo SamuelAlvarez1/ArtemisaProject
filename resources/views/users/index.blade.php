@@ -120,6 +120,7 @@
                     $(document).ready(function () {
                         var table = $('#users').DataTable({
                             "dom": 'tp',
+                            responsive: true,
                             'language': {
                                 "paginate": {
                                     "first": "Inicio",

@@ -95,6 +95,7 @@
         $(document).ready(function () {
             var table = $('#categories').DataTable({
                 "dom": 'tp',
+                responsive: true,
                 'language': {
                     "paginate": {
                         "first": "Primero",

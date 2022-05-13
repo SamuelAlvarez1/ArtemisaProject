@@ -159,6 +159,7 @@
     $(document).ready(function () {
         var table = $('#bookings').DataTable({
                             "dom": 'tp',
+                            responsive: true,
                             'language': {
                                 "paginate": {
                                     "first": "Inicio",
