@@ -25,7 +25,7 @@ class PlatesController extends Controller
     {
         $plates = Plate::join('categories', 'plates.idCategory', '=', 'categories.id')
             ->select('categories.name as categories', 'plates.*')
-            ->where('state', '0')->get();
+            ->where('plates.state', '0')->get();
         $states = "false";
 
 
@@ -50,7 +50,6 @@ class PlatesController extends Controller
     {
         $categories = Category::all();
         return view("plates.create", compact("categories"));
-
     }
 
 
@@ -73,31 +72,27 @@ class PlatesController extends Controller
                     $plates = Plate::where('name', $input["plate"][$key])->first();
                     if ($plates) {
                         $namePlates[sizeof($namePlates)] = $input["plate"][$key];
-                    }else{
+                    } else {
                         Plate::create([
-                        "name" => $input["plate"][$key],
-                        "price" => $input["prices"][$key],
-                        "idCategory" => $input["categories"][$key],
-                        "state" => 1
-                    ]);
+                            "name" => $input["plate"][$key],
+                            "price" => $input["prices"][$key],
+                            "idCategory" => $input["categories"][$key],
+                            "state" => 1
+                        ]);
                     }
-
                 }
             }
 
             DB::commit();
             if (sizeof($namePlates) > 0) {
 
-            return redirect('/plates')->with(['nameDuplicate' => $namePlates]);
-
+                return redirect('/plates')->with(['nameDuplicate' => $namePlates]);
             }
             return redirect('/plates')->with('success', 'Platillo creado exitosamente');
-
         } catch (\Exception $e) {
             DB::rollBack();
             return redirect('/plates')->with('error', $e->getMessage());
         }
-
     }
 
 
@@ -106,8 +101,6 @@ class PlatesController extends Controller
         $plates = Plate::find($id);
 
         return view('plates.show', compact('plates'));
-
-
     }
 
 
@@ -121,7 +114,6 @@ class PlatesController extends Controller
         }
 
         return view("plates.edit", compact('plate', 'categories'));
-
     }
 
 
@@ -129,7 +121,7 @@ class PlatesController extends Controller
     {
         if ($id != null) {
             $name = Plate::where('name', $request["plate"]);
-            if ($name){
+            if ($name) {
                 return redirect('/plates')->with("error", "El nombre al que quiere actualizar el platillo ya existe");
             }
             try {
@@ -138,7 +130,7 @@ class PlatesController extends Controller
                     "name" => $request["plate"],
                     "price" => $request["price"],
                     "idCategory" => $request["category"]
-                        ]);
+                ]);
                 return redirect('/plates')->with("success", "El platillo fue editado satisfactoriamente");
             } catch (\Exception $e) {
                 return redirect('/plates')->with("error", $e->getMessage());
@@ -151,7 +143,8 @@ class PlatesController extends Controller
         //
     }
 
-    public function getPricePlate($id){
+    public function getPricePlate($id)
+    {
         $price = Plate::select("plates.price")->where("id", $id)->first();
 
         return $price;

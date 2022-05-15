@@ -46,7 +46,7 @@
             <table id="users" class="table table-bordered">
                 <thead class="thead-light">
                 <tr>
-                    <th>Id</th>
+                    <th>#</th>
                     <th>Nombre</th>
                     <th>Apellido</th>
                     <th>Correo</th>

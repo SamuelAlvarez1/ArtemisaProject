@@ -62,7 +62,7 @@
             <table id="bookings" class="table table-bordered">
                 <thead class="thead-light">
                     <tr>
-                        <th>Id</th>
+                        <th>#</th>
                         <th>Cliente</th>
                         <th>Evento</th>
                         <th>cantidad de personas</th>

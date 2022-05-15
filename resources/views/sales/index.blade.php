@@ -44,7 +44,7 @@
                 <table id="sales" class="table table-bordered">
                     <thead class="thead-light">
                     <tr>
-                        <th>Id</th>
+                        <th>#</th>
                         <th>Clientes</th>
                         <th>Usuario</th>
                         <th>Precio Total</th>

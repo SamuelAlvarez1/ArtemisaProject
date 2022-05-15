@@ -57,7 +57,7 @@
                 <table id="plates" class="table table-bordered">
                     <thead class="thead-light">
                     <tr>
-                        <th>Id</th>
+                        <th>#</th>
                         <th>Categoría</th>
                         <th>Nombre</th>
                         <th>Precio</th>
