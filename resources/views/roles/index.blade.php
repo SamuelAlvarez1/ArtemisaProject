@@ -16,33 +16,33 @@
 
 <div class="card">
     <div class="card-header">
-        <div class="row">
-            <div class="col-3">
+        <div class="row mx-auto row-cols-3">
+            <div class="col my-2">
                 <strong>Roles</strong>
             </div>
-            <div class="col-5">
+            <div class="col-xl-7">
 
-                <a href="{{url('/roles/create')}}" class="btn-sm btn mx-2 btn-outline-dark">crear rol</a>
+                <a href="{{url('/roles/create')}}" class="btn-sm btn mx-2 btn-outline-dark">Crear rol</a>
 
                 @if($states == '0')
                 <a href="{{url('/roles')}}" class="btn-sm btn btn-outline-dark">Ver roles activos</a>
                 @endif
                 @if ($states == "1")
                     <a href="{{url('/roles/notActive')}}" class="btn-sm btn btn-outline-dark">Ver roles deshabilitados</a>
-                @endif        
-                
+                @endif
+
             </div>
-            <div class="col-3 offset-1 d-flex justify-content-center d-flex align-items-center">
-                    <div class="input-group">
+            <div class="col-lg">
+                    <div class="input-group my-2">
                         <input type="text" class="form-control-sm border border-dark" id="searchInput" placeholder="Busqueda"
                             aria-label="Recipient's username" aria-describedby="basic-addon2">
-                        
+
                     </div>
                 </div>
         </div>
     </div>
     <div class="card-body">
-        <div class="table-responsive mb-3 text-center">
+        <div class="mx-auto mb-3">
             <table id="roles" class="table table-bordered">
                 <thead class="thead-light">
                 <tr>
@@ -70,17 +70,21 @@
                             @endif
 
                         </td>
-                        
+
                         <td>
-                            <a class="mx-2" href="{{url('/roles/'.$value->id)}}"><i class="fa-solid text-dark fa-info-circle"></i></a>
-                            <a class="mx-2" href="{{url('/roles/'.$value->id . '/edit')}}"><i
+                            <a class="mx-2" data-delay="500" data-toggle="tooltip" data-placement="bottom" title="Detalles" href="{{url('/roles/'.$value->id)}}"><i class="fa-solid text-dark fa-info-circle"></i></a>
+                            <a class="mx-2" data-delay="500" data-toggle="tooltip" data-placement="bottom" title="Editar" href="{{url('/roles/'.$value->id . '/edit')}}"><i
                                     class="fa text-dark fa-edit"></i></a>
-                            @if($value->state == 1)
-                                <a class="mx-2" href="{{url('/roles/updateState/'.$value->id)}}/0"><i
-                                        class="fa text-dark fa-ban"></i></a>
-                            @else
-                                <a class="mx-2" href="{{url('/roles/updateState/'.$value->id)}}/1"><i
-                                        class="fa text-dark fa-check"></i></a>
+                            
+                            @if ($value->id != 1)
+                                @if($value->state == 1)    
+                                    <a class="mx-2" data-delay="500" data-toggle="tooltip" data-placement="bottom" title="Desactivar" href="{{url('/roles/updateState/'.$value->id)}}/0"><i
+                                    class="fa text-dark fa-ban"></i></a>
+                                @else
+                                    <a class="mx-2" data-delay="500" data-toggle="tooltip" data-placement="bottom" title="Activar" href="{{url('/roles/updateState/'.$value->id)}}/1"><i
+                                    class="fa text-dark fa-check"></i></a>
+                                @endif
+                                
                             @endif
 
 
@@ -106,7 +110,9 @@
                 <script>
                     $(document).ready(function () {
                         var table = $('#roles').DataTable({
+                            responsive: true,
                             "dom": 'tp',
+                            responsive: true,
                             'language': {
                                 "paginate": {
                                     "first": "Inicio",

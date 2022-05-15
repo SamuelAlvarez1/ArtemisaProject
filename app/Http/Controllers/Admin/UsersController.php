@@ -82,10 +82,10 @@ class UsersController extends Controller
             'last_name' => 'required|string|min:3|max:40',
             'name' => 'required|string|min:3|max:40',
             'email' => 'required|email|min:10|max:80|unique:users',
-            'phone' => 'required|string|max:11',
+            'phone' => 'required|numeric|digits_between:7,10',
             'idRol' => 'required',
-            'password' => 'required|min:10|max:80',
-            'password_confirmation' => 'required|min:10|max:80|same:password'
+            'password' => 'required|min:8|max:80',
+            'password_confirmation' => 'required|min:8|max:80|same:password'
         ];
 
         $this->validate($request, $campos);
@@ -237,8 +237,8 @@ class UsersController extends Controller
         if ($id != null) {
             $campos = [
                 'old_password' => 'required|max:80',
-                'new_password' => 'required|min:10|max:80',
-                'password_confirmation' => 'required|min:10|max:80|same:new_password'
+                'new_password' => 'required|min:8|max:80',
+                'password_confirmation' => 'required|min:8|max:80|same:new_password'
             ];
 
             $this->validate($request, $campos);

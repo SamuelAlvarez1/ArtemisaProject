@@ -24,26 +24,26 @@
     @endif
     <div class="card">
         <div class="card-header">
-            <div class="row">
-                <div class="col-3">
+            <div class="row max-auto row-cols-3">
+                <div class="col my-2">
                     <strong>Platillos</strong>
                 </div>
-                <div class="col-5">
+                <div class="col-xl-7">
 
-                    <a href="{{url('/plates/create')}}" class=" btn btn-sm mx-2 btn-outline-dark">Registrar platillo</a>
+                    <a href="{{url('/plates/create')}}" class=" btn btn-sm my-2 btn-outline-dark">Registrar platillo</a>
 
                     @if($states == 'active')
 
-                        <a href="{{url('/plates/notActive')}}" class="btn mx-2 btn-sm mr-4 btn-outline-dark">Ver
+                        <a href="{{url('/plates/notActive')}}" class="btn my-2 btn-sm mr-4 btn-outline-dark">Ver
                             platillos
                             desactivados</a>
                     @else
-                        <a href="{{url('/plates')}}" class="btn btn-sm mx-2 btn-outline-dark">Ver platillos
+                        <a href="{{url('/plates')}}" class="btn btn-sm my-2 btn-outline-dark">Ver platillos
                             activos</a>
                     @endif
                 </div>
-                <div class="col-3 offset-1 d-flex justify-content-center d-flex align-items-center">
-                    <div class="input-group">
+                <div class="col-lg">
+                    <div class="input-group my-2">
                         <input type="text" class="form-control-sm border border-dark" id="searchInput"
                                placeholder="Busqueda"
                                aria-label="Recipient's username" aria-describedby="basic-addon2">
@@ -53,7 +53,7 @@
             </div>
         </div>
         <div class="card-body">
-            <div class="table-responsive mb-3 text-center">
+            <div class="mx-auto mb-3">
                 <table id="plates" class="table table-bordered">
                     <thead class="thead-light">
                     <tr>
@@ -118,7 +118,9 @@
     <script>
         $(document).ready(function () {
             var table = $('#plates').DataTable({
+                responsive:true,
                 "dom": 'tp',
+                responsive: true,
                 'language': {
                     "paginate": {
                         "first": "Inicio",

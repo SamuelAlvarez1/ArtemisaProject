@@ -1,61 +1,61 @@
-@extends('layouts.panel') 
+@extends('layouts.forms')
 
 @section('title-nav')
     Crear Rol
 @endsection
 
-@section('main-content')
+@section('form')
 
-@if(count($errors)>0)
-  <div class="alert alert-danger" role="alert">
-    <ul>
-    @foreach($errors->all() as $error)
-        <li>{{ $error }}</li>
-    @endforeach
-    </ul>
-  </div>
-@endif
 
-<div class="col-md-6 offset-3 mt-4">
-        <div class="card shadow">
-                <div class="card-header border-0">
-                    <div class="row align-items-center">
-                        <div class="col">
-                            <h3 class="mb-0">Crear rol</h3>
-                        </div>
-                        <div class="col text-right">
-                            <a href="{{url('roles')}}" class="btn btn-sm btn-danger">
-                                Regresar
-                            </a>
-                        </div>
-                    </div>
-                </div>
-        <div class="card-body">
-            <form action="{{ url('roles') }}" method="post">
-                @csrf
-
+    <div class="card-header border-0">
+        <div class="row align-items-center">
+            <div class="col">
+                <h3 class="mb-0">Crear rol</h3>
+            </div>
+            <div class="col text-right">
+                <a href="{{url('roles')}}" class="btn btn-sm btn-outline-danger">
+                    Regresar
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        @if(count($errors)>0)
+            <div class="alert alert-danger" role="alert">
+                <ul>
+                    @foreach($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+        <form action="{{ url('roles') }}" method="post">
+            @csrf
+            <div>
+                <label for="">Nombre<b class="text-danger"> *</b></label>
                 <input
                     type="text"
                     class="form-control"
-                    placeholder="Nombre"
                     name="name"
                     value="{{ old('name') }}"
                 />
-
-                <input
+            </div>
+            <div class="mt-2 mb-2">
+                <label for="">Descripción<b class="text-danger"> *</b></label>
+                <textarea
                     type="text"
-                    class="form-control mt-2"
-                    placeholder="descripcion"
+                    class="form-control"
                     name="description"
-                    value="{{ old('description') }}"
-                />
+                    resize='none'
+                    rows="3"
+                >{{ old('description') }}
+                </textarea>
+            </div>
+            <div class="row mx-auto my-3">
+                <button type="submit" class="btn btn-outline-success">Crear</button>
 
-                <button type="submit" class="btn btn-primary mt-2">
-                    Crear rol
-                </button>
-            </form>
-        </div>
+            </div>
+        </form>
     </div>
-</div>
 
 @endsection

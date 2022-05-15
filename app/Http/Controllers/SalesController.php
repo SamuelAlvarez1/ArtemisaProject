@@ -10,18 +10,25 @@ use App\Models\User;
 use App\Models\SaleDetail;
 use http\Client;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 use Yajra\DataTables\DataTables;
 
 class SalesController extends Controller
 {
+    public function __construct()
+    {
+        Carbon::setLocale('es');
+        setlocale(LC_TIME, 'es_ES');
+    }
+
     public function index()
     {
         $sales = Sale::select("sales.*", "customers.name as customerName", "users.name as userName")
-            ->join("customers", "sales.idCustomers", "=", "customers.id")
+            ->leftjoin("customers", "sales.idCustomers", "=", "customers.id")
             ->join("users", "sales.idUser", "=", "users.id")
             ->where('sales.state', '1')
             ->get();
-        // dd($sales);
+
 
         $states = "activeSales";
 
@@ -31,7 +38,7 @@ class SalesController extends Controller
     public function canceledSales()
     {
         $sales = Sale::select("sales.*", "customers.name as customerName", "users.name as userName")
-            ->join("customers", "sales.idCustomers", "=", "customers.id")
+            ->leftjoin("customers", "sales.idCustomers", "=", "customers.id")
             ->join("users", "sales.idUser", "=", "users.id")
             ->where('sales.state', '0')
             ->get();
@@ -54,7 +61,6 @@ class SalesController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate(Sale::$rules);
         $input = $request->all();
 
         try {
@@ -65,13 +71,14 @@ class SalesController extends Controller
                 "state" => 1,
                 'idUser' => auth()->id()
             ]);
-            if ($request["idPlatillo"]!=null) {
+            if ($request["idPlatillo"] != null) {
                 foreach ($request["idPlatillo"] as $key => $value) {
                     SaleDetail::create([
                         'idSales' => $sale->id,
                         "idPlate" => $value,
                         "quantity" => $request["cantidades"][$key],
                         "platePrice" => $request["precios"][$key],
+                        "description" => $request["descripciones"][$key],
                     ]);
                 }
             } else {
@@ -103,17 +110,24 @@ class SalesController extends Controller
     public function show($id)
     {
         $sale = Sale::select("sales.*", "customers.name as customerName", "users.name as userName")
-            ->join("customers", "sales.idCustomers", "=", "customers.id")
+            ->leftjoin("customers", "sales.idCustomers", "=", "customers.id")
             ->join("users", "sales.idUser", "=", "users.id")
             ->where("sales.id", "=", $id)
             ->first();
+
+        // dd($sale);
 
         $saleDetail = SaleDetail::select("sales_details.*", "plates.name as namePlate")
             ->join("plates", "sales_details.idPlate", "=", "plates.id")
             ->where("sales_details.idSales", "=", $id)
             ->get();
 
-
         return view('sales.show', compact('sale', 'saleDetail'));
+    }
+
+    public function getSalesCount()
+    {
+        $salesCount = Sale::where('created_at', '>=', auth()->user()->lastLog)->count();
+        return $salesCount;
     }
 }

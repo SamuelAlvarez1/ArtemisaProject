@@ -154,6 +154,10 @@ return [
         'id_rol' => 'rol',
         'idRol' => 'Rol',
         'idCustomers' => "Cliente",
+<<<<<<< HEAD
+=======
+        'idCustomer' => "Cliente",
+>>>>>>> 0d43536de06425a0ed5a2430b73a4f7ce2c5a93c
         'amount_people' => 'cantidad de personas',
         'password' => 'contraseña',
         'new_password' => 'contraseña nueva',
@@ -190,7 +194,10 @@ return [
         'address' => 'Dirección',
         'phoneNumber' => 'Numero de telefono',
         'image' => 'Imagen',
-        'now' => 'Hoy'
+        'now' => 'Hoy',
+        'idCategory' => 'Categoría',
+        'price' => 'Precio',
+        'email' => 'Correo electrónico',
 
     ],
 

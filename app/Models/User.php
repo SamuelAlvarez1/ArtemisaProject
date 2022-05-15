@@ -25,6 +25,7 @@ class User extends Authenticatable
         'idRol',
         'phone',
         'password',
+        'lastLog',
     ];
 
 

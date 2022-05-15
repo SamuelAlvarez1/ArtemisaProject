@@ -1,20 +1,20 @@
-@extends('layouts.panel')
+@extends('layouts.forms')
 
 @section('title-nav')
     Editar categoría {{$category->name}}
 @endsection
 
-@section('main-content')
+@section('form')
 
 
-    <div class="card shadow">
+
         <div class="card-header border-0">
             <div class="row align-items-center">
                 <div class="col">
                     <h3 class="mb-0">Editar categoría</h3>
                 </div>
                 <div class="col text-right">
-                    <a href="{{url('categories')}}" class="btn btn-sm btn-danger">
+                    <a href="{{url('categories')}}" class="btn btn-sm btn-outline-danger">
                         Regresar
                     </a>
                 </div>
@@ -37,7 +37,7 @@
                 @csrf
                 @method('PUT')
                 <div class="form-group">
-                    <label for="nameInput">Nombre</label>
+                    <label for="nameInput">Nombre<b class="text-danger">*</b></label>
                     <input value="{{old('name', $category->name)}}" type="text" class="form-control" name="name"
                            id="nameInput" placeholder="Cliente">
                 </div>
@@ -50,12 +50,15 @@
                     @endif
 
                     <label class="form-check-label" for="state">
-                        Estado
+                        Estado<b class="text-danger">*</b>
                     </label>
                 </div>
-                <button type="submit" class="btn btn-success">Actualizar</button>
+                <div class="row mx-auto">
+                    <button type="submit" class="btn btn-outline-success">Actualizar</button>
+
+                </div>
             </form>
         </div>
-    </div>
+
 @endsection
 

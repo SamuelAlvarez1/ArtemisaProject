@@ -42,7 +42,7 @@ class CustomersController extends Controller
             ]);
             return redirect('/customers')->with('success', 'Se registró el cliente correctamente');
         } catch (\Exception $e) {
-            return redirect('/customers/create')->with('error', $e->getMessage());
+            return redirect('/customers/create')->with('error', 'No fue posible registrar el cliente    ');
         }
     }
 
@@ -109,7 +109,7 @@ class CustomersController extends Controller
             $customer->update(['state' => !$customer->state]);
             return redirect('/customers')->with('success', 'Se cambió el estado correctamente');
         } catch (\Exception $e) {
-            return redirect('/customers')->with('error', $e->getMessage());
+            return redirect('/customers')->with('error', 'No fue posible actualizar el estado');
         }
     }
 }

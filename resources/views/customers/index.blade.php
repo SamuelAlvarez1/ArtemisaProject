@@ -1,45 +1,38 @@
 @extends('layouts.panel')
-
-
 @section('title-nav')
     @if ($states == 'active')
         Clientes
     @else
-       Clientes no activos 
+       Clientes no activos
     @endif
 @endsection
-
 @section('main-content')
     <div class="card">
         <div class="card-header">
-            <div class="row">
-                <div class="col-2 d-flex justify-content-center d-flex align-items-center">
+            <div class="row mx-auto row-cols-3">
+                <div class="col my-2">
                     <strong>Clientes</strong>
                 </div>
-                <div class="col-6 d-flex justify-content-center d-flex align-items-center">
-
-                    <a href="{{url('/customers/create')}}" class="btn-sm btn mx-2 btn-outline-dark">Registrar cliente</a>
-
+                <div class="col-xl-7">
+                    <a href="{{url('/customers/create')}}" class="btn-sm btn my-2 btn-outline-dark">Registrar cliente</a>
                     @if($states == 'active')
-
-                        <a href="{{url('/customers/notActive')}}" class="btn-sm btn mx-2 mr-4 btn-outline-dark">Ver clientes
+                        <a href="{{url('/customers/notActive')}}" class="btn-sm btn my-2 mr-4 btn-outline-dark">Ver clientes
                             desactivados</a>
                     @else
-                        <a href="{{url('/customers')}}" class="btn-sm btn mx-2 btn-outline-dark">Ver clientes
+                        <a href="{{url('/customers')}}" class="btn-sm btn my-2 btn-outline-dark">Ver clientes
                             activos</a>
                     @endif
                 </div>
-                <div class="col-3 offset-1 d-flex justify-content-center d-flex align-items-center">
-                    <div class="input-group">
+                <div class="col-lg">
+                    <div class="input-group my-2">
                         <input type="text" class="form-control-sm border border-dark float-right" id="searchInput" placeholder="Busqueda"
                                aria-label="Recipient's username" aria-describedby="basic-addon2">
-                        
                     </div>
                 </div>
             </div>
         </div>
         <div class="card-body">
-            <div class="table-responsive mb-3 text-center">
+            <div class="mx-auto mb-3">
                 <table id="customers" class="table table-bordered">
                     <thead class="thead-light">
                     <tr>
@@ -53,7 +46,6 @@
                     </tr>
                     </thead>
                     <tbody>
-                    {{--table content--}}
                     @foreach($customers as $customer)
                         <tr>
                             <td>{{$customer->id}}</td>
@@ -67,7 +59,6 @@
                                 @else
                                     <span class="badge badge-danger">No activo</span>
                                 @endif
-
                             </td>
                             <td>
                                 <a class="mx-2" data-delay="500" data-toggle="tooltip" data-placement="bottom" title="Detalles" href="{{url('/customers/'.$customer->id)}}"><i class="fa-solid text-dark fa-info-circle"></i></a>
@@ -77,45 +68,34 @@
                                 @else
                                     <a class="mx-2" data-delay="500" data-toggle="tooltip" data-placement="bottom" title="Activar" href="{{url('/customers/updateState/'.$customer->id)}}"><i class="fa text-dark fa-check"></i></a>
                                 @endif
-
-
                             </td>
                         </tr>
                     @endforeach
                     </tbody>
                 </table>
             </div>
-            <div  class="d-flex justify-content-end">
-
-            </div>
-
         </div>
     </div>
 @endsection
 @section('scripts')
-
     <script>
         $(document).ready(function () {
             var table = $('#customers').DataTable({
-                "dom": 'tp',
+                responsive: true,
+                "dom": 'tp',    
                 'language': {
                     "paginate": {
                         "first": "Primero",
                         "last": "Último",
                         "next": "→",
                         "previous": "←"
-                    }
+                        },  
+                    "emptyTable": "No hay información disponible."
                 }
             });
-
             $('#searchInput').on('keyup', function () {
                 table.search($('#searchInput').val()).draw();
             });
-
-
         });
-
     </script>
 @endsection
-
-

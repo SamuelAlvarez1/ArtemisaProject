@@ -1,28 +1,47 @@
-@extends('layouts.panel') 
+
+  
+    @extends('layouts.panel')
+
 
 @section('title-nav')
-  Detalles del rol
+    Detalles del rol
 @endsection
 
 @section('main-content')
 
-<div class="col-md-4 offset-4 mt-4">
-    <div class="card">
-        <div class="card-body">
-          <h2 class="card-title">Detalles del rol</h2>
-          <h5 class="card-subtitle mt-2">Nombre</h5>
-          <p class="card-text">{{$rol->name}}</p>
-          
-          <h5 class="card-subtitle mt-2">Descripcion</h5>
-          <p class="card-text">{{$rol->description}}</p>
+    <div class="col-md-7 offset-2 my-2">
+        <div class="card">
+            <div class="card-header">
+                <div class="row align-items-center">
+                    <div class="col text-right">
+                        <a href="{{url('/roles/'.$rol->id.'/edit')}}" class="btn btn-sm btn-outline-warning">
+                            Editar esta rol
+                        </a>
+                        <a href="{{url('/roles')}}" class="btn btn-sm btn-outline-danger">
+                            Regresar
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body d-block m-auto text-center">
+                <h4 class="card-subtitle mt-2">Nombre del rol</h4>
+                <p class="card-text">{{$rol->name}}</p>
+                <h4 class="card-subtitle mt-2 mb-3">Descripción</h4>
+                <p class="card-text">{{$rol->description}}</p>
+                <h4 class="card-subtitle mt-2">Estado</h4>
+                @if ($rol->state == 0)
+                    <span class="badge badge-danger">No activo</span>
+                @else
+                    <span class="badge badge-success">Activo</span>
+                @endif
+            </div>
 
-          <h5 class="card-subtitle mt-2">Estado</h5>
-          @if ($rol->state == 1)
-          <p class="card-text">Activo <span class="text-success"><i class="fa-solid fa-check"></i></span></p>
-          @else
-          <p class="card-text">No activo <span class="text-danger" style="font-weight: 800"><b><i class="fa-solid fa-x"></i></span></b></p>
-          @endif
+
         </div>
-</div>
+
 
 @endsection
+
+  
+
+

@@ -1,7 +1,7 @@
 @extends('layouts.panel')
 
 @section('styles')
-    
+
 @endsection
 
 @section('title-nav')
@@ -16,29 +16,29 @@
 
 <div class="card">
     <div class="card-header">
-        <div class="row">
-            <div class="col-3">
+        <div class="row row-cols-3 mx-auto">
+            <div class="col my-2">
                 <strong>Usuarios</strong>
             </div>
-            <div class="col-5">
+            <div class="col-xl-7">
 
-                <a href="{{url('/users/create')}}" class="btn-sm btn mx-2 btn-outline-dark">crear usuario</a>
+                <a href="{{url('/users/create')}}" class="btn-sm btn my-2 btn-outline-dark">Crear usuario</a>
 
                 @if($states == '0')
-                <a href="{{url('/users')}}" class="btn-sm btn btn-outline-dark">Ver usuarios activos</a>
+                <a href="{{url('/users')}}" class="btn-sm btn my-2 btn-outline-dark">Ver usuarios activos</a>
                 @endif
                 @if ($states == "1")
-                    <a href="{{url('/users/notActive')}}" class="btn-sm btn btn-outline-dark">Ver usuarios deshabilitados</a>
-                @endif        
-                
+                    <a href="{{url('/users/notActive')}}" class="btn-sm btn my-2 btn-outline-dark">Ver usuarios deshabilitados</a>
+                @endif
+
             </div>
-            <div class="col-3 offset-1 d-flex justify-content-center d-flex align-items-center">
-                    <div class="input-group">
-                        <input type="text" class="form-control-sm border border-dark" id="searchInput" placeholder="Busqueda"
-                            aria-label="Recipient's username" aria-describedby="basic-addon2">
-                        
-                    </div>
+            <div class="col-lg">
+                <div class="input-group my-2">
+                    <input type="text" class="form-control-sm border border-dark" id="searchInput" placeholder="Busqueda"
+                        aria-label="Recipient's username" aria-describedby="basic-addon2">
+
                 </div>
+            </div>
         </div>
     </div>
     <div class="card-body">
@@ -51,7 +51,7 @@
                     <th>Apellido</th>
                     <th>Correo</th>
                     <th>rol</th>
-                    <th>telefono</th>
+                    <th>teléfono</th>
                     <th>Estado</th>
                     <th>Acciones</th>
                 </tr>
@@ -76,25 +76,25 @@
                             @endif
 
                         </td>
-                        
+
                         <td>
-                            <a class="mx-2" href="{{url('/users/'.$value->id)}}"><i class="fa-solid text-dark fa-info-circle"></i></a>
-                            <a class="mx-2" href="{{url('/users/'.$value->id . '/edit')}}"><i
+                            <a class="mx-2" data-delay="500" data-toggle="tooltip" data-placement="bottom" title="Detalles" href="{{url('/users/'.$value->id)}}"><i class="fa-solid text-dark fa-info-circle"></i></a>
+                            <a class="mx-2" data-delay="500" data-toggle="tooltip" data-placement="bottom" title="Editar" href="{{url('/users/'.$value->id . '/edit')}}"><i
                                     class="fa text-dark fa-edit"></i></a>
 
                             @if ($value->idRol != 1)
 
                             @if($value->state == 1)
-                                <a class="mx-2" href="{{url('/users/updateState/'.$value->id)}}/0"><i
+                                <a class="mx-2" data-delay="500" data-toggle="tooltip" data-placement="bottom" title="Desactivar" href="{{url('/users/updateState/'.$value->id)}}/0"><i
                                         class="fa text-dark fa-ban"></i></a>
                             @else
-                                <a class="mx-2" href="{{url('/users/updateState/'.$value->id)}}/1"><i
+                                <a class="mx-2" data-delay="500" data-toggle="tooltip" data-placement="bottom" title="Activar" href="{{url('/users/updateState/'.$value->id)}}/1"><i
                                         class="fa text-dark fa-check"></i></a>
                             @endif
-                                
+
                             @endif
-                            
-                            
+
+
 
 
                         </td>
@@ -119,7 +119,9 @@
                 <script>
                     $(document).ready(function () {
                         var table = $('#users').DataTable({
+                            responsive:true,
                             "dom": 'tp',
+                            responsive: true,
                             'language': {
                                 "paginate": {
                                     "first": "Inicio",

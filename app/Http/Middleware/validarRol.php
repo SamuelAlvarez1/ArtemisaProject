@@ -3,6 +3,8 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use App\Models\Sale;
+use App\Models\Booking;
 use Illuminate\Http\Request;
 
 class validarRol

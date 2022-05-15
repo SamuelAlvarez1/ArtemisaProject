@@ -10,6 +10,8 @@ use App\Http\Controllers\BookingsController;
 use App\Http\Controllers\Admin\PlatesController;
 use App\Http\Controllers\CustomersController;
 use App\Http\Controllers\EventsController;
+use App\Http\Controllers\WelcomeController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\SalesController;
 use App\Http\Controllers\Admin\CategoriesController;
 
@@ -23,18 +25,12 @@ use App\Http\Controllers\Admin\CategoriesController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/', function () {
-    $plates = \App\Models\Plate::all()->take(3);
-    return view('welcome', compact('plates'));
-});
+Route::get('/', [WelcomeController::class, "index"]);
+Route::post('/contact', [ContactController::class, 'save']);
 
 Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
-Route::post('home', [HomeController::class, 'fecha'])->name('fecha');
-
-
 Route::group(['middleware' => ['auth', 'validarRol']], function () {
 
     //<------------Roles------------>
@@ -85,6 +81,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/bookings/updateState/{id}/{state}', [BookingsController::class, "updateState"]);
     Route::get('/bookings/seeCanceled', [BookingsController::class, "seeCanceled"]);
     Route::get('/bookings/seeApproved', [BookingsController::class, "seeApproved"]);
+    Route::get('/bookings/getBookingsCount', [BookingsController::class, 'getBookingsCount']);
 
     //<---------Customers----------->
 
@@ -101,6 +98,7 @@ Route::group(['middleware' => 'auth'], function () {
     //<-----------Sales------------>
     Route::get('/sales/canceledSales', [SalesController::class, 'canceledSales']);
     Route::get('/sales/updateState/{id}', [SalesController::class, 'updateState']);
+    Route::get('/sales/getSalesCount', [SalesController::class, 'getSalesCount']);
 
     //<----------Resources---------->
 

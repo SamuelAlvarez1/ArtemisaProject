@@ -1,20 +1,18 @@
-@extends('layouts.panel')
+@extends('layouts.forms')
 
 @section('title-nav')
     Crear categoría
 @endsection
 
-@section('main-content')
+@section('form')
 
-    <div class="col-md-8 offset-2 my-2">
-        <div class="card shadow">
             <div class="card-header border-0">
                 <div class="row align-items-center">
                     <div class="col">
                         <h3 class="mb-0">Crear categoría</h3>
                     </div>
                     <div class="col text-right">
-                        <a href="{{url('categories')}}" class="btn btn-sm btn-danger">
+                        <a href="{{url('categories')}}" class="btn btn-sm btn-outline-danger">
                             Regresar
                         </a>
                     </div>
@@ -37,8 +35,8 @@
                     @csrf
                     <div class="row mb-4">
                         <div class="col">
-                            <label for="nameInput">Nombre de la categoría: <b class="text-danger">*</b></label>
-                            <input value="{{old('name')}}" type="text" class="form-control" name="name" id="nameInput" placeholder="Categoría">
+                            <label for="nameInput">Nombre de la categoría <b class="text-danger">*</b></label>
+                            <input value="{{old('name')}}" type="text" class="form-control @error('name') is-invalid @enderror" name="name" id="nameInput" placeholder="Categoría">
                         </div>
                     </div>
 
@@ -50,11 +48,9 @@
                         </label>
                     </div>
                     <div class="row">
-                        <button type="submit" class="btn btn-success">Crear</button>
+                        <button type="submit" class="btn btn-outline-success">Crear</button>
 
                     </div>
                 </form>
             </div>
-        </div>
-    </div>
 @endsection

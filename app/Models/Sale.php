@@ -19,10 +19,9 @@ class Sale extends Model
         'state',
     ];
 
-    public static $rules = [
-        'idCustomers' => "required",
-        
-    ];
-
     public $timestamps = true;
+
+    protected $dates = [
+        'created_at',
+    ];
 }

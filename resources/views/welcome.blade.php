@@ -13,6 +13,9 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css"/>
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="{{asset('css/styles.css')}}" rel="stylesheet"/>
+    
+    <link rel="stylesheet" href="/css/alertify.min.css"/>
+    <link rel="stylesheet" href="/css/themes/bootstrap.css"/>
 </head>
 <body id="page-top"  style=" background-image: url('{{asset('img/landing/header-bg.jpg')}}');">
 <!-- Navigation-->
@@ -39,13 +42,13 @@
 <header class="masthead"  style="padding:0%; background-image: url('{{asset('img/landing/header-bg.jpg')}}');">
     <div class="container">
         <div class="masthead-heading text-uppercase"><img src="{{asset('img/landing/navbar-logo.png')}}" alt="..." /></div>
-        <a class="btn btn-primary btn-xl text-uppercase" href="#Destacados">Destacados</a>
+        <a class="btn btn-primary btn-xl text-uppercase" href="/login">Iniciar sesión</a>
     </div>
     <div class="container" style="height: 6rem; background: rgba(0,0,0, 0.8); max-width: 1000rem !important; margin-top: 30px; display: flex;">
         <a class="arrow" href="#Quienessomos"><i class="fa-solid fa-angle-down" ></i></a>
     </div>
 </header>
-
+@include('includes.events')
 <!-- Quienes somos-->
 <section class="page-section" id="Quienessomos" >
 
@@ -93,12 +96,12 @@
                             <article>
                                 <p class="categoria">De Comer</p>
                                 @foreach($plates as $plate)
+                                @if ($plate->id != 1)
                                 <div class="platillo">
                                     <p class="nombre">{{$plate->name}}</p>
                                     <p class="precio">${{number_format($plate->price)}}</p>
-                                    <p class="descripcion">Praesent gravida, augue sit amet dignissim rutrum,
-                                        enim tellus suscipit risus.</p>
-                                </div>
+                                </div>    
+                                @endif
                                 @endforeach
 {{--                                <div class="platillo">--}}
 {{--                                    <p class="nombre">Lorem ipsum dolor sit amet</p>--}}
@@ -147,6 +150,7 @@
 </section>
 
 </div>
+
 <!-- Contactanos-->
 <section class="page-section pt-0" id="Contactanos">
     <div class="container">
@@ -154,20 +158,34 @@
             <h2 class="titulo">Contáctanos</h2>
             <h3 class="section-subheading text-white contact-text">Cuentanos tus sugerencias e inquietudes</h3>
             <div class="form">
-            <form>
+                @if($errors->any())
+                <div class="alert alert-danger alert-dismissible" role="alert">
+                    <ul>
+                        @foreach($errors->all() as $error)
+                            <li>{{$error}}</li>
+                        @endforeach
+                    </ul>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            @endif
+            <form method="post" action="{{url('contact')}}">
+                @csrf
                 <div class="mb-3">
-                    <input type="email" class="form-control" placeholder="Correo electrónico">
+                    <input type="text" value="{{old('name')}}" name="name" class="form-control" placeholder="Nombre">
                 </div>
                 <div class="mb-3">
-                    <textarea class="sugerencia form-control"  cols="50" rows="5" placeholder="Sugerencia o inquietud"></textarea>
-
+                    <input type="email" value="{{old('email')}}" name="email" class="form-control" placeholder="Correo electrónico">
+                </div>
+                <div class="mb-3">
+                    <textarea class="sugerencia form-control" name="message" cols="50" rows="5" placeholder="Sugerencia o inquietud">{{old('message')}}</textarea>
+                </div>
+                <div class="text-center">
+                    <button class="btn btn-primary btn-xl text-uppercase mt-3" id="submitButton" type="submit">Enviar
+                    </button>
                 </div>
             </form>
-            <div class="text-center">
-                <button class="btn btn-primary btn-xl text-uppercase mt-3" id="submitButton" type="submit">Enviar
-                </button>
-            </div>
-        </form>
             </div>
     </div>
 </section>
@@ -188,6 +206,19 @@
     </div>
 </footer>
 <!-- Bootstrap core JS-->
+
+<script src="/js/alertify.min.js"></script>
+@if(Session::has('success'))
+<script>
+        alertify.success('Se envió su mensaje correctamente!');
+</script>
+@endif
+@if(Session::has('error'))
+<script>
+    alertify.error('No fue posible enviar el mensaje!');
+</script>
+@endif
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 <!-- Core theme JS-->
 <script src="{{asset('js/scripts.js')}}"></script>

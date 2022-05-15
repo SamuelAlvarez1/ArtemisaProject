@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePlatesTable extends Migration
+class BookingsStates extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,9 @@ class CreatePlatesTable extends Migration
      */
     public function up()
     {
-        Schema::create('plates', function (Blueprint $table) {
-
+        Schema::create('bookings_states', function (Blueprint $table) {
             $table->id();
             $table->string("name");
-            $table->double("price");
-            $table->boolean("state");
-            $table->unsignedBigInteger("idCategory")->nullable(true);
-            $table->foreign("idCategory")->references("id")->on("categories");
-            $table->timestamps();
         });
     }
 
@@ -32,6 +26,6 @@ class CreatePlatesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('plates');
+        //
     }
 }

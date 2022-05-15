@@ -26,6 +26,9 @@
     {{-- Select2 --}}
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="//cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js">
+    <link rel="stylesheet" href="https://cdn.datatables.net/rowreorder/1.2.8/css/rowReorder.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.dataTables.min.css">
+
 
 
     @yield('styles')
@@ -41,7 +44,7 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <!-- Brand -->
-            <a class="navbar-brand text-white" href="#" data-toggle="tooltip" data-placement="right" title="Ir a la página de bienvenida">
+            <a class="navbar-brand text-white" href="{{url('/')}}" data-toggle="tooltip" data-placement="right" title="Ir a la página de bienvenida">
                 <img src="{{asset('img/landing/navbar-logo.png')}}" alt="Logo">
                 Artemisa
             </a>
@@ -52,7 +55,7 @@
                 <div class="navbar-collapse-header d-md-none">
                     <div class="row">
                         <div class="col-6 collapse-brand">
-                            <a href="{{url('/home')}}" class="text-dark">
+                            <a href="{{url('/')}}" class="text-dark">
                                 Artemisa
                             </a>
                         </div>
@@ -92,9 +95,14 @@
                         </a>
                         <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-right"
                             aria-labelledby="navbar-default_dropdown_1">
-                            <a class="dropdown-item" href="#">Reportes de reservas</a>
+                            <div class=" dropdown-header noti-title">
+                                <h6 class="text-overflow m-0">Desde la ultima sesión</h6>
+                            </div>
+                            <a class="dropdown-item" href="{{url('sales/')}}">Ventas: <span class="badge badge-danger" id="salesCount">
+                            </span></a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Reportes de ventas</a>
+                            <a class="dropdown-item" href="{{url('bookings')}}">Reservas: <span class="badge badge-danger" id="bookingsCount">
+                            </span></a>
                         </div>
                     </li>
                     <li class="nav-item dropdown">
@@ -155,9 +163,27 @@
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <!-- Argon JS -->
     @yield('scripts')
+    <script>
+        $.ajax({
+            url: `/sales/getSalesCount`,
+            type: 'GET',
+            success: function(platesCount) {
+                $("#salesCount").html(platesCount);
+            }
+        })
+        $.ajax({
+            url: `/bookings/getBookingsCount`,
+            type: 'GET',
+            success: function(bookingsCount) {
+                $("#bookingsCount").html(bookingsCount);
+            }
+        })
+    </script>
     <script src="{{asset('js/argon.js?v=1.0.0')}}"></script>
     <script src="//cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap4.min.js"></script>
+    <script src="https://cdn.datatables.net/rowreorder/1.2.8/js/dataTables.rowReorder.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
 
 </body>
 

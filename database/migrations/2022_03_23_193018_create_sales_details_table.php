@@ -22,6 +22,7 @@ class CreateSalesDetailsTable extends Migration
             $table->timestamps();
             $table->bigInteger("quantity");
             $table->double("platePrice");
+            $table->string("description");
         });
     }
 
