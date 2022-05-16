@@ -63,31 +63,6 @@ class PlatesController extends Controller
         $input = $request->all();
         try {
 
-<<<<<<< HEAD
-                $plates = Plate::all();
-                $namePlates = [];
-                foreach ($input["id"] as $key => $value) {
-
-                    $plates = Plate::where('name', $input["plate"][$key])->first();
-                    if ($plates) {
-                        $namePlates[sizeof($namePlates)] = $input["plate"][$key];
-                    } else {
-                        Plate::create([
-                            "name" => $input["plate"][$key],
-                            "price" => $input["prices"][$key],
-                            "idCategory" => $input["categories"][$key],
-                            "state" => 1
-                        ]);
-                    }
-                }
-            }
-
-            DB::commit();
-            if (sizeof($namePlates) > 0) {
-
-                return redirect('/plates')->with(['nameDuplicate' => $namePlates]);
-            }
-=======
                         Plate::create([
                         "name" => $input["name"],
                         "price" => $input["price"],
@@ -95,7 +70,6 @@ class PlatesController extends Controller
                         "state" => 1
                     ]);
 
->>>>>>> 0d43536de06425a0ed5a2430b73a4f7ce2c5a93c
             return redirect('/plates')->with('success', 'Platillo creado exitosamente');
         } catch (\Exception $e) {
             DB::rollBack();
@@ -107,13 +81,8 @@ class PlatesController extends Controller
     public function show($id)
     {
         $plates = Plate::find($id);
-<<<<<<< HEAD
-
-        return view('plates.show', compact('plates'));
-=======
         $platesSalesCount = SaleDetail::where('idPlate', $id)->sum('quantity'); //cantidad de ventas del platillo
         return view('plates.show', compact('plates', 'platesSalesCount'));
->>>>>>> 0d43536de06425a0ed5a2430b73a4f7ce2c5a93c
     }
 
 
@@ -132,13 +101,6 @@ class PlatesController extends Controller
 
     public function update(Request $request, $id)
     {
-<<<<<<< HEAD
-        if ($id != null) {
-            $name = Plate::where('name', $request["plate"]);
-            if ($name) {
-                return redirect('/plates')->with("error", "El nombre al que quiere actualizar el platillo ya existe");
-            }
-=======
         $validator = Validator::make($request->all(), Plate::$rulesEdit);
         $validator->after(function ($validator) use ($request, $id){
             $plate = Plate::where('name', $request->input('name'))->where('id','!=', $id)->first();
@@ -148,17 +110,12 @@ class PlatesController extends Controller
         if ($validator->fails()){
             return back()->withErrors($validator)->withInput();
         }
->>>>>>> 0d43536de06425a0ed5a2430b73a4f7ce2c5a93c
             try {
 
                 Plate::where("id", $id)->update([
                     "name" => $request["name"],
                     "price" => $request["price"],
-<<<<<<< HEAD
-                    "idCategory" => $request["category"]
-=======
                     "idCategory" => $request["idCategory"]
->>>>>>> 0d43536de06425a0ed5a2430b73a4f7ce2c5a93c
                 ]);
                 return redirect('/plates')->with("success", "El platillo fue editado satisfactoriamente");
             } catch (\Exception $e) {
