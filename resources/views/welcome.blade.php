@@ -173,13 +173,13 @@
             <form method="post" action="{{url('contact')}}">
                 @csrf
                 <div class="mb-3">
-                    <input type="text" value="{{old('name')}}" name="name" class="form-control" placeholder="Nombre">
+                    <input type="text" required minlength="5" value="{{old('name')}}" name="name" class="form-control" placeholder="Nombre">
                 </div>
                 <div class="mb-3">
-                    <input type="email" value="{{old('email')}}" name="email" class="form-control" placeholder="Correo electrónico">
+                    <input type="email" required value="{{old('email')}}" name="email" class="form-control" placeholder="Correo electrónico">
                 </div>
                 <div class="mb-3">
-                    <textarea class="sugerencia form-control" name="message" cols="50" rows="5" placeholder="Sugerencia o inquietud">{{old('message')}}</textarea>
+                    <textarea class="sugerencia form-control" minlength="10" required name="message" cols="50" rows="5" placeholder="Sugerencia o inquietud">{{old('message')}}</textarea>
                 </div>
                 <div class="text-center">
                     <button class="btn btn-primary btn-xl text-uppercase mt-3" id="submitButton" type="submit">Enviar

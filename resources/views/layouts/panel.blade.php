@@ -106,6 +106,16 @@
                         </div>
                     </li>
                     <li class="nav-item dropdown">
+                        <a id="navbarDropdown" class="nav-link" href="#" role="button"
+                            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                            <i class="fa-solid fa-comments"></i>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-arrow dropdown-menu-right"
+                            aria-labelledby="navbar-default_dropdown_2" id="lastMessages-body">
+                            {{--  Last messages  --}}
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
                         <a id="navbarDropdown" id="navbarDropdown" class="nav-link" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                         <div class="media align-items-center">
                 <span class="avatar avatar-sm rounded-circle">
@@ -170,14 +180,41 @@
             success: function(platesCount) {
                 $("#salesCount").html(platesCount);
             }
-        })
+        });
         $.ajax({
             url: `/bookings/getBookingsCount`,
             type: 'GET',
             success: function(bookingsCount) {
                 $("#bookingsCount").html(bookingsCount);
             }
-        })
+        });
+
+        $.ajax({
+            url: `/contact/lastMessages`,
+            type: 'GET',
+            success: function(lastMessages) {
+                var content = '';
+                $(function(){
+                $.each(lastMessages, function(index, lastMessages) {
+                    content += `<a class="dropdown-item"> 
+                    <div class="media">
+                    <img style="width:50px" src="{{asset("img/default/avatar.jpg")}}" alt="User Avatar" class="rounded-circle mr-3 img-circle">
+                    <div class="media-body">
+                    <h4 class="dropdown-item-title">${lastMessages.name}</h4>
+                    <p class="text-sm">${lastMessages.message.substring(0,15)}...</p>
+                    </div>
+                    </div>
+                    </a>
+                    <div class="dropdown-divider"></div>`
+                });
+                content += `<div class=" dropdown-header text-center noti-title">
+                                <a href="">Ver todos los mensajes</a>
+                            </div>`
+                $("#lastMessages-body").html(content);
+
+            })
+            }
+        });
     </script>
     <script src="{{asset('js/argon.js?v=1.0.0')}}"></script>
     <script src="//cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>

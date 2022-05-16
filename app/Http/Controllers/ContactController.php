@@ -40,4 +40,8 @@ class ContactController extends Controller
             return redirect('/#Contactanos')->with('error', 'No fue posible enviar el mensaje!');
         }
     }
+    public function lastMessages(){
+        $lastMessages = Contact::latest()->take(2)->get();
+        return $lastMessages;
+    }
 }
