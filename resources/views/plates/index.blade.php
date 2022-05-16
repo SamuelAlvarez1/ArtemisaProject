@@ -74,7 +74,7 @@
                             <td>{{$value-> id}}</td>
                             <td>{{$value->categories}}</td>
                             <td>{{$value-> name}}</td>
-                            <td>{{$value-> price}}</td>
+                            <td>{{number_format($value-> price)}}</td>
                             <td>
                                 @if($value->state == 1)
                                     <span class="badge badge-success">Activo</span>

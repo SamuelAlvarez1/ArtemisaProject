@@ -25,7 +25,7 @@
                 </div>
                 <div class="col-4 ">
                     <div class="row"><h2>Precio base</h2></div>
-                    <div class="row"><p>${{$plates->price}}</p></div>
+                    <div class="row"><p>${{number_format($plates->price)}}</p></div>
                 </div>
                 <div class="col-4 ">
                     <div class="row"><h2>Estado</h2></div>

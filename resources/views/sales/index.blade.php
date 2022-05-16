@@ -32,7 +32,7 @@
                 </div>
                 <div class="col-lg">
                         <div class="input-group my-2">
-                            <input type="text" class="form-control-sm border border-dark" id="searchInput" placeholder="Busqueda"
+                            <input type="text" class="form-control-sm border border-dark" id="searchInput" placeholder="Búsqueda"
                                 aria-label="Recipient's username" aria-describedby="basic-addon2">
                             
                         </div>
@@ -68,7 +68,7 @@
                             @endif
                             </td>
                             <td>{{$value-> userName}}</td>
-                            <td>{{$value-> finalPrice}}</td>
+                            <td id="columnPrice">{{number_format($value-> finalPrice)}}</td>
                             <td>{{$value->created_at->isoFormat('dddd D MMMM YYYY, h:mm a')}}</td>
                             <td>
                                 @if($value->state == 1)
@@ -88,8 +88,6 @@
                                     <a class="mx-2"  data-toggle="tooltip" data-placement="top" title="Activar" href="{{url('/sales/updateState/'.$value->id)}}"><i
                                             class="fa text-dark fa-check"></i></a>
                                 @endif
-
-
                             </td>
                         </tr>
                     @endforeach
@@ -124,6 +122,13 @@
                         $('#searchInput').on('keyup', function () {
                 table.search($('#searchInput').val()).draw();
             });
+                    });
+                </script>
+
+                <script>
+                    ($("#columnPrice")).toLocaleString(navigator.language, {
+                    style: "currency",
+                    currency: "COP"
                     });
                 </script>
 @endsection

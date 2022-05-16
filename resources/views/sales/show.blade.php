@@ -59,12 +59,12 @@ Detalles de la venta
                         >Precio total:</span></h2></div>
                     <div class="row"><b class="text-success"
                         >$</b
-                    >&ensp; <p>{{$sale-> finalPrice}}</p></div>
+                    >&ensp; <p>{{number_format($sale-> finalPrice)}}</p></div>
                 </div>   
             </div>
         </div>
         <div class="row">
-            <div class="col-9 offset-0">
+            <div class="col-8    offset-0">
             <table class="table table-striped table-responsive ">
                 <thead>
                     <tr>
@@ -84,11 +84,10 @@ Detalles de la venta
                                 {{$value-> description}}</td>
                                 @else
                                 {{$value-> namePlate}}</td>
-                                @endif
-                            
+                                @endif                      
                             <td>{{$value-> quantity}}</td>
-                            <td>{{$value-> platePrice}}</td>
-                            <td>{{($value-> quantity * $value->platePrice)}}</td>
+                            <td>{{number_format($value-> platePrice)}}</td>
+                            <td>{{number_format($value-> quantity * $value->platePrice)}}</td>
                             </tr>
                     @endforeach
                 </tbody>
