@@ -63,50 +63,13 @@
                 </div>
                 <div class="col">
                     <label for="booking_date">{{ __('Fecha inicial') }}<b class="text-danger"> *</b></label>
-                    <input id="booking_date" type="date"
-                           class="form-control @error('booking_date') is-invalid @enderror" name="booking_date" value=""
+                    <input id="booking_date" type="datetime-local"
+                           class="form-control @error('booking_date') is-invalid @enderror" name="booking_date"
+                           value="{{$booking->start_date->format("Y-m-d\TH:i")}}"
+
                            required autocomplete="booking_date">
                 </div>
-            </div>
-
-            <div class="row mb-4">
-                <div class="col">
-                    <label for="booking_hour">{{ __('Hora de la reserva') }}<b class="text-danger"> *</b></label>
-
-                    <select name="booking_hour" id="booking_hour"
-                            class="form-control @error('booking_hour') is-invalid @enderror">
-                        <option value="1">1 AM</option>
-                        <option value="2">2 AM</option>
-                        <option value="3">3 AM</option>
-                        <option value="4">4 AM</option>
-                        <option value="5">5 AM</option>
-                        <option value="6">6 AM</option>
-                        <option value="7">7 AM</option>
-                        <option value="8">8 AM</option>
-                        <option value="9">9 AM</option>
-                        <option value="10">10 AM</option>
-                        <option value="11">11 AM</option>
-                        <option value="00">12 AM</option>
-                        <option value="13">1 PM</option>
-                        <option value="14">2 PM</option>
-                        <option value="15">3 PM</option>
-                        <option value="16">4 PM</option>
-                        <option value="17">5 PM</option>
-                        <option value="18">6 PM</option>
-                        <option value="19">7 PM</option>
-                        <option value="20">8 PM</option>
-                        <option value="21">9 PM</option>
-                        <option value="22">10 PM</option>
-                        <option value="23">11 PM</option>
-                        <option value="12">12 PM</option>
-                    </select>
-            </div>
-            <div class="col">
-                <label for="booking_minutes">{{ __('Minutos de la reserva') }}<b class="text-danger"> *</b></label>
-                <input id="booking_minutes" type="text" class="form-control @error('booking_minutes') is-invalid @enderror"
-                       name="booking_minutes" value="{{ old('booking_minutes') }}" required
-                       autocomplete="booking_minutes">
-
+                
             </div>
     </div>
 
