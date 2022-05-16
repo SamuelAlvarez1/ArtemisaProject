@@ -15,7 +15,6 @@ class WelcomeController extends Controller
         ->whereRaw('DATE(CURDATE()) >= DATE_SUB(startDate, INTERVAL 6 DAY)')
         ->whereraw('DATE(CURDATE()) <= endDate')
         ->get();
-        // dd($events);
         return view('welcome', compact('plates', 'events'));
 
     }

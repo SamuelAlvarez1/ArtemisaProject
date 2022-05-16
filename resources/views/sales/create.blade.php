@@ -125,14 +125,9 @@
                 </div>
             </div>
             <div class="col-8">
-                <div class="input-group my-3 justify-content-end">
+                <div class="input-group my-3 justify-content-end w-100">
                     <div class="input-group-prepend">
-                        <span
-                            class="input-group-text bg-transparent"
-                            style="border: none"
-                            >Precio total:&ensp;&ensp;<b class="text-success"
-                                >$</b
-                            ></span>
+                        <span class="input-group-text bg-transparent" style="border: none"><h2>Precio total:&ensp;&ensp;<b class="text-success">$</b></h2></span>
                         <input
                             type="number"
                             class="form-control bg-transparent @error('totalPrice') is-invalid @enderror"
@@ -140,7 +135,7 @@
                             readonly
                             value="0"
                             id="totalPrice"
-                            style="border: none; width: 5rem"
+                            style="border: none; font-size: 25px"
                         />
                         @error('totalPrice')
                         <span class="invalid-feedback" role="alert">
@@ -191,6 +186,7 @@
 <script src="/js/alertify.min.js"></script>
 
 <script>
+    
     function assign_price() {
         let plateId = $("#plates option:selected").val();
 
@@ -219,7 +215,7 @@
         let cantidadInput = $("#quantity").val();
         let platillo = $("#plates option:selected").val();
         let precioPlatillo = $("#platePrice").val();
-
+        
         if (cantidadInput > 0 && platillo > 0 && precioPlatillo > 0) {
             let validate = validatePlate();
 
@@ -228,11 +224,11 @@
                 let platillo_text = $("#plates option:selected").text();
                 let cantidad = $("#quantity").val();
                 let precio = $("#platePrice").val();
+                
                 let descripcion = "Sin descripción";
                 if (idPlatillo == 1) {
                     descripcion = $("#detailsDescriptionText").val();
                 }
-
                 $("#tbl_plates").append(`
                 <tr id="tr-${idPlatillo}" class="trPlatillos">
                 <td class="text-plate">
@@ -245,9 +241,8 @@
                 <td>${descripcion}</td>
                 <td>${precio}</td>
                 <td class="cantidades-text">${cantidad}</td>
-                <td class="subtotales">${
-                    parseInt(cantidad) * parseInt(precio)
-                }</td>
+                <td class="subtotales">
+                ${parseInt(cantidad) * parseInt(precio)}</td>
                 <td>
                 <button type="button" class="btn btn-danger bg-danger" style="width: 35px; height: 35px; display: flex;justify-content:center" onclick="delete_plate(${idPlatillo})"><i class="fas fa-ban"></i></button>
                 </td>

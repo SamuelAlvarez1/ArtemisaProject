@@ -19,8 +19,11 @@ class Category extends Model
     ];
 
     public static $rules = [
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 3a18fed52fb091bf56a44ba224ecb11d81793368
         'name' => 'required|unique:categories|min:3|max:50|alpha_num',
     ];
 
