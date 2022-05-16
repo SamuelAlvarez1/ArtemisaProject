@@ -63,7 +63,7 @@
                         <th>Evento</th>
                         <th>cantidad de personas</th>
                         @if (auth()->user()->idRol == 1)
-                        <th>Usuario que creo la reserva</th>
+                        <th>Usuario que creo <br> la reserva</th>
                         @endif
                         <th>Estado</th>
                         <th>fecha inicial</th>
