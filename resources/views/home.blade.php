@@ -46,16 +46,13 @@ Dashboard
     </div>
 
 <div class="row row-cols-2" id="Month">
-
-    <div class="col" id="SBMonth">
-    </div>
-
+    <div class="col" id="SMonth"></div>
+    <div class="col" id="BMonth"></div>
 </div>
+
 <div class="row row-cols-2" id="Week">
-
-    <div class="col" id="SBWeek">
-    </div>
-
+    <div class="col" id="SWeek"></div>
+    <div class="col" id="BWeek"></div>
  </div>
 
     <div class="row my-5">
@@ -102,7 +99,7 @@ Dashboard
 
 
     $(document).ready(function(){
-        $('#Week').hide();
+        $('#Week').show();
     $('#Month').show();
     $('#buttonMonth').hide();
     $('#buttonWeek').show();
@@ -122,10 +119,10 @@ function mostrarSemana() {
     $('#buttonWeek').hide();
 }
 
-Highcharts.chart('SBMonth', {
+Highcharts.chart('SMonth', {
     chart: {
 
-        type: 'column'
+        type: 'area'
     },
     title: {
         text: 'Ventas del año'
@@ -154,17 +151,48 @@ Highcharts.chart('SBMonth', {
     series: [{
         name: 'Ventas',
         data: <?php echo json_encode($salesData); ?>,
+    }]
+});
+
+Highcharts.chart('BMonth', {
+    chart: {
+
+        type: 'area'
     },
-    {
+    title: {
+        text: 'Ventas del año'
+    },
+
+    xAxis: {
+        categories: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Agt', 'Sep', 'Oct', 'Nov', 'Dic'],
+        crosshair: true
+
+    },
+    yAxis: {
+        title: {
+            text: 'Número de ventas del año'
+        }
+    },
+
+    tooltip: {
+        shared: true,
+    },
+    plotOptions: {
+        column: {
+            pointPadding: 0.2,
+            borderWidth: 0
+        }
+    },
+    series: [{
         name: 'Reservas',
         data: <?php echo json_encode($bookingsData);?>,
     }]
 });
 
 
-Highcharts.chart('SBWeek', {
+Highcharts.chart('SWeek', {
     chart: {
-        type: 'column',
+        type: 'area',
     },
     title: {
         text: 'Ventas de la semana'
@@ -209,12 +237,59 @@ Highcharts.chart('SBWeek', {
     series: [{
         name: 'Ventas',
         data: <?php echo json_encode($salesDataWeek); ?>,
-    },
-    {
-        name: 'Reservas',
-        data: <?php echo json_encode($bookingsDataWeek); ?>,
     }]
 });
+
+Highcharts.chart('BWeek', {
+        chart: {
+            type: 'area',
+        },
+        title: {
+            text: 'Ventas de la semana'
+        },
+
+        xAxis: {
+            categories: [
+                'Lunes',
+                'Martes',
+                'Miercoles',
+                'Jueves',
+                'Viernes',
+                'Sabado',
+                'Domingo'
+            ],
+
+            plotBands: [{ // visualize the weekend
+                from: 4.5,
+                to: 6.5,
+                color: 'rgba(234,75,75,0.2)'
+            }],
+            crosshair: true
+        },
+        yAxis: {
+            title: {
+                text: 'Número de ventas y reservas de la semana'
+            }
+        },
+
+        tooltip: {
+
+            shared: true,
+
+        },
+        plotOptions: {
+            column: {
+                pointPadding: 0.2,
+                borderWidth: 0
+            }
+        },
+
+        series: [
+            {
+                name: 'Reservas',
+                data: <?php echo json_encode($bookingsDataWeek); ?>,
+            }]
+    });
 
 
 
