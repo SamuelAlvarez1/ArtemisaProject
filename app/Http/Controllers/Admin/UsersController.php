@@ -132,6 +132,9 @@ class UsersController extends Controller
     public function edit($id)
     {
         if ($id != null) {
+            if (auth()->user()->idRol != 1 && auth()->user()->id != $id) {
+                return redirect('/users/' . auth()->user()->id . "/edit")->with("error", 'Los empleados solo pueden cambiar su propia información');
+            }
             $user = User::find($id);
             $roles = Rol::all();
 

@@ -13,7 +13,7 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css"/>
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="{{asset('css/styles.css')}}" rel="stylesheet"/>
-    
+
     <link rel="stylesheet" href="/css/alertify.min.css"/>
     <link rel="stylesheet" href="/css/themes/bootstrap.css"/>
 </head>
@@ -96,12 +96,12 @@
                             <article>
                                 <p class="categoria">De Comer</p>
                                 @foreach($plates as $plate)
+                                @if ($plate->id != 1)
                                 <div class="platillo">
                                     <p class="nombre">{{$plate->name}}</p>
                                     <p class="precio">${{number_format($plate->price)}}</p>
-                                    <p class="descripcion">Praesent gravida, augue sit amet dignissim rutrum,
-                                        enim tellus suscipit risus.</p>
                                 </div>
+                                @endif
                                 @endforeach
 {{--                                <div class="platillo">--}}
 {{--                                    <p class="nombre">Lorem ipsum dolor sit amet</p>--}}
@@ -170,16 +170,16 @@
                     </button>
                 </div>
             @endif
-            <form method="post" action="{{url('contact')}}">
+            <form method="post" action="{{url('/contact')}}">
                 @csrf
                 <div class="mb-3">
-                    <input type="text" value="{{old('name')}}" name="name" class="form-control" placeholder="Nombre">
+                    <input type="text" required minlength="5" value="{{old('name')}}" name="name" class="form-control" placeholder="Nombre">
                 </div>
                 <div class="mb-3">
-                    <input type="email" value="{{old('email')}}" name="email" class="form-control" placeholder="Correo electrónico">
+                    <input type="email" required value="{{old('email')}}" name="email" class="form-control" placeholder="Correo electrónico">
                 </div>
                 <div class="mb-3">
-                    <textarea class="sugerencia form-control" name="message" cols="50" rows="5" placeholder="Sugerencia o inquietud">{{old('message')}}</textarea>
+                    <textarea class="sugerencia form-control" minlength="10" required name="message" cols="50" rows="5" placeholder="Sugerencia o inquietud">{{old('message')}}</textarea>
                 </div>
                 <div class="text-center">
                     <button class="btn btn-primary btn-xl text-uppercase mt-3" id="submitButton" type="submit">Enviar

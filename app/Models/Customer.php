@@ -38,5 +38,5 @@ class Customer extends Model
         'state' => 'required|boolean',
     ];
 
-    public $timestamps = false;
+    public $timestamps = true;
 }

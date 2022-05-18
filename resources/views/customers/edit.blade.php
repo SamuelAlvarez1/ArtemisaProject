@@ -52,7 +52,7 @@
                            name="address" id="addressInput" placeholder="Cliente">
                 </div>
                 <div class="form-group">
-                    <label for="addressInput">Número de telefono</label>
+                    <label for="addressInput">Número de teléfono</label>
                     <input value="{{old('phoneNumber', $customer->phoneNumber)}}" type="text" class="form-control @error('phoneNumber') is-invalid @enderror"
                            name="phoneNumber" id="phoneNumberInput" placeholder="Cliente">
                 </div>

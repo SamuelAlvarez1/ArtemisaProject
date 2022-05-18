@@ -42,16 +42,16 @@
         </div>
     </div>
     <div class="card-body">
-        <div class="table-responsive mb-3 text-center">
+        <div class="mb-3 text-center">
             <table id="users" class="table table-bordered">
                 <thead class="thead-light">
                 <tr>
-                    <th>Id</th>
+                    <th>#</th>
                     <th>Nombre</th>
                     <th>Apellido</th>
                     <th>Correo</th>
                     <th>rol</th>
-                    <th>telefono</th>
+                    <th>teléfono</th>
                     <th>Estado</th>
                     <th>Acciones</th>
                 </tr>

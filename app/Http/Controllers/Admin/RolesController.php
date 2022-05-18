@@ -39,22 +39,26 @@ class RolesController extends Controller
     public function updateState($id, $state)
     {
         if ($id != null) {
-            $rol = Rol::findOrFail($id);
-            try {
-                Rol::where("id", "=", $id)->update([
-                    "state" => $state
-                ]);
-                User::where("idRol", $rol->id)->update([
-                    "state" => $state
-                ]);
-                if ($state == 1) {
-                    return redirect('/roles/notActive')->with("success", "cambio de estado exitoso");;
-                } else {
-                    return redirect('/roles')->with("success", "cambio de estado exitoso");;
+            if($id != 1){
+                $rol = Rol::findOrFail($id);
+                try {
+                    Rol::where("id", "=", $id)->update([
+                        "state" => $state
+                    ]);
+                    User::where("idRol", $rol->id)->update([
+                        "state" => $state
+                    ]);
+                    if ($state == 1) {
+                        return redirect('/roles/notActive')->with("success", "cambio de estado exitoso");;
+                    } else {
+                        return redirect('/roles')->with("success", "cambio de estado exitoso");;
+                    }
+                } catch (\Exception $e) {
+                    return redirect('/roles')->with("error", "El cambio de estado del rol no se pudo realizar");
                 }
-            } catch (\Exception $e) {
-                return redirect('/roles')->with("error", "El estado del rol no se pudo realizar");
             }
+            return redirect('/roles')->with("error", "El cambio de estado del rol no se pudo realizar");
+            
         }
     }
 

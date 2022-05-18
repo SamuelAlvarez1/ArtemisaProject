@@ -25,7 +25,7 @@
                 <p class="card-text">{{$customer->name}}</p>
                 <h4 class="card-subtitle mt-2">Documento</h4>
                 <p class="card-text">{{$customer->document}}</p>
-                <h4 class="card-subtitle mt-2">Número de telefono</h4>
+                <h4 class="card-subtitle mt-2">Número de teléfono</h4>
                 <p class="card-text">{{$customer->phoneNumber}}</p>
                 <h4 class="card-subtitle mt-2">Dirección</h4>
                 <p class="card-text">{{$customer->address}}</p>
@@ -33,10 +33,10 @@
                 <p class="card-text">{{$customer->created_at}}</p>
                 <h4 class="card-subtitle mt-2">Ultima actualización de información</h4>
                 <p class="card-text">{{$customer->updated_at}}</p>
-                <h4 class="card-subtitle mt-2">Usuario que creó el Cliente</h4>
+                <h4 class="card-subtitle mt-2">Usuario que creó el cliente</h4>
                 <ul>
                     <li><p class="card-text">Nombre: {{$user->name.' '.$user->last_name}}</p></li>
-                    <li><p class="card-text">Número de telefono: {{$user->phone}}</p></li>
+                    <li><p class="card-text">Número de teléfono: {{$user->phone}}</p></li>
                     <li><p class="card-text">Rol: {{$role->name}}</p></li>
                 </ul>
                 <h4 class="card-subtitle mt-2">Estado</h4>

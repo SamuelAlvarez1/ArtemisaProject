@@ -14,7 +14,7 @@
         Reservas en proceso
     @endif
     @if ($states == '2')
-        Reservas aprobadas
+        Reservas finalizadas
     @endif
 
 @endsection
@@ -37,7 +37,7 @@
                 <a href="{{url('/bookings/seeCanceled')}}" class="btn-sm btn my-2 btn-outline-dark" >Ver reservas
                     canceladas</a>
                 <a href="{{url('/bookings/seeApproved')}}" class="btn-sm btn my-2 btn-outline-dark" >Ver reservas
-                    aprobadas</a>
+                    finalizadas</a>
                 @endif
                 @if ($states == "2")
                 <a href="{{url('/bookings/seeCanceled')}}" class="btn-sm my-2 btn btn-outline-dark"  data-toggle="tooltip" data-placement="top" title="Ver las reservas que se cancelaron">Ver reservas
@@ -58,12 +58,12 @@
             <table id="bookings" class="table table-bordered">
                 <thead class="thead-light">
                     <tr>
-                        <th>Id</th>
+                        <th>#</th>
                         <th>Cliente</th>
                         <th>Evento</th>
                         <th>cantidad de personas</th>
                         @if (auth()->user()->idRol == 1)
-                        <th>Usuario que creo la reserva</th>
+                        <th>Usuario que creo <br> la reserva</th>
                         @endif
                         <th>Estado</th>
                         <th>fecha inicial</th>

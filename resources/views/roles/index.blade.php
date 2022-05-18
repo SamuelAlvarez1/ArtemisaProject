@@ -46,7 +46,7 @@
             <table id="roles" class="table table-bordered">
                 <thead class="thead-light">
                 <tr>
-                    <th>Id</th>
+                    <th>#</th>
                     <th>Nombre</th>
                     <th>Descripción</th>
                     <th>Estado</th>
@@ -75,12 +75,16 @@
                             <a class="mx-2" data-delay="500" data-toggle="tooltip" data-placement="bottom" title="Detalles" href="{{url('/roles/'.$value->id)}}"><i class="fa-solid text-dark fa-info-circle"></i></a>
                             <a class="mx-2" data-delay="500" data-toggle="tooltip" data-placement="bottom" title="Editar" href="{{url('/roles/'.$value->id . '/edit')}}"><i
                                     class="fa text-dark fa-edit"></i></a>
-                            @if($value->state == 1)
-                                <a class="mx-2" data-delay="500" data-toggle="tooltip" data-placement="bottom" title="Desactivar" href="{{url('/roles/updateState/'.$value->id)}}/0"><i
-                                        class="fa text-dark fa-ban"></i></a>
-                            @else
-                                <a class="mx-2" data-delay="500" data-toggle="tooltip" data-placement="bottom" title="Activar" href="{{url('/roles/updateState/'.$value->id)}}/1"><i
-                                        class="fa text-dark fa-check"></i></a>
+                            
+                            @if ($value->id != 1)
+                                @if($value->state == 1)    
+                                    <a class="mx-2" data-delay="500" data-toggle="tooltip" data-placement="bottom" title="Desactivar" href="{{url('/roles/updateState/'.$value->id)}}/0"><i
+                                    class="fa text-dark fa-ban"></i></a>
+                                @else
+                                    <a class="mx-2" data-delay="500" data-toggle="tooltip" data-placement="bottom" title="Activar" href="{{url('/roles/updateState/'.$value->id)}}/1"><i
+                                    class="fa text-dark fa-check"></i></a>
+                                @endif
+                                
                             @endif
 
 

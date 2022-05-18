@@ -124,27 +124,23 @@ class BookingsController extends Controller
 
     public function store(Request $request)
     {
+
         $campos = [
             'idCustomer' => 'required|numeric',
-            'amount_people' => 'required|numeric|min:1|max:20',
-            'booking_date' => 'required|date|after_or_equal:' . date('d-m-Y'),
-            'booking_hour' => 'required|numeric',
-            'booking_minutes' => 'required|numeric',
+            'amount_people' => 'required|numeric|min:1|max:80',
+            'booking_date' => 'required|date|after_or_equal:' . Carbon::now(),
+
         ];
         $this->validate($request, $campos);
-        $start_date = Carbon::parse($request["booking_date"] . " " . $request["booking_hour"] . ":" . $request["booking_minutes"]);
-        if (Carbon::now() > Carbon::parse($start_date)) {
-            return redirect('/bookings/create')->with("error", "La reserva no se pudo crear debido a que la fecha actual es mayor a la fecha solicitada");
-        }
         $bookings = Booking::select("amount_people")
-            ->whereDate("start_date", $request['start_date'])
+            ->whereDate("start_date", Carbon::parse($request["booking_date"]))
             ->where('idState', 2)
             ->get();
         $countPeople = 0;
         foreach ($bookings as $booking) {
             $countPeople += $booking->amount_people;
         }
-        if (($countPeople + $request['amount_people']) >= 100) {
+        if (($countPeople + $request['amount_people']) >= 80) {
             return redirect('/bookings')->with("error", "ya no hay mas reservas disponibles para esa fecha");
         }
         try {
@@ -153,7 +149,7 @@ class BookingsController extends Controller
                 'idEvent' =>  $request['idEvent'],
                 'idUser' => auth()->id(),
                 'amount_people' => $request['amount_people'],
-                'start_date' => $start_date,
+                'start_date' => $request['booking_date'],
                 'idState' => 2
             ]);
         } catch (\Exception $e) {
@@ -184,10 +180,12 @@ class BookingsController extends Controller
     {
         if ($id != null) {
             $booking = Booking::find($id);
+
+
             if ($booking != null) {
                 $customers = Customer::all();
                 $events = Event::all();
-                return view("bookings.edit", compact("booking", "customers", "events",'date'));
+                return view("bookings.edit", compact("booking", "customers", "events"));
             }
         } else {
             return redirect('/bookings')->with("error", "La reserva no fue encontrada");
@@ -201,26 +199,16 @@ class BookingsController extends Controller
         if ($id != null) {
             $campos = [
                 'idCustomer' => 'required|numeric',
-                'amount_people' => 'required|numeric|min:1|max:20',
-                'booking_date' => 'required|date|after_or_equal:' . date('d-m-Y'),
-                'booking_hour' => 'required|numeric',
-                'booking_minutes' => 'required|numeric|',
+                'amount_people' => 'required|numeric|min:1|max:80',
+                'booking_date' => 'required|date|after_or_equal:' . Carbon::now(),
+
             ];
 
             $this->validate($request, $campos);
 
-            $start_date = Carbon::parse($request["booking_date"] . " " . $request["booking_hour"] . ":" . $request["booking_minutes"]);
-
-
-            if (Carbon::now() > Carbon::parse($start_date)) {
-                return redirect('/bookings/create')->with("error", "La reserva no se pudo crear debido a que la fecha actual es mayor a la fecha solicitada");
-            }
-
-
-
             $bookings = Booking::select("amount_people")
                 ->whereDate("start_date", $request['start_date'])
-                ->where('state', 1)
+                ->where('idState', 2)
                 ->get();
 
             $countPeople = 0;
@@ -229,7 +217,7 @@ class BookingsController extends Controller
             }
 
 
-            if (($countPeople + $request['amount_people']) >= 100) {
+            if (($countPeople + $request['amount_people']) >= 80) {
                 return redirect('/bookings')->with("error", "ya no hay mas reservas disponibles para esa fecha");
             }
 
@@ -243,7 +231,7 @@ class BookingsController extends Controller
                         'idEvent' =>  $request['idEvent'],
                         'idUser' => auth()->user()->id,
                         'amount_people' => $request['amount_people'],
-                        'start_date' => $start_date,
+                        'start_date' => $request['booking_date'],
                     ]);
                 }
 

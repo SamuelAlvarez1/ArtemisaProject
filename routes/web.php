@@ -38,24 +38,31 @@ Route::group(['middleware' => ['auth', 'validarRol']], function () {
     Route::get('/roles/updateState/{id}/{state}', [RolesController::class, "updateState"]);
     Route::get('/roles/notActive', [RolesController::class, "notActive"]);
 
-    //<-----------Users------------>
+    //<------------Users------------>
 
     Route::get('/users/updateState/{id}/{state}', [UsersController::class, "updateState"]);
     Route::get('/users/notActive', [UsersController::class, "notActive"]);
 
-    //<-----------Plates------------>
+    //<------------Plates----------->
 
     Route::get('/plates/notActive', [PlatesController::class, 'notActive']);
     Route::get('/plates/updateState/{id}', [PlatesController::class, 'updateState']);
     Route::get('/plates/updateStateVariation/{id}', [PlatesController::class, 'updateStateVariation']);
     Route::get('/plates/getPricePlate/{id}', [PlatesController::class, 'getPricePlate']);
 
-    //<---------Categories----------->
+    //<----------Categories--------->
 
     Route::get('/categories/notActive', [CategoriesController::class, 'notActive']);
     Route::get('/categories/updateState/{id}', [CategoriesController::class, 'updateState']);
 
-    //<---------Resources---------->
+
+    //<-----------Contact----------->
+
+    Route::get('/contact/lastMessages', [ContactController::class, 'lastMessages']);
+    Route::get('/contact/{id}', [ContactController::class, 'show']);
+    Route::get('/contact', [ContactController::class, 'index']);
+
+    //<----------Resources---------->
 
     Route::resource('users', UsersController::class)->only(['index', 'create', 'store', 'show']);
     Route::resources([

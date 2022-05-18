@@ -23,7 +23,7 @@
                    required="required">
             <label for="exampleInputPassword1" class="form-label font-weight-bold">Contraseña</label>
         </div>
-        <div class="col-md-6 offset-md-4 mb-3" style="display: initial;">
+        {{-- <div class="col-md-6 offset-md-4 mb-3" style="display: initial;">
             <div class="form-check">
                 <input class="form-check-input" type="checkbox" name="remember"
                        id="remember" {{ old('remember') ? 'checked' : '' }}>
@@ -32,7 +32,7 @@
                     {{ __('Recuerdame') }}
                 </label>
             </div>
-        </div>
+        </div> --}}
         @if (Route::has('password.request'))
             <a id="emailHelp" class="form-text text-muted text-decoration-none mb-4 text-center"
                href="{{ route('password.request') }}">
