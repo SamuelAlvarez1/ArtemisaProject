@@ -36,6 +36,7 @@ class EventsController extends Controller
     public function store(Request $request)
     {
         $request->validate(Event::$rules);
+
         $image = null;
         $input = $request->only('name', 'description','decorationPrice','entryPrice','state', 'endDate','startDate');
         if ($request->image){
