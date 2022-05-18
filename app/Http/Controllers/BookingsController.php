@@ -140,7 +140,7 @@ class BookingsController extends Controller
         foreach ($bookings as $booking) {
             $countPeople += $booking->amount_people;
         }
-        if (($countPeople + $request['amount_people']) >= 80) {
+        if (($countPeople + $request['amount_people']) > 80) {
             return redirect('/bookings')->with("error", "ya no hay mas reservas disponibles para esa fecha");
         }
         try {
