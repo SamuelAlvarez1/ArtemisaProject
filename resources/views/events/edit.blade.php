@@ -61,7 +61,7 @@
                                 id="addressInput" >
                         </div>
                         <div class="col">
-                            <label for="idCardInput">Precio de decoration </label>
+                            <label for="idCardInput">Precio de decoración </label>
                             <input value="{{old('decorationPrice', $event->decorationPrice)}}" type="number"
                                 class="form-control @error('decorationPrice') is-invalid @enderror" name="decorationPrice"
                                 id="decorationPriceInput" >

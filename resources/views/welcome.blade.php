@@ -13,7 +13,7 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css"/>
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="{{asset('css/styles.css')}}" rel="stylesheet"/>
-    
+
     <link rel="stylesheet" href="/css/alertify.min.css"/>
     <link rel="stylesheet" href="/css/themes/bootstrap.css"/>
 </head>
@@ -100,7 +100,7 @@
                                 <div class="platillo">
                                     <p class="nombre">{{$plate->name}}</p>
                                     <p class="precio">${{number_format($plate->price)}}</p>
-                                </div>    
+                                </div>
                                 @endif
                                 @endforeach
 {{--                                <div class="platillo">--}}
@@ -170,7 +170,7 @@
                     </button>
                 </div>
             @endif
-            <form method="post" action="{{url('contact')}}">
+            <form method="post" action="{{url('/contact')}}">
                 @csrf
                 <div class="mb-3">
                     <input type="text" required minlength="5" value="{{old('name')}}" name="name" class="form-control" placeholder="Nombre">

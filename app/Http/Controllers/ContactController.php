@@ -8,8 +8,21 @@ use Mail;
 
 class ContactController extends Controller
 {
-    public function save(Request $request) { 
-        @
+    public function index()
+    {
+        $messages = Contact::all();
+        return view('contact.index', compact('messages'));
+    }
+    public function show($id)
+    {
+        try {
+            $message = Contact::find($id);
+            return view('contact.details', compact('message'));
+        } catch (\Exception $e) {
+            return back()->with('error', 'No se ha encontrado el mensaje');
+        }
+    }
+    public function save(Request $request) {
         $this->validate($request, [
             'name' => 'required|min:4',
             'email' => 'required|email',

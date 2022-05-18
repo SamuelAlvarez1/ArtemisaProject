@@ -52,7 +52,7 @@
             </div>
             <div class="row mb-4">
                 <div class="col-lg">
-                    <label for="phoneNumberInput">Número de telefono<b class="text-danger"> *</b></label>
+                    <label for="phoneNumberInput">Número de teléfono<b class="text-danger"> *</b></label>
                     <input value="{{old('phoneNumber')}}" type="text"
                            class="form-control @error('phoneNumber') is-invalid @enderror" name="phoneNumber"
                            id="phoneNumberInput">
@@ -67,7 +67,7 @@
                             <input type="radio" name="options" id="option2" autocomplete="off"> No activo
                         </label>
                     </div>
-                        {{-- <br>    
+                        {{-- <br>
                         <label class="custom-toggle">
                             <input type="checkbox" value="1" class="form-check-input" id="state" name="state" checked>
                             <span class="custom-toggle-slider rounded-circle"></span>

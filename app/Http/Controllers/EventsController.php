@@ -52,9 +52,7 @@ class EventsController extends Controller
                 'endDate' => $input['endDate'],
                 'startDate' => $input['startDate'],
                 'state' => $input['state'],
-                'image' => $image,
-                'created_at' => date('Y-m-d H:i:s'),
-                'updated_at' => date('Y-m-d H:i:s')
+                'image' => $image
 
             ]);
             return redirect('/events')->with('success', 'Se registró el evento correctamente');
@@ -116,8 +114,7 @@ class EventsController extends Controller
             'endDate' => $input['endDate'],
             'startDate' => $input['startDate'],
             'state' => $input['state'],
-            'image' => $image,
-            'updated_at' => date('Y-m-d H:i:s')
+            'image' => $image
         ];
         try {
             $event = Event::find($id);
