@@ -68,17 +68,6 @@ class PlatesController extends Controller
                 "idCategory" => $input["idCategory"],
                 "state" => 1
             ]);
-
-<<<<<<< HEAD
-=======
-                        Plate::create([
-                        "name" => $input["name"],
-                        "price" => $input["price"],
-                        "idCategory" => $input["idCategory"],
-                        "state" => 1
-                    ]);
-
->>>>>>> 3a18fed52fb091bf56a44ba224ecb11d81793368
             return redirect('/plates')->with('success', 'Platillo creado exitosamente');
         } catch (\Exception $e) {
             DB::rollBack();
@@ -119,22 +108,7 @@ class PlatesController extends Controller
         if ($validator->fails()) {
             return back()->withErrors($validator)->withInput();
         }
-<<<<<<< HEAD
         try {
-=======
-            try {
-
-                Plate::where("id", $id)->update([
-                    "name" => $request["name"],
-                    "price" => $request["price"],
-                    "idCategory" => $request["idCategory"]
-                ]);
-                return redirect('/plates')->with("success", "El platillo fue editado satisfactoriamente");
-            } catch (\Exception $e) {
-                return redirect('/plates')->with("error", $e->getMessage());
-            }
->>>>>>> 3a18fed52fb091bf56a44ba224ecb11d81793368
-
             Plate::where("id", $id)->update([
                 "name" => $request["name"],
                 "price" => $request["price"],
