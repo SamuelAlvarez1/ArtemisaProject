@@ -15,12 +15,12 @@ class ContactController extends Controller
     }
     public function show($id)
     {
-        try {
             $message = Contact::find($id);
+            if ($message==null) {
+                return back()->with('error', 'No se ha encontrado el mensaje');
+            } 
             return view('contact.details', compact('message'));
-        } catch (\Exception $e) {
-            return back()->with('error', 'No se ha encontrado el mensaje');
-        }
+
     }
     public function save(Request $request) {
         $this->validate($request, [

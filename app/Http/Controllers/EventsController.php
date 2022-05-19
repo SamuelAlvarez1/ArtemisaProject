@@ -37,7 +37,7 @@ class EventsController extends Controller
     {
         $request->validate(Event::$rules);
         $image = null;
-        $input = $request->only('name', 'description','decorationPrice','entryPrice','state', 'endDate','startDate');
+        $input = $request->only('name', 'description','decorationPrice','entryPrice', 'endDate','startDate');
         if ($request->image){
             $image = $input['name'].time().'.'.$request->image->extension();
             $request->image->move(public_path('uploads'),$image);
@@ -51,9 +51,8 @@ class EventsController extends Controller
                 'idUser' => auth()->user()->id,
                 'endDate' => $input['endDate'],
                 'startDate' => $input['startDate'],
-                'state' => $input['state'],
-                'image' => $image
-
+            'image' => $image,  
+                'state' => 1
             ]);
             return redirect('/events')->with('success', 'Se registró el evento correctamente');
         } catch (\Exception $e) {
@@ -101,7 +100,7 @@ class EventsController extends Controller
             return back()->withErrors($validator)->withInput();
         }
         $image = null;
-        $input = $request->only('name', 'description','decorationPrice','entryPrice','state', 'endDate','startDate');
+        $input = $request->only('name', 'description','decorationPrice','entryPrice', 'endDate','startDate');
         if ($request->image){
             $image = $input['name'].time().'.'.$request->image->extension();
             $request->image->move(public_path('uploads'),$image);
@@ -113,7 +112,6 @@ class EventsController extends Controller
             'entryPrice' => $input['entryPrice'],
             'endDate' => $input['endDate'],
             'startDate' => $input['startDate'],
-            'state' => $input['state'],
             'image' => $image
         ];
         try {
@@ -139,10 +137,5 @@ class EventsController extends Controller
         } catch (\Exception $e) {
             return redirect('/events')->with('error', 'No fue posible cambiar el estado, intentelo mas tarde');
         }
-    }
-
-    public function destroy($id)
-    {
-        dd("What are you trying, bro?");
     }
 }

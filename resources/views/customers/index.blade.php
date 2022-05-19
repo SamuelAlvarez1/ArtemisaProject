@@ -36,12 +36,12 @@
                 <table id="customers" class="table table-bordered">
                     <thead class="thead-light">
                     <tr>
-                        <th>#</th>
-                        <th scope="col">Nombre</th>
-                        <th scope="col">Documento</th>
-                        <th scope="col">Dirección</th>
-                        <th scope="col">Telefono</th>
-                        <th scope="col">Estado</th>
+                        <th scope="col" title="Ordenar por orden de creación">#</th>
+                        <th scope="col" title="Ordenar por dirección">Dirección</th>
+                        <th scope="col" title="Ordenar por nombre">Nombre</th>
+                        <th scope="col" title="Ordenar por documento">Documento</th>
+                        <th scope="col" title="Ordenar por teléfono">Teléfono</th>
+                        <th scope="col" title="Ordenar por Estado">Estado</th>
                         <th scope="col">Acciones</th>
                     </tr>
                     </thead>
@@ -61,12 +61,12 @@
                                 @endif
                             </td>
                             <td>
-                                <a class="mx-2" data-delay="500" data-toggle="tooltip" data-placement="bottom" title="Detalles" href="{{url('/customers/'.$customer->id)}}"><i class="fa-solid text-dark fa-info-circle"></i></a>
-                                <a class="mx-2" data-delay="500" data-toggle="tooltip" data-placement="bottom" title="Editar" href="{{url('/customers/'.$customer->id.'/edit')}}"><i class="fa text-dark fa-edit"></i></a>
+                                <a class="mx-2" title="Ver más información del cliente" href="{{url('/customers/'.$customer->id)}}"><i class="fa-solid text-dark fa-info-circle"></i></a>
+                                <a class="mx-2" title="Editar información del cliente" href="{{url('/customers/'.$customer->id.'/edit')}}"><i class="fa text-dark fa-edit"></i></a>
                                 @if($customer->state == 1)
-                                    <a class="mx-2" data-delay="500" data-toggle="tooltip" data-placement="bottom" title="Desactivar" href="{{url('/customers/updateState/'.$customer->id)}}"><i class="fa text-dark fa-ban"></i></a>
+                                    <a class="mx-2" title="Desactivar el cliente" href="{{url('/customers/updateState/'.$customer->id)}}"><i class="fa text-dark fa-ban"></i></a>
                                 @else
-                                    <a class="mx-2" data-delay="500" data-toggle="tooltip" data-placement="bottom" title="Activar" href="{{url('/customers/updateState/'.$customer->id)}}"><i class="fa text-dark fa-check"></i></a>
+                                    <a class="mx-2" title="Activar el cliente" href="{{url('/customers/updateState/'.$customer->id)}}"><i class="fa text-dark fa-check"></i></a>
                                 @endif
                             </td>
                         </tr>

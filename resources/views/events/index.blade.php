@@ -35,15 +35,15 @@
                 <table id="events" class="table table-bordered">
                     <thead class="thead-light">
                     <tr>
-                        <th>#</th>
-                        <th>Nombre</th>
-                        <th>Descripción</th>
-                        <th>Valor <br> decoración</th>
-                        <th>Valor <br> entrada</th>
-                        <th>Fecha <br> inicio</th>
-                        <th>Fecha <br> fin</th>
-                        <th>Estado</th>
-                        <th>Acciones</th>
+                        <th scope="col" title="Ordenar por orden de creación">#</th>
+                        <th scope="col" title="Ordenar por nombre">Nombre</th>
+                        <th scope="col" title="Ordenar por descripción">Descripción</th>
+                        <th scope="col" title="Ordenar por valor de decoración">Valor <br> decoración</th>
+                        <th scope="col" title="Ordenar por valor de entrada">Valor <br> entrada</th>
+                        <th scope="col" title="Ordenar por fecha inicio">Fecha <br> inicio</th>
+                        <th scope="col" title="Ordenar por fecha fin">Fecha <br> fin</th>
+                        <th scope="col" title="Ordenar por estado">Estado</th>
+                        <th scope="col">Acciones</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -70,22 +70,24 @@
                             <td>{{$event->startDate}}</td>
                             <td>{{$event->endDate}}</td>
                             <td>
-                                @if($event->state == 1)
-                                    <span class="badge badge-success">Activo</span>
+                                @if($event->state == 1 && $event->startDate <= date('Y-m-d') && $event->endDate >= date('Y-m-d'))
+                                    <span class="badge badge-primary">En proceso</span>
+                                @elseif($event->state == 1 && $event->endDate < date('Y-m-d'))
+                                <span class="badge badge-success">Llevado a cabo</span>
                                 @else
-                                    <span class="badge badge-danger">No activo</span>
+                                    <span class="badge badge-danger">Cancelado</span>
                                 @endif
                             </td>
                             <td>
-                                <a class="mx-2" data-delay="500" data-toggle="tooltip" data-placement="bottom" title="Detalles" href="{{url('/events/'.$event->id)}}"><i
+                                <a class="mx-2" title="Ver más información del evento" href="{{url('/events/'.$event->id)}}"><i
                                         class="fa-solid text-dark fa-info-circle"></i></a>
-                                <a class="mx-2" data-delay="500" data-toggle="tooltip" data-placement="bottom" title="Editar" href="{{url('/events/'.$event->id.'/edit')}}"><i
+                                <a class="mx-2" title="Editar información del evento" href="{{url('/events/'.$event->id.'/edit')}}"><i
                                         class="fa text-dark fa-edit"></i></a>
                                 @if($event->state == 1)
-                                    <a class="mx-2" data-delay="500" data-toggle="tooltip" data-placement="bottom" title="Desactivar" href="{{url('/events/updateState/'.$event->id)}}"><i
+                                    <a class="mx-2" title="Desactivar el evento" href="{{url('/events/updateState/'.$event->id)}}"><i
                                             class="fa text-dark fa-ban"></i></a>
                                 @else
-                                    <a data-delay="500" data-toggle="tooltip" data-placement="bottom" title="Activar" class="mx-2" href="{{url('/events/updateState/'.$event->id)}}"><i
+                                    <a data-delay="500" title="Activar el evento" class="mx-2" href="{{url('/events/updateState/'.$event->id)}}"><i
                                             class="fa text-dark fa-check"></i></a>
                                 @endif
                             </td>
@@ -97,6 +99,7 @@
     </div>
 @endsection
 @section('scripts')
+
     <script>
         $(document).ready(function () {
             var table = $('#events').DataTable({

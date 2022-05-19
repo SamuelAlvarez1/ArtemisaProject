@@ -29,7 +29,6 @@ class Event extends Model
         'description' => 'required|min:3|max:255',
         'startDate' => 'required|date|after_or_equal:yesterday',
         'endDate' => 'required|date|after_or_equal:startDate',
-        'state' => 'required|boolean',
         'decorationPrice' => 'nullable|numeric|min:50',
         'entryPrice' => 'nullable|numeric|min:50',
         'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:3072'
@@ -39,7 +38,6 @@ class Event extends Model
         'description' => 'required|min:3|max:255',
         'startDate' => 'required|date|after_or_equal:yesterday',
         'endDate' => 'required|date|after_or_equal:startDate',
-        'state' => 'required|boolean',
         'decorationPrice' => 'nullable|numeric|min:50',
         'entryPrice' => 'nullable|numeric|min:50',
         'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:3072'

@@ -28,14 +28,12 @@ class Customer extends Model
         'document' => 'required|numeric|digits_between:6,15|unique:customers',
         'address' => 'required|min:5|max:70',
         'phoneNumber' => 'required|min:7|max:13',
-        'state' => 'required|boolean',
     ];
     public static $rulesUpdate = [
         'name' => 'required|min:5|max:50|regex:/^[a-zA-ZÀ-ÿñÑ ]+$/',
         'document' => 'required|digits_between:6,15',
         'address' => 'required|min:5|max:70',
         'phoneNumber' => 'required|min:7|max:20',
-        'state' => 'required|boolean',
     ];
 
     public $timestamps = true;

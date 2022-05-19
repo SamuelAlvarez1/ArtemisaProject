@@ -13,7 +13,7 @@
                         <h2>Detalles del mensaje</h2>
                     </div>
                     <div class="col text-right">
-                        <a href="{{url('/contact')}}" class="btn mt-2 btn-sm btn-danger">Regresar</a>
+                        <a href="{{url('/home')}}" class="btn mt-2 btn-sm btn-danger">Regresar</a>
                     </div>
                 </div>
             </div>

@@ -91,13 +91,6 @@
                     <label for="formFile" class="form-label">Selecciona una imagen</label>
                     <input class="form-control @error('image') is-invalid @enderror" value="{{old('image')}}" name="image" type="file" id="formFile">
                 </div>
-                <div class="form-check mb-3">
-                    <input type="hidden" name="state" value="0">
-                                  <input class="form-check-input" name="state" checked type="checkbox" value="1" id="state">
-                                  <label class="form-check-label" for="state">
-                        Estado
-                    </label>
-                </div>
                 <div class="row mx-auto">
                     <button type="submit" class="btn btn-outline-success">Crear</button>
                 </div>
