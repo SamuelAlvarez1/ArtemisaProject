@@ -74,6 +74,8 @@
                                     <span class="badge badge-primary">En proceso</span>
                                 @elseif($event->state == 1 && $event->endDate < date('Y-m-d'))
                                 <span class="badge badge-success">Llevado a cabo</span>
+                                @elseif($event->state == 1 && $event->startDate >= date('Y-m-d') && $event->endDate >= date('Y-m-d'))
+                                    <span class="badge badge-primary">Pendiente</span> 
                                 @else
                                     <span class="badge badge-danger">Cancelado</span>
                                 @endif

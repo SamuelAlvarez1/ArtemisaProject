@@ -35,7 +35,24 @@ class EventsController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate(Event::$rules);
+        $validator = Validator::make($request->all(), Event::$rules);
+        $validator->after(function ($validator) use ($request){
+            $repeatedEventEnd = Event::where('endDate', '<=', $request->input('endDate'))
+            ->where('startDate', '>=', $request->input('endDate'))
+            ->where('state', 1)
+            ->count();
+            $repeatedEventStart = Event::where('endDate', '<=', $request->input('startDate'))
+            ->where('startDate', '>=', $request->input('startDate'))
+            ->where('state', 1)
+            ->count();
+        dd($repeatedEventEnd, $repeatedEventStart);
+
+            if($repeatedEventEnd > 0 || $repeatedEventStart > 0)
+                $validator->errors()->add('startDate', 'Ya existe un evento en este rango de fechas');
+        });
+        if ($validator->fails()){
+            return back()->withErrors($validator)->withInput();
+        }
         $image = null;
         $input = $request->only('name', 'description','decorationPrice','entryPrice', 'endDate','startDate');
         if ($request->image){
@@ -43,20 +60,20 @@ class EventsController extends Controller
             $request->image->move(public_path('uploads'),$image);
         }
         try {
-            Event::create([
-                'name' => $input['name'],
-                'description' => $input['description'],
-                'decorationPrice' => $input['decorationPrice'],
-                'entryPrice' => $input['entryPrice'],
-                'idUser' => auth()->user()->id,
-                'endDate' => $input['endDate'],
-                'startDate' => $input['startDate'],
-            'image' => $image,  
-                'state' => 1
-            ]);
-            return redirect('/events')->with('success', 'Se registró el evento correctamente');
+                Event::create([
+                    'name' => $input['name'],
+                    'description' => $input['description'],
+                    'decorationPrice' => $input['decorationPrice'],
+                    'entryPrice' => $input['entryPrice'],
+                    'idUser' => auth()->user()->id,
+                    'endDate' => $input['endDate'],
+                    'startDate' => $input['startDate'],
+                    'image' => $image,
+                    'state' => 1
+                ]);
+                return redirect('/events')->with('success', 'Se registró el evento correctamente');
         } catch (\Exception $e) {
-            return redirect('/events/create')->with('error', $e->getMessage());
+            return redirect('/events/create')->with('error', 'No fue posible registrar el evento');
         }
     }
 
@@ -89,12 +106,22 @@ class EventsController extends Controller
 
     public function update(Request $request, $id)
     {
-//        $request->validate(Event::$rulesUpdate);
         $validator = Validator::make($request->all(), Event::$rulesUpdate);
         $validator->after(function ($validator) use ($request, $id){
             $event = Event::where('name', $request->input('name'))->where('id','!=', $id)->first();
             if ($event)
                 $validator->errors()->add('name', 'Este nombre ya está en uso');
+            
+            $repeatedEventEnd = Event::where('endDate', '<=', $request->input('endDate'))
+            ->where('startDate', '>=', $request->input('endDate'))
+            ->where('state', 1)
+            ->count();
+            $repeatedEventStart = Event::where('endDate', '<=', $request->input('startDate'))
+            ->where('startDate', '>=', $request->input('startDate'))
+            ->where('state', 1)
+            ->count();
+            if($repeatedEventEnd > 0 || $repeatedEventStart > 0)
+                $validator->errors()->add('startDate', 'Ya existe un evento en este rango de fechas');
         });
         if ($validator->fails()){
             return back()->withErrors($validator)->withInput();
