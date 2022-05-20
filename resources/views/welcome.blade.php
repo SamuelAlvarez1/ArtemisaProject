@@ -16,6 +16,7 @@
 
     <link rel="stylesheet" href="/css/alertify.min.css"/>
     <link rel="stylesheet" href="/css/themes/bootstrap.css"/>
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous"> -->
 </head>
 <body id="page-top"  style=" background-image: url('{{asset('img/landing/header-bg.jpg')}}');">
 <!-- Navigation-->
@@ -84,66 +85,27 @@
 
 {{--Destacados--}}
 
-<section class="page-section" id="Destacados" >
-
+<section class="page-section text-center" id="Destacados" >
+<h2 class="titulo mb-5">Destacados</h2>
     <div class="container">
-        <div class="row text-center">
-            <section class="menu">
-                <div class="contenedor">
-                    <h2 class="titulo" id="platillos">Destacados</h2>
-                    <div class="contenedor-menu">
-                        <div class="contenedor-menu2">
-                            <article>
-                                <p class="categoria">De Comer</p>
-                                @foreach($plates as $plate)
-                                @if ($plate->id != 1)
-                                <div class="platillo">
-                                    <p class="nombre">{{$plate->name}}</p>
-                                    <p class="precio">${{number_format($plate->price)}}</p>
-                                </div>
-                                @endif
-                                @endforeach
-{{--                                <div class="platillo">--}}
-{{--                                    <p class="nombre">Lorem ipsum dolor sit amet</p>--}}
-{{--                                    <p class="precio">$10</p>--}}
-{{--                                    <p class="descripcion">Vestibulum ac sem id massa tempor vestibulum sed--}}
-{{--                                        ut magna</p>--}}
-{{--                                </div>--}}
-{{--                                <div class="platillo">--}}
-{{--                                    <p class="nombre">Sed sagittis nisl dictum</p>--}}
-{{--                                    <p class="precio">$20</p>--}}
-{{--                                    <p class="descripcion">Praesent gravida, augue sit amet dignissim rutrum,--}}
-{{--                                        enim tellus suscipit risus.</p>--}}
-{{--                                </div>--}}
-
-                            </article>
-
-                            <article>
-                                <p class="categoria">De Tomar</p>
-                                <div class="platillo">
-                                    <p class="nombre">Sed sagittis nisl dictum</p>
-                                    <p class="precio">$15</p>
-                                    <p class="descripcion">Praesent gravida, augue sit amet dignissim rutrum,
-                                        enim tellus suscipit risus.</p>
-                                </div>
-                                <div class="platillo">
-                                    <p class="nombre">Sed sagittis nisl dictum</p>
-                                    <p class="precio">$15</p>
-                                    <p class="descripcion">Praesent gravida, augue sit amet dignissim rutrum,
-                                        enim tellus suscipit risus.</p>
-                                </div>
-                                <div class="platillo">
-                                    <p class="nombre">Sed sagittis nisl dictum</p>
-                                    <p class="precio">$15</p>
-                                    <p class="descripcion">Praesent gravida, augue sit amet dignissim rutrum,
-                                        enim tellus suscipit risus.</p>
-                                </div>
-
-                            </article>
-                        </div>
+        
+        <div class="row">
+            @foreach($plates as $plate)
+           <div class="col">
+                <div class="card">
+                    <img src="https://static-sevilla.abc.es/media/gurmesevilla/2012/01/comida-rapida-casera.jpg"
+                    class="u-full-width" alt="">
+                    <div class="info-card">
+                        <h4>{{$plate->name}}</h4>
+                        <p>Marca nesca</p>
+                        <img src="/img/landing/estrellas.png" alt="">
+                        <span class="u-pull-right">$15</span>
                     </div>
                 </div>
-            </section>
+           </div>
+            @endforeach
+    
+
 
         </div>
     </div>
@@ -221,6 +183,8 @@
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 <!-- Core theme JS-->
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
 <script src="{{asset('js/scripts.js')}}"></script>
 <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
 </body>

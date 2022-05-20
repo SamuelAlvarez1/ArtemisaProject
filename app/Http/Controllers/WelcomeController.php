@@ -9,8 +9,10 @@ use \App\Models\Plate;
 
 class WelcomeController extends Controller
 {
-    public function index(){      
-        $plates = Plate::all()->take(3);
+    public function index(){
+        
+        $plates = Plate::all()->where('id', '!=', 1)->take(5);
+
         $events = Event::where('state', 1)
         ->whereRaw('DATE(CURDATE()) >= DATE_SUB(startDate, INTERVAL 6 DAY)')
         ->whereraw('DATE(CURDATE()) <= endDate')
