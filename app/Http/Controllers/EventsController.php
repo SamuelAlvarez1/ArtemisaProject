@@ -37,19 +37,19 @@ class EventsController extends Controller
     {
         $validator = Validator::make($request->all(), Event::$rules);
         $validator->after(function ($validator) use ($request){
-            $repeatedEventEnd = Event::where('endDate', '<=', $request->input('endDate'))
-            ->where('startDate', '>=', $request->input('endDate'))
-            ->where('state', 1)
-            ->count();
-            $repeatedEventStart = Event::where('endDate', '<=', $request->input('startDate'))
-            ->where('startDate', '>=', $request->input('startDate'))
-            ->where('state', 1)
-            ->count();
-        dd($repeatedEventEnd, $repeatedEventStart);
 
-            if($repeatedEventEnd > 0 || $repeatedEventStart > 0)
+            //Eliminar las validaciones con validator a la hora de presentarlo al cliente 
+            $eventsInsideCreated = Event::where('state', 1)
+            ->where(function($query) use ($request){
+                $query->whereBetween('startDate', [$request->input('startDate'),$request->input('endDate')])
+                      ->orWhereBetween('endDate', [$request->input('startDate'),$request->input('endDate')])
+                      ->orWhereRaw('? BETWEEN startDate and endDate', [$request->input('startDate')]) 
+                      ->orWhereRaw('? BETWEEN startDate and endDate', [$request->input('endDate')]);
+              })
+            ->count();
+            if($eventsInsideCreated)
                 $validator->errors()->add('startDate', 'Ya existe un evento en este rango de fechas');
-        });
+            });
         if ($validator->fails()){
             return back()->withErrors($validator)->withInput();
         }
@@ -112,16 +112,17 @@ class EventsController extends Controller
             if ($event)
                 $validator->errors()->add('name', 'Este nombre ya está en uso');
             
-            $repeatedEventEnd = Event::where('endDate', '<=', $request->input('endDate'))
-            ->where('startDate', '>=', $request->input('endDate'))
-            ->where('state', 1)
+            $eventsInsideCreated = Event::where('state', 1)
+            ->where(function($query) use ($request){
+                $query->whereBetween('startDate', [$request->input('startDate'),$request->input('endDate')])
+                        ->orWhereBetween('endDate', [$request->input('startDate'),$request->input('endDate')])
+                        ->orWhereRaw('? BETWEEN startDate and endDate', [$request->input('startDate')]) 
+                        ->orWhereRaw('? BETWEEN startDate and endDate', [$request->input('endDate')]);
+                })
             ->count();
-            $repeatedEventStart = Event::where('endDate', '<=', $request->input('startDate'))
-            ->where('startDate', '>=', $request->input('startDate'))
-            ->where('state', 1)
-            ->count();
-            if($repeatedEventEnd > 0 || $repeatedEventStart > 0)
-                $validator->errors()->add('startDate', 'Ya existe un evento en este rango de fechas');
+            if($eventsInsideCreated)
+            $validator->errors()->add('startDate', 'Ya existe un evento en este rango de fechas');
+        
         });
         if ($validator->fails()){
             return back()->withErrors($validator)->withInput();
