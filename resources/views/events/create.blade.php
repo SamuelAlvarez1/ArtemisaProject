@@ -49,7 +49,7 @@
                     <div class="col">
                         <label for="idCardInput">Precio de entrada</label>
                         <input value="{{old('entryPrice')}}" type="number" class="form-control @error('entryPrice') is-invalid @enderror" name="entryPrice"
-                            id="addressInput">
+                            id="decorationPriceInput">
                     </div>
                     <div class="col">
                         <label for="idCardInput">Precio de decoración </label>
@@ -100,6 +100,20 @@
 @endsection
 
 @section('scripts')
+<script>
+    $("#decorationPriceInput").on({
+    "focus": function (event) {
+        $(event.target).select();
+    },
+    "keyup": function (event) {
+        $(event.target).val(function (index, value ) {
+            return value.replace(/\D/g, "")
+                        .replace(/([0-9])([0-9]{2})$/, '$1.$2')
+                        .replace(/\B(?=(\d{3})+(?!\d)\.?)/g, ",");
+        });
+    }
+});
+</script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js" integrity="sha512-T/tUfKSV1bihCnd+MxKD0Hm1uBBroVYBOYSk1knyvQ9VyZJpc/ALb4P0r6ubwVPSGB2GvjeoMAJJImBG12TiaQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
     <script>

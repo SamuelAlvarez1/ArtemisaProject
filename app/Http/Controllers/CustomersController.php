@@ -81,13 +81,6 @@ class CustomersController extends Controller
             return redirect('/customers/' . $id . '/edit')->with('error', 'No se pudo editar la información');
         }
     }
-
-
-    public function destroy($id)
-    {
-        dd("What are you trying to do bro?");
-    }
-
     public function notActive()
     {
         $customers = Customer::select('customers.*', 'users.name as user')

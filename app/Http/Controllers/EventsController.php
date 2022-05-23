@@ -119,8 +119,8 @@ class EventsController extends Controller
                         ->orWhereRaw('? BETWEEN startDate and endDate', [$request->input('startDate')]) 
                         ->orWhereRaw('? BETWEEN startDate and endDate', [$request->input('endDate')]);
                 })
-            ->count();
-            if($eventsInsideCreated)
+            ->first();
+            if($eventsInsideCreated && $eventsInsideCreated->id != $id)
             $validator->errors()->add('startDate', 'Ya existe un evento en este rango de fechas');
         
         });
