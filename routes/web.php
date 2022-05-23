@@ -31,8 +31,9 @@ Route::post('/contact', [ContactController::class, 'save']);
 
 Auth::routes();
 
-Route::get('/home', [HomeController::class, 'index'])->name('home');
-Route::group(['middleware' => ['auth', 'validarRol']], function () {
+
+
+Route::group(['middleware' => ['auth', 'validarRol', 'validarEstado']], function () {
 
     //<------------Roles------------>
 
@@ -71,7 +72,10 @@ Route::group(['middleware' => ['auth', 'validarRol']], function () {
 });
 
 
-Route::group(['middleware' => 'auth'], function () {
+Route::group(['middleware' => ['auth', 'validarEstado']], function () {
+
+    //<-----------Home------------>
+    Route::get('/home', [HomeController::class, 'index'])->name('home');
 
     //<-----------Users------------>
 
