@@ -3,12 +3,6 @@
 @section('content')
 
     <h1 class="font-weight-bold mb-5 mt-5 text-center">Restablece tu contraseña</h1>
-    @if (session('status'))
-        <div class="alert alert-success" role="alert">
-            {{ session('status') }}
-        </div>
-    @endif
-
     <p class="mb-5 text-center text-muted">Digita tu correo electrónico para enviarte un email de restablecimiento para tu contraseña</p>
     <form class="mb-5" method="POST" action="{{ route('password.email') }}">
         @csrf

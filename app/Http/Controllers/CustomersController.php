@@ -66,13 +66,12 @@ class CustomersController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate(Customer::$rulesUpdate);
-        $input = $request->only('name', 'document', 'address', 'phoneNumber', 'state');
+        $input = $request->only('name', 'document', 'address', 'phoneNumber');
         $data = [
             'name' => $input['name'],
             'address' => $input['address'],
             'document' => $input['document'],
             'phoneNumber' => $input['phoneNumber'],
-            'state' => $input['state']
         ];
         try {
             $customer = Customer::find($id);
@@ -86,7 +85,7 @@ class CustomersController extends Controller
 
     public function destroy($id)
     {
-        //
+        dd("What are you trying to do bro?");
     }
 
     public function notActive()

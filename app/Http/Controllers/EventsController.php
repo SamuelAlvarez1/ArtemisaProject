@@ -37,28 +37,46 @@ class EventsController extends Controller
     {
         $request->validate(Event::$rules);
 
+        $validator = Validator::make($request->all(), Event::$rules);
+        $validator->after(function ($validator) use ($request){
+
+            //Eliminar las validaciones con validator a la hora de presentarlo al cliente
+            $eventsInsideCreated = Event::where('state', 1)
+            ->where(function($query) use ($request){
+                $query->whereBetween('startDate', [$request->input('startDate'),$request->input('endDate')])
+                      ->orWhereBetween('endDate', [$request->input('startDate'),$request->input('endDate')])
+                      ->orWhereRaw('? BETWEEN startDate and endDate', [$request->input('startDate')])
+                      ->orWhereRaw('? BETWEEN startDate and endDate', [$request->input('endDate')]);
+              })
+            ->count();
+            if($eventsInsideCreated)
+                $validator->errors()->add('startDate', 'Ya existe un evento en este rango de fechas');
+            });
+        if ($validator->fails()){
+            return back()->withErrors($validator)->withInput();
+        }
+
         $image = null;
-        $input = $request->only('name', 'description','decorationPrice','entryPrice','state', 'endDate','startDate');
+        $input = $request->only('name', 'description','decorationPrice','entryPrice', 'endDate','startDate');
         if ($request->image){
             $image = $input['name'].time().'.'.$request->image->extension();
             $request->image->move(public_path('uploads'),$image);
         }
         try {
-            Event::create([
-                'name' => $input['name'],
-                'description' => $input['description'],
-                'decorationPrice' => $input['decorationPrice'],
-                'entryPrice' => $input['entryPrice'],
-                'idUser' => auth()->user()->id,
-                'endDate' => $input['endDate'],
-                'startDate' => $input['startDate'],
-                'state' => $input['state'],
-                'image' => $image
-
-            ]);
-            return redirect('/events')->with('success', 'Se registró el evento correctamente');
+                Event::create([
+                    'name' => $input['name'],
+                    'description' => $input['description'],
+                    'decorationPrice' => $input['decorationPrice'],
+                    'entryPrice' => $input['entryPrice'],
+                    'idUser' => auth()->user()->id,
+                    'endDate' => $input['endDate'],
+                    'startDate' => $input['startDate'],
+                    'image' => $image,
+                    'state' => 1
+                ]);
+                return redirect('/events')->with('success', 'Se registró el evento correctamente');
         } catch (\Exception $e) {
-            return redirect('/events/create')->with('error', $e->getMessage());
+            return redirect('/events/create')->with('error', 'No fue posible registrar el evento');
         }
     }
 
@@ -91,18 +109,29 @@ class EventsController extends Controller
 
     public function update(Request $request, $id)
     {
-//        $request->validate(Event::$rulesUpdate);
         $validator = Validator::make($request->all(), Event::$rulesUpdate);
         $validator->after(function ($validator) use ($request, $id){
             $event = Event::where('name', $request->input('name'))->where('id','!=', $id)->first();
             if ($event)
                 $validator->errors()->add('name', 'Este nombre ya está en uso');
+
+            $eventsInsideCreated = Event::where('state', 1)
+            ->where(function($query) use ($request){
+                $query->whereBetween('startDate', [$request->input('startDate'),$request->input('endDate')])
+                        ->orWhereBetween('endDate', [$request->input('startDate'),$request->input('endDate')])
+                        ->orWhereRaw('? BETWEEN startDate and endDate', [$request->input('startDate')])
+                        ->orWhereRaw('? BETWEEN startDate and endDate', [$request->input('endDate')]);
+                })
+            ->count();
+            if($eventsInsideCreated)
+            $validator->errors()->add('startDate', 'Ya existe un evento en este rango de fechas');
+
         });
         if ($validator->fails()){
             return back()->withErrors($validator)->withInput();
         }
         $image = null;
-        $input = $request->only('name', 'description','decorationPrice','entryPrice','state', 'endDate','startDate');
+        $input = $request->only('name', 'description','decorationPrice','entryPrice', 'endDate','startDate');
         if ($request->image){
             $image = $input['name'].time().'.'.$request->image->extension();
             $request->image->move(public_path('uploads'),$image);
@@ -114,7 +143,6 @@ class EventsController extends Controller
             'entryPrice' => $input['entryPrice'],
             'endDate' => $input['endDate'],
             'startDate' => $input['startDate'],
-            'state' => $input['state'],
             'image' => $image
         ];
         try {
@@ -140,10 +168,5 @@ class EventsController extends Controller
         } catch (\Exception $e) {
             return redirect('/events')->with('error', 'No fue posible cambiar el estado, intentelo mas tarde');
         }
-    }
-
-    public function destroy($id)
-    {
-        dd("What are you trying, bro?");
     }
 }

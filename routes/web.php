@@ -25,6 +25,7 @@ use App\Http\Controllers\Admin\CategoriesController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
 Route::get('/', [WelcomeController::class, "index"]);
 Route::post('/contact', [ContactController::class, 'save']);
 
@@ -47,9 +48,6 @@ Route::group(['middleware' => ['auth', 'validarRol']], function () {
 
     Route::get('/plates/notActive', [PlatesController::class, 'notActive']);
     Route::get('/plates/updateState/{id}', [PlatesController::class, 'updateState']);
-    Route::get('/plates/updateStateVariation/{id}', [PlatesController::class, 'updateStateVariation']);
-    Route::get('/plates/getPricePlate/{id}', [PlatesController::class, 'getPricePlate']);
-
     //<----------Categories--------->
 
     Route::get('/categories/notActive', [CategoriesController::class, 'notActive']);
@@ -105,6 +103,7 @@ Route::group(['middleware' => 'auth'], function () {
     //<-----------Sales------------>
     Route::get('/sales/canceledSales', [SalesController::class, 'canceledSales']);
     Route::get('/sales/updateState/{id}', [SalesController::class, 'updateState']);
+    Route::get('/plates/getPricePlate/{id}', [PlatesController::class, 'getPricePlate']);
     Route::get('/sales/getSalesCount', [SalesController::class, 'getSalesCount']);
 
     //<----------Resources---------->

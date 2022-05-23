@@ -99,7 +99,7 @@ Dashboard
 
 
     $(document).ready(function(){
-        $('#Week').show();
+        $('#Week').hide();
     $('#Month').show();
     $('#buttonMonth').hide();
     $('#buttonWeek').show();
@@ -160,7 +160,7 @@ Highcharts.chart('BMonth', {
         type: 'area'
     },
     title: {
-        text: 'Ventas del año'
+        text: 'Reservas del año'
     },
 
     xAxis: {
@@ -170,7 +170,7 @@ Highcharts.chart('BMonth', {
     },
     yAxis: {
         title: {
-            text: 'Número de ventas del año'
+            text: 'Número de reservas del año'
         }
     },
 
@@ -218,7 +218,7 @@ Highcharts.chart('SWeek', {
     },
     yAxis: {
         title: {
-            text: 'Número de ventas y reservas de la semana'
+            text: 'Número de ventas de la semana'
         }
     },
 
@@ -245,7 +245,7 @@ Highcharts.chart('BWeek', {
             type: 'area',
         },
         title: {
-            text: 'Ventas de la semana'
+            text: 'Reservas de la semana'
         },
 
         xAxis: {
@@ -268,7 +268,7 @@ Highcharts.chart('BWeek', {
         },
         yAxis: {
             title: {
-                text: 'Número de ventas y reservas de la semana'
+                text: 'Número de reservas de la semana'
             }
         },
 

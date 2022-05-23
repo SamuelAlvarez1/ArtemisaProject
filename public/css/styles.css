@@ -12782,6 +12782,7 @@ section#contact form#contactForm :-ms-input-placeholder {
         width: 36%;
 
     }
+<<<<<<< HEAD
 
     .img {
         width: 350px;
@@ -12821,7 +12822,69 @@ section#contact form#contactForm :-ms-input-placeholder {
 
 .destacados .card h4{
     font-weight: 600;
+=======
+.img{
+        width: 350px;
+        height: auto;
+    }
 }
+
+
+.card {
+  text-align: center;
+  background: #362D27;
+  box-shadow: 0 2px rgba(0, 0, 0, 0.4);
+  transition: all .25s;
+}
+
+.card .image{
+  border-radius: 5px;
+}
+
+.card:hover{
+  transform: translateY(-15px);
+  box-shadow: 0 12px 16px rgba(0, 0, 0, .2);
+}
+
+@media (min-width: 550px) {
+  .card {
+      text-align: left;
+  }
+}
+.info-card {
+  padding: 10px 20px;
+  color: white;
+}
+
+.info-card p,
+.card h4 {
+  margin-bottom: 5px;
+}
+
+.info-card .precio {
+  text-decoration: line-through;
+  font-size: 18px;
+  margin-top: 10px;
+}
+
+.info-card .precio span {
+  font-weight: 700;
+  font-size: 22px;
+}
+
+.u-full-width {
+  width: 100%;
+  box-sizing: border-box; 
+  border-radius: 5px;
+>>>>>>> 7b0d34368d427c1746d0237094fbf06c22752f86
+}
+.u-max-full-width {
+  max-width: 100%;
+  box-sizing: border-box; }
+.u-pull-right {
+  float: right; }
+.u-pull-left {
+  float: left; }
 
 .destacados .card p{
     padding: 0 1rem;

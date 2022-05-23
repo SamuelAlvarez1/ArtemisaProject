@@ -107,6 +107,7 @@
                             </span></a>
                     </div>
                 </li>
+                @if(auth()->user()->idRol == 1)
                 <li class="nav-item dropdown">
                     <a id="navbarDropdown" class="nav-link" href="#" role="button"
                        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -120,6 +121,7 @@
                         </div>
                     </div>
                 </li>
+                @endif
                 <li class="nav-item dropdown">
                     <a id="navbarDropdown" id="navbarDropdown" class="nav-link" href="#" role="button"
                        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -195,34 +197,35 @@
         }
     });
 
-    $.ajax({
-        url: `/contact/lastMessages`,
-        type: 'GET',
-        success: function (lastMessages) {
-            var content = '';
-            $(function () {
-                $.each(lastMessages, function (index, lastMessages) {
-                    content += `<a href="/contact/${lastMessages.id}" class="dropdown-item">
-                    <div class="media">
-                    <img style="width:50px" src="{{asset("img/theme/avatar.jpg")}}" alt="User Avatar" class="rounded-circle mr-3 img-circle">
-                    <div class="media-body">
-                    <h4 class="dropdown-item-title">${lastMessages.name}</h4>
-                    <p class="text-sm">${lastMessages.message.substring(0, 18)}...</p>
-                    </div>
-                    </div>
-                    </a>
-                    <div class="dropdown-divider"></div>`
-                });
-                if (content !== '') {
-                    content += `<div class=" dropdown-header text-center noti-title">
-                                <a href="/contact">Ver todos los mensajes</a>
-                            </div>`
-                    $("#lastMessages-body").html(content);
-                }
-
-            })
-        }
-    });
+    @if(auth()->user()->idRol == 1)
+        $.ajax({
+            url: `/contact/lastMessages`,
+            type: 'GET',
+            success: function (lastMessages) {
+                var content = '';
+                $(function () {
+                    $.each(lastMessages, function (index, lastMessages) {
+                        content += `<a href="/contact/${lastMessages.id}" class="dropdown-item">
+                        <div class="media">
+                        <img style="width:50px" src="{{asset("img/theme/avatar.jpg")}}" alt="User Avatar" class="rounded-circle mr-3 img-circle">
+                        <div class="media-body">
+                        <h4 class="dropdown-item-title">${lastMessages.name}</h4>
+                        <p class="text-sm">${lastMessages.message.substring(0, 18)}...</p>
+                        </div>
+                        </div>
+                        </a>
+                        <div class="dropdown-divider"></div>`
+                    });
+                    if (content !== '') {
+                        content += `<div class=" dropdown-header text-center noti-title">
+                                    <a href="/contact">Ver todos los mensajes</a>
+                                </div>`
+                        $("#lastMessages-body").html(content);
+                    }
+                })
+            }
+        });
+    @endif  
 </script>
 <script src="{{asset('js/argon.js?v=1.0.0')}}"></script>
 <script src="//cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>

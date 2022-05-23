@@ -18,6 +18,7 @@
 
     <link rel="stylesheet" href="/css/alertify.min.css"/>
     <link rel="stylesheet" href="/css/themes/bootstrap.css"/>
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous"> -->
 </head>
 <body id="page-top" style=" background-image: url('{{asset('img/landing/header-bg.jpg')}}');">
 <!-- Navigation-->
@@ -91,6 +92,7 @@
 
 {{--Destacados--}}
 
+<<<<<<< HEAD
 <section class="page-section" id="Destacados">
 
     <div class="destacados">
@@ -129,6 +131,28 @@
                     dignissimos eaque error, fugiat inventore ipsam magni maxime, nobis non, nostrum odio officiis
                     repellendus reprehenderit voluptatem voluptatibus!</p>
             </div>
+=======
+<section class="page-section text-center" id="Destacados" >
+<h2 class="titulo mb-5">Destacados</h2>
+    <div class="container">
+        
+        <div class="row">
+            @foreach($plates as $plate)
+           <div class="col">
+                <div class="card">
+                    <img src="https://static-sevilla.abc.es/media/gurmesevilla/2012/01/comida-rapida-casera.jpg"
+                    class="u-full-width" alt="">
+                    <div class="info-card">
+                        <h4>{{$plate->name}}</h4>
+                        <p>Marca nesca</p>
+                        <img src="/img/landing/estrellas.png" alt="">
+                        <span class="u-pull-right">$15</span>
+                    </div>
+                </div>
+           </div>
+            @endforeach
+    
+>>>>>>> 7b0d34368d427c1746d0237094fbf06c22752f86
 
 
     </div>
@@ -211,6 +235,8 @@
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 <!-- Core theme JS-->
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
 <script src="{{asset('js/scripts.js')}}"></script>
 <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
 </body>
