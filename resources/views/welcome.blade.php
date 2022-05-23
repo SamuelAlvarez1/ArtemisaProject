@@ -7,7 +7,9 @@
     <meta name="author" content=""/>
     <title>Artemisa</title>
     <!-- Font Awesome icons (free version)-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+          integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
     <!-- Google fonts-->
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css"/>
     <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css"/>
@@ -17,11 +19,12 @@
     <link rel="stylesheet" href="/css/alertify.min.css"/>
     <link rel="stylesheet" href="/css/themes/bootstrap.css"/>
 </head>
-<body id="page-top"  style=" background-image: url('{{asset('img/landing/header-bg.jpg')}}');">
+<body id="page-top" style=" background-image: url('{{asset('img/landing/header-bg.jpg')}}');">
 <!-- Navigation-->
 <nav class="navbar navbar-expand-lg navbar-dark " id="mainNav">
     <div class="container">
-        <a class="navbar-brand" href="#page-top"><img class="logo" src="{{asset('img/landing/navbar-logo.png')}}" alt="..."/></a>
+        <a class="navbar-brand" href="#page-top"><img class="logo" src="{{asset('img/landing/navbar-logo.png')}}"
+                                                      alt="..."/></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive"
                 aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
             Menu
@@ -39,18 +42,20 @@
     </div>
 </nav>
 <!-- Masthead-->
-<header class="masthead"  style="padding:0%; background-image: url('{{asset('img/landing/header-bg.jpg')}}');">
+<header class="masthead" style="padding:0%; background-image: url('{{asset('img/landing/header-bg.jpg')}}');">
     <div class="container">
-        <div class="masthead-heading text-uppercase"><img src="{{asset('img/landing/navbar-logo.png')}}" alt="..." /></div>
+        <div class="masthead-heading text-uppercase"><img src="{{asset('img/landing/navbar-logo.png')}}" alt="..."/>
+        </div>
         <a class="btn btn-primary btn-xl text-uppercase" href="/login">Iniciar sesión</a>
     </div>
-    <div class="container" style="height: 6rem; background: rgba(0,0,0, 0.8); max-width: 1000rem !important; margin-top: 30px; display: flex;">
-        <a class="arrow" href="#Quienessomos"><i class="fa-solid fa-angle-down" ></i></a>
+    <div class="container"
+         style="height: 6rem; background: rgba(0,0,0, 0.8); max-width: 1000rem !important; margin-top: 30px; display: flex;">
+        <a class="arrow" href="#Quienessomos"><i class="fa-solid fa-angle-down"></i></a>
     </div>
 </header>
 @include('includes.events')
 <!-- Quienes somos-->
-<section class="page-section" id="Quienessomos" >
+<section class="page-section" id="Quienessomos">
 
     <div class="container">
         <div class="row text-center">
@@ -58,10 +63,11 @@
                 <img src="img/landing/Artemisa_comida.jfif" alt="..." class="quienessomos img">
             </div>
             <div class="col-md-5">
-                      <h2 class="titulo">¿Quiénes somos?</h2>
+                <h2 class="titulo">¿Quiénes somos?</h2>
 
                 <p class="text">Bienvenidos a Artemisa,
-                    un restaurante apasionado por la comida artesanal, creando así un lugar alternativo y cómodo para todo público y disfrutar de un buen momento </p>
+                    un restaurante apasionado por la comida artesanal, creando así un lugar alternativo y cómodo para
+                    todo público y disfrutar de un buen momento </p>
             </div>
         </div>
     </div>
@@ -74,7 +80,8 @@
             <div class="col-md-6">
                 <h2 class="titulo">¿Dónde estamos ubicados?</h2>
 
-                <p class="text">Nos encontramos ubicados Cra51 #50a 06, te esperamos para que disfrutes de un buen momento en nuestro restaurante-bar  </div>
+                <p class="text">Nos encontramos ubicados Cra51 #50a 06, te esperamos para que disfrutes de un buen
+                    momento en nuestro restaurante-bar</div>
             <div class="col-md-5">
                 <img src="img/landing/Mapa.png" alt="..." class="img" class="map">
             </div>
@@ -84,68 +91,47 @@
 
 {{--Destacados--}}
 
-<section class="page-section" id="Destacados" >
+<section class="page-section" id="Destacados">
 
-    <div class="container">
-        <div class="row text-center">
-            <section class="menu">
-                <div class="contenedor">
-                    <h2 class="titulo" id="platillos">Destacados</h2>
-                    <div class="contenedor-menu">
-                        <div class="contenedor-menu2">
-                            <article>
-                                <p class="categoria">De Comer</p>
-                                @foreach($plates as $plate)
-                                @if ($plate->id != 1)
-                                <div class="platillo">
-                                    <p class="nombre">{{$plate->name}}</p>
-                                    <p class="precio">${{number_format($plate->price)}}</p>
-                                </div>
-                                @endif
-                                @endforeach
-{{--                                <div class="platillo">--}}
-{{--                                    <p class="nombre">Lorem ipsum dolor sit amet</p>--}}
-{{--                                    <p class="precio">$10</p>--}}
-{{--                                    <p class="descripcion">Vestibulum ac sem id massa tempor vestibulum sed--}}
-{{--                                        ut magna</p>--}}
-{{--                                </div>--}}
-{{--                                <div class="platillo">--}}
-{{--                                    <p class="nombre">Sed sagittis nisl dictum</p>--}}
-{{--                                    <p class="precio">$20</p>--}}
-{{--                                    <p class="descripcion">Praesent gravida, augue sit amet dignissim rutrum,--}}
-{{--                                        enim tellus suscipit risus.</p>--}}
-{{--                                </div>--}}
+    <div class="destacados">
+            <div class="card">
+                <img src="" alt="">
+                <h4></h4>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium aut commodi corporis deserunt
+                    dignissimos eaque error, fugiat inventore ipsam magni maxime, nobis non, nostrum odio officiis
+                    repellendus reprehenderit voluptatem voluptatibus!</p>
+            </div>
+            <div class="card">
+                <img src="" alt="">
+                <h4></h4>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium aut commodi corporis deserunt
+                    dignissimos eaque error, fugiat inventore ipsam magni maxime, nobis non, nostrum odio officiis
+                    repellendus reprehenderit voluptatem voluptatibus!</p>
+            </div>
+            <div class="card">
+                <img src="" alt="">
+                <h4></h4>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium aut commodi corporis deserunt
+                    dignissimos eaque error, fugiat inventore ipsam magni maxime, nobis non, nostrum odio officiis
+                    repellendus reprehenderit voluptatem voluptatibus!</p>
+            </div>
+            <div class="card">
+                <img src="" alt="">
+                <h4></h4>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium aut commodi corporis deserunt
+                    dignissimos eaque error, fugiat inventore ipsam magni maxime, nobis non, nostrum odio officiis
+                    repellendus reprehenderit voluptatem voluptatibus!</p>
+            </div>
+            <div class="card">
+                <img src="" alt="">
+                <h4></h4>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium aut commodi corporis deserunt
+                    dignissimos eaque error, fugiat inventore ipsam magni maxime, nobis non, nostrum odio officiis
+                    repellendus reprehenderit voluptatem voluptatibus!</p>
+            </div>
 
-                            </article>
 
-                            <article>
-                                <p class="categoria">De Tomar</p>
-                                <div class="platillo">
-                                    <p class="nombre">Sed sagittis nisl dictum</p>
-                                    <p class="precio">$15</p>
-                                    <p class="descripcion">Praesent gravida, augue sit amet dignissim rutrum,
-                                        enim tellus suscipit risus.</p>
-                                </div>
-                                <div class="platillo">
-                                    <p class="nombre">Sed sagittis nisl dictum</p>
-                                    <p class="precio">$15</p>
-                                    <p class="descripcion">Praesent gravida, augue sit amet dignissim rutrum,
-                                        enim tellus suscipit risus.</p>
-                                </div>
-                                <div class="platillo">
-                                    <p class="nombre">Sed sagittis nisl dictum</p>
-                                    <p class="precio">$15</p>
-                                    <p class="descripcion">Praesent gravida, augue sit amet dignissim rutrum,
-                                        enim tellus suscipit risus.</p>
-                                </div>
-
-                            </article>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-        </div>
+    </div>
     </div>
 </section>
 
@@ -159,35 +145,39 @@
             <h3 class="section-subheading text-white contact-text">Cuentanos tus sugerencias e inquietudes</h3>
             <div class="form">
                 @if($errors->any())
-                <div class="alert alert-danger alert-dismissible" role="alert">
-                    <ul>
-                        @foreach($errors->all() as $error)
-                            <li>{{$error}}</li>
-                        @endforeach
-                    </ul>
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-            @endif
-            <form method="post" action="{{url('/contact')}}">
-                @csrf
-                <div class="mb-3">
-                    <input type="text" required minlength="5" value="{{old('name')}}" name="name" class="form-control" placeholder="Nombre">
-                </div>
-                <div class="mb-3">
-                    <input type="email" required value="{{old('email')}}" name="email" class="form-control" placeholder="Correo electrónico">
-                </div>
-                <div class="mb-3">
-                    <textarea class="sugerencia form-control" minlength="10" required name="message" cols="50" rows="5" placeholder="Sugerencia o inquietud">{{old('message')}}</textarea>
-                </div>
-                <div class="text-center">
-                    <button class="btn btn-primary btn-xl text-uppercase mt-3" id="submitButton" type="submit">Enviar
-                    </button>
-                </div>
-            </form>
+                    <div class="alert alert-danger alert-dismissible" role="alert">
+                        <ul>
+                            @foreach($errors->all() as $error)
+                                <li>{{$error}}</li>
+                            @endforeach
+                        </ul>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                @endif
+                <form method="post" action="{{url('/contact')}}">
+                    @csrf
+                    <div class="mb-3">
+                        <input type="text" required minlength="5" value="{{old('name')}}" name="name"
+                               class="form-control" placeholder="Nombre">
+                    </div>
+                    <div class="mb-3">
+                        <input type="email" required value="{{old('email')}}" name="email" class="form-control"
+                               placeholder="Correo electrónico">
+                    </div>
+                    <div class="mb-3">
+                        <textarea class="sugerencia form-control" minlength="10" required name="message" cols="50"
+                                  rows="5" placeholder="Sugerencia o inquietud">{{old('message')}}</textarea>
+                    </div>
+                    <div class="text-center">
+                        <button class="btn btn-primary btn-xl text-uppercase mt-3" id="submitButton" type="submit">
+                            Enviar
+                        </button>
+                    </div>
+                </form>
             </div>
-    </div>
+        </div>
 </section>
 <!-- Footer-->
 <footer class="footer py-4">
@@ -209,14 +199,14 @@
 
 <script src="/js/alertify.min.js"></script>
 @if(Session::has('success'))
-<script>
+    <script>
         alertify.success('Se envió su mensaje correctamente!');
-</script>
+    </script>
 @endif
 @if(Session::has('error'))
-<script>
-    alertify.error('No fue posible enviar el mensaje!');
-</script>
+    <script>
+        alertify.error('No fue posible enviar el mensaje!');
+    </script>
 @endif
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
