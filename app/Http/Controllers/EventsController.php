@@ -35,15 +35,17 @@ class EventsController extends Controller
 
     public function store(Request $request)
     {
+        $request->validate(Event::$rules);
+
         $validator = Validator::make($request->all(), Event::$rules);
         $validator->after(function ($validator) use ($request){
 
-            //Eliminar las validaciones con validator a la hora de presentarlo al cliente 
+            //Eliminar las validaciones con validator a la hora de presentarlo al cliente
             $eventsInsideCreated = Event::where('state', 1)
             ->where(function($query) use ($request){
                 $query->whereBetween('startDate', [$request->input('startDate'),$request->input('endDate')])
                       ->orWhereBetween('endDate', [$request->input('startDate'),$request->input('endDate')])
-                      ->orWhereRaw('? BETWEEN startDate and endDate', [$request->input('startDate')]) 
+                      ->orWhereRaw('? BETWEEN startDate and endDate', [$request->input('startDate')])
                       ->orWhereRaw('? BETWEEN startDate and endDate', [$request->input('endDate')]);
               })
             ->count();
@@ -53,6 +55,7 @@ class EventsController extends Controller
         if ($validator->fails()){
             return back()->withErrors($validator)->withInput();
         }
+
         $image = null;
         $input = $request->only('name', 'description','decorationPrice','entryPrice', 'endDate','startDate');
         if ($request->image){
@@ -111,18 +114,18 @@ class EventsController extends Controller
             $event = Event::where('name', $request->input('name'))->where('id','!=', $id)->first();
             if ($event)
                 $validator->errors()->add('name', 'Este nombre ya está en uso');
-            
+
             $eventsInsideCreated = Event::where('state', 1)
             ->where(function($query) use ($request){
                 $query->whereBetween('startDate', [$request->input('startDate'),$request->input('endDate')])
                         ->orWhereBetween('endDate', [$request->input('startDate'),$request->input('endDate')])
-                        ->orWhereRaw('? BETWEEN startDate and endDate', [$request->input('startDate')]) 
+                        ->orWhereRaw('? BETWEEN startDate and endDate', [$request->input('startDate')])
                         ->orWhereRaw('? BETWEEN startDate and endDate', [$request->input('endDate')]);
                 })
             ->count();
             if($eventsInsideCreated)
             $validator->errors()->add('startDate', 'Ya existe un evento en este rango de fechas');
-        
+
         });
         if ($validator->fails()){
             return back()->withErrors($validator)->withInput();

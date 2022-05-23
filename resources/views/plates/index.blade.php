@@ -47,7 +47,7 @@
                         <input type="text" class="form-control-sm border border-dark" id="searchInput"
                                placeholder="Busqueda"
                                aria-label="Recipient's username" aria-describedby="basic-addon2">
-                        
+
                     </div>
                 </div>
             </div>
@@ -71,10 +71,10 @@
 
                         <tr>
 
-                            <td>{{$value-> id}}</td>
+                            <td>{{$value->id}}</td>
                             <td>{{$value->categories}}</td>
-                            <td>{{$value-> name}}</td>
-                            <td>{{number_format($value-> price)}}</td>
+                            <td>{{$value->name}}</td>
+                            <td>$ {{ number_format($value->price, 2)}}</td>
                             <td>
                                 @if($value->state == 1)
                                     <span class="badge badge-success">Activo</span>
