@@ -60,13 +60,20 @@ class PlatesController extends Controller
     {
 
         $request->validate(Plate::$rules);
+        $image = null;
         $input = $request->all();
+
+        if ($request->image){
+            $image = $input['name'].time().'.'.$request->image->extension();
+            $request->image->move(public_path('uploads'),$image);
+        }
         try {
             Plate::create([
                 "name" => $input["name"],
                 "price" => $input["price"],
                 "idCategory" => $input["idCategory"],
-                "state" => 1
+                "state" => 1,
+                'image' => $image
             ]);
             return redirect('/plates')->with('success', 'Platillo creado exitosamente');
         } catch (\Exception $e) {
@@ -108,11 +115,20 @@ class PlatesController extends Controller
         if ($validator->fails()) {
             return back()->withErrors($validator)->withInput();
         }
+
+        $image = null;
+        $input = $request->all();
+
+        if ($request->image){
+            $image = $input['name'].time().'.'.$request->image->extension();
+            $request->image->move(public_path('uploads'),$image);
+        }
         try {
             Plate::where("id", $id)->update([
-                "name" => $request["name"],
-                "price" => $request["price"],
-                "idCategory" => $request["idCategory"]
+                "name" => $input["name"],
+                "price" => $input["price"],
+                "idCategory" => $input["idCategory"],
+                'image' => $image
             ]);
             return redirect('/plates')->with("success", "El platillo fue editado satisfactoriamente");
         } catch (\Exception $e) {

@@ -11,9 +11,12 @@ Detalles de la venta
 @section('main-content')
 <div class="card">
     <div class="card-header">
+        <div class="">
+                <p>{{$sale-> created_at->isoFormat('dddd D MMMM YYYY, h:mm a')}}</p>
+        </div>
         <div class="row">
             <div class="col d-flex justify-content-center">
-                <strong>Detalles de Venta</strong>
+                <h2>Detalles de Venta</h2>
             </div>
         </div>
     </div>

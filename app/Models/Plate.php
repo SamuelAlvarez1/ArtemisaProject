@@ -16,7 +16,8 @@ class Plate extends Model
         'name',
         'price',
         'idCategory',
-        'state'
+        'state',
+        'image'
     ];
 
 
@@ -24,13 +25,15 @@ class Plate extends Model
     public static $rules = [
         'name' => "required|min:3|max:250|unique:plates",
         'price' => "required|numeric",
-        'idCategory' => "required"
+        'idCategory' => "required",
+        'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:3072'
     ];
 
     public static $rulesEdit = [
         'name' => "required|min:3|max:250",
         'price' => "required|numeric",
-        'idCategory' => "required"
+        'idCategory' => "required",
+        'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:3072'
     ];
 
     public $timestamps = true;
