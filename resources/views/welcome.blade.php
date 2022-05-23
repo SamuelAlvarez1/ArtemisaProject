@@ -92,50 +92,10 @@
 
 {{--Destacados--}}
 
-<<<<<<< HEAD
-<section class="page-section" id="Destacados">
-
-    <div class="destacados">
-            <div class="card">
-                <img src="" alt="">
-                <h4></h4>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium aut commodi corporis deserunt
-                    dignissimos eaque error, fugiat inventore ipsam magni maxime, nobis non, nostrum odio officiis
-                    repellendus reprehenderit voluptatem voluptatibus!</p>
-            </div>
-            <div class="card">
-                <img src="" alt="">
-                <h4></h4>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium aut commodi corporis deserunt
-                    dignissimos eaque error, fugiat inventore ipsam magni maxime, nobis non, nostrum odio officiis
-                    repellendus reprehenderit voluptatem voluptatibus!</p>
-            </div>
-            <div class="card">
-                <img src="" alt="">
-                <h4></h4>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium aut commodi corporis deserunt
-                    dignissimos eaque error, fugiat inventore ipsam magni maxime, nobis non, nostrum odio officiis
-                    repellendus reprehenderit voluptatem voluptatibus!</p>
-            </div>
-            <div class="card">
-                <img src="" alt="">
-                <h4></h4>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium aut commodi corporis deserunt
-                    dignissimos eaque error, fugiat inventore ipsam magni maxime, nobis non, nostrum odio officiis
-                    repellendus reprehenderit voluptatem voluptatibus!</p>
-            </div>
-            <div class="card">
-                <img src="" alt="">
-                <h4></h4>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium aut commodi corporis deserunt
-                    dignissimos eaque error, fugiat inventore ipsam magni maxime, nobis non, nostrum odio officiis
-                    repellendus reprehenderit voluptatem voluptatibus!</p>
-            </div>
-=======
 <section class="page-section text-center" id="Destacados" >
 <h2 class="titulo mb-5">Destacados</h2>
     <div class="container">
-        
+
         <div class="row">
             @foreach($plates as $plate)
            <div class="col">
@@ -146,20 +106,16 @@
                         <h4>{{$plate->name}}</h4>
                         <p>Marca nesca</p>
                         <img src="/img/landing/estrellas.png" alt="">
-                        <span class="u-pull-right">$15</span>
+                        <span class="u-pull-right">${{$plate->price}}</span>
                     </div>
                 </div>
            </div>
             @endforeach
-    
->>>>>>> 7b0d34368d427c1746d0237094fbf06c22752f86
 
 
     </div>
     </div>
 </section>
-
-</div>
 
 <!-- Contactanos-->
 <section class="page-section pt-0" id="Contactanos">
@@ -202,6 +158,7 @@
                 </form>
             </div>
         </div>
+    </div>
 </section>
 <!-- Footer-->
 <footer class="footer py-4">
@@ -219,9 +176,10 @@
         </div>
     </div>
 </footer>
+<a href="https://api.whatsapp.com/send?phone=3015767307" class="btn-wsp" target="_blank"><i class="fa-brands fa-whatsapp"></i></a>
+
 <!-- Bootstrap core JS-->
 
-<script src="/js/alertify.min.js"></script>
 @if(Session::has('success'))
     <script>
         alertify.success('Se envió su mensaje correctamente!');

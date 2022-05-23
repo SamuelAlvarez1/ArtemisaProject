@@ -12,28 +12,22 @@ use \App\Models\Plate;
 class WelcomeController extends Controller
 {
     public function index(){
-        $Plates = SaleDetail::select('sales_details.idPlate', 'plates.id as Plate')
-            ->join('plates', 'sales_details.idPlate', '=', 'plates.id')
+        $FPlates = SaleDetail::selectRaw('count(id) as sales, sales_details.idPlate as plates')
+            ->take(4)
+            ->groupBy('plates')
+            ->orderBy('sales', 'Desc')
             ->get();
-        $idPlate = [];
-        foreach ($Plates as $i => $value) {
-            $idPlate[$i] = $value->Plate;
+        $plates = [];
+        foreach ($FPlates as $key => $plate){
+            $plates[$key] = Plate::all()->where('id', $plate->plates)->first();
+            $plates[$key]['sales'] = $plate->sales;
         }
-        $plates = array_count_values($idPlate);
-
-        $outstandingsPlates = [];
-
-        foreach($plates as $key => $plate){
-            $outstandingsPlates[$key] = Plate::where('id', $key)->pluck('name', 'image', 'price');
-        }
-
-//    dd($outstandingsPlates);
 
         $events = Event::where('state', 1)
         ->whereRaw('DATE(CURDATE()) >= DATE_SUB(startDate, INTERVAL 6 DAY)')
         ->whereraw('DATE(CURDATE()) <= endDate')
         ->get();
-        return view('welcome', compact('outstandingsPlates', 'events'));
+        return view('welcome', compact( 'events', 'plates'));
 
     }
 }

@@ -12782,7 +12782,6 @@ section#contact form#contactForm :-ms-input-placeholder {
         width: 36%;
 
     }
-<<<<<<< HEAD
 
     .img {
         width: 350px;
@@ -12820,21 +12819,21 @@ section#contact form#contactForm :-ms-input-placeholder {
     box-shadow: 0 12px 16px rgba(0, 0, 0, .2);
 }
 
-.destacados .card h4{
+.destacados .card h4 {
     font-weight: 600;
-=======
+}
 .img{
         width: 350px;
         height: auto;
     }
-}
 
 
 .card {
   text-align: center;
   background: #362D27;
   box-shadow: 0 2px rgba(0, 0, 0, 0.4);
-  transition: all .25s;
+  transition: all .25s;margin-bottom: 20px;
+
 }
 
 .card .image{
@@ -12851,6 +12850,9 @@ section#contact form#contactForm :-ms-input-placeholder {
       text-align: left;
   }
 }
+
+
+
 .info-card {
   padding: 10px 20px;
   color: white;
@@ -12874,9 +12876,8 @@ section#contact form#contactForm :-ms-input-placeholder {
 
 .u-full-width {
   width: 100%;
-  box-sizing: border-box; 
+  box-sizing: border-box;
   border-radius: 5px;
->>>>>>> 7b0d34368d427c1746d0237094fbf06c22752f86
 }
 .u-max-full-width {
   max-width: 100%;
@@ -12890,4 +12891,28 @@ section#contact form#contactForm :-ms-input-placeholder {
     padding: 0 1rem;
     font-size: 16px;
     font-weight: 300;
+}
+
+.btn-wsp {
+    position: fixed;
+    width: 55px;
+    height: 55px;
+    line-height: 55px;
+    bottom: 30px;
+    right: 30px;
+    background: #0df053;
+    color: #fff;
+    border-radius: 50px;
+    text-align: center;
+    font-size: 30px;
+    box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.3);
+    z-index: 100;
+    transition: all 0.25s;
+}
+
+.btn-wsp:hover {
+    transform: translateY(-14px);
+    text-decoration: none;
+    color: #0df053;
+    background: #fff;
 }
