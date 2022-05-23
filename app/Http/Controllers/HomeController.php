@@ -15,7 +15,6 @@ class HomeController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth');
     }
     private function Mes($data)
     {
@@ -91,7 +90,7 @@ class HomeController extends Controller
             ->orderBy('sales', 'Desc')
             ->get();
         $customers = [];
-        foreach ($FClientes as $key => $cliente){
+        foreach ($FClientes as $key => $cliente) {
             $customers[$key] = Customer::select('name')->where('id', $cliente->customers)->first();
             $customers[$key]['sales'] = $cliente->sales;
         }

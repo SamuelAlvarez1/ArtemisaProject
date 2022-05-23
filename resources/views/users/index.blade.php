@@ -42,7 +42,7 @@
         </div>
     </div>
     <div class="card-body">
-        <div class="mb-3 text-center">
+        <div class="mb-3">
             <table id="users" class="table table-bordered">
                 <thead class="thead-light">
                 <tr>

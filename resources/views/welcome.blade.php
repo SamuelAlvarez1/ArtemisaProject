@@ -22,7 +22,7 @@
 </head>
 <body id="page-top" style=" background-image: url('{{asset('img/landing/header-bg.jpg')}}');">
 <!-- Navigation-->
-<nav class="navbar navbar-expand-lg navbar-dark " id="mainNav">
+<nav id="mainNav" class="navbar navbar-expand-lg navbar-dark ">
     <div class="container">
         <a class="navbar-brand" href="#page-top"><img class="logo" src="{{asset('img/landing/navbar-logo.png')}}"
                                                       alt="..."/></a>
@@ -43,7 +43,7 @@
     </div>
 </nav>
 <!-- Masthead-->
-<header class="masthead" style="padding:0%; background-image: url('{{asset('img/landing/header-bg.jpg')}}');">
+<header class="masthead" style="padding:0%; background-image: url('{{asset('img/landing/header-bg.jpg')}}'); padding-top:80px;">
     <div class="container">
         <div class="masthead-heading text-uppercase"><img src="{{asset('img/landing/navbar-logo.png')}}" alt="..."/>
         </div>
@@ -92,51 +92,30 @@
 
 {{--Destacados--}}
 
-<section class="page-section" id="Destacados">
+<section class="page-section text-center" id="Destacados" >
+<h2 class="titulo mb-5">Destacados</h2>
+    <div class="container">
 
-    <div class="destacados">
-            <div class="card">
-                <img src="" alt="">
-                <h4></h4>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium aut commodi corporis deserunt
-                    dignissimos eaque error, fugiat inventore ipsam magni maxime, nobis non, nostrum odio officiis
-                    repellendus reprehenderit voluptatem voluptatibus!</p>
-            </div>
-            <div class="card">
-                <img src="" alt="">
-                <h4></h4>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium aut commodi corporis deserunt
-                    dignissimos eaque error, fugiat inventore ipsam magni maxime, nobis non, nostrum odio officiis
-                    repellendus reprehenderit voluptatem voluptatibus!</p>
-            </div>
-            <div class="card">
-                <img src="" alt="">
-                <h4></h4>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium aut commodi corporis deserunt
-                    dignissimos eaque error, fugiat inventore ipsam magni maxime, nobis non, nostrum odio officiis
-                    repellendus reprehenderit voluptatem voluptatibus!</p>
-            </div>
-            <div class="card">
-                <img src="" alt="">
-                <h4></h4>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium aut commodi corporis deserunt
-                    dignissimos eaque error, fugiat inventore ipsam magni maxime, nobis non, nostrum odio officiis
-                    repellendus reprehenderit voluptatem voluptatibus!</p>
-            </div>
-            <div class="card">
-                <img src="" alt="">
-                <h4></h4>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium aut commodi corporis deserunt
-                    dignissimos eaque error, fugiat inventore ipsam magni maxime, nobis non, nostrum odio officiis
-                    repellendus reprehenderit voluptatem voluptatibus!</p>
-            </div>
+        <div class="row">
+            @foreach($plates as $plate)
+           <div class="col">
+                <div class="card">
+                    <img src="https://static-sevilla.abc.es/media/gurmesevilla/2012/01/comida-rapida-casera.jpg"
+                    class="u-full-width" alt="">
+                    <div class="info-card">
+                        <h4>{{$plate->name}}</h4>
+                        <p>Marca nesca</p>
+                        <img src="/img/landing/estrellas.png" alt="">
+                        <span class="u-pull-right">${{$plate->price}}</span>
+                    </div>
+                </div>
+           </div>
+            @endforeach
 
 
     </div>
     </div>
 </section>
-
-</div>
 
 <!-- Contactanos-->
 <section class="page-section pt-0" id="Contactanos">
@@ -179,6 +158,7 @@
                 </form>
             </div>
         </div>
+    </div>
 </section>
 <!-- Footer-->
 <footer class="footer py-4">
@@ -196,9 +176,10 @@
         </div>
     </div>
 </footer>
+<a href="https://api.whatsapp.com/send?phone=3015767307" class="btn-wsp" target="_blank"><i class="fa-brands fa-whatsapp"></i></a>
+
 <!-- Bootstrap core JS-->
 
-<script src="/js/alertify.min.js"></script>
 @if(Session::has('success'))
     <script>
         alertify.success('Se envió su mensaje correctamente!');
@@ -208,6 +189,13 @@
     <script>
         alertify.error('No fue posible enviar el mensaje!');
     </script>
+@endif
+
+@if(Session::has('errorState'))
+<script>
+    alertify.set('notifier', 'position', 'top-right');
+        alertify.error('{{ Session::get('errorState') }}');
+</script>
 @endif
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
