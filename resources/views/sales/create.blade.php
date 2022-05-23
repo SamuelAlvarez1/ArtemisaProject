@@ -129,7 +129,7 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text bg-transparent" style="border: none"><h2>Precio total:&ensp;&ensp;<b class="text-success">$</b></h2></span>
                         <input
-                            type="number"
+                            type="hidden"
                             class="form-control bg-transparent @error('totalPrice') is-invalid @enderror"
                             name="totalPrice"
                             readonly
@@ -137,6 +137,7 @@
                             id="totalPrice"
                             style="border: none; font-size: 25px"
                         />
+                        <p id="text_totalPrice" class="mr-4" style="font-size: 25px">0</p>
                         @error('totalPrice')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -253,6 +254,12 @@
                     parseInt(precio_total) +
                         parseInt(cantidad) * parseInt(precio)
                 );
+
+                let text_totalPrice = $("#text_totalPrice").val() || 0;
+                $("#text_totalPrice").text(
+                    (parseInt(text_totalPrice) +
+                        parseInt(cantidad) * parseInt(precio)).toLocaleString("en")
+                );
             }
         } else {
             alertify.set("notifier", "position", "top-right");
@@ -273,6 +280,10 @@
         $("#tr-" + id).remove();
         let precio_total = $("#totalPrice").val() || 0;
         $("#totalPrice").val(
+            parseInt(precio_total) - parseInt(cantidad * precioPlatillo)
+        );
+
+        $("#text_totalPrice").text(
             parseInt(precio_total) - parseInt(cantidad * precioPlatillo)
         );
     }
@@ -304,6 +315,10 @@
 
                         $("#totalPrice").val(
                             parseInt(precio_total) + parseInt(subtotal)
+                        );
+
+                        $("#text_totalPrice").text(
+                            (parseInt(precio_total) + parseInt(subtotal)).toLocaleString("en")
                         );
 
                         $(this)
@@ -349,6 +364,10 @@
 
                         $("#totalPrice").val(
                             parseInt(precio_total) + parseInt(subtotal)
+                        );
+
+                        $("#text_totalPrice").text(
+                            (parseInt(precio_total) + parseInt(subtotal)).toLocaleString("en")
                         );
 
                         $(this)

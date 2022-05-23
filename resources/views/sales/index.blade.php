@@ -79,13 +79,13 @@
 
                             </td>
                             <td>
-                                <a class="mx-2" data-toggle="tooltip" data-placement="top" title="Detalles" href="{{url('/sales/'.$value->id)}}"><i
+                                <a class="mx-2" data-toggle="tooltip" data-placement="top" title="Ver detalles de la Venta" href="{{url('/sales/'.$value->id)}}"><i
                                 class="fa-solid text-dark fa-info-circle"></i></a>
                                 @if($value->state == 1)
-                                    <a class="mx-2" data-toggle="tooltip" data-placement="top" title="Anular" href="{{url('/sales/updateState/'.$value->id)}}"><i
+                                    <a class="mx-2" data-toggle="tooltip" data-placement="top" title="Anular la venta" href="{{url('/sales/updateState/'.$value->id)}}"><i
                                             class="fa text-dark fa-ban"></i></a>
                                 @else
-                                    <a class="mx-2"  data-toggle="tooltip" data-placement="top" title="Activar" href="{{url('/sales/updateState/'.$value->id)}}"><i
+                                    <a class="mx-2"  data-toggle="tooltip" data-placement="top" title="Activar la venta" href="{{url('/sales/updateState/'.$value->id)}}"><i
                                             class="fa text-dark fa-check"></i></a>
                                 @endif
                             </td>

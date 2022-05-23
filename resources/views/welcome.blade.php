@@ -92,7 +92,6 @@
 
 {{--Destacados--}}
 
-<<<<<<< HEAD
 <section class="page-section" id="Destacados">
 
     <div class="destacados">
@@ -131,28 +130,6 @@
                     dignissimos eaque error, fugiat inventore ipsam magni maxime, nobis non, nostrum odio officiis
                     repellendus reprehenderit voluptatem voluptatibus!</p>
             </div>
-=======
-<section class="page-section text-center" id="Destacados" >
-<h2 class="titulo mb-5">Destacados</h2>
-    <div class="container">
-        
-        <div class="row">
-            @foreach($plates as $plate)
-           <div class="col">
-                <div class="card">
-                    <img src="https://static-sevilla.abc.es/media/gurmesevilla/2012/01/comida-rapida-casera.jpg"
-                    class="u-full-width" alt="">
-                    <div class="info-card">
-                        <h4>{{$plate->name}}</h4>
-                        <p>Marca nesca</p>
-                        <img src="/img/landing/estrellas.png" alt="">
-                        <span class="u-pull-right">$15</span>
-                    </div>
-                </div>
-           </div>
-            @endforeach
-    
->>>>>>> 7b0d34368d427c1746d0237094fbf06c22752f86
 
 
     </div>
