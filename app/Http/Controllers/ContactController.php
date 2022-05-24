@@ -18,7 +18,7 @@ class ContactController extends Controller
             $message = Contact::find($id);
             if ($message==null) {
                 return back()->with('error', 'No se ha encontrado el mensaje');
-            } 
+            }
             $message->update(['read' => 1]);
             return view('contact.details', compact('message'));
 
@@ -38,12 +38,10 @@ class ContactController extends Controller
             ]);
             return redirect('/#Contactanos')->with('success', 'Se envió su mensaje correctamente!');
         } catch (\Exception $e) {
-            dd($e);
             return redirect('/#Contactanos')->with('error', 'No fue posible enviar el mensaje!');
         }
     }
     public function lastMessages(){
-        $lastMessages = Contact::latest()->take(2)->get();
-        return $lastMessages;
+        return Contact::latest()->take(2)->get();
     }
 }

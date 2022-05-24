@@ -42,7 +42,6 @@ class SalesController extends Controller
             ->join("users", "sales.idUser", "=", "users.id")
             ->where('sales.state', '0')
             ->get();
-        // dd($sales);
 
         $states = "canceledSales";
 
@@ -61,8 +60,6 @@ class SalesController extends Controller
 
     public function store(Request $request)
     {
-        $input = $request->all();
-
         try {
             DB::beginTransaction();
             $sale = Sale::create([
@@ -115,7 +112,6 @@ class SalesController extends Controller
             ->where("sales.id", "=", $id)
             ->first();
 
-        // dd($sale);
 
         $saleDetail = SaleDetail::select("sales_details.*", "plates.name as namePlate")
             ->join("plates", "sales_details.idPlate", "=", "plates.id")
@@ -127,7 +123,6 @@ class SalesController extends Controller
 
     public function getSalesCount()
     {
-        $salesCount = Sale::where('created_at', '>=', auth()->user()->lastLog)->count();
-        return $salesCount;
+        return Sale::where('created_at', '>=', auth()->user()->lastLog)->count();
     }
 }

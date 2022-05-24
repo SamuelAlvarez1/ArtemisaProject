@@ -11,6 +11,8 @@ class Event extends Model
 
     protected $table = "events";
 
+    const NUMERIC_NULLABLE = 'nullable|numeric|min:50';
+
     protected $fillable = [
         'id',
         'name',
@@ -29,8 +31,8 @@ class Event extends Model
         'description' => 'required|min:3|max:255',
         'startDate' => 'required|date|after_or_equal:yesterday',
         'endDate' => 'required|date|after_or_equal:startDate',
-        'decorationPrice' => 'nullable|numeric|min:50',
-        'entryPrice' => 'nullable|numeric|min:50',
+        'decorationPrice' => self::NUMERIC_NULLABLE,
+        'entryPrice' => self::NUMERIC_NULLABLE,
         'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:3072'
     ];
     public static $rulesUpdate = [
@@ -38,8 +40,8 @@ class Event extends Model
         'description' => 'required|min:3|max:255',
         'startDate' => 'required|date|after_or_equal:yesterday',
         'endDate' => 'required|date|after_or_equal:startDate',
-        'decorationPrice' => 'nullable|numeric|min:50',
-        'entryPrice' => 'nullable|numeric|min:50',
+        'decorationPrice' => self::NUMERIC_NULLABLE,
+        'entryPrice' => self::NUMERIC_NULLABLE,
         'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:3072'
     ];
 

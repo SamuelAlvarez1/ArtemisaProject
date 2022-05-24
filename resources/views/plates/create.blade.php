@@ -10,7 +10,6 @@
 
 @section('form')
 
-
     <div class="card-header">
         <div class="row align-items-center">
             <div class="col">
@@ -80,7 +79,6 @@
 
 
         </form>
-
     </div>
 
 
@@ -106,6 +104,5 @@
             return patron.test(tecla_final);
         }
     </script>
-
 
 @endsection

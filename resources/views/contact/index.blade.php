@@ -19,7 +19,7 @@
         </div>
         <div class="card-body">
             <div class="mx-auto mb-3">
-                <table id="messages" class="table table-bordered">
+                <table id="messages" class="table table-bordered" aria-label="Mensajes">
                     <thead class="thead-light">
                     <tr>
                         <th>#</th>
@@ -46,8 +46,8 @@
                                 @endif
                             </td>
                             <td>
-                                <a class="mx-2" title="Ver más información" href="{{url('/contact/'.$message->id)}}"><i
-                                        class="fa-solid text-dark fa-info-circle"></i></a>
+                                <a class="mx-2" title="Ver más información" href="{{url('/contact/'.$message->id)}}"><em
+                                        class="fa-solid text-dark fa-info-circle"></em></a>
                             </td>
                         </tr>
                     @endforeach

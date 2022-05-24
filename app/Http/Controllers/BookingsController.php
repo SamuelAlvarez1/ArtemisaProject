@@ -8,16 +8,13 @@ use App\Models\Customer;
 use App\Models\Event;
 use DataTables;
 use Carbon\Carbon;
-
 class BookingsController extends Controller
 {
-
     public function __construct()
     {
         Carbon::setLocale('es');
         setlocale(LC_TIME, 'es_ES');
     }
-
 
     public function index()
     {
@@ -32,7 +29,6 @@ class BookingsController extends Controller
 
         return view("bookings.index", compact("bookings", "states"));
     }
-
 
     public function seeCanceled()
     {
@@ -245,11 +241,6 @@ class BookingsController extends Controller
 
     public function getBookingsCount()
     {
-        $bookingsCount = Booking::where('created_at', '>=', auth()->user()->lastLog)->count();
-        return $bookingsCount;
-    }
-
-    public function destroy($id)
-    {
+        return Booking::where('created_at', '>=', auth()->user()->lastLog)->count();
     }
 }

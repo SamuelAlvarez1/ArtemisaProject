@@ -11,6 +11,7 @@ use Yajra\DataTables\DataTables;
 
 class CustomersController extends Controller
 {
+    const INDEX = '/customers';
 
     public function index()
     {
@@ -38,7 +39,7 @@ class CustomersController extends Controller
                 'phoneNumber' => $input['phoneNumber'],
                 'state' => $input['state'],
             ]);
-            return redirect('/customers')->with('success', 'Se registró el cliente correctamente');
+            return redirect(self::INDEX)->with('success', 'Se registró el cliente correctamente');
         } catch (\Exception $e) {
             return redirect('/customers/create')->with('error', 'No fue posible registrar el cliente    ');
         }
@@ -48,7 +49,9 @@ class CustomersController extends Controller
     public function show($id)
     {
         $customer = Customer::find($id);
-        if ($customer == null)  return redirect("/customers")->with('error', 'Cliente no encontrado');
+        if ($customer == null)  {
+            return redirect("/customers")->with('error', 'Cliente no encontrado');
+        }
         $user = User::find($customer->idUser);
         $role = Rol::find($user->idRol);
         return view('customers.details', compact('customer', 'user','role'));
@@ -58,7 +61,7 @@ class CustomersController extends Controller
     {
         $customer = Customer::find($id);
         if ($customer == null) {
-            return redirect("/customers")->with('error', 'Cliente no encontrado');
+            return redirect(self::INDEX)->with('error', 'Cliente no encontrado');
         }
         return view('customers.edit', compact('customer'));
     }
@@ -76,11 +79,12 @@ class CustomersController extends Controller
         try {
             $customer = Customer::find($id);
             $customer->update($data);
-            return redirect('/customers')->with('success', 'Se ha editado correctamente la información');
+            return redirect(self::INDEX)->with('success', 'Se ha editado correctamente la información');
         } catch (\Exception $e) {
             return redirect('/customers/' . $id . '/edit')->with('error', 'No se pudo editar la información');
         }
     }
+
     public function notActive()
     {
         $customers = Customer::select('customers.*', 'users.name as user')
@@ -96,9 +100,9 @@ class CustomersController extends Controller
         try {
             $customer = Customer::find($id);
             $customer->update(['state' => !$customer->state]);
-            return redirect('/customers')->with('success', 'Se cambió el estado correctamente');
+            return redirect(self::INDEX)->with('success', 'Se cambió el estado correctamente');
         } catch (\Exception $e) {
-            return redirect('/customers')->with('error', 'No fue posible actualizar el estado');
+            return redirect(self::INDEX)->with('error', 'No fue posible actualizar el estado');
         }
     }
 }

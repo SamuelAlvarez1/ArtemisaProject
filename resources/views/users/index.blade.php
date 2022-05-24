@@ -58,7 +58,7 @@
                 </thead>
                 <tbody>
 
-                @foreach($users as $value)
+                    @foreach($users as $value)
 
                     <tr>
 
