@@ -125,7 +125,7 @@ Highcharts.chart('SMonth', {
         type: 'area'
     },
     title: {
-        text: 'Ventas del año'
+        text: 'Ventas Anuales'
     },
 
     xAxis: {
@@ -135,7 +135,7 @@ Highcharts.chart('SMonth', {
     },
     yAxis: {
         title: {
-            text: 'Número de ventas del año'
+            text: 'Número de ventas'
         }
     },
 
@@ -160,7 +160,7 @@ Highcharts.chart('BMonth', {
         type: 'area'
     },
     title: {
-        text: 'Reservas del año'
+        text: 'Reservas anuales'
     },
 
     xAxis: {
@@ -170,7 +170,7 @@ Highcharts.chart('BMonth', {
     },
     yAxis: {
         title: {
-            text: 'Número de reservas del año'
+            text: 'Número de reservas'
         }
     },
 
@@ -218,7 +218,7 @@ Highcharts.chart('SWeek', {
     },
     yAxis: {
         title: {
-            text: 'Número de ventas de la semana'
+            text: 'Número de ventas'
         }
     },
 
@@ -268,7 +268,7 @@ Highcharts.chart('BWeek', {
         },
         yAxis: {
             title: {
-                text: 'Número de reservas de la semana'
+                text: 'Número de reservas'
             }
         },
 

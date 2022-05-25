@@ -23,14 +23,14 @@ class Plate extends Model
 
 
     public static $rules = [
-        'name' => "required|min:3|max:250|unique:plates",
+        'name' => "required|min:3|max:250|regex:/^[a-zA-ZÀ-ÿñÑ0-9 ]+$/|unique:plates",
         'price' => "required|numeric",
         'idCategory' => "required",
         'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:3072'
     ];
 
     public static $rulesEdit = [
-        'name' => "required|min:3|max:250",
+        'name' => "required|min:3|max:250|regex:/^[a-zA-ZÀ-ÿñÑ0-9 ]+$/",
         'price' => "required|numeric",
         'idCategory' => "required",
         'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:3072'
