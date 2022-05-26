@@ -18,6 +18,10 @@
 
     <link rel="stylesheet" href="/css/alertify.min.css"/>
     <link rel="stylesheet" href="/css/themes/bootstrap.css"/>
+    <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+  />
     <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous"> -->
 </head>
 <body id="page-top" style=" background-image: url('{{asset('img/landing/header-bg.jpg')}}');">
@@ -45,9 +49,9 @@
 <!-- Masthead-->
 <header class="masthead" style="padding:0%; background-image: url('{{asset('img/landing/header-bg.jpg')}}'); padding-top:80px;">
     <div class="container">
-        <div class="masthead-heading text-uppercase"><img src="{{asset('img/landing/navbar-logo.png')}}" alt="..."/>
+        <div class="masthead-heading text-uppercase logoHeader"><img src="{{asset('img/landing/navbar-logo.png')}}" alt="..."/>
         </div>
-        <a class="btn btn-primary btn-xl text-uppercase" href="/login">Iniciar sesión</a>
+        <a class="btn btn-primary btn-xl text-uppercase animate__animated animate__fadeInUp" href="/login">Iniciar sesión</a>
     </div>
     <div class="container"
          style="height: 6rem; background: rgba(0,0,0, 0.8); max-width: 1000rem !important; margin-top: 30px; display: flex;">
@@ -84,7 +88,7 @@
                 <p class="text">Nos encontramos ubicados Cra51 #50a 06, te esperamos para que disfrutes de un buen
                     momento en nuestro restaurante-bar</div>
             <div class="col-md-5">
-                <img src="img/landing/Mapa.png" alt="..." class="img" class="map">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3965.4566938669386!2d-75.56149658548003!3d6.33483692708588!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e442fa68a4e80bf%3A0x2a9eccf2250943da!2sCra.%2051%20%2350a-6%2C%20Bello%2C%20Antioquia!5e0!3m2!1ses!2sco!4v1653330556882!5m2!1ses!2sco" width="600" height="450" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" class="map"></iframe>
             </div>
         </div>
     </div>
@@ -176,7 +180,7 @@
         </div>
     </div>
 </footer>
-<a href="https://api.whatsapp.com/send?phone=3015767307" class="btn-wsp" target="_blank"><i class="fa-brands fa-whatsapp"></i></a>
+<a href="https://api.whatsapp.com/send?phone=3015767307" class="btn-wsp animate__animated animate__fadeInUp" target="_blank"><i class="fa-brands fa-whatsapp"></i></a>
 
 <!-- Bootstrap core JS-->
 
