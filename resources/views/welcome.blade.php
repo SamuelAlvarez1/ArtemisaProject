@@ -104,9 +104,9 @@
                     class="u-full-width" alt="">
                     <div class="info-card">
                         <h4>{{$plate->name}}</h4>
+                        
                         <p>Marca nesca</p>
-                        <img src="/img/landing/estrellas.png" alt="">
-                        <span class="u-pull-right">${{$plate->price}}</span>
+                        <span class="u-pull-right">${{number_format($plate->price)}}</span>
                     </div>
                 </div>
            </div>

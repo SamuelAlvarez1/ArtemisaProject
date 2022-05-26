@@ -94,6 +94,20 @@ class HomeController extends Controller
             $customers[$key] = Customer::select('name')->where('id', $cliente->customers)->first();
             $customers[$key]['sales'] = $cliente->sales;
         }
-        return view('home', compact('plate', 'countBookings', 'countSales', 'salesData', 'bookingsData', 'salesDataWeek', 'bookingsDataWeek', 'customers'));
+        $FPlates = SaleDetail::selectRaw('count(id) as sales, sum(quantity) as quantity,  sales_details.idPlate as plates')
+        ->where('idPlate', '!=', 1)
+            ->take(5)
+            ->groupBy('plates')
+            ->orderBy('quantity', 'Desc')
+            ->get();
+
+        $plates = [];
+        
+        foreach ($FPlates as $key => $plate){
+            $plates[$key] = Plate::all()->where('id', $plate->plates)->first();
+            $plates[$key]['sales'] = $plate->sales;
+            $plates[$key]['quantity'] = $plate->quantity;
+        }
+        return view('home', compact('plate', 'countBookings', 'countSales', 'salesData', 'bookingsData', 'salesDataWeek', 'bookingsDataWeek', 'customers','plates'));
     }
 }

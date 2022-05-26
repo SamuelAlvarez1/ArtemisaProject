@@ -12,15 +12,18 @@ use \App\Models\Plate;
 class WelcomeController extends Controller
 {
     public function index(){
-        $FPlates = SaleDetail::selectRaw('count(id) as sales, sales_details.idPlate as plates')
+        $FPlates = SaleDetail::selectRaw('count(id) as sales, sum(quantity) as quantity,  sales_details.idPlate as plates')
+        ->where('idPlate', '!=', 1)
             ->take(4)
             ->groupBy('plates')
-            ->orderBy('sales', 'Desc')
+            ->orderBy('quantity', 'Desc')
             ->get();
         $plates = [];
+        
         foreach ($FPlates as $key => $plate){
             $plates[$key] = Plate::all()->where('id', $plate->plates)->first();
             $plates[$key]['sales'] = $plate->sales;
+            $plates[$key]['quantity'] = $plate->quantity;
         }
 
         $events = Event::where('state', 1)

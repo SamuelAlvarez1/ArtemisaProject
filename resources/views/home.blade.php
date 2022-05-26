@@ -55,23 +55,32 @@ Dashboard
     <div class="col" id="BWeek"></div>
  </div>
 
-    <div class="row my-5">
-        <div class="card">
-            <div class="card-header text-center">
-                <h2>Clientes más frecuentes</h2>
-                <div class="card-body">
-                    <table class="table table-striped m-auto table-responsive-sm">
+    <div class="row my-4">
+        <div class="col-xl-6">
+            <div class="card">
+                <div class="card-header border-0">
+                    <div class="row align-items-center">
+                        <div class="col">
+                            <h3 class="mb-0">Platos más vendidos</h3>
+                        </div>
+                        <div class="col text-right">
+                            <a href="#!" class="btn btn-sm btn-outline-dark">Ver todos</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table class="table align-items-center table-flush">
                         <thead class="thead-dark">
                             <tr>
                                 <th>Nombre</th>
                                 <th>Número de ventas</th>
                             </tr>
                         </thead>
-                        <tbody class="text-center">
-                            @foreach($customers as $customer)
+                        <tbody> 
+                            @foreach($plates as $plate)
                             <tr>
-                                <td>{{$customer->name}}</td>
-                                <td>{{$customer->sales}}</td>
+                                <td>{{$plate->name}}</td>
+                                <td>{{$plate->quantity}}</td>
                             </tr>
                             @endforeach
                         </tbody>
@@ -79,9 +88,41 @@ Dashboard
                 </div>
             </div>
         </div>
+        <div class="col-xl-6">
+            <div class="card">
+                <div class="card-header border-0">
+                    <div class="row align-items-center">
+                        <div class="col">
+                            <h3 class="mb-0">Clientes frecuentes</h3>
+                        </div>
+                        <div class="col text-right">
+                            <a href="#!" class="btn btn-sm btn-outline-dark">Ver todos</a>
+                        </div>
+                     </div>
+                </div>
+                    <div class="table-responsive">
+                        <table class="table align-items-center table-flush">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th scope="col">Nombre</th>
+                                    <th scope="col">Número de ventas</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach($customers as $customer)
+                                <tr>
+                                    <td>{{$customer->name}}</td>
+                                    <td>{{$customer->sales}}</td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+       </div>
     </div>
-
-</div>
 @endsection
 
 @section('scripts')
