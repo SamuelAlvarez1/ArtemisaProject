@@ -26,6 +26,12 @@
                 <p class="card-text">{{$message->message}}</p>
                 <h4 class="card-subtitle mt-2">Fecha de envío</h4>
                 <p class="card-text">{{$message->created_at}}</p>
+                <h4 class="card-subtitle mt-2">Estado</h4>
+                @if ($message->read == 0)
+                    <span class="badge badge-warning">No leído</span>
+                @else
+                    <span class="badge badge-primary">Leído</span>
+                @endif
             </div>
 
 

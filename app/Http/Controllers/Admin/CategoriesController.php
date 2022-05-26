@@ -66,8 +66,9 @@ class CategoriesController extends Controller
         $validator = Validator::make($request->all(), Category::$rulesEdit);
         $validator->after(function ($validator) use ($request, $id){
             $category = Category::where('name', $request->input('name'))->where('id','!=', $id)->first();
-            if ($category)
+            if ($category) {
                 $validator->errors()->add('name', 'Este nombre ya está en uso');
+            }
         });
         if ($validator->fails()){
             return back()->withErrors($validator)->withInput();
@@ -84,12 +85,6 @@ class CategoriesController extends Controller
         } catch (\Exception $e) {
             return redirect('/categories/' . $id . '/edit')->with('error', 'No se pudo editar la información');
         }
-    }
-
-
-    public function destroy($id)
-    {
-        //
     }
 
     public function notActive()

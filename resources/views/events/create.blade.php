@@ -38,18 +38,18 @@
             <form action="{{url('events')}}" method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="form-group">
-                    <label for="nameInput">Nombre<b class="text-danger">*</b></label>
+                    <label for="nameInput">Nombre<strong class="text-danger">*</strong></label>
                     <input value="{{old('name')}}" type="text" class="form-control @error('name') is-invalid @enderror" name="name" id="nameInput">
                 </div>
                 <div class="form-group">
-                    <label for="emailInput">Descripción<b class="text-danger">*</b></label>
+                    <label for="emailInput">Descripción<strong class="text-danger">*</strong></label>
                     <textarea rows="3" class="form-control @error('description') is-invalid @enderror" name="description" id="descriptionInput" resize="none">{{old('description')}}</textarea>
                 </div>
                 <div class="row mb-4">
                     <div class="col">
                         <label for="idCardInput">Precio de entrada</label>
                         <input value="{{old('entryPrice')}}" type="number" class="form-control @error('entryPrice') is-invalid @enderror" name="entryPrice"
-                            id="addressInput">
+                            id="decorationPriceInput">
                     </div>
                     <div class="col">
                         <label for="idCardInput">Precio de decoración </label>
@@ -60,10 +60,10 @@
                 <div class="row">
                     <div class="col">
                         <div class="form-group">
-                            <label for="dateInput">Fecha de inicio<b class="text-danger">*</b></label>
+                            <label for="dateInput">Fecha de inicio<strong class="text-danger">*</strong></label>
                             <div class="input-group input-group-alternative">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
+                                    <span class="input-group-text"><i aria-hidden="true" class="ni ni-calendar-grid-58"></i></span>
                                 </div>
                                 <input value="{{old('startDate', date('Y-m-d'))}}" type="text" class="form-control @error('startDate') is-invalid @enderror datepicker"
                                        name="startDate"
@@ -74,10 +74,10 @@
                     </div>
                     <div class="col">
                         <div class="form-group">
-                            <label for="dateInput">Fecha fin<b class="text-danger">*</b></label>
+                            <label for="dateInput">Fecha fin<strong class="text-danger">*</strong></label>
                             <div class="input-group input-group-alternative">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
+                                    <span class="input-group-text"><i aria-hidden="true" class="ni ni-calendar-grid-58"></i></span>
                                 </div>
                                 <input value="{{old('endDate', date('Y-m-d'))}}" type="text" class="form-control @error('endDate') is-invalid @enderror datepicker"
                                        name="endDate"
@@ -100,6 +100,20 @@
 @endsection
 
 @section('scripts')
+<script>
+    $("#decorationPriceInput").on({
+    "focus": function (event) {
+        $(event.target).select();
+    },
+    "keyup": function (event) {
+        $(event.target).val(function (index, value ) {
+            return value.replace(/\D/g, "")
+                        .replace(/([0-9])([0-9]{2})$/, '$1.$2')
+                        .replace(/\B(?=(\d{3})+(?!\d)\.?)/g, ",");
+        });
+    }
+});
+</script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js" integrity="sha512-T/tUfKSV1bihCnd+MxKD0Hm1uBBroVYBOYSk1knyvQ9VyZJpc/ALb4P0r6ubwVPSGB2GvjeoMAJJImBG12TiaQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
     <script>

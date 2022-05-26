@@ -35,7 +35,8 @@
 
 <body>
 <!-- Sidenav -->
-<nav class="navbar navbar-vertical fixed-left navbar-expand-md navbar-dark bg-dark" id="sidenav-main">
+<nav class="navbar navbar-vertical fixed-left navbar-expand-md navbar-dark bg-dark" id="sidenav-main"
+     aria-label="side-nav">
     <div class="container-fluid">
         <!-- Toggler -->
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#sidenav-collapse-main"
@@ -81,7 +82,7 @@
 </nav>
 <div class="main-content">
     <!-- Top navbar -->
-    <nav class="navbar navbar-top navbar-expand-md navbar-white" id="navbar-main">
+    <nav class="navbar navbar-top navbar-expand-md navbar-white" id="navbar-main" aria-label="top-nav">
         <div class="container-fluid">
             <!-- Brand -->
             <a class="h4 mb-0 text-dark text-uppercase d-none d-lg-inline-block" href="">@yield('title-nav')</a>
@@ -91,7 +92,7 @@
                 <li class="nav-item dropdown">
                     <a id="navbarDropdown" class="nav-link" href="#" role="button"
                        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                        <i class="ni ni-bell-55"></i>
+                        <i aria-hidden="true" class="ni ni-bell-55"></i>
                     </a>
                     <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-right"
                          aria-labelledby="navbar-default_dropdown_1">
@@ -108,19 +109,19 @@
                     </div>
                 </li>
                 @if(auth()->user()->idRol == 1)
-                <li class="nav-item dropdown">
-                    <a id="navbarDropdown" class="nav-link" href="#" role="button"
-                       data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                        <i class="fa-solid fa-comments"></i>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-arrow dropdown-menu-right"
-                         aria-labelledby="navbar-default_dropdown_2" id="lastMessages-body">
-                        {{--  Last messages  --}}
-                        <div class=" dropdown-header noti-title">
-                            <h6 class="text-overflow m-0">Aún no hay mensajes</h6>
+                    <li class="nav-item dropdown">
+                        <a id="navbarDropdown" class="nav-link" href="#" role="button"
+                           data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                            <i aria-hidden="true" class="fa-solid fa-comments"></i>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-arrow dropdown-menu-right"
+                             aria-labelledby="navbar-default_dropdown_2" id="lastMessages-body">
+                            {{--  Last messages  --}}
+                            <div class=" dropdown-header noti-title">
+                                <h6 class="text-overflow m-0">Aún no hay mensajes</h6>
+                            </div>
                         </div>
-                    </div>
-                </li>
+                    </li>
                 @endif
                 <li class="nav-item dropdown">
                     <a id="navbarDropdown" id="navbarDropdown" class="nav-link" href="#" role="button"
@@ -139,17 +140,17 @@
                             <h6 class="text-overflow m-0">Bienvenido!</h6>
                         </div>
                         <a href="/users/profile/{{auth()->user()->id}}" class="dropdown-item">
-                            <i class="ni ni-single-02"></i>
+                            <i aria-hidden="true" class="ni ni-single-02"></i>
                             <span>Mi perfil</span>
                         </a>
                         <a href="{{url("/users/".auth()->user()->id."/edit")}}" class="dropdown-item">
-                            <i class="ni ni-settings-gear-65"></i>
+                            <i aria-hidden="true" class="ni ni-settings-gear-65"></i>
                             <span>Configuración</span>
                         </a>
                         <div class="dropdown-divider"></div>
                         <a href="" class="dropdown-item"
                            onclick="event.preventDefault(); document.getElementById('form-logout').submit();">
-                            <i class="ni ni-user-run"></i>
+                            <i aria-hidden="true" class="ni ni-user-run"></i>
                             <span>Cerrar sesion</span>
                         </a>
                         <form action="{{route('logout')}}" method="post" style="display: none;" id="form-logout">
@@ -198,14 +199,14 @@
     });
 
     @if(auth()->user()->idRol == 1)
-        $.ajax({
-            url: `/contact/lastMessages`,
-            type: 'GET',
-            success: function (lastMessages) {
-                var content = '';
-                $(function () {
-                    $.each(lastMessages, function (index, lastMessages) {
-                        content += `<a href="/contact/${lastMessages.id}" class="dropdown-item">
+    $.ajax({
+        url: `/contact/lastMessages`,
+        type: 'GET',
+        success: function (lastMessages) {
+            var content = '';
+            $(function () {
+                $.each(lastMessages, function (index, lastMessages) {
+                    content += `<a href="/contact/${lastMessages.id}" class="dropdown-item">
                         <div class="media">
                         <img style="width:50px" src="{{asset("img/theme/avatar.jpg")}}" alt="User Avatar" class="rounded-circle mr-3 img-circle">
                         <div class="media-body">
@@ -215,17 +216,17 @@
                         </div>
                         </a>
                         <div class="dropdown-divider"></div>`
-                    });
-                    if (content !== '') {
-                        content += `<div class=" dropdown-header text-center noti-title">
+                });
+                if (content !== '') {
+                    content += `<div class=" dropdown-header text-center noti-title">
                                     <a href="/contact">Ver todos los mensajes</a>
                                 </div>`
-                        $("#lastMessages-body").html(content);
-                    }
-                })
-            }
-        });
-    @endif  
+                    $("#lastMessages-body").html(content);
+                }
+            })
+        }
+    });
+    @endif
 </script>
 <script src="{{asset('js/argon.js?v=1.0.0')}}"></script>
 <script src="//cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>

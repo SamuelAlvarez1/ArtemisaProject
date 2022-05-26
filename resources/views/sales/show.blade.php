@@ -5,15 +5,18 @@
 @endsection
 
 @section('title-nav')
-Detalles de la venta
+    Detalles de la venta
 @endsection
 
 @section('main-content')
 <div class="card">
     <div class="card-header">
+        <div class="">
+                <p>{{$sale-> created_at->isoFormat('dddd D MMMM YYYY, h:mm a')}}</p>
+        </div>
         <div class="row">
             <div class="col d-flex justify-content-center">
-                <strong>Detalles de Venta</strong>
+                <h2>Detalles de Venta</h2>
             </div>
         </div>
     </div>
@@ -50,8 +53,8 @@ Detalles de la venta
                         @else
                             <span class="badge badge-danger">No activo</span>
                         @endif
-                    </div>  
-                </div> 
+                    </div>
+                </div>
                 <div class="row d-block">
                     <div class="row"> <h2><span
                         class=""
@@ -60,7 +63,7 @@ Detalles de la venta
                     <div class="row"><b class="text-success"
                         >$</b
                     >&ensp; <p>{{number_format($sale-> finalPrice)}}</p></div>
-                </div>   
+                </div>
             </div>
         </div>
         <div class="row">
@@ -84,7 +87,7 @@ Detalles de la venta
                                 {{$value-> description}}</td>
                                 @else
                                 {{$value-> namePlate}}</td>
-                                @endif                      
+                                @endif
                             <td>{{$value-> quantity}}</td>
                             <td>{{number_format($value-> platePrice)}}</td>
                             <td>{{number_format($value-> quantity * $value->platePrice)}}</td>
@@ -93,9 +96,9 @@ Detalles de la venta
                 </tbody>
             </table>
         </div>
-        
+
     </div>
-       
+
     </div>
     <div class="row">
         <a href="{{url('sales')}}" class="btn btn-outline-danger mb-4">
@@ -103,8 +106,6 @@ Detalles de la venta
         </a>
     </div>
 </div>
-
-
 
 @endsection
 

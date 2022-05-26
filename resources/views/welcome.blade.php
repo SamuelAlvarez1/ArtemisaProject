@@ -22,7 +22,7 @@
 </head>
 <body id="page-top" style=" background-image: url('{{asset('img/landing/header-bg.jpg')}}');">
 <!-- Navigation-->
-<nav class="navbar navbar-expand-lg navbar-dark " id="mainNav">
+<nav id="mainNav" class="navbar navbar-expand-lg navbar-dark ">
     <div class="container">
         <a class="navbar-brand" href="#page-top"><img class="logo" src="{{asset('img/landing/navbar-logo.png')}}"
                                                       alt="..."/></a>
@@ -43,7 +43,7 @@
     </div>
 </nav>
 <!-- Masthead-->
-<header class="masthead" style="padding:0%; background-image: url('{{asset('img/landing/header-bg.jpg')}}');">
+<header class="masthead" style="padding:0%; background-image: url('{{asset('img/landing/header-bg.jpg')}}'); padding-top:80px;">
     <div class="container">
         <div class="masthead-heading text-uppercase"><img src="{{asset('img/landing/navbar-logo.png')}}" alt="..."/>
         </div>

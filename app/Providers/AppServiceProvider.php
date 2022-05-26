@@ -29,11 +29,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        // $lastLog = User::select('lastLog')->where('id', auth()->id())->first();
-        // dd($lastLog);
-        // $salesCount = Sale::where('created_at', '>=', $lastLog);
-        // dd($salesCount);    
-        // View::share('salesCount', $salesCount);
         Paginator::defaultView('includes.paginate.paginateView');
         Paginator::defaultSimpleView('includes.paginate.paginateView');
     }

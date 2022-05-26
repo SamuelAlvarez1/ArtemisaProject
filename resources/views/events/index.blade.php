@@ -32,7 +32,7 @@
         </div>
         <div class="card-body">
             <div class="mx-auto mb-3">
-                <table id="events" class="table table-bordered">
+                <table id="events" class="table table-bordered" aria-label="Eventos">
                     <thead class="thead-light">
                     <tr>
                         <th scope="col" title="Ordenar por orden de creación">#</th>
@@ -75,22 +75,22 @@
                                 @elseif($event->state == 1 && $event->endDate < date('Y-m-d'))
                                 <span class="badge badge-success">Llevado a cabo</span>
                                 @elseif($event->state == 1 && $event->startDate >= date('Y-m-d') && $event->endDate >= date('Y-m-d'))
-                                    <span class="badge badge-primary">Pendiente</span> 
+                                    <span class="badge badge-primary">Pendiente</span>
                                 @else
                                     <span class="badge badge-danger">Cancelado</span>
                                 @endif
                             </td>
                             <td>
                                 <a class="mx-2" title="Ver más información del evento" href="{{url('/events/'.$event->id)}}"><i
-                                        class="fa-solid text-dark fa-info-circle"></i></a>
+                                        aria-hidden="true" class="fa-solid text-dark fa-info-circle"></i></a>
                                 <a class="mx-2" title="Editar información del evento" href="{{url('/events/'.$event->id.'/edit')}}"><i
-                                        class="fa text-dark fa-edit"></i></a>
+                                        aria-hidden="true" class="fa text-dark fa-edit"></i></a>
                                 @if($event->state == 1)
                                     <a class="mx-2" title="Desactivar el evento" href="{{url('/events/updateState/'.$event->id)}}"><i
-                                            class="fa text-dark fa-ban"></i></a>
+                                            aria-hidden="true" class="fa text-dark fa-ban"></i></a>
                                 @else
                                     <a data-delay="500" title="Activar el evento" class="mx-2" href="{{url('/events/updateState/'.$event->id)}}"><i
-                                            class="fa text-dark fa-check"></i></a>
+                                            aria-hidden="true" class="fa text-dark fa-check"></i></a>
                                 @endif
                             </td>
                         </tr>

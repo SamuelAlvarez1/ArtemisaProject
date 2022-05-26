@@ -35,7 +35,7 @@
                     @csrf
                     <div class="row mb-4">
                         <div class="col">
-                            <label for="nameInput">Nombre de la categoría <b class="text-danger">*</b></label>
+                            <label for="nameInput">Nombre de la categoría <strong class="text-danger">*</strong></label>
                             <input value="{{old('name')}}" type="text" class="form-control @error('name') is-invalid @enderror" name="name" id="nameInput" placeholder="Categoría">
                         </div>
                     </div>

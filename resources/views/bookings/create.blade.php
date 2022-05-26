@@ -35,7 +35,7 @@
 
             <div class="form-group">
                 <label for="idCustomer">{{ __('Cliente') }}
-                    <b class="text-danger"> *</b></label>
+                    <strong class="text-danger"> *</strong></label>
 
                 <select name="idCustomer" id="idCustomer"
                         class="form-control @error('idCustomer') is-invalid @enderror">
@@ -61,16 +61,16 @@
             <div class="row mb-4">
                 <div class="col">
                     <label for="amount_people"
-                    >{{ __('Cantidad de personas') }}<b
-                            class="text-danger"> *</b></label>
+                    >{{ __('Cantidad de personas') }}<strong
+                            class="text-danger"> *</strong></label>
 
                     <input id="amount_people" type="number" class="form-control @error('amount_people') is-invalid @enderror" name="amount_people"
                            value="{{ old('amount_people') }}" required autocomplete="amount_people">
                 </div>
                 <div class="col">
                     <label for="start_date"
-                    >{{ __('Fecha inicial') }}<b
-                            class="text-danger"> *</b></label>
+                    >{{ __('Fecha inicial') }}<strong
+                            class="text-danger"> *</strong></label>
                     <input id="booking_date" type="datetime-local" class="form-control @error('booking_date') is-invalid @enderror" name="booking_date"
                            value="{{ old('booking_date') }}" required autocomplete="booking_date" onchange="si()">
                 </div>
@@ -83,7 +83,7 @@
             </div>
         </form>
     </div>
-    
+
 @endsection
 
 @section('scripts')
@@ -93,7 +93,7 @@
 
             console.log(dates);
         }
-            
-        
+
+
     </script>
 @endsection

@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\Validator;
 
 class EventsController extends Controller
 {
+    const INDEX = '/events';
+    const BETWEEN_RANGE = '? BETWEEN startDate and endDate';
 
     public function index()
     {
@@ -35,8 +37,6 @@ class EventsController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate(Event::$rules);
-
         $validator = Validator::make($request->all(), Event::$rules);
         $validator->after(function ($validator) use ($request){
 
@@ -45,17 +45,17 @@ class EventsController extends Controller
             ->where(function($query) use ($request){
                 $query->whereBetween('startDate', [$request->input('startDate'),$request->input('endDate')])
                       ->orWhereBetween('endDate', [$request->input('startDate'),$request->input('endDate')])
-                      ->orWhereRaw('? BETWEEN startDate and endDate', [$request->input('startDate')])
-                      ->orWhereRaw('? BETWEEN startDate and endDate', [$request->input('endDate')]);
+                      ->orWhereRaw(self::BETWEEN_RANGE, [$request->input('startDate')])
+                      ->orWhereRaw(self::BETWEEN_RANGE, [$request->input('endDate')]);
               })
             ->count();
-            if($eventsInsideCreated)
+            if($eventsInsideCreated) {
                 $validator->errors()->add('startDate', 'Ya existe un evento en este rango de fechas');
+            }
             });
         if ($validator->fails()){
             return back()->withErrors($validator)->withInput();
         }
-
         $image = null;
         $input = $request->only('name', 'description','decorationPrice','entryPrice', 'endDate','startDate');
         if ($request->image){
@@ -63,18 +63,18 @@ class EventsController extends Controller
             $request->image->move(public_path('uploads'),$image);
         }
         try {
-                Event::create([
-                    'name' => $input['name'],
-                    'description' => $input['description'],
-                    'decorationPrice' => $input['decorationPrice'],
-                    'entryPrice' => $input['entryPrice'],
-                    'idUser' => auth()->user()->id,
-                    'endDate' => $input['endDate'],
-                    'startDate' => $input['startDate'],
-                    'image' => $image,
-                    'state' => 1
-                ]);
-                return redirect('/events')->with('success', 'Se registró el evento correctamente');
+            Event::create([
+                'name' => $input['name'],
+                'description' => $input['description'],
+                'decorationPrice' => $input['decorationPrice'],
+                'entryPrice' => $input['entryPrice'],
+                'idUser' => auth()->user()->id,
+                'endDate' => $input['endDate'],
+                'startDate' => $input['startDate'],
+                'image' => $image,
+                'state' => 1
+            ]);
+            return redirect(self::INDEX)->with('success', 'Se registró el evento correctamente');
         } catch (\Exception $e) {
             return redirect('/events/create')->with('error', 'No fue posible registrar el evento');
         }
@@ -84,13 +84,15 @@ class EventsController extends Controller
     public function show($id)
     {
         $event = Event::find($id);
-        if ($event == null)  return redirect("/events")->with('error', 'Evento no encontrado');
+        if ($event == null){
+            return redirect("/events")->with('error', 'Evento no encontrado');
+        }
         $user = User::find($event->idUser);
         $role = Rol::find($user->idRol);
         $countBookings = Booking::where('idEvent', $id)->count();
         $bookings = Booking::where('idEvent', $id)->get();
         $countSeats = 0;
-        foreach ($bookings as $key => $booking) {
+        foreach ($bookings as $booking) {
             $countSeats += $booking->amount_people;
         }
 
@@ -101,7 +103,9 @@ class EventsController extends Controller
     public function edit($id)
     {
         $event = Event::find($id);
-        if ($event == null)  return redirect("/events")->with('error', 'Evento no encontrado');
+        if ($event == null)  {
+            return redirect(self::INDEX)->with('error', 'Evento no encontrado');
+        }
 
         return view('events.edit', compact('event'));
     }
@@ -112,20 +116,21 @@ class EventsController extends Controller
         $validator = Validator::make($request->all(), Event::$rulesUpdate);
         $validator->after(function ($validator) use ($request, $id){
             $event = Event::where('name', $request->input('name'))->where('id','!=', $id)->first();
-            if ($event)
+            if ($event){
                 $validator->errors()->add('name', 'Este nombre ya está en uso');
+            }
 
             $eventsInsideCreated = Event::where('state', 1)
             ->where(function($query) use ($request){
                 $query->whereBetween('startDate', [$request->input('startDate'),$request->input('endDate')])
                         ->orWhereBetween('endDate', [$request->input('startDate'),$request->input('endDate')])
-                        ->orWhereRaw('? BETWEEN startDate and endDate', [$request->input('startDate')])
-                        ->orWhereRaw('? BETWEEN startDate and endDate', [$request->input('endDate')]);
+                        ->orWhereRaw(self::BETWEEN_RANGE, [$request->input('startDate')])
+                        ->orWhereRaw(self::BETWEEN_RANGE, [$request->input('endDate')]);
                 })
-            ->count();
-            if($eventsInsideCreated)
-            $validator->errors()->add('startDate', 'Ya existe un evento en este rango de fechas');
-
+                ->first();
+            if($eventsInsideCreated && $eventsInsideCreated->id != $id){
+                $validator->errors()->add('startDate', 'Ya existe un evento en este rango de fechas');
+            }
         });
         if ($validator->fails()){
             return back()->withErrors($validator)->withInput();
@@ -148,7 +153,7 @@ class EventsController extends Controller
         try {
             $event = Event::find($id);
             $event->update($data);
-            return redirect('/events')->with('success', 'Se ha editado correctamente la información');
+            return redirect(self::INDEX)->with('success', 'Se ha editado correctamente la información');
         } catch (\Exception $e) {
             return redirect('/events/'.$id.'/edit')->with('error', 'No se pudo editar la información');
         }
@@ -161,12 +166,12 @@ class EventsController extends Controller
             $today = date('Y-m-d');
             $yesterday = Carbon::yesterday()->format('Y-m-d');
             if ($event->startDate==$yesterday || $event->startDate==$today) {
-                return redirect('/events')->with('error', 'No es posible cancelar el evento que está proximo a ocurrir');
+                return redirect(self::INDEX)->with('error', 'No es posible cancelar el evento que está proximo a ocurrir');
             }
             $event->update(['state' => !$event->state]);
-            return redirect('/events')->with('success', 'Se cambió el estado correctamente');
+            return redirect(self::INDEX)->with('success', 'Se cambió el estado correctamente');
         } catch (\Exception $e) {
-            return redirect('/events')->with('error', 'No fue posible cambiar el estado, intentelo mas tarde');
+            return redirect(self::INDEX)->with('error', 'No fue posible cambiar el estado, intentelo mas tarde');
         }
     }
 }

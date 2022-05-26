@@ -73,7 +73,7 @@
                                 <label for="dateInput">Fecha de inicio</label>
                                 <div class="input-group input-group-alternative">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
+                                        <span class="input-group-text"><em class="ni ni-calendar-grid-58"></em></span>
                                     </div>
                                     <input value="{{old('startDate', $event->startDate)}}" type="text"
                                         class="form-control @error('startDate') is-invalid @enderror datepicker"
@@ -88,7 +88,7 @@
                                 <label for="dateInput">Fecha fin</label>
                                 <div class="input-group input-group-alternative">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
+                                        <span class="input-group-text"><em class="ni ni-calendar-grid-58"></em></span>
                                     </div>
                                     <input value="{{old('endDate',  $event->endDate)}}" type="text"
                                         class="form-control @error('endDate') is-invalid @enderror datepicker"

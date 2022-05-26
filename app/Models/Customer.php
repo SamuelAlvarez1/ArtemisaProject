@@ -24,8 +24,8 @@ class Customer extends Model
     ];
 
     public static $rules = [
-        'name' => 'required|min:5|max:50|regex:/^[a-zA-ZÀ-ÿñÑ ]+$/',
-        'document' => 'required|numeric|digits_between:6,15|unique:customers',
+        'name' => 'required|min:4|max:50|regex:/^[a-zA-ZÀ-ÿñÑ ]+$/',
+        'document' => 'required|numeric|digits_between:6,15|unique:customers|starts_with:1,2,3,4,5,6,7,8,9',
         'address' => 'required|min:5|max:70',
         'phoneNumber' => 'required|min:7|max:13',
     ];

@@ -22,9 +22,9 @@
                 @endif
             <div class="col-md-5">
                 @if($event->image == '')
-                <img src="img/landing/Mapa.png" alt="Evento" class="img quienessomos">
+                <img src="img/landing/event-default.jpg" alt="Evento" class="img rounded">
                 @else
-                <img src="uploads/{{$event->image}}" alt="Evento" class="img quienessomos">
+                <img src="uploads/{{$event->image}}" alt="Evento" class="img rounded">
                 @endif
             </div>
         </div>

@@ -33,7 +33,7 @@
         </div>
         <div class="card-body">
             <div class="mx-auto mb-3">
-                <table id="customers" class="table table-bordered">
+                <table id="customers" class="table table-bordered" aria-label="Clientes">
                     <thead class="thead-light">
                     <tr>
                         <th scope="col" title="Ordenar por orden de creación">#</th>
@@ -61,12 +61,12 @@
                                 @endif
                             </td>
                             <td>
-                                <a class="mx-2" title="Ver más información del cliente" href="{{url('/customers/'.$customer->id)}}"><i class="fa-solid text-dark fa-info-circle"></i></a>
-                                <a class="mx-2" title="Editar información del cliente" href="{{url('/customers/'.$customer->id.'/edit')}}"><i class="fa text-dark fa-edit"></i></a>
+                                <a class="mx-2" title="Ver más información del cliente" href="{{url('/customers/'.$customer->id)}}"><i aria-hidden="true" class="fa-solid text-dark fa-info-circle"></i></a>
+                                <a class="mx-2" title="Editar información del cliente" href="{{url('/customers/'.$customer->id.'/edit')}}"><i aria-hidden="true" class="fa text-dark fa-edit"></i></a>
                                 @if($customer->state == 1)
-                                    <a class="mx-2" title="Desactivar el cliente" href="{{url('/customers/updateState/'.$customer->id)}}"><i class="fa text-dark fa-ban"></i></a>
+                                    <a class="mx-2" title="Desactivar el cliente" href="{{url('/customers/updateState/'.$customer->id)}}"><i aria-hidden="true" class="fa text-dark fa-ban"></i></a>
                                 @else
-                                    <a class="mx-2" title="Activar el cliente" href="{{url('/customers/updateState/'.$customer->id)}}"><i class="fa text-dark fa-check"></i></a>
+                                    <a class="mx-2" title="Activar el cliente" href="{{url('/customers/updateState/'.$customer->id)}}"><i aria-hidden="true" class="fa text-dark fa-check"></i></a>
                                 @endif
                             </td>
                         </tr>
@@ -82,14 +82,14 @@
         $(document).ready(function () {
             var table = $('#customers').DataTable({
                 responsive: true,
-                "dom": 'tp',    
+                "dom": 'tp',
                 'language': {
                     "paginate": {
                         "first": "Primero",
                         "last": "Último",
                         "next": "→",
                         "previous": "←"
-                        },  
+                        },
                     "emptyTable": "No hay información disponible."
                 }
             });
