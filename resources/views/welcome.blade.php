@@ -18,6 +18,10 @@
 
     <link rel="stylesheet" href="/css/alertify.min.css"/>
     <link rel="stylesheet" href="/css/themes/bootstrap.css"/>
+    <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+  />
     <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous"> -->
 </head>
 <body id="page-top" style=" background-image: url('{{asset('img/landing/header-bg.jpg')}}');">
@@ -45,7 +49,7 @@
 <!-- Masthead-->
 <header class="masthead" style="padding:0%; background-image: url('{{asset('img/landing/header-bg.jpg')}}'); padding-top:80px;">
     <div class="container">
-        <div class="masthead-heading text-uppercase"><img src="{{asset('img/landing/navbar-logo.png')}}" alt="..."/>
+        <div class="masthead-heading text-uppercase logoHeader"><img src="{{asset('img/landing/navbar-logo.png')}}" alt="..."/>
         </div>
         <a class="btn btn-primary btn-xl text-uppercase" href="/login">Iniciar sesión</a>
     </div>
