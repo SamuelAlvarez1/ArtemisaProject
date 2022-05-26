@@ -63,9 +63,9 @@ class PlatesController extends Controller
         $image = null;
         $input = $request->all();
 
-        if ($request->image){
-            $image = $input['name'].time().'.'.$request->image->extension();
-            $request->image->move(public_path('uploads'),$image);
+        if ($request->image) {
+            $image = $input['name'] . time() . '.' . $request->image->extension();
+            $request->image->move(public_path('uploads'), $image);
         }
         try {
             Plate::create([
@@ -109,8 +109,9 @@ class PlatesController extends Controller
         $validator = Validator::make($request->all(), Plate::$rulesEdit);
         $validator->after(function ($validator) use ($request, $id) {
             $plate = Plate::where('name', $request->input('name'))->where('id', '!=', $id)->first();
-            if ($plate)
+            if ($plate) {
                 $validator->errors()->add('name', 'Este nombre ya está en uso');
+            }
         });
         if ($validator->fails()) {
             return back()->withErrors($validator)->withInput();
@@ -119,9 +120,9 @@ class PlatesController extends Controller
         $image = null;
         $input = $request->all();
 
-        if ($request->image){
-            $image = $input['name'].time().'.'.$request->image->extension();
-            $request->image->move(public_path('uploads'),$image);
+        if ($request->image) {
+            $image = $input['name'] . time() . '.' . $request->image->extension();
+            $request->image->move(public_path('uploads'), $image);
         }
         try {
             Plate::where("id", $id)->update([
@@ -134,11 +135,6 @@ class PlatesController extends Controller
         } catch (\Exception $e) {
             return redirect('/plates')->with("error", $e->getMessage());
         }
-    }
-
-    public function destroy($id)
-    {
-        //
     }
 
     public function getPricePlate($id)

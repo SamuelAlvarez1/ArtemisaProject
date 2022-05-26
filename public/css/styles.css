@@ -12527,8 +12527,7 @@ section#contact form#contactForm :-ms-input-placeholder {
 .map {
     width: 25rem;
     height: 25rem;
-    border-radius: 20px;
-    border-radius: 100%;
+    border-radius: 10px;
 }
 
 .titulo {

@@ -84,7 +84,7 @@
                 <p class="text">Nos encontramos ubicados Cra51 #50a 06, te esperamos para que disfrutes de un buen
                     momento en nuestro restaurante-bar</div>
             <div class="col-md-5">
-                <img src="img/landing/Mapa.png" alt="..." class="img" class="map">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3965.4566938669386!2d-75.56149658548003!3d6.33483692708588!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e442fa68a4e80bf%3A0x2a9eccf2250943da!2sCra.%2051%20%2350a-6%2C%20Bello%2C%20Antioquia!5e0!3m2!1ses!2sco!4v1653330556882!5m2!1ses!2sco" width="600" height="450" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" class="map"></iframe>
             </div>
         </div>
     </div>
