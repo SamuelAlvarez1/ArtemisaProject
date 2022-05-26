@@ -28,7 +28,10 @@
     <link rel="stylesheet" href="//cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js">
     <link rel="stylesheet" href="https://cdn.datatables.net/rowreorder/1.2.8/css/rowReorder.dataTables.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.dataTables.min.css">
-
+    <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+  />
 
     @yield('styles')
 </head>
@@ -165,7 +168,7 @@
     <div class="header bg-white pb-2 pt-6 pt-md-6">
 
     </div>
-    <div class="container-fluid mt-5">
+    <div class="container-fluid mt-5 div-alerts">
         @include('includes.errors')
         @yield('main-content')
         @include('includes.panel.footer')

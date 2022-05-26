@@ -10,7 +10,7 @@
 const logo = document.querySelector('.logoHeader')
 const imagenSomos = document.querySelector('.quienessomos')
 window.addEventListener('DOMContentLoaded', event => {
-  logo.classList.add('animate__animated', 'animate__heartBeat')
+  logo.classList.add('animate__animated', 'animate__fadeInUp')
   // Navbar shrink function
   const navbarShrink = function () {
     const navbarCollapsible = document.body.querySelector('#mainNav')

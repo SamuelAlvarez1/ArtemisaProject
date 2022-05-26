@@ -51,7 +51,7 @@
     <div class="container">
         <div class="masthead-heading text-uppercase logoHeader"><img src="{{asset('img/landing/navbar-logo.png')}}" alt="..."/>
         </div>
-        <a class="btn btn-primary btn-xl text-uppercase" href="/login">Iniciar sesión</a>
+        <a class="btn btn-primary btn-xl text-uppercase animate__animated animate__fadeInUp" href="/login">Iniciar sesión</a>
     </div>
     <div class="container"
          style="height: 6rem; background: rgba(0,0,0, 0.8); max-width: 1000rem !important; margin-top: 30px; display: flex;">
@@ -180,7 +180,7 @@
         </div>
     </div>
 </footer>
-<a href="https://api.whatsapp.com/send?phone=3015767307" class="btn-wsp" target="_blank"><i class="fa-brands fa-whatsapp"></i></a>
+<a href="https://api.whatsapp.com/send?phone=3015767307" class="btn-wsp animate__animated animate__fadeInUp" target="_blank"><i class="fa-brands fa-whatsapp"></i></a>
 
 <!-- Bootstrap core JS-->
 
