@@ -68,7 +68,7 @@
                     <label for="idRol">{{ __('Rol') }}<b
                             class="text-danger"> *</b></label>
                     <select name="idRol" id="idRol" class="form-control">
-                        <option value="">seleccione</option>
+                        <option value="">Seleccione</option>
                         @foreach ($roles as $rol)
                             <option
                                 value="{{$rol->id}}" {{($rol->id == old('idRol') ? 'selected' : '')}}>{{$rol->name}}</option>

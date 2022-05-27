@@ -26,7 +26,7 @@
 </head>
 <body id="page-top" style=" background-image: url('{{asset('img/landing/header-bg.jpg')}}');">
 <!-- Navigation-->
-<nav id="mainNav" class="navbar navbar-expand-lg navbar-dark ">
+<nav id="mainNav" class="navbar navbar-expand-lg navbar-dark">
     <div class="container">
         <a class="navbar-brand" href="#page-top"><img class="logo" src="{{asset('img/landing/navbar-logo.png')}}"
                                                       alt="..."/></a>

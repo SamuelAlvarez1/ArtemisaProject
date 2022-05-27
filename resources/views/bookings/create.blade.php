@@ -39,7 +39,7 @@
 
                 <select name="idCustomer" id="idCustomer"
                         class="form-control @error('idCustomer') is-invalid @enderror">
-                    <option value="">seleccione el cliente</option>
+                    <option value="">Seleccione el cliente</option>
                     @foreach ($customers as $customer)
                         <option
                             value="{{$customer->id}}" {{($customer->id == old('idCustomer') ? 'selected' : '')}}>{{$customer->name}}</option>
@@ -50,7 +50,7 @@
             <div class="form-group">
                 <label for="idEvent">{{ __('Evento') }}</label>
                 <select name="idEvent" id="idEvent" class="form-control @error('idEvent') is-invalid @enderror">
-                    <option value="">seleccione el evento</option>
+                    <option value="">Seleccione el evento</option>
                     @foreach ($events as $event)
                         <option
                             value="{{$event->id}}" {{($event->id == old('idEvent') ? 'selected' : '')}}>{{$event->name}}</option>
@@ -86,14 +86,3 @@
 
 @endsection
 
-@section('scripts')
-    <script>
-        function si(e){
-            let dates = new Date();
-
-            console.log(dates);
-        }
-
-
-    </script>
-@endsection
