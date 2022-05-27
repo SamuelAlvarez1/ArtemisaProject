@@ -67,11 +67,11 @@ class HomeController extends Controller
                 $outstandingPlate = $key;
             }
         }
-        $plate = Plate::find($outstandingPlate);
+        $plateOutStanding = Plate::find($outstandingPlate);
         //Bookings
         $date = Carbon::now()->toDateString();
         $Bookings = Booking::select('id')
-            ->where('start_date', $date)
+            ->whereRaw('Date(created_at) = CURDATE()')
             ->get();
         $countBookings = sizeof($Bookings);
         //sales
@@ -107,6 +107,6 @@ class HomeController extends Controller
             $plates[$key]['sales'] = $plate->sales;
             $plates[$key]['quantity'] = $plate->quantity;
         }
-        return view('home', compact('plate', 'countBookings', 'countSales', 'salesData', 'bookingsData', 'salesDataWeek', 'bookingsDataWeek', 'customers', 'plates'));
+        return view('home', compact('plateOutStanding', 'countBookings', 'countSales', 'salesData', 'bookingsData', 'salesDataWeek', 'bookingsDataWeek', 'customers', 'plates'));
     }
 }

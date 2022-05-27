@@ -11,10 +11,10 @@ Dashboard
             <div class="card-counter bg-warning text-dark ">
                 <i class="fa-solid fa-pizza-slice"></i>
 
-                @if(empty($plate))
+                @if(empty($plateOutStanding))
                 <span class="count-numbers text-white" style="font-size: 20px">No hay un plato destacado aún</span>
                 @else
-                <span class="count-numbers text-white" style="font-size: 20px">{{$plate->name}}</span>
+                <span class="count-numbers text-white" style="font-size: 20px">{{$plateOutStanding->name}}</span>
                 @endif
                 <span class="count-name">Platillo destacado</span>
             </div>
