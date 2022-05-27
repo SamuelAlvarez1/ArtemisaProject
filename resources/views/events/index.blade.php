@@ -57,14 +57,14 @@
                                 @if($event->decorationPrice == '')
                                     Sin valor
                                 @else
-                                    {{$event->decorationPrice}}
+                                    ${{ number_format($event->decorationPrice)}}
                                 @endif
                             </td>
                             <td>
                                 @if($event->entryPrice == '')
                                     Sin valor
                                 @else
-                                    {{$event->entryPrice}}
+                                    ${{ number_format($event->entryPrice)}}
                                 @endif
                             </td>
                             <td>{{$event->startDate}}</td>

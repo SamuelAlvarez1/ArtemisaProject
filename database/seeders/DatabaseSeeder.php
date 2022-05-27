@@ -32,7 +32,7 @@ class DatabaseSeeder extends Seeder
         ]);
         Rol::create([
             'id' => '2',
-            'name' => 'Empelado',
+            'name' => 'Empleado',
             'description' => 'Rol por defecto',
             'state' => '1'
         ]);

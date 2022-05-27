@@ -92,7 +92,7 @@
 
             <!-- User -->
             <ul class="navbar-nav align-items-center d-none d-md-flex">
-                <li class="nav-item dropdown">
+                <li class="nav-item dropdown" title="Ver reservas y ventas desde tu ultimo cierre de sesión">
                     <a id="navbarDropdown" class="nav-link" href="#" role="button"
                        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                         <i aria-hidden="true" class="ni ni-bell-55"></i>
@@ -112,7 +112,7 @@
                     </div>
                 </li>
                 @if(auth()->user()->idRol == 1)
-                    <li class="nav-item dropdown">
+                    <li class="nav-item dropdown" title="Ver ultimos 2 mensajes enviados por los clientes">
                         <a id="navbarDropdown" class="nav-link" href="#" role="button"
                            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                             <i aria-hidden="true" class="fa-solid fa-comments"></i>

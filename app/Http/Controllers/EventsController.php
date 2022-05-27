@@ -112,18 +112,21 @@ class EventsController extends Controller
         }
         $image = null;
         $input = $request->only('name', 'description','decorationPrice','entryPrice', 'endDate','startDate');
+        $data = [];
         if ($request->image){
+            $event = Event::find($id);
+            $this->removeImage($event->image);
             $image = $input['name'].time().'.'.$request->image->extension();
             $request->image->move(public_path('uploads'),$image);
+            $data = ['image' => $image];
         }
-        $data=[
+        $data+=[
             'name' => $input['name'],
             'description' => $input['description'],
             'decorationPrice' => $input['decorationPrice'],
             'entryPrice' => $input['entryPrice'],
             'endDate' => $input['endDate'],
             'startDate' => $input['startDate'],
-            'image' => $image
         ];
         try {
             $event = Event::find($id);
@@ -160,5 +163,12 @@ class EventsController extends Controller
                     ->orWhereRaw(self::BETWEEN_RANGE, [$endDate]);
             })
             ->first();
+    }
+    
+    public function removeImage($image)
+    {
+        if(\File::exists(public_path('uploads/'. $image))){
+        \File::delete(public_path('uploads/'. $image));
+        }
     }
 }

@@ -35,7 +35,7 @@
                             @if($event->decorationPrice == '')
                                 Precio sin especificar
                             @else
-                                {{$event->decorationPrice}}
+                                ${{number_format($event->decorationPrice)}}
                             @endif
                         </p>
                         <h4 class="card-subtitle mt-2">Precio de entrada:</h4>
@@ -43,7 +43,7 @@
                             @if($event->entryPrice == '')
                                 Precio sin especificar
                             @else
-                                {{$event->entryPrice}}
+                                ${{number_format($event->entryPrice)}}
                             @endif
                         </p>
                         <h4 class="card-subtitle mt-2">Fecha de inicio:</h4>
