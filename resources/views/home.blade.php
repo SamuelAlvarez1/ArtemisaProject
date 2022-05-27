@@ -11,10 +11,10 @@ Dashboard
             <div class="card-counter bg-warning text-dark ">
                 <i class="fa-solid fa-pizza-slice"></i>
 
-                @if(empty($plate))
+                @if(empty($plateOutStanding))
                 <span class="count-numbers text-white" style="font-size: 20px">No hay un plato destacado aún</span>
                 @else
-                <span class="count-numbers text-white" style="font-size: 20px">{{$plate->name}}</span>
+                <span class="count-numbers text-white" style="font-size: 20px">{{$plateOutStanding->name}}</span>
                 @endif
                 <span class="count-name">Platillo destacado</span>
             </div>
@@ -64,7 +64,11 @@ Dashboard
                             <h3 class="mb-0">Platos más vendidos</h3>
                         </div>
                         <div class="col text-right">
+<<<<<<< HEAD
                             <a href="/sales" class="btn btn-sm btn-outline-dark">Ver todos</a>
+=======
+                            <a href="{{url('/plates')}}" class="btn btn-sm btn-outline-dark">Ver todos</a>
+>>>>>>> 8e2a7358c5eede938e2c03aebce83c0dacc9cee7
                         </div>
                     </div>
                 </div>
@@ -103,7 +107,11 @@ Dashboard
                             <h3 class="mb-0">Clientes frecuentes</h3>
                         </div>
                         <div class="col text-right">
+<<<<<<< HEAD
                             <a href="/customers" class="btn btn-sm btn-outline-dark">Ver todos</a>
+=======
+                            <a href="{{url('/customers')}}" class="btn btn-sm btn-outline-dark">Ver todos</a>
+>>>>>>> 8e2a7358c5eede938e2c03aebce83c0dacc9cee7
                         </div>
                      </div>
                 </div>
