@@ -87,7 +87,11 @@ class RolesController extends Controller
     {
         $rol = Rol::find($id);
 
-        return view("roles.showDetails", compact("rol"));
+        $users = User::select('name', 'last_name', 'email')
+        ->where('users.state', 1)
+        ->where('users.idRol', $id)->get();
+
+        return view("roles.showDetails", compact('rol', 'users'));
     }
 
     public function edit($id)

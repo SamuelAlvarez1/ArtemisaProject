@@ -64,7 +64,7 @@ Dashboard
                             <h3 class="mb-0">Platos más vendidos</h3>
                         </div>
                         <div class="col text-right">
-                            <a href="#!" class="btn btn-sm btn-outline-dark">Ver todos</a>
+                            <a href="{{url('/plates')}}" class="btn btn-sm btn-outline-dark">Ver todos</a>
                         </div>
                     </div>
                 </div>
@@ -103,7 +103,7 @@ Dashboard
                             <h3 class="mb-0">Clientes frecuentes</h3>
                         </div>
                         <div class="col text-right">
-                            <a href="#!" class="btn btn-sm btn-outline-dark">Ver todos</a>
+                            <a href="{{url('/customers')}}" class="btn btn-sm btn-outline-dark">Ver todos</a>
                         </div>
                      </div>
                 </div>
