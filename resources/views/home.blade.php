@@ -55,8 +55,8 @@ Dashboard
     <div class="col" id="BWeek"></div>
  </div>
 
-    <div class="row my-4">
-        <div class="col-xl-6">
+    <div class="row my-4 row-cols-2">
+        <div class="col-sm">
             <div class="card">
                 <div class="card-header border-0">
                     <div class="row align-items-center">
@@ -69,14 +69,21 @@ Dashboard
                     </div>
                 </div>
                 <div class="table-responsive">
-                    <table class="table align-items-center table-flush">
+                    <table aria-label="outstandingPlates" class="table align-items-center table-flush">
                         <thead class="thead-dark">
                             <tr>
                                 <th>Nombre</th>
                                 <th>Número de ventas</th>
                             </tr>
                         </thead>
-                        <tbody> 
+                        <tbody>
+                            @if(!$plates)
+                                <tr>
+                                    <td colspan="2" class="text-center">
+                                        Sin información
+                                    </td>
+                                </tr>
+                            @endif
                             @foreach($plates as $plate)
                             <tr>
                                 <td>{{$plate->name}}</td>
@@ -88,7 +95,7 @@ Dashboard
                 </div>
             </div>
         </div>
-        <div class="col-xl-6">
+        <div class="col-sm">
             <div class="card">
                 <div class="card-header border-0">
                     <div class="row align-items-center">
@@ -101,7 +108,7 @@ Dashboard
                      </div>
                 </div>
                     <div class="table-responsive">
-                        <table class="table align-items-center table-flush">
+                        <table aria-label="outstandingCustomers" class="table align-items-center table-flush">
                             <thead class="thead-dark">
                                 <tr>
                                     <th scope="col">Nombre</th>
@@ -109,6 +116,13 @@ Dashboard
                                 </tr>
                             </thead>
                             <tbody>
+                                @if(!$customers)
+                                <tr>
+                                    <td colspan="2" class="text-center">
+                                        Sin información
+                                    </td>
+                                </tr>
+                                @endif
                                 @foreach($customers as $customer)
                                 <tr>
                                     <td>{{$customer->name}}</td>

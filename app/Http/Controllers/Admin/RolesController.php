@@ -10,11 +10,6 @@ use App\Models\User;
 
 class RolesController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         $roles = Rol::select("roles.*")
@@ -49,36 +44,23 @@ class RolesController extends Controller
                         "state" => $state
                     ]);
                     if ($state == 1) {
-                        return redirect('/roles/notActive')->with("success", "cambio de estado exitoso");;
+                        return redirect('/roles/notActive')->with("success", "cambio de estado exitoso");
                     } else {
-                        return redirect('/roles')->with("success", "cambio de estado exitoso");;
+                        return redirect('/roles')->with("success", "cambio de estado exitoso");
                     }
                 } catch (\Exception $e) {
                     return redirect('/roles')->with("error", "El cambio de estado del rol no se pudo realizar");
                 }
             }
             return redirect('/roles')->with("error", "El cambio de estado del rol no se pudo realizar");
-            
+
         }
     }
-
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         return view("roles.create");
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $campos = [
@@ -101,12 +83,6 @@ class RolesController extends Controller
         }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         $rol = Rol::find($id);
@@ -114,12 +90,6 @@ class RolesController extends Controller
         return view("roles.showDetails", compact("rol"));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
         if ($id != null) {
@@ -131,13 +101,6 @@ class RolesController extends Controller
         }
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
         if ($id != null) {
@@ -157,15 +120,5 @@ class RolesController extends Controller
                 return redirect('/roles')->with("error", $e->getMessage());
             }
         }
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
     }
 }

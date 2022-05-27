@@ -13,9 +13,6 @@ use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
-    public function __construct()
-    {
-    }
     private function Mes($data)
     {
         $Chart = DB::table($data)->select(DB::raw('COUNT(*) as count'))
@@ -32,6 +29,7 @@ class HomeController extends Controller
         }
         return $Data;
     }
+
     private function Semana($data)
     {
         $now = Carbon::now();
@@ -52,6 +50,7 @@ class HomeController extends Controller
         }
         return $Data;
     }
+
     public function index()
     {
         $Plates = SaleDetail::select('sales_details.idPlate', 'plates.id as Plate')
@@ -95,19 +94,19 @@ class HomeController extends Controller
             $customers[$key]['sales'] = $cliente->sales;
         }
         $FPlates = SaleDetail::selectRaw('count(id) as sales, sum(quantity) as quantity,  sales_details.idPlate as plates')
-        ->where('idPlate', '!=', 1)
+            ->where('idPlate', '!=', 1)
             ->take(5)
             ->groupBy('plates')
             ->orderBy('quantity', 'Desc')
             ->get();
 
         $plates = [];
-        
-        foreach ($FPlates as $key => $plate){
+
+        foreach ($FPlates as $key => $plate) {
             $plates[$key] = Plate::all()->where('id', $plate->plates)->first();
             $plates[$key]['sales'] = $plate->sales;
             $plates[$key]['quantity'] = $plate->quantity;
         }
-        return view('home', compact('plate', 'countBookings', 'countSales', 'salesData', 'bookingsData', 'salesDataWeek', 'bookingsDataWeek', 'customers','plates'));
+        return view('home', compact('plate', 'countBookings', 'countSales', 'salesData', 'bookingsData', 'salesDataWeek', 'bookingsDataWeek', 'customers', 'plates'));
     }
 }

@@ -2,10 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Appointment;
 use App\Models\Event;
-use App\Models\Rol;
-use \App\Models\User;
 use \App\Models\Booking;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
@@ -41,14 +38,7 @@ class EventsController extends Controller
         $validator->after(function ($validator) use ($request){
 
             //Eliminar las validaciones con validator a la hora de presentarlo al cliente
-            $eventsInsideCreated = Event::where('state', 1)
-            ->where(function($query) use ($request){
-                $query->whereBetween('startDate', [$request->input('startDate'),$request->input('endDate')])
-                      ->orWhereBetween('endDate', [$request->input('startDate'),$request->input('endDate')])
-                      ->orWhereRaw(self::BETWEEN_RANGE, [$request->input('startDate')])
-                      ->orWhereRaw(self::BETWEEN_RANGE, [$request->input('endDate')]);
-              })
-            ->count();
+            $eventsInsideCreated = $this->getDateRange($request->input('startDate'), $request->input('endDate'));
             if($eventsInsideCreated) {
                 $validator->errors()->add('startDate', 'Ya existe un evento en este rango de fechas');
             }
@@ -87,16 +77,9 @@ class EventsController extends Controller
         if ($event == null){
             return redirect("/events")->with('error', 'Evento no encontrado');
         }
-        $user = User::find($event->idUser);
-        $role = Rol::find($user->idRol);
         $countBookings = Booking::where('idEvent', $id)->count();
-        $bookings = Booking::where('idEvent', $id)->get();
-        $countSeats = 0;
-        foreach ($bookings as $booking) {
-            $countSeats += $booking->amount_people;
-        }
-
-        return view('events.details', compact('event', 'user','role', 'countBookings', 'countSeats'));
+        $seatsNeeded = Booking::where('idEvent', $id)->sum('amount_people');
+        return view('events.details', compact('event','countBookings', 'seatsNeeded'));
     }
 
 
@@ -119,15 +102,7 @@ class EventsController extends Controller
             if ($event){
                 $validator->errors()->add('name', 'Este nombre ya está en uso');
             }
-
-            $eventsInsideCreated = Event::where('state', 1)
-            ->where(function($query) use ($request){
-                $query->whereBetween('startDate', [$request->input('startDate'),$request->input('endDate')])
-                        ->orWhereBetween('endDate', [$request->input('startDate'),$request->input('endDate')])
-                        ->orWhereRaw(self::BETWEEN_RANGE, [$request->input('startDate')])
-                        ->orWhereRaw(self::BETWEEN_RANGE, [$request->input('endDate')]);
-                })
-                ->first();
+            $eventsInsideCreated = $this->getDateRange($request->input('startDate'), $request->input('endDate'));
             if($eventsInsideCreated && $eventsInsideCreated->id != $id){
                 $validator->errors()->add('startDate', 'Ya existe un evento en este rango de fechas');
             }
@@ -173,5 +148,17 @@ class EventsController extends Controller
         } catch (\Exception $e) {
             return redirect(self::INDEX)->with('error', 'No fue posible cambiar el estado, intentelo mas tarde');
         }
+    }
+
+    public function getDateRange($startDate, $endDate)
+    {
+        return Event::where('state', 1)
+            ->where(function($query) use ($startDate, $endDate){
+                $query->whereBetween('startDate', [$startDate,$endDate])
+                    ->orWhereBetween('endDate', [$startDate,$endDate])
+                    ->orWhereRaw(self::BETWEEN_RANGE, [$startDate])
+                    ->orWhereRaw(self::BETWEEN_RANGE, [$endDate]);
+            })
+            ->first();
     }
 }

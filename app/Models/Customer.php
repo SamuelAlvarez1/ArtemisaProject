@@ -36,5 +36,10 @@ class Customer extends Model
         'phoneNumber' => 'required|min:7|max:20',
     ];
 
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'idUser');
+    }
+
     public $timestamps = true;
 }
