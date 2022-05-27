@@ -63,7 +63,7 @@ Route::group(['middleware' => ['auth', 'validarRol', 'validarEstado']], function
 
     //<----------Resources---------->
 
-    Route::resource('users', UsersController::class)->only(['index', 'create', 'store', 'show']);
+    Route::resource('users', UsersController::class)->only(['index', 'create', 'store', 'show', 'update']);
     Route::resources([
         'roles' => RolesController::class,
         'plates' => PlatesController::class,
@@ -79,10 +79,11 @@ Route::group(['middleware' => ['auth', 'validarEstado']], function () {
 
     //<-----------Users------------>
 
-    Route::resource('users', UsersController::class)->only(['edit', 'update']);
+    Route::resource('users', UsersController::class)->only(['edit']);
     Route::get('/users/profile/{id}', [UsersController::class, 'profile']);
     Route::get('/users/EditPassword/{id}', [UsersController::class, 'EditPassword']);
     Route::post('/users/UpdatePassword/{id}', [UsersController::class, 'UpdatePassword']);
+    Route::post('/users/update/{id}', [UsersController::class, 'updateEmployee']);
 
 
     //<---------Bookings----------->

@@ -34,7 +34,7 @@ class RolesController extends Controller
     public function updateState($id, $state)
     {
         if ($id != null) {
-            if($id != 1){
+            if ($id != 1) {
                 $rol = Rol::findOrFail($id);
                 try {
                     Rol::where("id", "=", $id)->update([
@@ -53,7 +53,6 @@ class RolesController extends Controller
                 }
             }
             return redirect('/roles')->with("error", "El cambio de estado del rol no se pudo realizar");
-
         }
     }
     public function create()
@@ -108,8 +107,9 @@ class RolesController extends Controller
     public function update(Request $request, $id)
     {
         if ($id != null) {
+            $rol = Rol::findOrFail($id);
             $campos = [
-                'name' => 'required|string|min:5|max:20',
+                'name' => 'required|string|min:5|max:20|unique:roles,name,' . $rol->id,
                 'description' => 'required|string|min:10|max:50'
 
             ];

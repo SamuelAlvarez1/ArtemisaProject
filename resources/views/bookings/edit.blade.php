@@ -34,7 +34,7 @@
             <div class="form-group">
                 <label for="idCustomer">{{ __('Cliente') }}<strong class="text-danger"> *</strong></label>
                 <select name="idCustomer" id="idCustomer" class="form-control">
-                    <option value="">seleccione el cliente</option>
+                    <option value="">Seleccione el cliente</option>
                     @foreach ($customers as $customer)
                         <option
                             value="{{$customer->id}}" {{($customer->id == $booking->idCustomer ? 'selected' : '')}}>{{$customer->name}}</option>
@@ -46,7 +46,7 @@
                 <label for="idEvent">{{ __('Evento') }}</label>
 
                 <select name="idEvent" id="idEvent" class="form-control @error('idEvent') is-invalid @enderror">
-                    <option value="">seleccione el evento</option>
+                    <option value="">Seleccione el evento</option>
                     @foreach ($events as $event)
                         <option
                             value="{{$event->id}}" {{($event->id == $booking->idEvent ? 'selected' : '')}}>{{$event->name}}</option>
@@ -74,7 +74,7 @@
     </div>
 
 
-    <div class="row mx-auto mt-4">
+    <div class="row mx-auto mb-4">
             <button type="submit" class="btn btn-outline-success">
                 Actualizar
             </button>
