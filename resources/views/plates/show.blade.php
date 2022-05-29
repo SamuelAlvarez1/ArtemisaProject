@@ -17,7 +17,7 @@
                         <a href="{{url('/plates/'.$plates->id.'/edit')}}" class="btn mt-2 btn-sm btn-outline-warning">
                             Editar este platillo
                         </a>
-                        <a href="{{url('plates')}}" class="btn btn-sm mt-2 btn-outline-danger">
+                        <a href="{{url()->previous()}}" class="btn btn-sm mt-2 btn-outline-danger">
                             Regresar
                         </a>
                     </div>

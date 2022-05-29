@@ -65,7 +65,7 @@
                                 </div>
                                 <input value="{{old('startDate', date('Y-m-d'))}}" type="text" class="form-control @error('startDate') is-invalid @enderror datepicker"
                                        name="startDate"
-                                       id="date" data-date-format="yyyy-mm-dd" data-date-start-date="{{date('Y-m-d')}}"
+                                       id="date" data-date-language="es" data-date-format="yyyy-mm-dd" data-date-start-date="{{date('Y-m-d')}}"
                                        data-date-end-date="+60d">
                             </div>
                         </div>
@@ -79,7 +79,7 @@
                                 </div>
                                 <input value="{{old('endDate', date('Y-m-d'))}}" type="text" class="form-control @error('endDate') is-invalid @enderror datepicker"
                                        name="endDate"
-                                       id="date" data-date-format="yyyy-mm-dd" data-date-start-date="{{date('Y-m-d')}}"
+                                       id="date" data-date-language="es" data-date-format="yyyy-mm-dd" data-date-start-date="{{date('Y-m-d')}}"
                                        data-date-end-date="+62d">
                             </div>
                         </div>
@@ -102,6 +102,17 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js" integrity="sha512-T/tUfKSV1bihCnd+MxKD0Hm1uBBroVYBOYSk1knyvQ9VyZJpc/ALb4P0r6ubwVPSGB2GvjeoMAJJImBG12TiaQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
     <script>
+        $.fn.datepicker.dates['es'] = {
+            days: ["Domingo", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado"],
+            daysShort: ["Dom", "Lun", "Mar", "Mie", "Jue", "Vie", "Sab"],
+            daysMin: ["Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa"],
+            months: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"],
+            monthsShort: ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"],
+            today: "Hoy",
+            clear: "Limpiar",
+            weekStart: 1
+        };
+
        $('.datepicker').datepicker();
     </script>
 @endsection

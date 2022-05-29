@@ -25,18 +25,21 @@
                     <a href="{{url('/sales/create')}}" class=" btn btn-sm my-2 btn-outline-dark">Registrar Venta</a>
 
                     @if($states == 'activeSales')
-                    <a href="{{url('/sales/canceledSales')}}" class="btn btn-sm my-2 btn-outline-dark">Ver Ventas Anuladas</a>
+                        <a href="{{url('/sales/canceledSales')}}" class="btn btn-sm my-2 btn-outline-dark">Ver Ventas
+                            Anuladas</a>
                     @else
-                    <a href="{{url('/sales')}}" class="btn my-2 btn-sm mr-4 btn-outline-dark">Ver Ventas Realizadas</a>
+                        <a href="{{url('/sales')}}" class="btn my-2 btn-sm mr-4 btn-outline-dark">Ver Ventas
+                            Realizadas</a>
                     @endif
                 </div>
                 <div class="col-lg">
-                        <div class="input-group my-2">
-                            <input type="text" class="form-control-sm border border-dark" id="searchInput" placeholder="Búsqueda"
-                                aria-label="Recipient's username" aria-describedby="basic-addon2">
-                            
-                        </div>
+                    <div class="input-group my-2">
+                        <input type="text" class="form-control-sm border border-dark" id="searchInput"
+                               placeholder="Búsqueda"
+                               aria-label="Recipient's username" aria-describedby="basic-addon2">
+
                     </div>
+                </div>
             </div>
         </div>
         <div class="card-body">
@@ -46,7 +49,7 @@
                     <tr>
                         <th>#</th>
                         <th>Clientes</th>
-                        <th>Usuario</th>
+                        <th>Realizada por</th>
                         <th>Precio Total</th>
                         <th>Fecha de Ventas</th>
                         <th>Estado</th>
@@ -64,10 +67,16 @@
                                 @if ($value->idCustomers == null)
                                     Cliente de Mostrador
                                 @else
-                                {{$value->customerName}}
-                            @endif
+                                    <a class="text-dark" href="{{url('/customers/'.$value->idCustomers)}}"><u>{{$value->customerName}}</u></a>
+                                @endif
                             </td>
-                            <td>{{$value-> userName}}</td>
+                            <td>
+                                @if(auth()->user()->idRol == 1)
+                                <a class="text-dark" href="{{url('/users/'.$value->idUser)}}"><u>{{$value-> userName}}</u></a>
+                                @else
+                                    {{$value-> userName}}
+                                @endif
+                            </td>
                             <td id="columnPrice">{{number_format($value-> finalPrice)}}</td>
                             <td>{{$value->created_at->isoFormat('dddd D MMMM YYYY, h:mm a')}}</td>
                             <td>
@@ -79,13 +88,16 @@
 
                             </td>
                             <td>
-                                <a class="mx-2" data-toggle="tooltip" data-placement="top" title="Ver detalles de la Venta" href="{{url('/sales/'.$value->id)}}"><i
-                                class="fa-solid text-dark fa-info-circle"></i></a>
+                                <a class="mx-2" data-toggle="tooltip" data-placement="top"
+                                   title="Ver detalles de la Venta" href="{{url('/sales/'.$value->id)}}"><i
+                                        class="fa-solid text-dark fa-info-circle"></i></a>
                                 @if($value->state == 1)
-                                    <a class="mx-2" data-toggle="tooltip" data-placement="top" title="Anular la venta" href="{{url('/sales/updateState/'.$value->id)}}"><i
+                                    <a class="mx-2" data-toggle="tooltip" data-placement="top" title="Anular la venta"
+                                       href="{{url('/sales/updateState/'.$value->id)}}"><i
                                             class="fa text-dark fa-ban"></i></a>
                                 @else
-                                    <a class="mx-2"  data-toggle="tooltip" data-placement="top" title="Activar la venta" href="{{url('/sales/updateState/'.$value->id)}}"><i
+                                    <a class="mx-2" data-toggle="tooltip" data-placement="top" title="Activar la venta"
+                                       href="{{url('/sales/updateState/'.$value->id)}}"><i
                                             class="fa text-dark fa-check"></i></a>
                                 @endif
                             </td>
@@ -98,37 +110,34 @@
         </div>
     </div>
 
-            @endsection
+@endsection
 
-            @section('scripts')
-                <script>
-                    $(document).ready(function () {
-                        var table = $('#sales').DataTable({
-                            rowReorder: {
-                    selector: 'td:nth-child(2)'
-                },
-                responsive: true, 
-                            "dom": 'tp',
-                            'language': {
-                                "paginate": {
-                                    "first": "Inicio",
-                                    "last": "Fin",
-                                    "next": "→",
-                                    "previous": "←"
-                                }
-                            }
-                        });
+@section('scripts')
+    <script>
+        $(document).ready(function () {
+            var table = $('#sales').DataTable({
+                responsive: true,
+                "dom": 'tp',
+                'language': {
+                    "paginate": {
+                        "first": "Inicio",
+                        "last": "Fin",
+                        "next": "→",
+                        "previous": "←"
+                    }
+                }
+            });
 
-                        $('#searchInput').on('keyup', function () {
+            $('#searchInput').on('keyup', function () {
                 table.search($('#searchInput').val()).draw();
             });
-                    });
-                </script>
+        });
+    </script>
 
-                <script>
-                    ($("#columnPrice")).toLocaleString(navigator.language, {
-                    style: "currency",
-                    currency: "COP"
-                    });
-                </script>
+    <script>
+        ($("#columnPrice")).toLocaleString(navigator.language, {
+            style: "currency",
+            currency: "COP"
+        });
+    </script>
 @endsection

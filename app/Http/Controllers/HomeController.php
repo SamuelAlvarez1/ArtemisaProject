@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
+
     private function Mes($data)
     {
         $Chart = DB::table($data)->select(DB::raw('COUNT(*) as count'))

@@ -86,7 +86,7 @@ class RolesController extends Controller
     {
         $rol = Rol::find($id);
 
-        $users = User::select('name', 'last_name', 'email')
+        $users = User::select('name', 'last_name', 'email','id')
         ->where('users.state', 1)
         ->where('users.idRol', $id)->get();
 

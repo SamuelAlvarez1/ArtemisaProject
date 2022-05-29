@@ -186,6 +186,15 @@
 <!-- Argon JS -->
 @yield('scripts')
 <script>
+    $(document).ready(function(){
+        $("select").select2({
+            language: {
+                noResults: function () {
+                    return 'No hay resultados';
+                },
+            },
+        });
+    });
     $.ajax({
         url: `/sales/getSalesCount`,
         type: 'GET',

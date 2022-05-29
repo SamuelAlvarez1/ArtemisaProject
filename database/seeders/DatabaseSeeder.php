@@ -72,12 +72,28 @@ class DatabaseSeeder extends Seeder
             'price' => '0',
             'state' => '1',
         ]);
-        Plate::create([
-            'id' => 2,
-            'name' => 'pizza hawaiana',
-            'price' => '1500',
-            'state' => '1',
-            'idCategory' => '1',
-        ]);
+
+        $pizzaNames = ['Pizza Delicia ranchera' , 'Pizza Merry', 'Pizza Artemisa', 'Pizza Tierna y dulce', 'Pizza Hawaiana',
+            'Pizza Napolitana', 'Pizza Peperoni', 'Pizza Pollo y champiñones','Pizza de mi tierra','Pizza desgranada',
+            'Pizza Pollo y tocineta','Pizza Jamon y queso','Pizza Vegetariana'];
+        $pizzaSizes = ['pequeña', 'mediana', 'grande'];
+        $pizzaPrices = [18000,28000,40000,19500,32500,53500,19500,32500,51500,19500,27500,36500,17000,27000,35000,17500,
+            27500,37000,18000,28000,37000,18500,28500,46500,19000,32000,51000,18500,29000,37000,19000,28000,37000,16000,
+            27000,35000,19000,32000,43000];
+        $pizzasI =0;
+        for($i=0;$i<sizeof($pizzaNames);$i++){
+            for ($j = 0; $j < sizeof($pizzaSizes); $j++) {
+                Plate::create([
+                    'name' => $pizzaNames[$i] . ' ' . $pizzaSizes[$j],
+                    'price' => $pizzaPrices[$pizzasI],
+                    'state' => '1',
+                    'idCategory' => '2',
+                    'image' => '',
+                    'created_at' => date('Y-m-d H:m:i'),
+                    'updated_at' => date('Y-m-d H:m:i'),
+                ]);
+                $pizzasI++;
+            }
+        }
     }
 }

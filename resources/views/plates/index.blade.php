@@ -58,8 +58,8 @@
                     <thead class="thead-light">
                     <tr>
                         <th>#</th>
-                        <th>Categoría</th>
                         <th>Nombre</th>
+                        <th>Categoría</th>
                         <th>Precio</th>
                         <th>Estado</th>
                         <th>Acciones</th>
@@ -72,8 +72,8 @@
                         <tr>
 
                             <td>{{$value->id}}</td>
-                            <td>{{$value->categories}}</td>
                             <td>{{$value->name}}</td>
+                            <td><a class="text-dark" href="{{url('/categories/'.$value->idCategory)}}"><u>{{$value->categories}}</u></a></td>
                             <td>$ {{ number_format($value->price, 2)}}</td>
                             <td>
                                 @if($value->state == 1)

@@ -34,7 +34,10 @@ class EventsController extends Controller
 
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(), Event::$rules);
+        $messages = [
+            'startDate.after_or_equal' => 'El campo fecha inicio debe ser una fecha posterior o igual a hoy',
+        ];
+        $validator = Validator::make($request->all(), Event::$rules, $messages);
         $validator->after(function ($validator) use ($request){
 
             //Eliminar las validaciones con validator a la hora de presentarlo al cliente
@@ -70,7 +73,6 @@ class EventsController extends Controller
         }
     }
 
-
     public function show($id)
     {
         $event = Event::find($id);
@@ -82,7 +84,6 @@ class EventsController extends Controller
         return view('events.details', compact('event','countBookings', 'seatsNeeded'));
     }
 
-
     public function edit($id)
     {
         $event = Event::find($id);
@@ -93,10 +94,12 @@ class EventsController extends Controller
         return view('events.edit', compact('event'));
     }
 
-
     public function update(Request $request, $id)
     {
-        $validator = Validator::make($request->all(), Event::$rulesUpdate);
+        $messages = [
+            'startDate.after_or_equal' => 'El campo fecha inicio debe ser una fecha posterior o igual a hoy',
+        ];
+        $validator = Validator::make($request->all(), Event::$rulesUpdate, $messages);
         $validator->after(function ($validator) use ($request, $id){
             $event = Event::where('name', $request->input('name'))->where('id','!=', $id)->first();
             if ($event){
@@ -164,7 +167,7 @@ class EventsController extends Controller
             })
             ->first();
     }
-    
+
     public function removeImage($image)
     {
         if(\File::exists(public_path('uploads/'. $image))){

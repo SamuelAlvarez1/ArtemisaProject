@@ -98,6 +98,7 @@ class UsersController extends Controller
             'state' => 1,
             'idRol' => $request['idRol'],
             'password' => Hash::make($request['password']),
+            'lastLog' => date('Y-m-d H:m:i')
 
         ]);
 

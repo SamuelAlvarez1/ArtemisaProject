@@ -17,7 +17,7 @@
                         <a href="{{url('/events/'.$event->id.'/edit')}}" class="btn mt-2 btn-sm btn-outline-warning">
                             Editar este evento
                         </a>
-                        <a href="{{url('events')}}" class="btn btn-sm mt-2 btn-outline-danger">
+                        <a href="{{ url()->previous() }}" class="btn btn-sm mt-2 btn-outline-danger">
                             Regresar
                         </a>
                     </div>
@@ -98,7 +98,7 @@
                                                 <span aria-hidden="true">&times;</span>
                                             </button>
                                         </div>
-                                        <img class="align-self-center mb-4" src="/uploads/{{$event->image}}"
+                                        <img class="align-self-center mb-4" style="max-width:700px;" src="/uploads/{{$event->image}}"
                                              alt="Imagen no disponible">
                                     </div>
                                 </div>

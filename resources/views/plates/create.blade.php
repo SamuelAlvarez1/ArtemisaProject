@@ -41,7 +41,7 @@
             <div class="row mb-5">
                 <div class="col">
                     <label for="">Categoría <b class="text-danger">*</b></label>
-                    <select name="idCategory" class="form-control @error('idCategory') is-invalid @enderror"
+                    <select style="width: 100%" name="idCategory" class="form-control @error('idCategory') is-invalid @enderror"
                             id="categories">
                         <option value="">Seleccione</option>
                         @foreach($categories as $value)

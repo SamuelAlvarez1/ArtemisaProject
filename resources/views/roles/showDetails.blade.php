@@ -15,7 +15,7 @@ Detalles del rol
                     <a href="{{url('/roles/'.$rol->id.'/edit')}}" class="btn btn-sm btn-outline-warning">
                         Editar esta rol
                     </a>
-                    <a href="{{url('/roles')}}" class="btn btn-sm btn-outline-danger">
+                    <a href="{{url()->previous()}}" class="btn btn-sm btn-outline-danger">
                         Regresar
                     </a>
                 </div>
@@ -42,7 +42,7 @@ Detalles del rol
             </div>
 
             <div class="row">
-              
+
                 <div class="col">
                 <h4 class="mb-3">Usuarios con este rol</h4>
 
@@ -57,7 +57,7 @@ Detalles del rol
                             @if(sizeof($users) > 0)
                             @foreach ($users as $user)
                             <tr>
-                                <td>{{$user->name}} {{$user->last_name}}</td>
+                                <td><a class="text-dark" href="{{url('/users/'. $user->id)}}"><u>{{$user->name}} {{$user->last_name}}</u></a></td>
                                 <td>{{$user->email}}</td>
                             </tr>
                             @endforeach

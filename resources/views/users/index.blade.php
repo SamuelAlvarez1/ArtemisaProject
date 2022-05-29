@@ -50,7 +50,7 @@
                     <th>Nombre</th>
                     <th>Apellido</th>
                     <th>Correo</th>
-                    <th>rol</th>
+                    <th>Rol</th>
                     <th>teléfono</th>
                     <th>Estado</th>
                     <th>Acciones</th>
@@ -66,7 +66,7 @@
                         <td>{{$value->name}}</td>
                         <td>{{$value->last_name}}</td>
                         <td>{{$value->email}}</td>
-                        <td>{{$value->rol}}</td>
+                        <td><a class="text-dark" href="{{url('/roles/'.$value->idRol)}}"><u>{{$value->rol}}</u></a></td>
                         <td>{{$value->phone}}</td>
                         <td>
                             @if($value->state == 1)
