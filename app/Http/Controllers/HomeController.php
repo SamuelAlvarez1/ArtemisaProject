@@ -70,7 +70,6 @@ class HomeController extends Controller
         }
         $plateOutStanding = Plate::find($outstandingPlate);
         //Bookings
-        $date = Carbon::now()->toDateString();
         $Bookings = Booking::select('id')
             ->whereRaw('Date(created_at) = CURDATE()')
             ->get();

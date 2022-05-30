@@ -55,7 +55,7 @@
     </div>
     <div class="card-body">
         <div class="mx-auto mb-3">
-            <table id="bookings" class="table table-bordered">
+            <table id="bookings" aria-label="bookings" class="table table-bordered">
                 <thead class="thead-light">
                     <tr>
                         <th>#</th>

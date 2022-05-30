@@ -37,7 +37,7 @@
             <div class="row mb-5">
                 <div class="col">
                     <label for="">Categoría <b class="text-danger">*</b></label>
-                    <select name="idCategory" class="form-control @error('idCategory') is-invalid @enderror" id="categories">
+                    <select style="width: 100%" name="idCategory" class="form-control @error('idCategory') is-invalid @enderror" id="categories">
                         <option value="">Seleccione</option>
                         @foreach($categories as $value)
                             <option
@@ -60,7 +60,7 @@
                 </div>
                 <div class="col">
 
-                    <label for=" formFileDisabled" class="form-label">Adjuntar imagen de evento</label>
+                    <label for=" formFileDisabled" class="form-label">Adjuntar imagen de platillo</label>
                     <input class="form-control @error('image') is-invalid @enderror" name="image" type="file" id="formFileDisabled" value="{{$plate->image}}">
 
                 </div>

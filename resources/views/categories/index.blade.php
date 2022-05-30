@@ -37,7 +37,7 @@
         </div>
         <div class="card-body">
             <div class="mx-auto mb-3">
-                <table id="categories" class="table table-bordered">
+                <table id="categories" aria-label="categories" class="table table-bordered">
                     <thead class="thead-light">
                     <tr>
                         <th>#</th>

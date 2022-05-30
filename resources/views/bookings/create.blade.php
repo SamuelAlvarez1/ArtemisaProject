@@ -37,7 +37,7 @@
                 <label for="idCustomer">{{ __('Cliente') }}
                     <strong class="text-danger"> *</strong></label>
 
-                <select name="idCustomer" id="idCustomer"
+                <select style="width: 100%" name="idCustomer" id="idCustomer"
                         class="form-control @error('idCustomer') is-invalid @enderror">
                     <option value="">Seleccione el cliente</option>
                     @foreach ($customers as $customer)
@@ -49,7 +49,7 @@
 
             <div class="form-group">
                 <label for="idEvent">{{ __('Evento') }}</label>
-                <select name="idEvent" id="idEvent" class="form-control @error('idEvent') is-invalid @enderror">
+                <select style="width: 100%"  name="idEvent" id="idEvent" class="form-control @error('idEvent') is-invalid @enderror">
                     <option value="">Seleccione el evento</option>
                     @foreach ($events as $event)
                         <option
