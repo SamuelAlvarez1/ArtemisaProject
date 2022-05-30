@@ -119,26 +119,49 @@ class PlatesController extends Controller
 
         $image = null;
         $input = $request->all();
-
-        if ($request->image) {
-            $image = $input['name'] . time() . '.' . $request->image->extension();
-            $request->image->move(public_path('uploads'), $image);
+        $data = [];
+        if ($request->image){
+            $plate = Plate::find($id);
+            $this->removeImage($plate->image);
+            $image = $input['name'].time().'.'.$request->image->extension();
+            $request->image->move(public_path('uploads'),$image);
+            $data = ['image' => $image];
         }
         try {
             Plate::where("id", $id)->update([
                 "name" => $input["name"],
                 "price" => $input["price"],
                 "idCategory" => $input["idCategory"],
-                'image' => $image
+                'image' => $data['image']
             ]);
             return redirect('/plates')->with("success", "El platillo fue editado satisfactoriamente");
         } catch (\Exception $e) {
-            return redirect('/plates')->with("error", $e->getMessage());
+            return redirect('/plates')->with("error", "No fue posible actualizar el platillo");
         }
     }
 
     public function getPricePlate($id)
     {
         return Plate::select("plates.price")->where("id", $id)->first();
+    }
+
+    public function removeImage($image)
+    {
+        if(\File::exists(public_path('uploads/'. $image))){
+            \File::delete(public_path('uploads/'. $image));
+        }
+    }
+
+    public function removeImageAction($id)
+    {
+        $plate = Plate::find($id);
+
+        if ($plate->image == ''){
+            return redirect('/plates')->with("error", "Este platillo no tiene imagen");
+        }
+        $this->removeImage($plate->image);
+        $plate->image = '';
+        $plate->save();
+        return redirect('/plates')->with("success", "La imagen fue removida satisfactoriamente");
     }
 }

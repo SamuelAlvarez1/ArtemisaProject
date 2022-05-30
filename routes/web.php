@@ -49,6 +49,8 @@ Route::group(['middleware' => ['auth', 'validarRol', 'validarEstado']], function
 
     Route::get('/plates/notActive', [PlatesController::class, 'notActive']);
     Route::get('/plates/updateState/{id}', [PlatesController::class, 'updateState']);
+    Route::get('/plates/deleteImage/{id}', [PlatesController::class, 'removeImageAction']);
+
     //<----------Categories--------->
 
     Route::get('/categories/notActive', [CategoriesController::class, 'notActive']);
@@ -102,6 +104,7 @@ Route::group(['middleware' => ['auth', 'validarEstado']], function () {
 
     Route::get('/events/old', [EventsController::class, 'oldEvents']);
     Route::get('/events/updateState/{id}', [EventsController::class, 'updateState']);
+    Route::get('/events/deleteImage/{id}', [EventsController::class, 'removeImageAction']);
 
 
 

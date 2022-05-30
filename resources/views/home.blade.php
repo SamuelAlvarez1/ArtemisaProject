@@ -180,7 +180,7 @@ Highcharts.chart('SMonth', {
         type: 'area'
     },
     title: {
-        text: 'Ventas Anuales'
+        text: 'Ventas anuales'
     },
 
     xAxis: {

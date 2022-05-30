@@ -21,8 +21,8 @@ Detalles del rol
                 </div>
             </div>
         </div>
-        <div class="card-body text-center">
-            <div class="row mb-5">
+        <div class="card-body ">
+            <div class="row mb-5 text-center">
                 <div class="col">
                     <h4 class="mt-2">Nombre del rol</h4>
                     <p class="card-text">{{$rol->name}}</p>
@@ -44,7 +44,7 @@ Detalles del rol
             <div class="row">
 
                 <div class="col">
-                <h4 class="mb-3">Usuarios con este rol</h4>
+                <h4 class="mb-3 text-center">Usuarios con este rol</h4>
 
                     <table class="table">
                         <thead class="thead-dark">

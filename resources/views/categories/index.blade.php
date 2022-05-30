@@ -61,12 +61,12 @@
 
                             </td>
                             <td>
-                                <a class="mx-2" data-delay="500" data-toggle="tooltip" data-placement="bottom" title="Detalles" href="{{url('/categories/'.$category->id)}}"><i class="fa-solid text-dark fa-info-circle"></i></a>
-                                <a class="mx-2" data-delay="500" data-toggle="tooltip" data-placement="bottom" title="Editar" href="{{url('/categories/'.$category->id.'/edit')}}"><i class="fa text-dark fa-edit"></i></a>
+                                <a class="mx-2" title="Ver la información de esta categoría" href="{{url('/categories/'.$category->id)}}"><i class="fa-solid text-dark fa-info-circle"></i></a>
+                                <a class="mx-2" title="Editar esta categoría" href="{{url('/categories/'.$category->id.'/edit')}}"><i class="fa text-dark fa-edit"></i></a>
                                 @if($category->state == 1)
-                                    <a class="mx-2" data-delay="500" data-toggle="tooltip" data-placement="bottom" title="Desactivar" href="{{url('/categories/updateState/'.$category->id)}}"><i class="fa text-dark fa-ban"></i></a>
+                                    <a class="mx-2" title="Desactivar esta categoría" href="{{url('/categories/updateState/'.$category->id)}}"><i class="fa text-dark fa-ban"></i></a>
                                 @else
-                                    <a class="mx-2" data-delay="500" data-toggle="tooltip" data-placement="bottom" title="Activar" href="{{url('/categories/updateState/'.$category->id)}}"><i class="fa text-dark fa-check"></i></a>
+                                    <a class="mx-2" title="Activar esta categoría" href="{{url('/categories/updateState/'.$category->id)}}"><i class="fa text-dark fa-check"></i></a>
                                 @endif
 
 

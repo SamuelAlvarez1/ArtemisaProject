@@ -174,4 +174,17 @@ class EventsController extends Controller
         \File::delete(public_path('uploads/'. $image));
         }
     }
+
+    public function removeImageAction($id)
+    {
+        $event = Event::find($id);
+
+        if ($event->image == ''){
+            return redirect('/events')->with("error", "Este evento no tiene imagen");
+        }
+        $this->removeImage($event->image);
+        $event->image = '';
+        $event->save();
+        return redirect('/events')->with("success", "La imagen fue removida satisfactoriamente");
+    }
 }

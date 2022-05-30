@@ -45,7 +45,7 @@
                             id="categories">
                         <option value="">Seleccione</option>
                         @foreach($categories as $value)
-                            <option value="{{$value->id}}">{{$value->name}}</option>
+                            <option value="{{$value->id}}" {{($value->id == old('idCategory') ? 'selected' : '')}}>{{$value->name}}</option>
                         @endforeach
                     </select>
                 </div>

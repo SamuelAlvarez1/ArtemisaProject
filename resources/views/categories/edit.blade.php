@@ -41,18 +41,7 @@
                     <input value="{{old('name', $category->name)}}" type="text" class="form-control" name="name"
                            id="nameInput" placeholder="Cliente" onkeypress="return check(event)">
                 </div>
-                <div class="form-check mb-3">
-                    <input type="hidden" name="state" value="0">
-                    @if($category->state == true)
-                        <input class="form-check-input" name="state" type="checkbox" value="1" id="state" checked>
-                    @else
-                        <input class="form-check-input" name="state" type="checkbox" value="1" id="state">
-                    @endif
 
-                    <label class="form-check-label" for="state">
-                        Estado<b class="text-danger">*</b>
-                    </label>
-                </div>
                 <div class="row mx-auto">
                     <button type="submit" class="btn btn-outline-success">Actualizar</button>
 

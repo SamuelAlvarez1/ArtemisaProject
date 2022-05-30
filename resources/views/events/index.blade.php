@@ -92,6 +92,10 @@
                                     <a data-delay="500" title="Activar el evento" class="mx-2" href="{{url('/events/updateState/'.$event->id)}}"><i
                                             aria-hidden="true" class="fa text-dark fa-check"></i></a>
                                 @endif
+                                @if($event->image != '')
+                                    <a class="mx-2" data-delay="500" data-toggle="tooltip" data-placement="bottom" title="Eliminar Imagen" href="{{url('/events/deleteImage/'.$event->id)}}">
+                                        <img src="/img/icons/image.png" style="width: 18px; margin-top: -3px" alt="quitarimagen"></a>
+                                @endif
                             </td>
                         </tr>
                     @endforeach

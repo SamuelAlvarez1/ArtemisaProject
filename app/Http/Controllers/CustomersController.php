@@ -28,7 +28,6 @@ class CustomersController extends Controller
     {
         $request->validate(Customer::$rules);
         $input = $request->only('name', 'document', 'address', 'phoneNumber', 'state');
-        $input['state'] = 0 ? $input['state'] != 'on' : 1;
         try {
             Customer::create([
                 'name' => $input['name'],
@@ -36,7 +35,7 @@ class CustomersController extends Controller
                 'address' => $input['address'],
                 'idUser' => auth()->id(),
                 'phoneNumber' => $input['phoneNumber'],
-                'state' => $input['state'],
+                'state' => 1,
             ]);
             return redirect(self::INDEX)->with('success', 'Se registró el cliente correctamente');
         } catch (\Exception $e) {

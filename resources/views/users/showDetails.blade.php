@@ -1,9 +1,8 @@
-
-    @extends('layouts.panel')
+@extends('layouts.panel')
 
 
 @section('title-nav')
-Detalles del usuario {{$user->name}}
+    Detalles del usuario {{$user->name}}
 @endsection
 
 @section('main-content')
@@ -22,23 +21,47 @@ Detalles del usuario {{$user->name}}
                     </div>
                 </div>
             </div>
-            <div class="card-body d-block m-auto text-center">
-                <h4 class="card-subtitle mt-2">Nombre del usuario</h4>
-                <p class="card-text">{{$user->name}}</p>
-                <h4 class="card-subtitle mt-2 mb-3">Apellidos</h4>
-                <p class="card-text">{{$user->last_name}}</p>
-                <h4 class="card-subtitle mt-2 mb-3">Correo electrónico</h4>
-                <p class="card-text">{{$user->email}}</p>
-                <h4 class="card-subtitle mt-2 mb-3">Teléfono</h4>
-                <p class="card-text">{{$user->phone}}</p>
-                <h4 class="card-subtitle mt-2 mb-3">Rol</h4>
-                <p class="card-text"><a class="text-dark" href="{{url('/roles/'.$user->idRol)}}"><u>{{$user->rol}}</u></a></p>
-                <h4 class="card-subtitle mt-2">Estado</h4>
-                @if ($user->state == 0)
-                    <span class="badge badge-danger">No activo</span>
-                @else
-                    <span class="badge badge-success">Activo</span>
-                @endif
+            <div class="card-body text-center">
+                <div class="row mb-3">
+                    <div class="col">
+                        <h4 class="mt-2">Nombre del usuario</h4>
+                        <p class="card-text">{{$user->name}}</p>
+                    </div>
+                    <div class="col">
+                        <h4 class="mt-2 ">Apellidos</h4>
+                        <p class="card-text">{{$user->last_name}}</p>
+                    </div>
+
+                </div>
+                <div class="row mb-3">
+                    <div class="col">
+                        <h4 class="mt-2 ">Teléfono</h4>
+                        <p class="card-text">{{$user->phone}}</p>
+                    </div>
+
+                    <div class="col">
+                        <h4 class="mt-2 ">Correo electrónico</h4>
+                        <p class="card-text">{{$user->email}}</p>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <h4 class="mt-2 ">Rol</h4>
+                        <p class="card-text"><a class="text-dark"
+                                                href="{{url('/roles/'.$user->idRol)}}"><u>{{$user->rol}}</u></a></p>
+                    </div>
+                    <div class="col">
+                        <h4 class="mt-2">Estado</h4>
+                        @if ($user->state == 0)
+                            <span class="badge badge-danger">No activo</span>
+                        @else
+                            <span class="badge badge-success">Activo</span>
+                        @endif
+                    </div>
+                </div>
+
+
             </div>
 
 

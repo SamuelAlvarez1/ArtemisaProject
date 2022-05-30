@@ -17,7 +17,7 @@
             </div>
         </div>
     </div>
-    <form action="{{url('plates/'.$plate->id)}}" method="post">
+    <form action="{{url('plates/'.$plate->id)}}" method="post" enctype="multipart/form-data">
         @csrf
         @method('PUT')
     <div class="card-body">

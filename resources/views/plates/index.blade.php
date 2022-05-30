@@ -84,18 +84,24 @@
 
                             </td>
                             <td>
-                                <a class="mx-2" data-delay="500" data-toggle="tooltip" data-placement="bottom"
-                                   title="Detalles" href="{{url('/plates/'.$value->id)}}"><i
+                                <a class="mx-2"
+                                   title="Ver la información de este platillo" href="{{url('/plates/'.$value->id)}}"><i
                                         class="fa-solid text-dark fa-info-circle"></i></a>
-                                <a class="mx-2" data-delay="500" data-toggle="tooltip" data-placement="bottom" title="Editar" href="{{url('/plates/'.$value->id.'/edit')}}"><i
+                                <a class="mx-2" title="Editar este platillo" href="{{url('/plates/'.$value->id.'/edit')}}"><i
                                         class="fa text-dark fa-edit"></i></a>
                                 @if($value->state == 1)
-                                    <a class="mx-2" data-delay="500" data-toggle="tooltip" data-placement="bottom" title="Desactivar" href="{{url('/plates/updateState/'.$value->id)}}"><i
+                                    <a class="mx-2" title="Desactivar este platillo" href="{{url('/plates/updateState/'.$value->id)}}"><i
                                             class="fa text-dark fa-ban"></i></a>
                                 @else
-                                    <a class="mx-2" data-delay="500" data-toggle="tooltip" data-placement="bottom" title="Activar" href="{{url('/plates/updateState/'.$value->id)}}"><i
+                                    <a class="mx-2" title="Activar este platillo" href="{{url('/plates/updateState/'.$value->id)}}"><i
                                             class="fa text-dark fa-check"></i></a>
                                 @endif
+
+                                @if($value->image != '')
+                                    <a class="mx-2" data-delay="500" data-toggle="tooltip" data-placement="bottom" title="Eliminar Imagen" href="{{url('/plates/deleteImage/'.$value->id)}}">
+                                        <img src="/img/icons/image.png" style="width: 18px; margin-top: -3px" alt="quitarimagen"></a>
+                                @endif
+
 
 
                             </td>
