@@ -35,7 +35,7 @@
             <div class="col-lg">
                 <div class="input-group my-2">
                     <input type="text" class="form-control-sm border border-dark" id="searchInput" placeholder="Búsqueda"
-                        aria-label="Recipient's username" aria-describedby="basic-addon2">
+                        aria-label="Recipient's username" aria-describedby="basic-addon2" title="Digite para buscar un usuario que se desee encontrar">
 
                 </div>
             </div>
@@ -78,17 +78,17 @@
                         </td>
 
                         <td>
-                            <a class="mx-2" data-delay="500" data-toggle="tooltip" data-placement="bottom" title="Detalles" href="{{url('/users/'.$value->id)}}"><i class="fa-solid text-dark fa-info-circle"></i></a>
-                            <a class="mx-2" data-delay="500" data-toggle="tooltip" data-placement="bottom" title="Editar" href="{{url('/users/'.$value->id . '/edit')}}"><i
+                            <a class="mx-2" title="Detalles de este usuario" href="{{url('/users/'.$value->id)}}"><i class="fa-solid text-dark fa-info-circle"></i></a>
+                            <a class="mx-2" title="Editar este usuario" href="{{url('/users/'.$value->id . '/edit')}}"><i
                                     class="fa text-dark fa-edit"></i></a>
 
                             @if ($value->idRol != 1)
 
                             @if($value->state == 1)
-                                <a class="mx-2" data-delay="500" data-toggle="tooltip" data-placement="bottom" title="Desactivar" href="{{url('/users/updateState/'.$value->id)}}/0"><i
+                                <a class="mx-2" title="Desactivar este usuario" href="{{url('/users/updateState/'.$value->id)}}/0"><i
                                         class="fa text-dark fa-ban"></i></a>
                             @else
-                                <a class="mx-2" data-delay="500" data-toggle="tooltip" data-placement="bottom" title="Activar" href="{{url('/users/updateState/'.$value->id)}}/1"><i
+                                <a class="mx-2" title="Activar este usuario" href="{{url('/users/updateState/'.$value->id)}}/1"><i
                                         class="fa text-dark fa-check"></i></a>
                             @endif
 

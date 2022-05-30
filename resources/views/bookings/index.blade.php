@@ -40,15 +40,15 @@
                     finalizadas</a>
                 @endif
                 @if ($states == "2")
-                <a href="{{url('/bookings/seeCanceled')}}" class="btn-sm my-2 btn btn-outline-dark"  data-toggle="tooltip" data-placement="top" title="Ver las reservas que se cancelaron">Ver reservas
+                <a href="{{url('/bookings/seeCanceled')}}" class="btn-sm my-2 btn btn-outline-dark" title="Ver las reservas que se cancelaron">Ver reservas
                     canceladas</a>
-                <a href="{{url('/bookings')}}" class="btn-sm btn btn-outline-dark"  data-toggle="tooltip" data-placement="top" title="Ver las reservas que se encuentran en proceso">Ver reservas en proceso</a>
+                <a href="{{url('/bookings')}}" class="btn-sm btn btn-outline-dark" title="Ver las reservas que se encuentran en proceso">Ver reservas en proceso</a>
                 @endif
             </div>
             <div class="col-lg">
                 <div class="input-group my-2">
                     <input type="text" class="form-control-sm border border-dark" id="searchInput" placeholder="Búsqueda"
-                        aria-label="Recipient's username" aria-describedby="basic-addon2"  data-toggle="tooltip" data-placement="top" title="digite para buscar una reserva que se desee encontrar">
+                        aria-label="Recipient's username" aria-describedby="basic-addon2" title="Digite para buscar una reserva que se desee encontrar">
                 </div>
             </div>
         </div>
