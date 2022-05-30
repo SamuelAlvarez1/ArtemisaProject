@@ -42,12 +42,13 @@
                     class="form-control"
                     name="name"
                     value="{{$rol->name}}"
+                    required
                 />
             </div>
             <div class="mt-2 mb-2">
                 <label for="">Descripción<b class="text-danger"> *</b></label>
                 <textarea class="form-control" name="description" id="exampleFormControlTextarea1" resize='none'
-                          rows="4">{{$rol->description}}</textarea>
+                          rows="4" required>{{$rol->description}}</textarea>
                 </textarea>
             </div>
             <div class="row mx-auto mt-4">

@@ -33,7 +33,7 @@
             @method('PUT')
             <div class="form-group">
                 <label for="idCustomer">{{ __('Cliente') }}<strong class="text-danger"> *</strong></label>
-                <select name="idCustomer" id="idCustomer" class="form-control">
+                <select name="idCustomer" id="idCustomer" class="form-control" required>
                     <option value="">Seleccione el cliente</option>
                     @foreach ($customers as $customer)
                         <option

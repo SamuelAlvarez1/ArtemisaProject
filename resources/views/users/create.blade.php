@@ -44,7 +44,7 @@
                 <div class="col">
                     <label for="last_name">{{ __('Apellidos') }}<strong class="text-danger"> *</strong></label>
                     <input id="last_name" type="text" class="form-control" name="last_name"
-                           value="{{ old('last_name') }}" required autocomplete="last_name">
+                           value="{{ old('last_name') }}" required autocomplete="on">
                 </div>
             </div>
 
@@ -67,7 +67,7 @@
                 <div class="col">
                     <label for="idRol">{{ __('Rol') }}<strong
                             class="text-danger"> *</strong></label>
-                    <select name="idRol" style="width: 100%" id="idRol" class="form-control">
+                    <select name="idRol" style="width: 100%" id="idRol" class="form-control" required>
                         <option value="">Seleccione</option>
                         @foreach ($roles as $rol)
                             <option

@@ -17,7 +17,7 @@
                     <strong>Categorias</strong>
                 </div>
                 <div class="col-xl-7">
-                    <a href="{{url('/categories/create')}}" class="btn-sm btn my-2 btn-outline-dark">Registrar Categoria</a>
+                    <a href="{{url('/categories/create')}}" class="btn-sm btn my-2 btn-outline-dark">Registrar categoria</a>
                     @if($states == 'active')
                         <a href="{{url('/categories/notActive')}}" class="btn-sm btn my-2 mr-4 btn-outline-dark">Ver categorias
                             desactivadas</a>
@@ -28,7 +28,7 @@
                 </div>
                 <div class="col-lg">
                     <div class="input-group my-2">
-                        <input type="text" class="form-control-sm border border-dark" id="searchInput" placeholder="Busqueda"
+                        <input type="text" class="form-control-sm border border-dark" id="searchInput" placeholder="Búsqueda"
                                aria-label="Recipient's username" aria-describedby="basic-addon2">
 
                     </div>

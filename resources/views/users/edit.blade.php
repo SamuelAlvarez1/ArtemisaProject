@@ -44,19 +44,19 @@
         <div class="row mb-4">
             <div class="col">
                 <label for="name">{{ __('Nombres') }}<strong class="text-danger"> *</strong></label>
-                <input type="text" class="form-control" placeholder="nombre" name="name" value="{{$user->name}}"/>
+                <input type="text" class="form-control" placeholder="nombre" name="name" value="{{$user->name}}" required/>
             </div>
             <div class="col">
                 <label for="name">{{ __('Apellidos') }}<strong class="text-danger"> *</strong></label>
                 <input type="text" class="form-control" placeholder="apellidos" name="last_name"
-                       value="{{$user->last_name}}"/>
+                       value="{{$user->last_name}}" required/>
             </div>
         </div>
 
 
         <div class="form-group">
             <label for="name">{{ __('Correo electrónico') }}<strong class="text-danger"> *</strong></label><input type="text" class="form-control" placeholder="email" name="email"
-                       value="{{$user->email}}"/>
+                       value="{{$user->email}}" required/>
         </div>
 
         @if (auth()->user()->idRol == 1)
@@ -68,7 +68,7 @@
             </div>
             <div class="col">
                 <label for="idRol">{{ __('Rol') }}<strong class="text-danger"> *</strong></label>
-                <select style="width: 100%" name="idRol" id="idRol" class="form-control">
+                <select style="width: 100%" name="idRol" id="idRol" class="form-control" required>
                     <option value="">Seleccione</option>
                     @foreach ($roles as $rol)
                         <option
@@ -79,7 +79,7 @@
         </div>
         @else
         <div class="form-group">
-            <label for="phone">{{ __('Teléfono') }}<strong class="text-danger"> *</strong></label><input type="text" class="form-control" placeholder="Número de teléfono" name="phone"
+            <label for="phone">{{ __('Teléfono') }}<strong class="text-danger"> *</strong></label><input type="text" class="form-control" placeholder="Número de teléfono" name="phone" required
                        value="{{$user->phone}}"/>
         </div>
         @endif
