@@ -19,11 +19,11 @@ class Category extends Model
     ];
 
     public static $rules = [
-        'name' => 'required|unique:categories|min:3|max:50|alpha_num',
+        'name' => 'required|unique:categories|min:3|max:50|regex:/^[a-zA-ZÀ-ÿñÑ0-9 ]+$/',
     ];
 
     public static $rulesEdit = [
-        'name' => 'required|min:3|max:250|alpha_num',
+        'name' => 'required|min:3|max:250|regex:/^[a-zA-ZÀ-ÿñÑ0-9 ]+$/',
     ];
 
     public $timestamps = false;

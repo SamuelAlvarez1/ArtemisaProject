@@ -39,7 +39,7 @@
                 <div class="form-group">
                     <label for="nameInput">Nombre<b class="text-danger">*</b></label>
                     <input value="{{old('name', $category->name)}}" type="text" class="form-control" name="name"
-                           id="nameInput" placeholder="Cliente">
+                           id="nameInput" placeholder="Cliente" onkeypress="return check(event)">
                 </div>
                 <div class="form-check mb-3">
                     <input type="hidden" name="state" value="0">
@@ -61,4 +61,25 @@
         </div>
 
 @endsection
+@section("scripts")
+
+    <script>
+
+        function check(e) {
+            tecla = (document.all) ? e.keyCode : e.which;
+
+            //Tecla de retroceso para borrar, siempre la permite
+            if (tecla == 8 || tecla == 32) {
+                return true;
+            }
+
+            // Patrón de entrada, en este caso solo acepta numeros y letras
+            patron = /[A-Za-z0-9á-úÁ-Ú]/;
+            tecla_final = String.fromCharCode(tecla);
+            return patron.test(tecla_final);
+        }
+    </script>
+
+@endsection
+
 
