@@ -128,7 +128,11 @@ class BookingsController extends Controller
             'booking_date' => 'required|date|after_or_equal:' . Carbon::now(),
 
         ];
-        $this->validate($request, $campos);
+
+        $mensaje = [
+            'after_or_equal' => 'El campo :attribute debe ser una fecha posterior o igual a ' . Carbon::now()->isoFormat('dddd D MMMM YYYY, h:mm a')
+        ];
+        $this->validate($request, $campos, $mensaje);
         $bookings = Booking::select("amount_people")
             ->whereDate("start_date", Carbon::parse($request["booking_date"]))
             ->where('idState', 2)
@@ -201,7 +205,11 @@ class BookingsController extends Controller
 
             ];
 
-            $this->validate($request, $campos);
+            $mensaje = [
+                'after_or_equal' => 'El campo :attribute debe ser una fecha posterior o igual a ' . Carbon::now()->isoFormat('dddd D MMMM YYYY, h:mm a')
+            ];
+
+            $this->validate($request, $campos, $mensaje);
 
             $bookings = Booking::select("amount_people")
                 ->whereDate("start_date", $request['start_date'])

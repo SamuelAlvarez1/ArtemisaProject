@@ -257,9 +257,8 @@
 
                     let text_totalPrice = $("#text_totalPrice").val() || 0;
                     $("#text_totalPrice").text(
-                        (parseInt(text_totalPrice) +
-                            parseInt(cantidad) * parseInt(precio)).toLocaleString("en")
-                    );
+                                parseInt($("#totalPrice").val()).toLocaleString("en")
+                            );
                 }
             } else {
                 alertify.set("notifier", "position", "top-right");
@@ -317,8 +316,10 @@
                                 parseInt(precio_total) + parseInt(subtotal)
                             );
 
+                            
+
                             $("#text_totalPrice").text(
-                                (parseInt(precio_total) + parseInt(subtotal)).toLocaleString("en")
+                                parseInt($("#totalPrice").val()).toLocaleString("en")
                             );
 
                             $(this)

@@ -62,14 +62,14 @@
                                 >Precio total:</span></h2></div>
                         <div class="row">
                             <strong class="text-success">$</strong>&ensp;
-                            <p>{{number_format($sale-> finalPrice)}}</p>
+                            <p>${{number_format($sale-> finalPrice)}}</p>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="row">
-                <div class="col-8    offset-0">
-                    <table class="table table-striped table-responsive ">
+                <div class="col mx-auto">
+                    <table class="table table-striped" id="table-details">
                         <thead>
                         <tr>
                             <th scope="col">#</th>
@@ -80,9 +80,9 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach ($saleDetail as $value)
+                        @foreach ($saleDetail as $key => $value)
                             <tr>
-                                <td>{{$value-> id}}</td>
+                                <td>{{$key + 1 }}</td>
                                 <td>
                                     @if ($value->idPlate == 1)
                                         {{$value-> description}}
@@ -114,7 +114,20 @@
 
 
 @section('scripts')
-    <script>
-
-    </script>
+<script>
+    $(document).ready(function () {
+        var table = $('#table-details').DataTable({
+            responsive: true,
+            "dom": 'tp',
+            'language': {
+                "paginate": {
+                    "first": "Inicio",
+                    "last": "Fin",
+                    "next": "→",
+                    "previous": "←"
+                }
+            }
+        });
+    });
+</script>
 @endsection

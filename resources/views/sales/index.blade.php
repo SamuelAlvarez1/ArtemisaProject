@@ -77,7 +77,7 @@
                                     {{$value-> userName}}
                                 @endif
                             </td>
-                            <td id="columnPrice">{{number_format($value-> finalPrice)}}</td>
+                            <td id="columnPrice">${{number_format($value-> finalPrice)}}</td>
                             <td>{{$value->created_at->isoFormat('dddd D MMMM YYYY, h:mm a')}}</td>
                             <td>
                                 @if($value->state == 1)
