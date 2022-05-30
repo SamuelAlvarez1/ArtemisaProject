@@ -98,7 +98,7 @@
                                                 <span aria-hidden="true">&times;</span>
                                             </button>
                                         </div>
-                                        <img class="align-self-center mb-4" style="max-width:700px;" src="/uploads/{{$event->image}}"
+                                        <img class="align-self-center mb-4 details-img" src="/uploads/{{$event->image}}"
                                              alt="Imagen no disponible">
                                     </div>
                                 </div>
