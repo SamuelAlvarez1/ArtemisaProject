@@ -24,7 +24,7 @@
                 </div>
                 <div class="col-lg">
                     <div class="input-group my-2">
-                        <input type="text" class="form-control-sm border border-dark" id="searchInput" placeholder="Busqueda"
+                        <input type="text" class="form-control-sm border border-dark" id="searchInput" placeholder="Búsqueda"
                                aria-label="Recipient's username" aria-describedby="basic-addon2">
                     </div>
                 </div>

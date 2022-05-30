@@ -38,6 +38,7 @@
                     class="form-control"
                     name="name"
                     value="{{ old('name') }}"
+                    required
                 />
             </div>
             <div class="mt-2 mb-2">
@@ -48,6 +49,7 @@
                     name="description"
                     resize='none'
                     rows="3"
+                    required
                 >{{ old('description') }}
                 </textarea>
             </div>

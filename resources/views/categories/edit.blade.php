@@ -39,7 +39,7 @@
                 <div class="form-group">
                     <label for="nameInput">Nombre<b class="text-danger">*</b></label>
                     <input value="{{old('name', $category->name)}}" type="text" class="form-control" name="name"
-                           id="nameInput" placeholder="Cliente" onkeypress="return check(event)">
+                           id="nameInput" placeholder="Cliente" onkeypress="return check(event)" required>
                 </div>
 
                 <div class="row mx-auto">

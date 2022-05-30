@@ -22,13 +22,13 @@
                 </div>
                 <div class="col-xl-7">
 
-                    <a href="{{url('/sales/create')}}" class=" btn btn-sm my-2 btn-outline-dark">Registrar Venta</a>
+                    <a href="{{url('/sales/create')}}" class=" btn btn-sm my-2 btn-outline-dark">Registrar venta</a>
 
                     @if($states == 'activeSales')
-                        <a href="{{url('/sales/canceledSales')}}" class="btn btn-sm my-2 btn-outline-dark">Ver Ventas
+                        <a href="{{url('/sales/canceledSales')}}" class="btn btn-sm my-2 btn-outline-dark">Ver ventas
                             Anuladas</a>
                     @else
-                        <a href="{{url('/sales')}}" class="btn my-2 btn-sm mr-4 btn-outline-dark">Ver Ventas
+                        <a href="{{url('/sales')}}" class="btn my-2 btn-sm mr-4 btn-outline-dark">Ver ventas
                             Realizadas</a>
                     @endif
                 </div>

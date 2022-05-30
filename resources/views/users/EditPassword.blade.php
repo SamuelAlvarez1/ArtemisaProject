@@ -43,7 +43,7 @@
 
                 <div class="col-md-6">
                     <input type="password" id="old_password" class="form-control" placeholder="Contraseña"
-                           name="old_password"/>
+                           name="old_password" required/>
                 </div>
             </div>
 
@@ -54,7 +54,7 @@
                 <div class="col-md-6">
 
                     <input type="password" class="form-control mt-2" id="new_password" placeholder="Contraseña nueva"
-                           name="new_password"/>
+                           name="new_password" required/>
 
                 </div>
             </div>
@@ -66,7 +66,7 @@
                 <div class="col-md-6">
 
                     <input type="password" id="password_confirmation" class="form-control mt-2"
-                           placeholder="Confrimar contraseña" name="password_confirmation"/>
+                           placeholder="Confrimar contraseña" name="password_confirmation" required/>
 
                 </div>
             </div>
