@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -44,6 +45,20 @@ class Event extends Model
         'entryPrice' => self::NUMERIC_NULLABLE,
         'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:3072'
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'idUser');
+    }
+
+    public function getCreatedAt12Attribute()
+    {
+        return (new Carbon($this->created_at))->format('Y-m-d g:i A');
+    }
+    public function getUpdatedAt12Attribute()
+    {
+        return (new Carbon($this->updated_at))->format('Y-m-d g:i A');
+    }
 
     public $timestamps = true;
 }

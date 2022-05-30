@@ -65,7 +65,7 @@ class UsersController extends Controller
      */
     public function create()
     {
-        $roles = Rol::all();
+        $roles = Rol::select("roles.*")->where("state", 1)->get();
 
         return view("users.create", compact('roles'));
     }
@@ -98,6 +98,7 @@ class UsersController extends Controller
             'state' => 1,
             'idRol' => $request['idRol'],
             'password' => Hash::make($request['password']),
+            'lastLog' => date('Y-m-d H:m:i')
 
         ]);
 
@@ -136,9 +137,15 @@ class UsersController extends Controller
                 return redirect('/users/' . auth()->user()->id . "/edit")->with("error", 'Los empleados solo pueden cambiar su propia información');
             }
             $user = User::find($id);
-            $roles = Rol::all();
 
-            return view("users.edit", compact("user", "roles"));
+            if (auth()->user()->idRol == 1) {
+                $roles = Rol::select("roles.*")->where("state", 1)->get();
+            }
+
+            if (auth()->user()->idRol == 1)
+                return view("users.edit", compact("user", "roles"));
+
+            return view("users.edit", compact("user"));
         } else {
             return redirect('/users')->with("error", 'el id del usuario no fue encontrado');
         }
@@ -160,10 +167,10 @@ class UsersController extends Controller
                 'name' => 'required|string|min:3|max:40',
                 'email' => 'required|email|min:10|max:80|unique:users,email,' . $user->id,
                 'phone' => 'required|string|max:10',
-
+                'idRol' => 'required',
             ];
 
-            if (auth()->user()->idRol == 2 && auth()->user()->id != $id) {
+            if (auth()->user()->idRol > 1 && auth()->user()->id != $id) {
                 return redirect('/users/profile/' . auth()->user()->id)->with("error", 'Los empleados solo pueden cambiar su propia información');
             }
 
@@ -174,6 +181,7 @@ class UsersController extends Controller
                     'name' =>  $request['name'],
                     'email' => $request['email'],
                     'phone' => $request['phone'],
+                    'idRol' => $request['idRol'],
                 ]);
                 if (auth()->user()->idRol == 1 && auth()->user()->id != $id) {
                     return redirect('/users')->with("success", "el usuario fue editado satisfactoriamente");
@@ -255,6 +263,32 @@ class UsersController extends Controller
                 return redirect('/users/profile/' . auth()->user()->id)->with("success", 'La contraseña ha sido cambiada satisfactoriamente');
             }
             return redirect('/users/EditPassword/' . auth()->user()->id)->with("error", 'Usted no ha digitado correctamente la antigua contraseña');
+        }
+    }
+    public function updateEmployee(Request $request, $id)
+    {
+        if ($id != null) {
+            $user = User::find($id);
+            $campos = [
+                'last_name' => 'required|string|min:3|max:40',
+                'name' => 'required|string|min:3|max:40',
+                'email' => 'required|email|min:10|max:80|unique:users,email,' . $user->id,
+                'phone' => 'required|string|max:10',
+            ];
+
+
+            $this->validate($request, $campos);
+            try {
+                User::where("id", "=", $id)->update([
+                    'last_name' => $request['last_name'],
+                    'name' =>  $request['name'],
+                    'email' => $request['email'],
+                    'phone' => $request['phone'],
+                ]);
+                return redirect('/users/profile/' . auth()->user()->id)->with("success", 'La información ha sido editada satisfactoriamente');
+            } catch (\Exception $e) {
+                return redirect('/users')->with("error", $e->getMessage());
+            }
         }
     }
 }

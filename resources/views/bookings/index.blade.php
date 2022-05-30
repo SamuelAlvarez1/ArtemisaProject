@@ -61,14 +61,14 @@
                         <th>#</th>
                         <th>Cliente</th>
                         <th>Evento</th>
-                        <th>cantidad de personas</th>
+                        <th>Cantidad de personas</th>
                         @if (auth()->user()->idRol == 1)
                         <th>Usuario que creo <br> la reserva</th>
                         @endif
                         <th>Estado</th>
-                        <th>fecha inicial</th>
+                        <th>Fecha inicial</th>
                         @if ($states == "2")
-                        <th>fecha final</th>
+                        <th>Fecha final</th>
                         @endif
                         <th>Acciones</th>
                     </tr>
@@ -80,12 +80,12 @@
                     <tr>
 
                         <td>{{$value->id}}</td>
-                        <td>{{$value->customerName}}</td>
+                        <td><a class="text-dark" href="{{url('/customers/'. $value->idCustomer)}}"><u>{{$value->customerName}}</u></a></td>
                         <td>
                             @if ($value->idEvent == null)
                             sin evento
                             @else
-                            {{$value->eventName}}
+                                <a class="text-dark" href="{{url('/events/'. $value->idEvent)}}"><u>{{$value->eventName}}</u>
                             @endif
                         </td>
                         <td>{{$value->amount_people}}</td>

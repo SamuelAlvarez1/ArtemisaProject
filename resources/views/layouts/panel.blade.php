@@ -28,7 +28,10 @@
     <link rel="stylesheet" href="//cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js">
     <link rel="stylesheet" href="https://cdn.datatables.net/rowreorder/1.2.8/css/rowReorder.dataTables.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.dataTables.min.css">
-
+    <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+  />
 
     @yield('styles')
 </head>
@@ -89,7 +92,7 @@
 
             <!-- User -->
             <ul class="navbar-nav align-items-center d-none d-md-flex">
-                <li class="nav-item dropdown">
+                <li class="nav-item dropdown" title="Ver reservas y ventas desde tu ultimo cierre de sesión">
                     <a id="navbarDropdown" class="nav-link" href="#" role="button"
                        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                         <i aria-hidden="true" class="ni ni-bell-55"></i>
@@ -109,7 +112,7 @@
                     </div>
                 </li>
                 @if(auth()->user()->idRol == 1)
-                    <li class="nav-item dropdown">
+                    <li class="nav-item dropdown" title="Ver ultimos 2 mensajes enviados por los clientes">
                         <a id="navbarDropdown" class="nav-link" href="#" role="button"
                            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                             <i aria-hidden="true" class="fa-solid fa-comments"></i>
@@ -165,7 +168,7 @@
     <div class="header bg-white pb-2 pt-6 pt-md-6">
 
     </div>
-    <div class="container-fluid mt-5">
+    <div class="container-fluid mt-5 div-alerts">
         @include('includes.errors')
         @yield('main-content')
         @include('includes.panel.footer')
@@ -183,6 +186,15 @@
 <!-- Argon JS -->
 @yield('scripts')
 <script>
+    $(document).ready(function(){
+        $("select").select2({
+            language: {
+                noResults: function () {
+                    return 'No hay resultados';
+                },
+            },
+        });
+    });
     $.ajax({
         url: `/sales/getSalesCount`,
         type: 'GET',

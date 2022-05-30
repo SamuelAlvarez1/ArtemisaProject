@@ -37,9 +37,9 @@
                     <thead class="thead-light">
                     <tr>
                         <th scope="col" title="Ordenar por orden de creación">#</th>
-                        <th scope="col" title="Ordenar por dirección">Dirección</th>
                         <th scope="col" title="Ordenar por nombre">Nombre</th>
                         <th scope="col" title="Ordenar por documento">Documento</th>
+                        <th scope="col" title="Ordenar por dirección">Dirección</th>
                         <th scope="col" title="Ordenar por teléfono">Teléfono</th>
                         <th scope="col" title="Ordenar por Estado">Estado</th>
                         <th scope="col">Acciones</th>

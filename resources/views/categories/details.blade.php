@@ -15,7 +15,7 @@
                         <a href="{{url('/categories/'.$category->id.'/edit')}}" class="btn btn-sm btn-outline-warning">
                             Editar esta categoría
                         </a>
-                        <a href="{{url('/categories')}}" class="btn btn-sm btn-outline-danger">
+                        <a href="{{url()->previous()}}" class="btn btn-sm btn-outline-danger">
                             Regresar
                         </a>
                     </div>

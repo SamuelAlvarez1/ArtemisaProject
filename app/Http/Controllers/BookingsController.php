@@ -8,6 +8,7 @@ use App\Models\Customer;
 use App\Models\Event;
 use DataTables;
 use Carbon\Carbon;
+
 class BookingsController extends Controller
 {
     public function __construct()
