@@ -58,17 +58,17 @@
             <table id="bookings" aria-label="bookings" class="table table-bordered">
                 <thead class="thead-light">
                     <tr>
-                        <th title="Click para ordenar de mayor a menor o de menor a mayor">#</th>
-                        <th title="Click para ordenar de mayor a menor o de menor a mayor">Cliente</th>
-                        <th title="Click para ordenar de mayor a menor o de menor a mayor">Evento</th>
-                        <th title="Click para ordenar de mayor a menor o de menor a mayor">Cantidad de personas</th>
+                        <th title="Ordenar por id">#</th>
+                        <th title="Ordenar por cliente">Cliente</th>
+                        <th title="Ordenar por evento">Evento</th>
+                        <th title="Ordenar por cantidad de personas">Cantidad de personas</th>
                         @if (auth()->user()->idRol == 1)
-                        <th title="Click para ordenar de mayor a menor o de menor a mayor">Usuario que creo <br> la reserva</th>
+                        <th title="Ordenar por usuario">Usuario que creo <br> la reserva</th>
                         @endif
-                        <th title="Click para ordenar de mayor a menor o de menor a mayor">Estado</th>
-                        <th title="Click para ordenar de mayor a menor o de menor a mayor">Fecha inicial</th>
+                        <th title="Ordenar por estado">Estado</th>
+                        <th title="Ordenar por fecha inicial">Fecha inicial</th>
                         @if ($states == "2")
-                        <th title="Click para ordenar de mayor a menor o de menor a mayor">Fecha final</th>
+                        <th title="Ordenar por fecha fin">Fecha final</th>
                         @endif
                         <th>Acciones</th>
                     </tr>

@@ -42,10 +42,10 @@
             <table id="roles" aria-label="roles" class="table table-bordered">
                 <thead class="thead-light">
                 <tr>
-                    <th title="Click para ordenar de mayor a menor o de menor a mayor">#</th>
-                    <th title="Click para ordenar de mayor a menor o de menor a mayor">Nombre</th>
-                    <th title="Click para ordenar de mayor a menor o de menor a mayor">Descripción</th>
-                    <th title="Click para ordenar de mayor a menor o de menor a mayor">Estado</th>
+                    <th title="Ordenar por id">#</th>
+                    <th title="Ordenar por nombre">Nombre</th>
+                    <th title="Ordenar por descripción">Descripción</th>
+                    <th title="Ordenar por estado">Estado</th>
                     <th>Acciones</th>
                 </tr>
                 </thead>

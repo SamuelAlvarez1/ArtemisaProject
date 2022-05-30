@@ -46,13 +46,13 @@
             <table id="users" aria-label="users" class="table table-bordered">
                 <thead class="thead-light">
                 <tr>
-                    <th title="Click para ordenar de mayor a menor o de menor a mayor">#</th>
-                    <th title="Click para ordenar de mayor a menor o de menor a mayor">Nombre</th>
-                    <th title="Click para ordenar de mayor a menor o de menor a mayor">Apellido</th>
-                    <th title="Click para ordenar de mayor a menor o de menor a mayor">Correo</th>
-                    <th title="Click para ordenar de mayor a menor o de menor a mayor">Rol</th>
-                    <th title="Click para ordenar de mayor a menor o de menor a mayor">teléfono</th>
-                    <th title="Click para ordenar de mayor a menor o de menor a mayor">Estado</th>
+                    <th title="Ordenar por id">#</th>
+                    <th title="Ordenar por nombre">Nombre</th>
+                    <th title="Ordenar por apellido">Apellido</th>
+                    <th title="Ordenar por correo">Correo</th>
+                    <th title="Ordenar por rol">Rol</th>
+                    <th title="Ordenar por teléfono">teléfono</th>
+                    <th title="Ordenar por estado">Estado</th>
                     <th>Acciones</th>
                 </tr>
                 </thead>
