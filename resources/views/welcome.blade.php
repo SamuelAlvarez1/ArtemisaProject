@@ -88,13 +88,13 @@
             <div class="col-md-6">
                 <h2 class="titulo">¿Dónde estamos ubicados?</h2>
 
-                <p class="text">Nos encontramos ubicados Cra51 #50a 06, te esperamos para que disfrutes de un buen
+                <p class="text">Nos encontramos ubicados Cra. 51 #50a-6, te esperamos para que disfrutes de un buen
                     momento en nuestro restaurante-bar</div>
             <div class="col-md-5">
                 <iframe
                     src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3965.4566938669386!2d-75.56149658548003!3d6.33483692708588!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e442fa68a4e80bf%3A0x2a9eccf2250943da!2sCra.%2051%20%2350a-6%2C%20Bello%2C%20Antioquia!5e0!3m2!1ses!2sco!4v1653330556882!5m2!1ses!2sco"
                     width="600" height="450" allowfullscreen="" loading="lazy"
-                    referrerpolicy="no-referrer-when-downgrade" class="map"></iframe>
+                    referrerpolicy="no-referrer-when-downgrade" class="map" title="Localización de Artemisa en el mapa"></iframe>
             </div>
         </div>
     </div>
@@ -110,11 +110,15 @@
             @foreach($plates as $plate)
                 <div class="col">
                     <div class="card">
-                        <img src="https://static-sevilla.abc.es/media/gurmesevilla/2012/01/comida-rapida-casera.jpg"
+                        @if($plate->image == '')
+                        <img src="img/landing/sin-imagen-logo.jpg"
                              class="u-full-width" alt="">
+                        @else
+                        <img src="uploads/{{$plate->image}}"
+                             class="u-full-width" alt="">
+                        @endif
                         <div class="info-card">
                             <h4>{{$plate->name}}</h4>
-
                             <p>Marca nesca</p>
                             <span class="u-pull-right">${{number_format($plate->price)}}</span>
                         </div>
@@ -132,7 +136,7 @@
     <div class="container">
         <div class="text-center contact">
             <h2 class="titulo">Contáctanos</h2>
-            <h3 class="section-subheading text-white contact-text">Cuentanos tus sugerencias e inquietudes</h3>
+            <h3 class="section-subheading text-white contact-text">Cuéntanos tus sugerencias e inquietudes</h3>
             <div class="form">
                 @if($errors->any())
                     <div class="alert alert-danger alert-dismissible" role="alert">
@@ -179,8 +183,8 @@
         <div class="row align-items-center">
             <div class="col-lg-4 text-lg-start text-white">Copyright &copy; Artemisa 2022</div>
             <div class="col-lg-4 my-3 my-lg-0">
-                <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-instagram"></i></a>
-                <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-whatsapp"></i></a>
+                <a target="_blank" class="btn btn-dark btn-social mx-2" href="https://www.instagram.com/artemisa.restobar/?hl=es"><i class="fab fa-instagram"></i></a>
+                <a target="_blank" class="btn btn-dark btn-social mx-2" href="https://api.whatsapp.com/send?phone=3015767307"><i class="fab fa-whatsapp"></i></a>
             </div>
             <div class="col-lg-4 text-lg-end">
                 <a class="link-dark text-decoration-none me-3 text-white" href="#!">Privacy Policy</a>

@@ -1,3 +1,4 @@
+
 @extends('layouts.panel')
 
 
@@ -81,7 +82,7 @@
                                                     <span aria-hidden="true">&times;</span>
                                                 </button>
                                             </div>
-                                            <img class="align-self-center mb-4" src="/uploads/{{$plates->image}}"
+                                            <img class="align-self-center mb-4 details-img" src="/uploads/{{$plates->image}}"
                                                  alt="Imagen no disponible">
                                         </div>
                                     </div>
