@@ -115,7 +115,6 @@
                         <div class="info-card">
                             <h4>{{$plate->name}}</h4>
 
-                            <p>Marca nesca</p>
                             <span class="u-pull-right">${{number_format($plate->price)}}</span>
                         </div>
                     </div>
