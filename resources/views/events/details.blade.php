@@ -64,10 +64,14 @@
                             <li><p class="card-text">Rol: {{$event->user->role->name}}</p></li>
                         </ul>
                         <h4 class="card-subtitle mt-2">Estado:</h4>
-                        @if ($event->state == 0)
-                            <span class="badge badge-danger">No activo</span>
+                        @if($event->state == 1 && $event->startDate <= date('Y-m-d') && $event->endDate >= date('Y-m-d'))
+                            <span class="badge badge-primary">En proceso</span>
+                        @elseif($event->state == 1 && $event->endDate < date('Y-m-d'))
+                            <span class="badge badge-success">Llevado a cabo</span>
+                        @elseif($event->state == 1 && $event->startDate >= date('Y-m-d') && $event->endDate >= date('Y-m-d'))
+                            <span class="badge badge-primary">Pendiente</span>
                         @else
-                            <span class="badge badge-success">Activo</span>
+                            <span class="badge badge-danger">Cancelado</span>
                         @endif
                         <h4 class="card-subtitle mt-2">Número de reservas con este evento:</h4>
                         <p class="card-text">{{$countBookings}}</p>

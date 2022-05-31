@@ -32,7 +32,7 @@
             <div class="col-lg">
                     <div class="input-group my-2">
                         <input type="text" class="form-control-sm border border-dark" id="searchInput" placeholder="Búsqueda"
-                            aria-label="Recipient's username" aria-describedby="basic-addon2">
+                            aria-label="Recipient's username" aria-describedby="basic-addon2" title="Digite para buscar un rol que se desee encontrar">
                     </div>
                 </div>
         </div>
@@ -42,10 +42,10 @@
             <table id="roles" aria-label="roles" class="table table-bordered">
                 <thead class="thead-light">
                 <tr>
-                    <th>#</th>
-                    <th>Nombre</th>
-                    <th>Descripción</th>
-                    <th>Estado</th>
+                    <th title="Ordenar por id">#</th>
+                    <th title="Ordenar por nombre">Nombre</th>
+                    <th title="Ordenar por descripción">Descripción</th>
+                    <th title="Ordenar por estado">Estado</th>
                     <th>Acciones</th>
                 </tr>
                 </thead>
@@ -68,16 +68,16 @@
                         </td>
 
                         <td>
-                            <a class="mx-2" data-delay="500" data-toggle="tooltip" data-placement="bottom" title="Detalles" href="{{url('/roles/'.$value->id)}}"><i class="fa-solid text-dark fa-info-circle"></i></a>
-                            <a class="mx-2" data-delay="500" data-toggle="tooltip" data-placement="bottom" title="Editar" href="{{url('/roles/'.$value->id . '/edit')}}"><i
+                            <a class="mx-2" title="Detalles de este rol" href="{{url('/roles/'.$value->id)}}"><i class="fa-solid text-dark fa-info-circle"></i></a>
+                            <a class="mx-2" title="Editar este rol" href="{{url('/roles/'.$value->id . '/edit')}}"><i
                                     class="fa text-dark fa-edit"></i></a>
 
                             @if ($value->id != 1)
                                 @if($value->state == 1)
-                                    <a class="mx-2" data-delay="500" data-toggle="tooltip" data-placement="bottom" title="Desactivar" href="{{url('/roles/updateState/'.$value->id)}}/0"><i
+                                    <a class="mx-2" title="Desactivar este rol" href="{{url('/roles/updateState/'.$value->id)}}/0"><i
                                     class="fa text-dark fa-ban"></i></a>
                                 @else
-                                    <a class="mx-2" data-delay="500" data-toggle="tooltip" data-placement="bottom" title="Activar" href="{{url('/roles/updateState/'.$value->id)}}/1"><i
+                                    <a class="mx-2" title="Activar este rol" href="{{url('/roles/updateState/'.$value->id)}}/1"><i
                                     class="fa text-dark fa-check"></i></a>
                                 @endif
 

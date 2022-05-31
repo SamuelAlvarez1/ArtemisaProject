@@ -44,13 +44,13 @@
                     @csrf
                     @method('PUT')
                     <div class="form-group">
-                        <label for="nameInput">Nombre</label>
+                        <label for="nameInput">Nombre<strong class="text-danger">*</strong></label>
                         <input value="{{old('name', $event->name)}}" type="text" class="form-control @error('name') is-invalid @enderror" name="name"
                             id="nameInput"
                             >
                     </div>
                     <div class="form-group">
-                        <label for="emailInput">Descripción</label>
+                        <label for="emailInput">Descripción<strong class="text-danger">*</strong></label>
                         <textarea rows="3" class="form-control @error('description') is-invalid @enderror" name="description" id="descriptionInput" resize="none">{{old('description', $event->description)}}</textarea>
                     </div>
                     <div class="row mb-4">
@@ -70,7 +70,7 @@
                     <div class="row">
                         <div class="col">
                             <div class="form-group">
-                                <label for="dateInput">Fecha de inicio</label>
+                                <label for="dateInput">Fecha de inicio<strong class="text-danger">*</strong></label>
                                 <div class="input-group input-group-alternative">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><em class="ni ni-calendar-grid-58"></em></span>
@@ -85,7 +85,7 @@
                         </div>
                         <div class="col">
                             <div class="form-group">
-                                <label for="dateInput">Fecha fin</label>
+                                <label for="dateInput">Fecha fin<strong class="text-danger">*</strong></label>
                                 <div class="input-group input-group-alternative">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><em class="ni ni-calendar-grid-58"></em></span>

@@ -7,6 +7,8 @@ use App\Models\customer;
 use App\Models\Event;
 use App\Models\Plate;
 use App\Models\bookingState;
+use App\Models\Sale;
+use App\Models\SaleDetail;
 use Database\Factories\CustomerFactory;
 use Illuminate\Database\Seeder;
 use App\Models\User;
@@ -46,9 +48,9 @@ class DatabaseSeeder extends Seeder
             'lastlog' => date('Y-m-d H:i:s'),
             'password' => bcrypt('12345678'),
         ]);
+        User::factory(10)->create();
         Customer::factory(50)->create();
         Event::factory(20)->create();
-
 
         $categories = ['Papas', 'Pizzas', 'Arroz'];
         $states = ['Cancelada', 'En proceso', 'Aprobada'];
@@ -76,6 +78,8 @@ class DatabaseSeeder extends Seeder
         $pizzaNames = ['Pizza Delicia ranchera' , 'Pizza Merry', 'Pizza Artemisa', 'Pizza Tierna y dulce', 'Pizza Hawaiana',
             'Pizza Napolitana', 'Pizza Peperoni', 'Pizza Pollo y champiñones','Pizza de mi tierra','Pizza desgranada',
             'Pizza Pollo y tocineta','Pizza Jamon y queso','Pizza Vegetariana'];
+        $pizzaRoutes = ['ranchera.jpg', 'merry.jpg', 'pizzartemisa.jpg','tiernadulce.jpg','hawaiana.jpg','napolitana.jpg',
+            'peperoni.jpg','pollo.jpg','migente.jpg','desgranada.jpg','pollotocino.jpg','jamonqueso.jpg','vegetariana.jpg'];
         $pizzaSizes = ['pequeña', 'mediana', 'grande'];
         $pizzaPrices = [18000,28000,40000,19500,32500,53500,19500,32500,51500,19500,27500,36500,17000,27000,35000,17500,
             27500,37000,18000,28000,37000,18500,28500,46500,19000,32000,51000,18500,29000,37000,19000,28000,37000,16000,
@@ -88,12 +92,16 @@ class DatabaseSeeder extends Seeder
                     'price' => $pizzaPrices[$pizzasI],
                     'state' => '1',
                     'idCategory' => '2',
-                    'image' => '',
+                    'image' => $pizzaRoutes[$i],
                     'created_at' => date('Y-m-d H:m:i'),
                     'updated_at' => date('Y-m-d H:m:i'),
                 ]);
                 $pizzasI++;
             }
         }
+
+        Booking::factory(20)->create();
+        Sale::factory(50)->create();
+        SaleDetail::factory(150)->create();
     }
 }
