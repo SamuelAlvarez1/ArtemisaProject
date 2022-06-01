@@ -112,18 +112,13 @@
                     <div class="card">
                         @if($plate->image == '')
                         <img src="img/landing/sin-imagen-logo.jpg"
-                             class="u-full-width" alt="">
+                             class="u-full-width image" alt="">
                         @else
                         <img src="uploads/{{$plate->image}}"
-                             class="u-full-width" alt="">
+                             class="u-full-width image" alt="">
                         @endif
                         <div class="info-card">
-                            <h4>{{$plate->name}}</h4>
-<<<<<<< HEAD
-
-=======
-                            <p>Marca nesca</p>
->>>>>>> c58b7a665d4888b1f495ad029b21667dbd0c80e0
+                            <h4 class="mb-3">{{$plate->name}}</h4>
                             <span class="u-pull-right">${{number_format($plate->price)}}</span>
                         </div>
                     </div>
