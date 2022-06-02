@@ -158,7 +158,7 @@ return [
         'booking_minutes' => 'minutos de la reserva',
         'final_date' => 'fecha final',
         'startDate' => 'fecha inicio',
-        'phone' => 'número',
+        'phone' => 'Teléfono',
         'id_rol' => 'rol',
         'amount_people' => 'cantidad de personas',
         'password' => 'contraseña',
