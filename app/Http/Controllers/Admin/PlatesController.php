@@ -127,13 +127,16 @@ class PlatesController extends Controller
             $request->image->move(public_path('uploads'),$image);
             $data = ['image' => $image];
         }
+
+        $data+=[
+            "name" => $input["name"],
+            "price" => $input["price"],
+            "idCategory" => $input["idCategory"],
+        ];
         try {
-            Plate::where("id", $id)->update([
-                "name" => $input["name"],
-                "price" => $input["price"],
-                "idCategory" => $input["idCategory"],
-                'image' => $data['image']
-            ]);
+            $plate = Plate::find($id);
+            $plate->update($data);
+
             return redirect('/plates')->with("success", "El platillo fue editado satisfactoriamente");
         } catch (\Exception $e) {
             return redirect('/plates')->with("error", "No fue posible actualizar el platillo");
