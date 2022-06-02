@@ -88,7 +88,7 @@ class CustomersController extends Controller
         $customers = Customer::select('customers.*', 'users.name as user')
             ->join("users", "customers.idUser", "=", "users.id")
             ->where('customers.state', '0')
-            ->paginate(20);
+            ->get();
         $states = 'false';
         return view('customers.index', compact('customers', 'states'));
     }
