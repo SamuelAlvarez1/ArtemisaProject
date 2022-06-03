@@ -10,54 +10,59 @@
         <div class="card">
             <div class="card-header">
 
-                <a href="{{url('/bookings')}}" class="btn btn-sm btn-outline-danger float-right" data-toggle="tooltip"
-                   data-placement="top" title="Volver al listado de reservas">
+                <a href="{{url('/bookings')}}" class="btn btn-sm btn-outline-danger float-right">
                     Regresar
                 </a>
 
                 @if ($booking->idState == "1" || $booking->idState == "2")
                     <a href="{{url('/bookings/'.$booking->id.'/edit')}}"
-                       class="btn btn-sm btn-outline-warning mx-2 float-right" data-toggle="tooltip"
-                       data-placement="top" title="Editar esta reserva">
+                       class="btn btn-sm btn-outline-warning mx-2 float-right">
                         Editar esta reserva
                     </a>
                 @endif
             </div>
-            <div class="card-body">
-                <h5 class="card-subtitle  ">Nombre del cliente</h5>
-                <p class="card-text">{{$booking->customerName}}</p>
+            <div class="card-body text-center">
 
-                <h5 class="card-subtitle mt-2">Evento</h5>
-                <p class="card-text">{{($booking->idEvent == null) ? 'sin evento' : $booking->eventName}}</p>
+                <div class="row mb-5">
+                    <div class="col">
+                        <h4 class="mt-2">Nombre del cliente</h4>
+                        <p class="card-text">{{$booking->customerName}}</p>
+                    </div>
+                    <div class="col">
+                        <h4 class=" mt-2">Evento</h4>
+                        <p class="card-text">{{($booking->idEvent == null) ? 'sin evento' : $booking->eventName}}</p>
+                    </div>
+                    <div class="col">
+                        @if ($booking->idState == "3")
+                            <h4 class=" mt-2">Fecha final de la reserva</h4>
+                            <p class="card-text">{{$booking->final_date->isoFormat('dddd D MMMM YYYY, h:mm a')}}</p>
+                        @endif
 
-                <h5 class="card-subtitle mt-2">Cantidad de personas</h5>
-                <p class="card-text">{{$booking->amount_people}}</p>
+                        <h4 class=" mt-2">Estado</h4>
+                        @if ($booking->idState == 1)
+                                <span class="badge badge-danger">Cancelada <i class="fa-solid fa-x"></i></span>
+                        @endif
+                        @if ($booking->idState == 2)
+                                <span class="badge badge-primary">En proceso <i class="fa-solid fa-clock"></i></span>
+                        @endif
+                        @if ($booking->idState == 3)
+                                <span class="badge badge-success">Aprobada <i class="fa-solid fa-check"></i></span>
 
-                <h5 class="card-subtitle mt-2">Fecha de la reserva</h5>
-                <p class="card-text">{{$booking->start_date->isoFormat('dddd D MMMM YYYY, h:mm a')}}</p>
+                            @endif
+                    </div>
+                </div>
 
-                @if ($booking->idState == "3")
-                    <h5 class="card-subtitle mt-2">Fecha final de la reserva</h5>
-                    <p class="card-text">{{$booking->final_date->isoFormat('dddd D MMMM YYYY, h:mm a')}}</p>
-                @endif
-
-                <h5 class="card-subtitle mt-2">Estado</h5>
-                @if ($booking->idState == 1)
-                    <p class="card-text">Cancelada <span class="text-danger"><i class="fa-solid fa-x"></i></span></p>
-                @endif
-                @if ($booking->idState == 2)
-                    <p class="card-text">En proceso <span class="text-warning"><i class="fa-solid fa-clock"></i></span>
-                    </p>
-                @endif
-                @if ($booking->idState == 3)
-                    <p class="card-text">Aprobada <span class="text-success"><i class="fa-solid fa-check"></i></span>
-                    </p>
-                @endif
-
-
+                <div class="row mb-5">
+                    <div class="col">
+                        <h4 class=" mt-2">Fecha de la reserva</h4>
+                        <p class="card-text">{{$booking->start_date->isoFormat('dddd D MMMM YYYY, h:mm a')}}</p>
+                    </div>
+                    <div class="col">
+                        <h4 class=" mt-2">Cantidad de personas</h4>
+                        <p class="card-text">{{$booking->amount_people}}</p>
+                    </div>
+                </div>
             </div>
-
-
         </div>
 
 @endsection

@@ -36,25 +36,25 @@
                 <div class="col">
                     <label for="nameInput">Nombre<b class="text-danger"> *</b></label>
                     <input value="{{old('name')}}" type="text" class="form-control @error('name') is-invalid @enderror"
-                           name="name" id="nameInput">
+                           name="name" id="nameInput" required>
                 </div>
                 <div class="col">
                     <label for="documentInput">Documento<b class="text-danger"> *</b></label>
                     <input value="{{old('document')}}" type="number"
                            class="form-control @error('document') is-invalid @enderror" name="document"
-                           id="documentInput">
+                           id="documentInput" required>
                 </div>
             </div>
             <div class="form-group">
                 <label for="addressInput">Dirección<b class="text-danger"> *</b></label>
                 <input value="{{old('address')}}" type="text"
-                       class="form-control @error('address') is-invalid @enderror" name="address" id="addressInput">
+                       class="form-control @error('address') is-invalid @enderror" name="address" id="addressInput" required>
             </div>
                 <div class="form-group">
                     <label for="phoneNumberInput">Número de teléfono<b class="text-danger"> *</b></label>
                     <input value="{{old('phoneNumber')}}" type="text"
                            class="form-control @error('phoneNumber') is-invalid @enderror" name="phoneNumber"
-                           id="phoneNumberInput">
+                           id="phoneNumberInput" required>
                 </div>
             <button type="submit" class="btn btn-outline-success d-block m-auto">Crear</button>
         </form>

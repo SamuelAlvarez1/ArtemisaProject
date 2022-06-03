@@ -25,7 +25,7 @@
                 </div>
                 <div class="col-lg">
                     <div class="input-group my-2">
-                        <input type="text" class="form-control-sm border border-dark float-right" id="searchInput" placeholder="Busqueda"
+                        <input type="text" class="form-control-sm border border-dark float-right" id="searchInput" placeholder="Búsqueda"
                                aria-label="Recipient's username" aria-describedby="basic-addon2">
                     </div>
                 </div>
@@ -37,9 +37,9 @@
                     <thead class="thead-light">
                     <tr>
                         <th scope="col" title="Ordenar por orden de creación">#</th>
-                        <th scope="col" title="Ordenar por dirección">Dirección</th>
                         <th scope="col" title="Ordenar por nombre">Nombre</th>
                         <th scope="col" title="Ordenar por documento">Documento</th>
+                        <th scope="col" title="Ordenar por dirección">Dirección</th>
                         <th scope="col" title="Ordenar por teléfono">Teléfono</th>
                         <th scope="col" title="Ordenar por Estado">Estado</th>
                         <th scope="col">Acciones</th>

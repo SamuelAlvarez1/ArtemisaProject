@@ -21947,3 +21947,20 @@ html:not([dir='rtl']) .noUi-horizontal .noUi-handle
     display: block;
     font-size: 18px;
   }
+
+  .select2-selection__rendered {
+    height: calc(2.75rem + 2px) !important;
+    margin: 8px; !important;
+  }
+
+  .select2-container .select2-selection--single {
+    height: calc(2.75rem + 2px) !important;
+  }
+
+  .select2-selection__arrow {
+    height: calc(2.75rem + 2px) !important;
+  }
+
+  .details-img{
+    max-width:700px;
+  }

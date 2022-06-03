@@ -21,35 +21,31 @@
                 <strong>Roles</strong>
             </div>
             <div class="col-xl-7">
-
-                <a href="{{url('/roles/create')}}" class="btn-sm btn mx-2 btn-outline-dark">Crear rol</a>
-
+                <a href="{{url('/roles/create')}}" class="btn-sm btn my-2 btn-outline-dark">Crear rol</a>
                 @if($states == '0')
-                <a href="{{url('/roles')}}" class="btn-sm btn btn-outline-dark">Ver roles activos</a>
+                <a href="{{url('/roles')}}" class="btn-sm btn my-2 btn-outline-dark">Ver roles activos</a>
                 @endif
                 @if ($states == "1")
-                    <a href="{{url('/roles/notActive')}}" class="btn-sm btn btn-outline-dark">Ver roles deshabilitados</a>
+                    <a href="{{url('/roles/notActive')}}" class="btn-sm btn my-2 btn-outline-dark">Ver roles deshabilitados</a>
                 @endif
-
             </div>
             <div class="col-lg">
                     <div class="input-group my-2">
-                        <input type="text" class="form-control-sm border border-dark" id="searchInput" placeholder="Busqueda"
-                            aria-label="Recipient's username" aria-describedby="basic-addon2">
-
+                        <input type="text" class="form-control-sm border border-dark" id="searchInput" placeholder="Búsqueda"
+                            aria-label="Recipient's username" aria-describedby="basic-addon2" title="Digite para buscar un rol que se desee encontrar">
                     </div>
                 </div>
         </div>
     </div>
     <div class="card-body">
         <div class="mx-auto mb-3">
-            <table id="roles" class="table table-bordered">
+            <table id="roles" aria-label="roles" class="table table-bordered">
                 <thead class="thead-light">
                 <tr>
-                    <th>#</th>
-                    <th>Nombre</th>
-                    <th>Descripción</th>
-                    <th>Estado</th>
+                    <th title="Ordenar por id">#</th>
+                    <th title="Ordenar por nombre">Nombre</th>
+                    <th title="Ordenar por descripción">Descripción</th>
+                    <th title="Ordenar por estado">Estado</th>
                     <th>Acciones</th>
                 </tr>
                 </thead>
@@ -72,19 +68,19 @@
                         </td>
 
                         <td>
-                            <a class="mx-2" data-delay="500" data-toggle="tooltip" data-placement="bottom" title="Detalles" href="{{url('/roles/'.$value->id)}}"><i class="fa-solid text-dark fa-info-circle"></i></a>
-                            <a class="mx-2" data-delay="500" data-toggle="tooltip" data-placement="bottom" title="Editar" href="{{url('/roles/'.$value->id . '/edit')}}"><i
+                            <a class="mx-2" title="Detalles de este rol" href="{{url('/roles/'.$value->id)}}"><i class="fa-solid text-dark fa-info-circle"></i></a>
+                            <a class="mx-2" title="Editar este rol" href="{{url('/roles/'.$value->id . '/edit')}}"><i
                                     class="fa text-dark fa-edit"></i></a>
-                            
+
                             @if ($value->id != 1)
-                                @if($value->state == 1)    
-                                    <a class="mx-2" data-delay="500" data-toggle="tooltip" data-placement="bottom" title="Desactivar" href="{{url('/roles/updateState/'.$value->id)}}/0"><i
+                                @if($value->state == 1)
+                                    <a class="mx-2" title="Desactivar este rol" href="{{url('/roles/updateState/'.$value->id)}}/0"><i
                                     class="fa text-dark fa-ban"></i></a>
                                 @else
-                                    <a class="mx-2" data-delay="500" data-toggle="tooltip" data-placement="bottom" title="Activar" href="{{url('/roles/updateState/'.$value->id)}}/1"><i
+                                    <a class="mx-2" title="Activar este rol" href="{{url('/roles/updateState/'.$value->id)}}/1"><i
                                     class="fa text-dark fa-check"></i></a>
                                 @endif
-                                
+
                             @endif
 
 

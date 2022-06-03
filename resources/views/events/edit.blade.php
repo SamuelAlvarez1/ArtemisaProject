@@ -13,7 +13,7 @@
 
 @section('main-content')
 
-    <div class="col-md-8 offset-2 my-2">
+    <div class="col-md-8 mx-auto mt-1 mb-2">
         <div class="card shadow">
             <div class="card-header">
                 <div class="row align-items-center">
@@ -44,13 +44,13 @@
                     @csrf
                     @method('PUT')
                     <div class="form-group">
-                        <label for="nameInput">Nombre</label>
+                        <label for="nameInput">Nombre<strong class="text-danger">*</strong></label>
                         <input value="{{old('name', $event->name)}}" type="text" class="form-control @error('name') is-invalid @enderror" name="name"
                             id="nameInput"
                             >
                     </div>
                     <div class="form-group">
-                        <label for="emailInput">Descripción</label>
+                        <label for="emailInput">Descripción<strong class="text-danger">*</strong></label>
                         <textarea rows="3" class="form-control @error('description') is-invalid @enderror" name="description" id="descriptionInput" resize="none">{{old('description', $event->description)}}</textarea>
                     </div>
                     <div class="row mb-4">
@@ -70,7 +70,7 @@
                     <div class="row">
                         <div class="col">
                             <div class="form-group">
-                                <label for="dateInput">Fecha de inicio</label>
+                                <label for="dateInput">Fecha de inicio<strong class="text-danger">*</strong></label>
                                 <div class="input-group input-group-alternative">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><em class="ni ni-calendar-grid-58"></em></span>
@@ -85,7 +85,7 @@
                         </div>
                         <div class="col">
                             <div class="form-group">
-                                <label for="dateInput">Fecha fin</label>
+                                <label for="dateInput">Fecha fin<strong class="text-danger">*</strong></label>
                                 <div class="input-group input-group-alternative">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><em class="ni ni-calendar-grid-58"></em></span>
@@ -99,20 +99,39 @@
                             </div>
                         </div>
                     </div>
-                    <div class="mb-3">
+                    <div class="row mb-4">
+                        <div class="col">
                         <label for="formFile" class="form-label">Imagen</label>
                         <input class="form-control @error('image') is-invalid @enderror" name="image" type="file" id="formFile">
                     </div>
-                    <div class="form-check mb-3">
-                        <input type="hidden" name="state" value="0">
-                        <input class="form-check-input" name="state" checked type="checkbox" value="1" id="state">
-                        <label class="form-check-label" for="state">
-                            Estado
-                        </label>
+                    <div class="col">
+                        @if($event->image == null)
+                            <span class="badge mt-5 badge-danger">Sin imagen <i class="fas fa-image"></i></span>
+                        @else
+                            <button type="button" class="bg-transparent d-block m-auto border-0" data-toggle="modal"
+                                    data-target=".bd-image-modal-lg">
+                                <img src="/uploads/{{$event->image}}" width="150px" alt="Imagen no disponible" style="border-radius: 10px">
+                            </button>
+                            <div class="modal fade bd-image-modal-lg" tabindex="-1" role="dialog"
+                                 aria-labelledby="imageModal" aria-hidden="true">
+                                <div class="modal-dialog modal-lg">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h4 class="modal-title" id="exampleModalLabel">Imagen</h4>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <img class="align-self-center details-img mb-4" src="/uploads/{{$event->image}}"
+                                             alt="Imagen no disponible">
+                                    </div>
+                                </div>
+                            </div>
+                        @endif
+                    </div>
                     </div>
                     <div class="row mx-auto">
                         <button type="submit" class="btn btn-outline-success">Actualizar</button>
-
                     </div>
                 </form>
             </div>

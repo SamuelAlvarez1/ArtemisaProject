@@ -17,7 +17,7 @@
             </div>
         </div>
     </div>
-    <form action="{{url('plates/'.$plate->id)}}" method="post">
+    <form action="{{url('plates/'.$plate->id)}}" method="post" enctype="multipart/form-data">
         @csrf
         @method('PUT')
     <div class="card-body">
@@ -37,7 +37,7 @@
             <div class="row mb-5">
                 <div class="col">
                     <label for="">Categoría <b class="text-danger">*</b></label>
-                    <select name="idCategory" class="form-control @error('idCategory') is-invalid @enderror" id="categories">
+                    <select style="width: 100%" name="idCategory" class="form-control @error('idCategory') is-invalid @enderror" id="categories" required>
                         <option value="">Seleccione</option>
                         @foreach($categories as $value)
                             <option
@@ -48,7 +48,7 @@
                 <div class="col">
                     <label for="">Nombre del platillo <b class="text-danger">*</b></label>
                     <input type="text" class="form-control @error('name') is-invalid @enderror"
-                           name="name" id="name" onkeypress="return check(event)" value="{{$plate->name}}">
+                           name="name" id="name" onkeypress="return check(event)" value="{{$plate->name}}" required>
                 </div>
             </div>
 
@@ -56,11 +56,11 @@
                 <div class="col">
                     <label for="">Precio base <b class="text-danger">*</b></label>
                     <input type="number" class="form-control @error('price') is-invalid @enderror"
-                           name="price" id="price" value="{{$plate->price}}">
+                           name="price" id="price" value="{{$plate->price}}" required>
                 </div>
                 <div class="col">
 
-                    <label for=" formFileDisabled" class="form-label">Adjuntar imagen de evento</label>
+                    <label for=" formFileDisabled" class="form-label">Adjuntar imagen de platillo</label>
                     <input class="form-control @error('image') is-invalid @enderror" name="image" type="file" id="formFileDisabled" value="{{$plate->image}}">
 
                 </div>

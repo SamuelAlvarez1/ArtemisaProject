@@ -15,7 +15,7 @@
                 <h3 class="mb-0">Crear usuario</h3>
             </div>
             <div class="col text-right">
-                <a href="{{url('users')}}" class="btn btn-sm btn-outline-danger">
+                <a href="{{url()->previous()}}" class="btn btn-sm btn-outline-danger">
                     Regresar
                 </a>
             </div>
@@ -37,21 +37,21 @@
 
             <div class="row mb-4">
                 <div class="col">
-                    <label for="name">{{ __('Nombres') }}<b class="text-danger"> *</b></label>
+                    <label for="name">{{ __('Nombres') }}<strong class="text-danger"> *</strong></label>
                     <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name"
                            value="{{ old('name') }}" required autocomplete="name" autofocus>
                 </div>
                 <div class="col">
-                    <label for="last_name">{{ __('Apellidos') }}<b class="text-danger"> *</b></label>
+                    <label for="last_name">{{ __('Apellidos') }}<strong class="text-danger"> *</strong></label>
                     <input id="last_name" type="text" class="form-control" name="last_name"
-                           value="{{ old('last_name') }}" required autocomplete="last_name">
+                           value="{{ old('last_name') }}" required autocomplete="on">
                 </div>
             </div>
 
 
             <div class="form-group">
-                <label for="email">{{ __('Correo electrónico') }}<b
-                        class="text-danger"> *</b></label>
+                <label for="email">{{ __('Correo electrónico') }}<strong
+                        class="text-danger"> *</strong></label>
 
                     <input id="email" type="email" class="form-control @error('email') is-invalid @enderror"
                            name="email" value="{{ old('email') }}" required autocomplete="email">
@@ -59,15 +59,15 @@
 
             <div class="row mb-4">
                 <div class="col">
-                    <label for="phone">{{ __('Teléfono') }}<b
-                            class="text-danger"> *</b></label>
+                    <label for="phone">{{ __('Teléfono') }}<strong
+                            class="text-danger"> *</strong></label>
                     <input id="phone" type="text" class="form-control" name="phone" value="{{ old('phone') }}" required
                            autocomplete="phone">
                 </div>
                 <div class="col">
-                    <label for="idRol">{{ __('Rol') }}<b
-                            class="text-danger"> *</b></label>
-                    <select name="idRol" id="idRol" class="form-control">
+                    <label for="idRol">{{ __('Rol') }}<strong
+                            class="text-danger"> *</strong></label>
+                    <select name="idRol" style="width: 100%" id="idRol" class="form-control" required>
                         <option value="">Seleccione</option>
                         @foreach ($roles as $rol)
                             <option
@@ -80,14 +80,14 @@
 
             <div class="row mb-4">
                 <div class="col">
-                    <label for="password">{{ __('Contraseña') }}<b
-                            class="text-danger"> *</b></label>
+                    <label for="password">{{ __('Contraseña') }}<strong
+                            class="text-danger"> *</strong></label>
                     <input id="password" type="password" class="form-control @error('password') is-invalid @enderror"
                            name="password" required autocomplete="new-password">
                 </div>
                 <div class="col">
-                    <label for="password-confirm">{{ __('Confirmar contraseña') }}<b
-                            class="text-danger"> *</b></label>
+                    <label for="password-confirm">{{ __('Confirmar contraseña') }}<strong
+                            class="text-danger"> *</strong></label>
                     <input id="password-confirm" type="password" class="form-control" name="password_confirmation"
                            required autocomplete="new-password">
                 </div>

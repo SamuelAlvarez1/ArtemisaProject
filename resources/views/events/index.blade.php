@@ -24,7 +24,7 @@
                 </div>
                 <div class="col-lg">
                     <div class="input-group my-2">
-                        <input type="text" class="form-control-sm border border-dark" id="searchInput" placeholder="Busqueda"
+                        <input type="text" class="form-control-sm border border-dark" id="searchInput" placeholder="Búsqueda"
                                aria-label="Recipient's username" aria-describedby="basic-addon2">
                     </div>
                 </div>
@@ -57,14 +57,14 @@
                                 @if($event->decorationPrice == '')
                                     Sin valor
                                 @else
-                                    {{$event->decorationPrice}}
+                                    ${{ number_format($event->decorationPrice)}}
                                 @endif
                             </td>
                             <td>
                                 @if($event->entryPrice == '')
                                     Sin valor
                                 @else
-                                    {{$event->entryPrice}}
+                                    ${{ number_format($event->entryPrice)}}
                                 @endif
                             </td>
                             <td>{{$event->startDate}}</td>
@@ -91,6 +91,10 @@
                                 @else
                                     <a data-delay="500" title="Activar el evento" class="mx-2" href="{{url('/events/updateState/'.$event->id)}}"><i
                                             aria-hidden="true" class="fa text-dark fa-check"></i></a>
+                                @endif
+                                @if($event->image != '')
+                                    <a class="mx-2" data-delay="500" data-toggle="tooltip" data-placement="bottom" title="Eliminar Imagen" href="{{url('/events/deleteImage/'.$event->id)}}">
+                                        <img src="/img/icons/image.png" style="width: 18px; margin-top: -3px" alt="quitarimagen"></a>
                                 @endif
                             </td>
                         </tr>

@@ -40,35 +40,35 @@
                     finalizadas</a>
                 @endif
                 @if ($states == "2")
-                <a href="{{url('/bookings/seeCanceled')}}" class="btn-sm my-2 btn btn-outline-dark"  data-toggle="tooltip" data-placement="top" title="Ver las reservas que se cancelaron">Ver reservas
+                <a href="{{url('/bookings/seeCanceled')}}" class="btn-sm my-2 btn btn-outline-dark" title="Ver las reservas que se cancelaron">Ver reservas
                     canceladas</a>
-                <a href="{{url('/bookings')}}" class="btn-sm btn btn-outline-dark"  data-toggle="tooltip" data-placement="top" title="Ver las reservas que se encuentran en proceso">Ver reservas en proceso</a>
+                <a href="{{url('/bookings')}}" class="btn-sm btn btn-outline-dark" title="Ver las reservas que se encuentran en proceso">Ver reservas en proceso</a>
                 @endif
             </div>
             <div class="col-lg">
                 <div class="input-group my-2">
-                    <input type="text" class="form-control-sm border border-dark" id="searchInput" placeholder="Busqueda"
-                        aria-label="Recipient's username" aria-describedby="basic-addon2"  data-toggle="tooltip" data-placement="top" title="digite para buscar una reserva que se desee encontrar">
+                    <input type="text" class="form-control-sm border border-dark" id="searchInput" placeholder="Búsqueda"
+                        aria-label="Recipient's username" aria-describedby="basic-addon2" title="Digite para buscar una reserva que se desee encontrar">
                 </div>
             </div>
         </div>
     </div>
     <div class="card-body">
         <div class="mx-auto mb-3">
-            <table id="bookings" class="table table-bordered">
+            <table id="bookings" aria-label="bookings" class="table table-bordered">
                 <thead class="thead-light">
                     <tr>
-                        <th>#</th>
-                        <th>Cliente</th>
-                        <th>Evento</th>
-                        <th>cantidad de personas</th>
+                        <th title="Ordenar por id">#</th>
+                        <th title="Ordenar por cliente">Cliente</th>
+                        <th title="Ordenar por evento">Evento</th>
+                        <th title="Ordenar por cantidad de personas">Cantidad de personas</th>
                         @if (auth()->user()->idRol == 1)
-                        <th>Usuario que creo <br> la reserva</th>
+                        <th title="Ordenar por usuario">Usuario que creo <br> la reserva</th>
                         @endif
-                        <th>Estado</th>
-                        <th>fecha inicial</th>
+                        <th title="Ordenar por estado">Estado</th>
+                        <th title="Ordenar por fecha inicial">Fecha inicial</th>
                         @if ($states == "2")
-                        <th>fecha final</th>
+                        <th title="Ordenar por fecha fin">Fecha final</th>
                         @endif
                         <th>Acciones</th>
                     </tr>
@@ -80,12 +80,12 @@
                     <tr>
 
                         <td>{{$value->id}}</td>
-                        <td>{{$value->customerName}}</td>
+                        <td><a class="text-dark" href="{{url('/customers/'. $value->idCustomer)}}"><u>{{$value->customerName}}</u></a></td>
                         <td>
                             @if ($value->idEvent == null)
                             sin evento
                             @else
-                            {{$value->eventName}}
+                                <a class="text-dark" href="{{url('/events/'. $value->idEvent)}}"><u>{{$value->eventName}}</u>
                             @endif
                         </td>
                         <td>{{$value->amount_people}}</td>

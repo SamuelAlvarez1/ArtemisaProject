@@ -13246,21 +13246,24 @@ section#contact form#contactForm :-ms-input-placeholder {
 .destacados .card h4 {
     font-weight: 600;
 }
-.img {
-    width: 350px;
-    height: auto;
-}
+
 
 .card {
     text-align: center;
     background: #362d27;
     box-shadow: 0 2px rgba(0, 0, 0, 0.4);
     transition: all 0.25s;
-    margin-bottom: 20px;
+    margin: 20px;
+    height: 350px;
+    padding: 0;
 }
 
 .card .image {
     border-radius: 5px;
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+
 }
 
 .card:hover {
@@ -13299,10 +13302,10 @@ section#contact form#contactForm :-ms-input-placeholder {
     width: 100%;
     box-sizing: border-box;
     border-radius: 5px;
+
 }
 .u-max-full-width {
     max-width: 100%;
-    box-sizing: border-box;
 }
 .u-pull-right {
     float: right;
@@ -13311,10 +13314,11 @@ section#contact form#contactForm :-ms-input-placeholder {
     float: left;
 }
 
-.destacados .card p {
-    padding: 0 1rem;
-    font-size: 16px;
-    font-weight: 300;
+.galery{
+    display: grid;
+    gap: 1rem;
+    grid-auto-rows: 22rem;
+    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
 }
 
 .btn-wsp {
@@ -13339,4 +13343,7 @@ section#contact form#contactForm :-ms-input-placeholder {
     text-decoration: none;
     color: #0df053;
     background: #fff;
+}
+.g-recaptcha > div {
+    margin: 0 auto;
 }

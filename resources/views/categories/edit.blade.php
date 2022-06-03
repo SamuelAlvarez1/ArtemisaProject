@@ -39,20 +39,9 @@
                 <div class="form-group">
                     <label for="nameInput">Nombre<b class="text-danger">*</b></label>
                     <input value="{{old('name', $category->name)}}" type="text" class="form-control" name="name"
-                           id="nameInput" placeholder="Cliente">
+                           id="nameInput" placeholder="Cliente" onkeypress="return check(event)" required>
                 </div>
-                <div class="form-check mb-3">
-                    <input type="hidden" name="state" value="0">
-                    @if($category->state == true)
-                        <input class="form-check-input" name="state" type="checkbox" value="1" id="state" checked>
-                    @else
-                        <input class="form-check-input" name="state" type="checkbox" value="1" id="state">
-                    @endif
 
-                    <label class="form-check-label" for="state">
-                        Estado<b class="text-danger">*</b>
-                    </label>
-                </div>
                 <div class="row mx-auto">
                     <button type="submit" class="btn btn-outline-success">Actualizar</button>
 
@@ -61,4 +50,25 @@
         </div>
 
 @endsection
+@section("scripts")
+
+    <script>
+
+        function check(e) {
+            tecla = (document.all) ? e.keyCode : e.which;
+
+            //Tecla de retroceso para borrar, siempre la permite
+            if (tecla == 8 || tecla == 32) {
+                return true;
+            }
+
+            // Patrón de entrada, en este caso solo acepta numeros y letras
+            patron = /[A-Za-z0-9á-úÁ-Ú]/;
+            tecla_final = String.fromCharCode(tecla);
+            return patron.test(tecla_final);
+        }
+    </script>
+
+@endsection
+
 

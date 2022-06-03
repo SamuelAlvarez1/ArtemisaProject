@@ -45,7 +45,7 @@
                 <div class="col-lg">
                     <div class="input-group my-2">
                         <input type="text" class="form-control-sm border border-dark" id="searchInput"
-                               placeholder="Busqueda"
+                               placeholder="Búsqueda"
                                aria-label="Recipient's username" aria-describedby="basic-addon2">
 
                     </div>
@@ -54,12 +54,12 @@
         </div>
         <div class="card-body">
             <div class="mx-auto mb-3">
-                <table id="plates" class="table table-bordered">
+                <table id="plates" aria-label="plates" class="table table-bordered">
                     <thead class="thead-light">
                     <tr>
                         <th>#</th>
-                        <th>Categoría</th>
                         <th>Nombre</th>
+                        <th>Categoría</th>
                         <th>Precio</th>
                         <th>Estado</th>
                         <th>Acciones</th>
@@ -72,8 +72,8 @@
                         <tr>
 
                             <td>{{$value->id}}</td>
-                            <td>{{$value->categories}}</td>
                             <td>{{$value->name}}</td>
+                            <td><a class="text-dark" href="{{url('/categories/'.$value->idCategory)}}"><u>{{$value->categories}}</u></a></td>
                             <td>$ {{ number_format($value->price, 2)}}</td>
                             <td>
                                 @if($value->state == 1)
@@ -84,18 +84,24 @@
 
                             </td>
                             <td>
-                                <a class="mx-2" data-delay="500" data-toggle="tooltip" data-placement="bottom"
-                                   title="Detalles" href="{{url('/plates/'.$value->id)}}"><i
+                                <a class="mx-2"
+                                   title="Ver la información de este platillo" href="{{url('/plates/'.$value->id)}}"><i
                                         class="fa-solid text-dark fa-info-circle"></i></a>
-                                <a class="mx-2" data-delay="500" data-toggle="tooltip" data-placement="bottom" title="Editar" href="{{url('/plates/'.$value->id.'/edit')}}"><i
+                                <a class="mx-2" title="Editar este platillo" href="{{url('/plates/'.$value->id.'/edit')}}"><i
                                         class="fa text-dark fa-edit"></i></a>
                                 @if($value->state == 1)
-                                    <a class="mx-2" data-delay="500" data-toggle="tooltip" data-placement="bottom" title="Desactivar" href="{{url('/plates/updateState/'.$value->id)}}"><i
+                                    <a class="mx-2" title="Desactivar este platillo" href="{{url('/plates/updateState/'.$value->id)}}"><i
                                             class="fa text-dark fa-ban"></i></a>
                                 @else
-                                    <a class="mx-2" data-delay="500" data-toggle="tooltip" data-placement="bottom" title="Activar" href="{{url('/plates/updateState/'.$value->id)}}"><i
+                                    <a class="mx-2" title="Activar este platillo" href="{{url('/plates/updateState/'.$value->id)}}"><i
                                             class="fa text-dark fa-check"></i></a>
                                 @endif
+
+                                @if($value->image != '')
+                                    <a class="mx-2" data-delay="500" data-toggle="tooltip" data-placement="bottom" title="Eliminar Imagen" href="{{url('/plates/deleteImage/'.$value->id)}}">
+                                        <img src="/img/icons/image.png" style="width: 18px; margin-top: -3px" alt="quitarimagen"></a>
+                                @endif
+
 
 
                             </td>

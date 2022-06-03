@@ -15,9 +15,9 @@
                         <h2>Detalles del cliente</h2>
                     </div>
                     <div class="col text-right">
-                        <a href="{{url('/customers/'.$customer->id.'/edit')}}" class="btn mt-2 btn-sm btn-warning">Editar
+                        <a href="{{url('/customers/'.$customer->id.'/edit')}}" class="btn mt-2 btn-sm btn-outline-warning">Editar
                             este cliente</a>
-                        <a href="{{url('/customers')}}" class="btn mt-2 btn-sm btn-danger">Regresar</a>
+                        <a href="{{ url()->previous() }}" class="btn btn-sm mt-2 btn-outline-danger">Regresar</a>
                     </div>
                 </div>
             </div>
@@ -33,11 +33,11 @@
                         <h4 class="card-subtitle mt-2">Dirección:</h4>
                         <p class="card-text">{{$customer->address}}</p>
                         <h4 class="card-subtitle mt-2">Fecha de creación del cliente:</h4>
-                        <p class="card-text">{{$customer->created_at}}</p>
+                        <p class="card-text">{{$customer->created_at_12}}</p>
                     </div>
                     <div class="col">
                         <h4 class="card-subtitle mt-2">Ultima actualización de información:</h4>
-                        <p class="card-text">{{$customer->updated_at}}</p>
+                        <p class="card-text">{{$customer->updated_at_12}}</p>
                         <h4 class="card-subtitle mt-2">Usuario que creó el cliente:</h4>
                         <ul>
                             <li><p class="card-text">Nombre: {{$customer->user->name.' '.$customer->user->last_name}}</p></li>

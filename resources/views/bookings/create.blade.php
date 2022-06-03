@@ -37,8 +37,8 @@
                 <label for="idCustomer">{{ __('Cliente') }}
                     <strong class="text-danger"> *</strong></label>
 
-                <select name="idCustomer" id="idCustomer"
-                        class="form-control @error('idCustomer') is-invalid @enderror">
+                <select style="width: 100%" name="idCustomer" id="idCustomer"
+                        class="form-control @error('idCustomer') is-invalid @enderror" required>
                     <option value="">Seleccione el cliente</option>
                     @foreach ($customers as $customer)
                         <option
@@ -49,7 +49,7 @@
 
             <div class="form-group">
                 <label for="idEvent">{{ __('Evento') }}</label>
-                <select name="idEvent" id="idEvent" class="form-control @error('idEvent') is-invalid @enderror">
+                <select style="width: 100%"  name="idEvent" id="idEvent" class="form-control @error('idEvent') is-invalid @enderror">
                     <option value="">Seleccione el evento</option>
                     @foreach ($events as $event)
                         <option
@@ -72,7 +72,7 @@
                     >{{ __('Fecha inicial') }}<strong
                             class="text-danger"> *</strong></label>
                     <input id="booking_date" type="datetime-local" class="form-control @error('booking_date') is-invalid @enderror" name="booking_date"
-                           value="{{ old('booking_date') }}" required autocomplete="booking_date" onchange="si()">
+                           value="{{ old('booking_date') }}" required autocomplete="booking_date">
                 </div>
             </div>
 

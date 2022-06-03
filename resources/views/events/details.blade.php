@@ -17,7 +17,7 @@
                         <a href="{{url('/events/'.$event->id.'/edit')}}" class="btn mt-2 btn-sm btn-outline-warning">
                             Editar este evento
                         </a>
-                        <a href="{{url('events')}}" class="btn btn-sm mt-2 btn-outline-danger">
+                        <a href="{{ url()->previous() }}" class="btn btn-sm mt-2 btn-outline-danger">
                             Regresar
                         </a>
                     </div>
@@ -35,7 +35,7 @@
                             @if($event->decorationPrice == '')
                                 Precio sin especificar
                             @else
-                                {{$event->decorationPrice}}
+                                ${{number_format($event->decorationPrice)}}
                             @endif
                         </p>
                         <h4 class="card-subtitle mt-2">Precio de entrada:</h4>
@@ -43,7 +43,7 @@
                             @if($event->entryPrice == '')
                                 Precio sin especificar
                             @else
-                                {{$event->entryPrice}}
+                                ${{number_format($event->entryPrice)}}
                             @endif
                         </p>
                         <h4 class="card-subtitle mt-2">Fecha de inicio:</h4>
@@ -64,10 +64,14 @@
                             <li><p class="card-text">Rol: {{$event->user->role->name}}</p></li>
                         </ul>
                         <h4 class="card-subtitle mt-2">Estado:</h4>
-                        @if ($event->state == 0)
-                            <span class="badge badge-danger">No activo</span>
+                        @if($event->state == 1 && $event->startDate <= date('Y-m-d') && $event->endDate >= date('Y-m-d'))
+                            <span class="badge badge-primary">En proceso</span>
+                        @elseif($event->state == 1 && $event->endDate < date('Y-m-d'))
+                            <span class="badge badge-success">Llevado a cabo</span>
+                        @elseif($event->state == 1 && $event->startDate >= date('Y-m-d') && $event->endDate >= date('Y-m-d'))
+                            <span class="badge badge-primary">Pendiente</span>
                         @else
-                            <span class="badge badge-success">Activo</span>
+                            <span class="badge badge-danger">Cancelado</span>
                         @endif
                         <h4 class="card-subtitle mt-2">Número de reservas con este evento:</h4>
                         <p class="card-text">{{$countBookings}}</p>
@@ -98,7 +102,7 @@
                                                 <span aria-hidden="true">&times;</span>
                                             </button>
                                         </div>
-                                        <img class="align-self-center mb-4" src="/uploads/{{$event->image}}"
+                                        <img class="align-self-center mb-4 details-img" src="/uploads/{{$event->image}}"
                                              alt="Imagen no disponible">
                                     </div>
                                 </div>

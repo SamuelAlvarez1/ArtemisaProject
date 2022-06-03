@@ -12,9 +12,9 @@ Dashboard
                 <i class="fa-solid fa-pizza-slice"></i>
 
                 @if(empty($plateOutStanding))
-                <span class="count-numbers text-white" style="font-size: 20px">No hay un plato destacado aún</span>
+                <span class="count-numbers text-white" style="font-size: 18px">No hay un plato destacado aún</span>
                 @else
-                <span class="count-numbers text-white" style="font-size: 20px">{{$plateOutStanding->name}}</span>
+                <span class="count-numbers text-white" style="font-size: 17px">{{$plateOutStanding->name}}</span>
                 @endif
                 <span class="count-name">Platillo destacado</span>
             </div>
@@ -46,26 +46,28 @@ Dashboard
     </div>
 
 <div class="row row-cols-2" id="Month">
-    <div class="col" id="SMonth"></div>
-    <div class="col" id="BMonth"></div>
+    <div class="col-xl mb-3" id="SMonth"></div>
+    <div class="col-xl mb-3" id="BMonth"></div>
 </div>
 
 <div class="row row-cols-2" id="Week">
-    <div class="col" id="SWeek"></div>
-    <div class="col" id="BWeek"></div>
+    <div class="col-xl mb-3" id="SWeek"></div>
+    <div class="col-xl mb-3" id="BWeek"></div>
  </div>
 
     <div class="row my-4 row-cols-2">
-        <div class="col-sm">
-            <div class="card">
+        <div class="col-sm mb-3">
+            <div class="card shadow-lg">
                 <div class="card-header border-0">
                     <div class="row align-items-center">
                         <div class="col">
                             <h3 class="mb-0">Platos más vendidos</h3>
                         </div>
+                        @if($rol->idRol == 1)
                         <div class="col text-right">
-                            <a href="#!" class="btn btn-sm btn-outline-dark">Ver todos</a>
+                            <a href="{{url('/plates')}}" class="btn btn-sm btn-outline-dark">Ver todos</a>
                         </div>
+                        @endif
                     </div>
                 </div>
                 <div class="table-responsive">
@@ -95,16 +97,19 @@ Dashboard
                 </div>
             </div>
         </div>
-        <div class="col-sm">
-            <div class="card">
+        <div class="col-sm mb-3">
+            <div class="card shadow-lg">
                 <div class="card-header border-0">
                     <div class="row align-items-center">
                         <div class="col">
                             <h3 class="mb-0">Clientes frecuentes</h3>
                         </div>
-                        <div class="col text-right">
-                            <a href="#!" class="btn btn-sm btn-outline-dark">Ver todos</a>
-                        </div>
+
+                       @if($rol->idRol == 1)
+                            <div class="col text-right">
+                                <a href="{{url('/customers')}}" class="btn btn-sm btn-outline-dark">Ver todos</a>
+                            </div>
+                        @endif
                      </div>
                 </div>
                     <div class="table-responsive">
@@ -180,7 +185,7 @@ Highcharts.chart('SMonth', {
         type: 'area'
     },
     title: {
-        text: 'Ventas Anuales'
+        text: 'Ventas anuales'
     },
 
     xAxis: {

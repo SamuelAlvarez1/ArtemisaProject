@@ -14,14 +14,14 @@
     @csrf
     <input type="hidden" name="token" value="{{ $token }}">
     <div class="inputBox">
-        <input type="email" 
+        <input type="email"
             class="form-control bg-dark-x border-0 @error('email') is-invalid @enderror" name="email"
             id="exampleInputEmail1" aria-describedby="emailHelp" required="required"
-            value="{{ $email ?? old('email') }}" required autocomplete="email">
+            value="{{ $email ?? old('email') }}">
         <label for="exampleInputEmail1" class="form-label font-weight-bold">Email</label>
 
         @error('email')
-        <span class="invalid-feedback" style="padding-top: 55px !important; font-size: 15px !important;" role="alert">
+        <span class="invalid-feedback"  style="padding-top: 55px !important; font-size: 15px !important;" role="alert">
             <strong>{{ $message }}</strong>
         </span>
         @enderror
@@ -31,7 +31,7 @@
         <input id="exampleInputEmail1" type="password" class="form-control bg-dark-x border-0 @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
         <label for="exampleInputEmail1" class="form-label font-weight-bold">Contraseña</label>
                                 @error('password')
-                                    <span class="invalid-feedback" role="alert">
+                                    <span class="invalid-feedback" style="padding-top: 55px !important; font-size: 15px !important;" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror

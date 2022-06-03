@@ -32,7 +32,7 @@ class CategoriesController extends Controller
             Category::create([
                 'name' => $input['name'],
                 'idUser' => auth()->user()->id,
-                'state' => $input['state'],
+                'state' => 1,
             ]);
             return redirect('/categories')->with('success', 'Se registró la categoría correctamente');
         } catch (\Exception $e) {
@@ -47,9 +47,13 @@ class CategoriesController extends Controller
         if ($category == null) {
             return redirect("/categories")->with('error', 'Categoría no encontrado');
         }
+        $plates = Plate::select('name', 'price', 'id')
+            ->where('plates.state', 1)
+            ->where('plates.idCategory', $id)->get();
+
         $user = User::find($category->idUser);
         $role = Rol::find($user->idRol);
-        return view('categories.details', compact('category', 'user', 'role'));
+        return view('categories.details', compact('category', 'user', 'role', 'plates'));
     }
 
     public function edit($id)
@@ -76,7 +80,6 @@ class CategoriesController extends Controller
         $input = $request->all();
         $data = [
             'name' => $input['name'],
-            'state' => $input['state'],
         ];
         try {
             $category = Category::find($id);
