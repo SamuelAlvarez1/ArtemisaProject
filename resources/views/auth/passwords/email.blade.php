@@ -8,7 +8,7 @@
         @csrf
 
         <div class="inputBox">
-            <input type="text" class="form-control bg-dark-x border-0 @error('email') is-invalid @enderror"
+            <input type="email" class="form-control bg-dark-x border-0 @error('email') is-invalid @enderror"
                    name="email" value="{{ old('email') }}" id="exampleInputEmail1"
                    aria-describedby="emailHelp" required="required">
             <label for="exampleInputEmail1" class="form-label font-weight-bold">Email</label>

@@ -10,6 +10,7 @@
     <h1 class="font-weight-bold mb-5 mt-5 text-center">Iniciar sesión</h1>
     <form class="mb-5" method="POST" action="{{ route('login') }}">
         @csrf
+
         <div class="inputBox">
             <input type="email" class="form-control bg-dark-x border-0 @error('email') is-invalid @enderror"
                    name="email" value="{{ old('email') }}" id="exampleInputEmail1"
@@ -23,7 +24,7 @@
                    required="required">
             <label for="exampleInputPassword1" class="form-label font-weight-bold">Contraseña</label>
         </div>
-        
+
         @if (Route::has('password.request'))
             <a id="emailHelp" class="form-text text-muted text-decoration-none mb-4 text-center"
                href="{{ route('password.request') }}">
@@ -61,5 +62,5 @@
             alertify.error('{{ Session::get('errorState') }}');
         </script>
     @endif
-    
+
 @endsection
