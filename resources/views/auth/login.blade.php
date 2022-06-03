@@ -33,7 +33,10 @@
                 contraseña?
             </a>
         @endif
-        <button type="submit" class="btn btn-outline-light flex-grow-1 w-100">Iniciar sesión</button>
+        <div class="row">
+            <button type="submit" class="btn btn-outline-light flex-grow-1 m-3">Iniciar sesión</button>
+            <a href="/" class="btn btn-outline-danger flex-grow-1 m-3 pt-3">Volver</a>
+        </div>
     </form>
 @endsection
 @section('scripts')
