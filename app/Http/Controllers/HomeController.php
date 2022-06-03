@@ -3,12 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\Booking;
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\Sale;
 use App\Models\SaleDetail;
 use App\Models\Plate;
 use App\Models\Customer;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
@@ -107,6 +109,9 @@ class HomeController extends Controller
             $plates[$key]['sales'] = $plate->sales;
             $plates[$key]['quantity'] = $plate->quantity;
         }
-        return view('home', compact('plateOutStanding', 'countBookings', 'countSales', 'salesData', 'bookingsData', 'salesDataWeek', 'bookingsDataWeek', 'customers', 'plates'));
+
+        $id = Auth::id();
+        $rol = User::select('idRol')->where('id', $id)->first();
+        return view('home', compact('rol','plateOutStanding', 'countBookings', 'countSales', 'salesData', 'bookingsData', 'salesDataWeek', 'bookingsDataWeek', 'customers', 'plates'));
     }
 }

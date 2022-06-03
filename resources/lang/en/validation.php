@@ -1,4 +1,4 @@
-a<?php
+<?php
 
 return [
 
@@ -175,7 +175,7 @@ return [
         'phoneNumber' => 'número de teléfono',
         'image' => 'imagen',
         'now' => 'hoy',
-        'yesterday' => 'ayer', 
+        'yesterday' => 'ayer',
         'idCategory' => 'categoría',
         'price' => 'precio',
         'email' => 'correo electrónico',

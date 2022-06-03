@@ -12,9 +12,9 @@ Dashboard
                 <i class="fa-solid fa-pizza-slice"></i>
 
                 @if(empty($plateOutStanding))
-                <span class="count-numbers text-white" style="font-size: 20px">No hay un plato destacado aún</span>
+                <span class="count-numbers text-white" style="font-size: 18px">No hay un plato destacado aún</span>
                 @else
-                <span class="count-numbers text-white" style="font-size: 20px">{{$plateOutStanding->name}}</span>
+                <span class="count-numbers text-white" style="font-size: 17px">{{$plateOutStanding->name}}</span>
                 @endif
                 <span class="count-name">Platillo destacado</span>
             </div>
@@ -63,9 +63,11 @@ Dashboard
                         <div class="col">
                             <h3 class="mb-0">Platos más vendidos</h3>
                         </div>
+                        @if($rol->idRol == 1)
                         <div class="col text-right">
                             <a href="{{url('/plates')}}" class="btn btn-sm btn-outline-dark">Ver todos</a>
                         </div>
+                        @endif
                     </div>
                 </div>
                 <div class="table-responsive">
@@ -102,9 +104,12 @@ Dashboard
                         <div class="col">
                             <h3 class="mb-0">Clientes frecuentes</h3>
                         </div>
-                        <div class="col text-right">
-                            <a href="{{url('/customers')}}" class="btn btn-sm btn-outline-dark">Ver todos</a>
-                        </div>
+
+                       @if($rol->idRol == 1)
+                            <div class="col text-right">
+                                <a href="{{url('/customers')}}" class="btn btn-sm btn-outline-dark">Ver todos</a>
+                            </div>
+                        @endif
                      </div>
                 </div>
                     <div class="table-responsive">

@@ -47,7 +47,7 @@ class CategoriesController extends Controller
         if ($category == null) {
             return redirect("/categories")->with('error', 'Categoría no encontrado');
         }
-        $plates = Plate::select('name', 'price')
+        $plates = Plate::select('name', 'price', 'id')
             ->where('plates.state', 1)
             ->where('plates.idCategory', $id)->get();
 

@@ -13253,7 +13253,9 @@ section#contact form#contactForm :-ms-input-placeholder {
     background: #362d27;
     box-shadow: 0 2px rgba(0, 0, 0, 0.4);
     transition: all 0.25s;
-    margin-bottom: 20px;
+    margin: 20px;
+    height: 350px;
+    padding: 0;
 }
 
 .card .image {
@@ -13312,6 +13314,12 @@ section#contact form#contactForm :-ms-input-placeholder {
     float: left;
 }
 
+.galery{
+    display: grid;
+    gap: 1rem;
+    grid-auto-rows: 22rem;
+    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+}
 
 .btn-wsp {
     position: fixed;
