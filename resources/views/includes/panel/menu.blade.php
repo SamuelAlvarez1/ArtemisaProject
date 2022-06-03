@@ -7,6 +7,14 @@
     </li>
 </ul>
 
+<ul class="navbar-nav">
+
+    <li class="nav-item">
+        <a class="nav-link" href="{{url('/sales')}}">
+            <i aria-hidden="true" class="fa-solid fa-chart-column"></i> Reportes
+        </a>
+    </li>
+</ul>
 
 <h6 class="navbar-heading text-muted">
     Gestionar

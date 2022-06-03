@@ -107,15 +107,7 @@
             var table = $('#events').DataTable({
                 responsive: true,
                 "dom": 'tp',
-                'language': {
-                    "paginate": {
-                        "first": "Inicio",
-                        "last": "Fin",
-                        "next": "→",
-                        "previous": "←",
-                    },
-                    "emptyTable": "No hay información disponible."
-                }
+                'language': spanish
             });
             $('#searchInput').on('keyup', function () {
                 table.search($('#searchInput').val()).draw();

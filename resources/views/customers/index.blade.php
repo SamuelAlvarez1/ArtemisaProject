@@ -83,15 +83,7 @@
             var table = $('#customers').DataTable({
                 responsive: true,
                 "dom": 'tp',
-                'language': {
-                    "paginate": {
-                        "first": "Primero",
-                        "last": "Último",
-                        "next": "→",
-                        "previous": "←"
-                        },
-                    "emptyTable": "No hay información disponible."
-                }
+                'language': spanish
             });
             $('#searchInput').on('keyup', function () {
                 table.search($('#searchInput').val()).draw();

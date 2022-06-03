@@ -94,14 +94,7 @@
                 responsive: true,
                 "dom": 'tp',
                 responsive: true,
-                'language': {
-                    "paginate": {
-                        "first": "Primero",
-                        "last": "Último",
-                        "next": "→",
-                        "previous": "←"
-                    }
-                }
+                'language': spanish
             });
 
             $('#searchInput').on('keyup', function () {
