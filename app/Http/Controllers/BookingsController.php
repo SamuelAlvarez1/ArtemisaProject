@@ -26,6 +26,10 @@ class BookingsController extends Controller
             ->join("bookings_states", "bookings.idState", "=", "bookings_states.id")
             ->where("bookings.idState", "=", 2)
             ->get();
+
+
+
+
         $states = "1";
 
         return view("bookings.index", compact("bookings", "states"));

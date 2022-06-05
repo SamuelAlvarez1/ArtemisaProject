@@ -9,11 +9,14 @@
 
 <ul class="navbar-nav">
 
+    @if (auth()->user()->idRol == 1)
     <li class="nav-item">
-        <a class="nav-link" href="{{url('/sales')}}">
+        <a class="nav-link" href="{{url('/reports')}}">
             <i aria-hidden="true" class="fa-solid fa-chart-column"></i> Reportes
         </a>
     </li>
+        
+    @endif
 </ul>
 
 <h6 class="navbar-heading text-muted">

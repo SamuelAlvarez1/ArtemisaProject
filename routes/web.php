@@ -14,6 +14,7 @@ use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\SalesController;
 use App\Http\Controllers\Admin\CategoriesController;
+use App\Http\Controllers\ReportsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -62,6 +63,11 @@ Route::group(['middleware' => ['auth', 'validarRol', 'validarEstado']], function
     Route::get('/contact/lastMessages', [ContactController::class, 'lastMessages']);
     Route::get('/contact/{id}', [ContactController::class, 'show']);
     Route::get('/contact', [ContactController::class, 'index']);
+
+    //<-----------Reports----------->
+    Route::get("/reports", [ReportsController::class, "index"]);
+    Route::get("/reports/bookings/{startDate}/{finalDate}", [ReportsController::class, "bookings"]);
+    Route::get("/reports/sales/{startDate}/{finalDate}", [ReportsController::class, "sales"]);
 
     //<----------Resources---------->
 

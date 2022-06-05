@@ -112,7 +112,6 @@
 
 @endsection
 
-<<<<<<< HEAD
             @section('scripts')
                 <script>
                     $(document).ready(function () {
@@ -124,23 +123,6 @@
                             "dom": 'tp',
                             'language': spanish
                         });
-=======
-@section('scripts')
-    <script>
-        $(document).ready(function () {
-            var table = $('#sales').DataTable({
-                responsive: true,
-                "dom": 'tp',
-                'language': {
-                    "paginate": {
-                        "first": "Inicio",
-                        "last": "Fin",
-                        "next": "→",
-                        "previous": "←"
-                    }
-                }
-            });
->>>>>>> 64a3be57f8b5b7d497f992bcbf9613eb521b1f5a
 
             $('#searchInput').on('keyup', function () {
                 table.search($('#searchInput').val()).draw();
