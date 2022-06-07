@@ -133,7 +133,9 @@ class ReportsController extends Controller
                         $salesActived++;
                     }
                 }
-                return view("reports.salesPDF", compact("sales", "salesCanceled", "salesActived"));
+                $pdf = PDF::loadView("reports.salesPDF", ['sales' => $sales, "salesCanceled" => $salesCanceled, "salesActived" => $salesActived]);
+
+                return $pdf->download("reporte_de_ventas.pdf");
             }
 
             return redirect("/reports")->with("error", "No se han encontrado ventas en ese rango de fecha");

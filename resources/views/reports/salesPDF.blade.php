@@ -5,51 +5,51 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Artemisa</title>
-    <link href="{{asset('img/brand/favicon.png')}}" rel="icon" type="image/png">
+    <link href="{{public_path('img/brand/favicon.png')}}" rel="icon" type="image/png">
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
     <!-- Icons -->
-    <link href="{{asset('vendor/nucleo/css/nucleo.css')}}" rel="stylesheet">
-    <link type="text/css" href="{{asset('css/argon.css?v=1.0.0')}}" rel="stylesheet">
+    <link href="{{public_path('vendor/nucleo/css/nucleo.css')}}" rel="stylesheet" type="text/css">
+    <link href="{{public_path('css/argon.css?v=1.0.0')}}" rel="stylesheet" type="text/css">
 </head>
 <body>
-    <div class="container">
-        <div class="d-flex justify-content-center flex-column align-items-center p-4">
+    
+        <div class="d-flex justify-content-center flex-column align-items-center">
             <div class="row">
-                <div class="mx-2">
-                    <h2 class="text-danger"><b>Cantidad de ventas anuladas: {{$salesCanceled}}</b></h2>
-                </div>
-                <div>
-                    <h2 class="text-primary"><b>Cantidad de ventas activas: {{$salesActived}}</b></h2>
+                <div class="col-12">
+                    <h6 class="">
+                        <b class="text-danger">Cantidad de ventas anuladas: {{$salesCanceled}}</b>
+                        <b class="text-success">    Cantidad de ventas activas: {{$salesActived}}</b>
+                    </h6>
+                    
                 </div>
             </div>
-            <table class="table table-bordered">
+            <table class="table table-bordered mx-auto" style="width: 200px;">
                 <thead class="thead-light">
                     <tr>
-                        <th>#</th>
-                        <th>CLIENTE</th>
-                        <th>REALIZADA POR</th>
-                        <th>PRECIO TOTAL</th>
-                        <th>FECHA VENTA</th>
-                        <th>ESTADO</th>
+                        <th style="font-size: 8px !important;">#</th>
+                        <th style="font-size: 8px !important;">CLIENTE</th>
+                        <th style="font-size: 8px !important;">REALIZADA POR</th>
+                        <th style="font-size: 8px !important;">PRECIO TOTAL</th>
+                        <th style="font-size: 8px !important;">FECHA DE LA VENTA</th>
+                        <th style="font-size: 8px !important;">ESTADO</th>
                     </tr>
                 </thead>
                 <tbody>
                     @forelse ($sales as $sale)
                         <tr>
-                            <td>{{$sale->id}}</td>
-                            <td>{{$sale->customerName}}</td>
-                            <td>{{$sale->userName}}</td>
-                            <td>{{$sale->final_price}}</td>
-                            <td>{{$sale->created_at->isoFormat('dddd D MMMM YYYY, h:mm a')}}</td>
-                            <td>
-
-                                @if($sale->state == 1)
-                                <span class="badge badge-success">Activa</span>
-                                @else
-                                <span class="badge badge-danger">Anulada</span>
-                                @endif
-                                
+                            <td style="font-size: 11px !important">{{$sale->id}}</td>
+                            <td style="font-size: 11px !important">{{Str::limit($sale->customerName,8)}}</td>
+                            <td style="font-size: 11px !important">{{Str::limit($sale->userName,8)}}</td>
+                            <td style="font-size: 11px !important">${{number_format($sale->finalPrice)}}</td>
+                            <td>{{$sale->created_at->isoFormat('D MMMM YYYY')}}</td>
+                            <td style="font-size: 11px !important">
+                                @if($sale->state == 0)
+                            <span class="badge badge-danger" style="font-size: 11px !important">Anulada</span>
+                        @endif
+                        @if($sale->state == 1)
+                        <span class="badge badge-success" style="font-size: 11px !important">Activa</span>
+                        @endif
                             </td>
                         </tr>
                     @empty
@@ -58,7 +58,7 @@
                 </tbody>
             </table>
         </div>
-    </div>
+    
     
 </body>
 </html>
