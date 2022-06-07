@@ -48,14 +48,17 @@ Reportes
 
 <div class="d-flex justify-content-center mt-2">
     <div>
-        <a class="btn btn-outline-primary" href="" id="reports-bookings">Generar reporte de
+        <a class="btn btn-outline-primary" href="/reports/bookings/{{date("Y-m-d")}}/{{date("Y-m-d")}}" id="reports-bookings">Generar reporte de
             reservas</a>
-        <a class="btn btn-outline-primary" href="" id="reports-sales">Generar reportes de ventas</a>
+        <a class="btn btn-outline-primary" href="/reports/sales/{{date("Y-m-d")}}/{{date("Y-m-d")}}" id="reports-sales">Generar reportes de ventas</a>
     </div>
 </div>
 
 <div id="content">
     @if ($condition == "bookings")
+        <div class="d-flex justify-content-center mt-2">
+            <?php echo $button ?>
+        </div>
         <table class="table table-bordered mt-2">
             <thead class="thead-light">
                 <tr>
@@ -117,6 +120,9 @@ Reportes
     @endif
 
     @if ($condition == "sales")
+        <div class="d-flex justify-content-center mt-2">
+            <?php echo $button ?>
+        </div>
         <table class="table table-bordered mt-2">
             <thead class="thead-light">
                 <tr>
@@ -173,10 +179,8 @@ Reportes
         let startDate = $("#start-date").val();
         let finalDate = $("#final-date").val();
 
-        console.log(Date.parse(finalDate) > Date.parse(startDate));
-
         if(startDate != null && finalDate != null){
-            if (Date.parse(finalDate) > Date.parse(startDate)) {
+            if (Date.parse(finalDate) >= Date.parse(startDate)) {
                 let enlaceBookings = document.getElementById("reports-bookings");
 
                 enlaceBookings.href = `/reports/bookings/${startDate}/${finalDate}`;
@@ -187,7 +191,7 @@ Reportes
             }else{
                 let enlaceBookings = document.getElementById("reports-bookings");
 
-                enlaceBookings.href = '/reports';
+                enlaceBookings.href = '/reports'; 
 
                 let enlaceSales = document.getElementById("reports-sales");
 

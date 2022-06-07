@@ -68,6 +68,8 @@ Route::group(['middleware' => ['auth', 'validarRol', 'validarEstado']], function
     Route::get("/reports", [ReportsController::class, "index"]);
     Route::get("/reports/bookings/{startDate}/{finalDate}", [ReportsController::class, "bookings"]);
     Route::get("/reports/sales/{startDate}/{finalDate}", [ReportsController::class, "sales"]);
+    Route::get("/reports/bookingsPDF/{startDate}/{finalDate}", [ReportsController::class, "bookingsPDF"]);
+    Route::get("/reports/salesPDF/{startDate}/{finalDate}", [ReportsController::class, "salesPDF"]);
 
     //<----------Resources---------->
 
