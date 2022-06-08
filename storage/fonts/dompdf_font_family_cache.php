@@ -85,7 +85,7 @@ return array (
     'bold' => $fontDir . '/open_sans_bold_96e606aebf881f427389c3b892029fd5',
   ),
   'nucleoicons' => array(
-    'normal' => $fontDir . '/nucleoicons_normal_18948e5e23ceaad28352d3cc4b2a769a',
+    'normal' => $fontDir . '/nucleoicons_normal_6461e202b970002e24cc730bea32c43e',
   ),
   'nunito' => array(
     'normal' => $fontDir . '/nunito_normal_6c0bd57bf447898b6d51683e027e0634',
