@@ -39,7 +39,14 @@
                     @forelse ($sales as $sale)
                         <tr>
                             <td style="font-size: 11px !important">{{$sale->id}}</td>
-                            <td style="font-size: 11px !important">{{Str::limit($sale->customerName,8)}}</td>
+                            <td style="font-size: 11px !important">
+                                @if ($sale->idCustomers != null)
+                                {{Str::limit($sale->customerName,8)}}
+                                
+                                @else   
+                                    Sin cliente
+                                @endif
+                            </td>
                             <td style="font-size: 11px !important">{{Str::limit($sale->userName,8)}}</td>
                             <td style="font-size: 11px !important">${{number_format($sale->finalPrice)}}</td>
                             <td>{{$sale->created_at->isoFormat('D MMMM YYYY')}}</td>

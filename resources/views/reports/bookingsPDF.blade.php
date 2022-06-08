@@ -42,7 +42,13 @@
                         <tr>
                             <td style="font-size: 11px !important">{{$booking->id}}</td>
                             <td style="font-size: 11px !important">{{Str::limit($booking->customerName,8)}}</td>
-                            <td style="font-size: 11px !important">{{Str::limit($booking->eventName,8)}}</td>
+                            <td style="font-size: 11px !important">
+                                @if ($booking->idEvent != null)
+                                {{Str::limit($booking->eventName,8)}}
+                                @else
+                                    Sin evento
+                                @endif
+                            </td>
                             <td style="font-size: 11px !important">{{$booking->amount_people}}</td>
                             <td style="font-size: 11px !important">{{Str::limit($booking->user,8)}}</td>
                             <td style="font-size: 11px !important">
